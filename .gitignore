@@ -37,6 +37,13 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local tooling / scratch
+.playwright-mcp/
+.mcp.json
+screenshots/
+lighthouse-*.json
+home.html
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
