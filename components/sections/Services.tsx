@@ -2,6 +2,7 @@ import {
   Bot,
   Code2,
   Database,
+  Gauge,
   MessageSquare,
   Smartphone,
   Workflow,
@@ -56,6 +57,14 @@ export const services = [
     duration: "2–7 дней",
   },
   {
+    icon: Gauge,
+    title: "Аудит скорости сайта",
+    description:
+      "Проверю ваш сайт по Core Web Vitals и дам план исправлений",
+    price: "от 15 000 ₸",
+    duration: "1–2 дня",
+  },
+  {
     icon: MessageSquare,
     title: "Консультация и аудит",
     description:
@@ -72,7 +81,7 @@ export function Services() {
         <SectionHeading
           eyebrow="Услуги"
           title="Что делаю для бизнеса в Казахстане"
-          description="Шесть направлений, где AI-стек дает разрыв с классической студией в разы: боты, автоматизации, MVP, мобильные, парсинг, аудит."
+          description="Семь направлений, где AI-стек дает разрыв с классической студией в разы: боты, автоматизации, MVP, мобильные, парсинг, аудит скорости, консультация."
         />
 
         <MotionStagger className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
