@@ -14,7 +14,7 @@ import { MotionStagger } from "@/components/shared/MotionStagger";
 import { MotionItem } from "@/components/shared/MotionItem";
 import { siteConfig } from "@/lib/metadata";
 
-const services = [
+export const services = [
   {
     icon: Bot,
     title: "Telegram-боты с AI",

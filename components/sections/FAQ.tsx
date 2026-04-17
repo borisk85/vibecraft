@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { Plus } from "lucide-react";
 
-const faqs = [
+export const faqs = [
   {
     q: "Почему так быстро? Это точно нормальное качество?",
     a: "Скорость — за счет Claude Code и Cursor: они берут boilerplate, тесты, типизацию, CRUD-обвязку. Архитектуру, безопасность и бизнес-логику пишу сам. Код уходит в продакшн, а не в демо.",
