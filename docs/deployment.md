@@ -46,35 +46,51 @@ npm run build    # проходит без ошибок
 
 ## 3. Подключение домена vibecraft.kz
 
-1. Vercel Dashboard → Project → Settings → Domains → Add.
-2. Добавьте сначала `vibecraft.kz`, затем `www.vibecraft.kz`. Vercel предложит:
-   - `vibecraft.kz` → основной (apex)
-   - `www.vibecraft.kz` → редирект на apex (рекомендуется)
-3. Vercel покажет нужные DNS-записи. Зайдите в панель ps.kz → Домены → vibecraft.kz → DNS-записи и пропишите:
+1. Vercel Dashboard → Project → Settings → Domains → Add Domain.
+2. Добавьте сначала `vibecraft.kz`, затем `www.vibecraft.kz`. Vercel предложит конфигурацию:
+   - `vibecraft.kz` — **Primary** (apex, основной URL)
+   - `www.vibecraft.kz` — **Redirect to vibecraft.kz** (не наоборот — apex должен быть primary, www редиректит на apex)
 
-| Тип | Имя | Значение |
+   Если Vercel поставит по-другому — поправить через Settings → Domains → троеточие у домена.
+3. Vercel покажет нужные DNS-записи. Откройте ps.kz → Домены → vibecraft.kz → DNS-записи и пропишите две записи:
+
+| Тип | Имя (Host) | Значение |
 |---|---|---|
-| A | `@` (apex) | `76.76.21.21` |
+| A | `@` (или пустое поле — зависит от интерфейса ps.kz) | `76.76.21.21` |
 | CNAME | `www` | `cname.vercel-dns.com` |
 
-4. TTL оставьте по умолчанию (обычно 3600).
-5. SSL-сертификат Let's Encrypt Vercel подтянет автоматически в течение 5 минут после распространения DNS. В Vercel Dashboard у домена появится зелёная галочка.
-6. Распространение DNS может занять от 10 минут до 2 часов. Проверить можно командой:
+4. TTL оставьте значение по умолчанию (обычно 3600).
+5. Сохраните. Распространение DNS занимает **5–30 минут** для большинства резолверов. Проверить можно командой:
    ```bash
    nslookup vibecraft.kz
    ```
-   Должен вернуть `76.76.21.21`.
+   Должен вернуть `76.76.21.21`. Для www:
+   ```bash
+   nslookup www.vibecraft.kz
+   ```
+   Должен вернуть CNAME на `cname.vercel-dns.com`.
+6. SSL-сертификат Let's Encrypt Vercel выпустит автоматически сразу после того, как DNS резолвится на их anycast. В Vercel Dashboard у обоих доменов появится зелёная галочка «Valid Configuration».
 
 ## 4. Post-deploy проверки
 
 На опубликованном URL (https://vibecraft.kz) пройтись по чеклисту:
 
-### 4.1. Форма заявки
+### 4.1. Домен и SSL
+- https://vibecraft.kz открывается напрямую (без редиректа на www или на `vibecraft-xxx.vercel.app`).
+- https://www.vibecraft.kz делает **301 редирект на** https://vibecraft.kz (apex — primary, www — redirect, а не наоборот).
+- В адресной строке зелёный замок — SSL-сертификат валидный.
+- Проверить редирект без браузера:
+  ```bash
+  curl -sI https://www.vibecraft.kz | grep -iE "^(HTTP|Location)"
+  ```
+  Должно быть `HTTP/2 301` или `308` и `Location: https://vibecraft.kz/`.
+
+### 4.2. Форма заявки
 - Прокрутить до блока «Опишите задачу».
 - Отправить тестовую заявку.
 - В Telegram (@vibecraft_leads_bot) должно прийти сообщение с жирными заголовками полей. Это подтверждает, что env-переменные `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` подхватились.
 
-### 4.2. Lighthouse
+### 4.3. Lighthouse
 Открыть DevTools → Lighthouse → Analyze page load. Ожидаемые цифры на публичном URL (Vercel + Brotli + HTTP/2):
 
 | Метрика | Desktop | Mobile |
@@ -86,22 +102,22 @@ npm run build    # проходит без ошибок
 
 Если mobile Performance < 80 — проверить, не упал ли edge runtime `/opengraph-image` (лог в Vercel Dashboard → Functions).
 
-### 4.3. Валидация Schema.org
+### 4.4. Валидация Schema.org
 - https://search.google.com/test/rich-results → ввести `https://vibecraft.kz`.
 - Должно распознать: Organization, Service (6 штук), FAQPage.
 - Если ругается на Offer.price без валюты — проверьте, что `priceCurrency: KZT` на месте (он есть в коде, ошибок быть не должно).
 
-### 4.4. OG-превью
+### 4.5. OG-превью
 - https://www.opengraph.xyz/url/https%3A%2F%2Fvibecraft.kz — проверка Facebook / LinkedIn / Telegram превью.
 - https://cards-dev.twitter.com/validator — проверка Twitter Card (`summary_large_image`).
 - Превью должно показывать чёрный фон, gradient-круг, заголовок «Vibecraft», субтитр «AI-разработка · Telegram-боты · MVP».
 - Если превью пустое — открыть `https://vibecraft.kz/opengraph-image` напрямую, должен вернуться PNG 1200×630.
 
-### 4.5. Robots и Sitemap
+### 4.6. Robots и Sitemap
 - https://vibecraft.kz/robots.txt — должен быть доступен, содержать `Sitemap:` строку.
 - https://vibecraft.kz/sitemap.xml — список URL (`/`, `/blog`).
 
-### 4.6. Аналитика (после заполнения env)
+### 4.7. Аналитика (после заполнения env)
 - Яндекс.Метрика: Settings → Environment Variables → `NEXT_PUBLIC_YM_ID` = цифровой ID счётчика. Redeploy. В DevTools → Network после загрузки страницы должен появиться запрос к `mc.yandex.ru/metrika/tag.js`.
 - GA4: то же с `NEXT_PUBLIC_GA_ID`. В Network — запрос к `googletagmanager.com/gtag/js`.
 
