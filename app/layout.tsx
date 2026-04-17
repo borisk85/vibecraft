@@ -3,6 +3,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { siteConfig } from "@/lib/metadata";
 import { MotionProvider } from "@/components/shared/MotionProvider";
+import { Analytics } from "@/components/shared/Analytics";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -88,6 +89,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background text-foreground font-sans">
         <MotionProvider>{children}</MotionProvider>
+        <Analytics />
       </body>
     </html>
   );
