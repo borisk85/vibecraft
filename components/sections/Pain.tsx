@@ -1,5 +1,8 @@
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { MotionSection } from "@/components/shared/MotionSection";
+import { MotionStagger } from "@/components/shared/MotionStagger";
+import { MotionItem } from "@/components/shared/MotionItem";
 import { Clock, EyeOff, PackageX, Wallet } from "lucide-react";
 
 const pains = [
@@ -31,7 +34,7 @@ const pains = [
 
 export function Pain() {
   return (
-    <section className="py-24 md:py-28">
+    <MotionSection className="py-24 md:py-28">
       <Container>
         <SectionHeading
           eyebrow="Проблема"
@@ -39,11 +42,11 @@ export function Pain() {
           description="Знакомо? Это не про плохих подрядчиков — это про устаревший формат разработки."
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2">
+        <MotionStagger className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2">
           {pains.map((pain) => (
-            <div
+            <MotionItem
               key={pain.title}
-              className="group rounded-2xl border border-border bg-card p-8 transition-colors hover:border-accent"
+              className="group rounded-2xl border border-border bg-card p-8 transition-colors duration-200 hover:border-accent"
             >
               <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface text-accent-text">
                 <pain.icon className="h-5 w-5" />
@@ -52,10 +55,10 @@ export function Pain() {
                 {pain.title}
               </h3>
               <p className="text-muted leading-relaxed">{pain.description}</p>
-            </div>
+            </MotionItem>
           ))}
-        </div>
+        </MotionStagger>
       </Container>
-    </section>
+    </MotionSection>
   );
 }

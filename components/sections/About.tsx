@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Send } from "lucide-react";
 import { Container } from "@/components/shared/Container";
+import { MotionSection } from "@/components/shared/MotionSection";
 import { siteConfig } from "@/lib/metadata";
 
 export function About() {
   return (
-    <section className="py-24 md:py-28">
+    <MotionSection className="py-24 md:py-28">
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[320px_1fr] lg:gap-16">
           {/* Фото — placeholder под реальное */}
@@ -40,7 +41,7 @@ export function About() {
                 href={siteConfig.contacts.telegram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm text-foreground transition-colors hover:border-accent"
+                className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm text-foreground transition-colors duration-150 hover:border-accent"
               >
                 <Send className="h-4 w-4 text-accent-text" />
                 Telegram
@@ -49,6 +50,6 @@ export function About() {
           </div>
         </div>
       </Container>
-    </section>
+    </MotionSection>
   );
 }

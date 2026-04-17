@@ -1,5 +1,8 @@
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { MotionSection } from "@/components/shared/MotionSection";
+import { MotionStagger } from "@/components/shared/MotionStagger";
+import { MotionItem } from "@/components/shared/MotionItem";
 
 const steps = [
   {
@@ -36,7 +39,7 @@ const steps = [
 
 export function Process() {
   return (
-    <section id="process" className="relative py-24 md:py-28">
+    <MotionSection id="process" className="relative py-24 md:py-28">
       <Container>
         <SectionHeading
           eyebrow="Процесс"
@@ -44,11 +47,12 @@ export function Process() {
           description="Прозрачные этапы, частые демо и поэтапная оплата. Вы видите прогресс и управляете приоритетами в любой момент."
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6 lg:grid-cols-5 lg:gap-4">
+        <MotionStagger className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6 lg:grid-cols-5 lg:gap-4">
           {steps.map((step) => (
-            <div
+            <MotionItem
               key={step.step}
-              className="relative flex h-full flex-col gap-3 rounded-2xl border border-border bg-card p-5 lg:p-5"
+              interactive
+              className="relative flex h-full flex-col gap-3 rounded-2xl border border-border bg-card p-5 transition-colors duration-200 hover:border-accent lg:p-5"
             >
               <span className="font-mono text-sm text-accent-text">
                 {step.step}
@@ -59,10 +63,10 @@ export function Process() {
               <p className="text-sm leading-relaxed text-muted">
                 {step.description}
               </p>
-            </div>
+            </MotionItem>
           ))}
-        </div>
+        </MotionStagger>
       </Container>
-    </section>
+    </MotionSection>
   );
 }

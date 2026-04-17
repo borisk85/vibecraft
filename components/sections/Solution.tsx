@@ -1,5 +1,8 @@
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { MotionSection } from "@/components/shared/MotionSection";
+import { MotionStagger } from "@/components/shared/MotionStagger";
+import { MotionItem } from "@/components/shared/MotionItem";
 import { Bot, Gauge, ShieldCheck } from "lucide-react";
 
 const points = [
@@ -25,7 +28,7 @@ const points = [
 
 export function Solution() {
   return (
-    <section className="py-24 md:py-28">
+    <MotionSection className="py-24 md:py-28">
       <Container>
         <SectionHeading
           eyebrow="Подход"
@@ -33,9 +36,9 @@ export function Solution() {
           description="Использую Claude Code и Cursor там, где они дают 3–5-кратное ускорение. Архитектура, безопасность и результат — на мне."
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <MotionStagger className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
           {points.map((point) => (
-            <div
+            <MotionItem
               key={point.title}
               className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-8"
             >
@@ -46,10 +49,10 @@ export function Solution() {
                 {point.title}
               </h3>
               <p className="text-muted leading-relaxed">{point.description}</p>
-            </div>
+            </MotionItem>
           ))}
-        </div>
+        </MotionStagger>
       </Container>
-    </section>
+    </MotionSection>
   );
 }

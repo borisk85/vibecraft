@@ -1,5 +1,6 @@
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { MotionSection } from "@/components/shared/MotionSection";
 import { Plus } from "lucide-react";
 
 const faqs = [
@@ -39,7 +40,7 @@ const faqs = [
 
 export function FAQ() {
   return (
-    <section id="faq" className="py-24 md:py-28">
+    <MotionSection id="faq" className="py-24 md:py-28">
       <Container>
         <SectionHeading
           eyebrow="FAQ"
@@ -64,6 +65,6 @@ export function FAQ() {
           ))}
         </div>
       </Container>
-    </section>
+    </MotionSection>
   );
 }

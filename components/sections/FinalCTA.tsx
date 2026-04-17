@@ -2,8 +2,10 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { ArrowRight, Send } from "lucide-react";
 import { Container } from "@/components/shared/Container";
+import { MotionSection } from "@/components/shared/MotionSection";
 import { siteConfig } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
@@ -50,7 +52,10 @@ export function FinalCTA() {
   };
 
   return (
-    <section id="contact" className="relative overflow-hidden py-24 md:py-28">
+    <MotionSection
+      id="contact"
+      className="relative overflow-hidden py-24 md:py-28"
+    >
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-accent opacity-15 blur-[120px]"
@@ -99,21 +104,29 @@ export function FinalCTA() {
                 name="message"
                 rows={4}
                 placeholder="Опишите задачу в 2–3 предложениях"
-                className="resize-none rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-subtle focus:border-accent focus:outline-none"
+                className="resize-none rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-subtle transition-colors duration-150 focus:border-accent focus:outline-none"
               />
             </div>
 
-            <button
+            <motion.button
               type="submit"
               disabled={state === "sending"}
+              whileHover={{
+                y: -2,
+                transition: { duration: 0.15, ease: "easeOut" },
+              }}
+              whileTap={{
+                scale: 0.98,
+                transition: { duration: 0.15, ease: "easeOut" },
+              }}
               className={cn(
-                "group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_40px_-8px_rgb(139_92_246/0.6)] transition-transform hover:-translate-y-0.5",
+                "group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_40px_-8px_rgb(139_92_246/0.6)]",
                 state === "sending" && "opacity-70",
               )}
             >
               {state === "sending" ? "Отправляю…" : "Отправить заявку"}
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </button>
+            </motion.button>
 
             {state === "sent" ? (
               <p className="text-center text-sm text-success">
@@ -140,7 +153,7 @@ export function FinalCTA() {
               href={siteConfig.contacts.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-foreground transition-colors hover:text-accent-text"
+              className="inline-flex items-center gap-2 text-foreground transition-colors duration-150 hover:text-accent-text"
             >
               <Send className="h-4 w-4" />
               Telegram {siteConfig.contacts.telegramHandle}
@@ -148,7 +161,7 @@ export function FinalCTA() {
           </div>
         </div>
       </Container>
-    </section>
+    </MotionSection>
   );
 }
 
@@ -176,7 +189,7 @@ function Field({
         name={name}
         required={required}
         placeholder={placeholder}
-        className="h-11 rounded-lg border border-border bg-background px-4 text-foreground placeholder:text-subtle focus:border-accent focus:outline-none"
+        className="h-11 rounded-lg border border-border bg-background px-4 text-foreground placeholder:text-subtle transition-colors duration-150 focus:border-accent focus:outline-none"
       />
     </div>
   );
@@ -201,7 +214,7 @@ function SelectField({
         id={id}
         name={name}
         defaultValue=""
-        className="h-11 rounded-lg border border-border bg-background px-4 text-foreground focus:border-accent focus:outline-none"
+        className="h-11 rounded-lg border border-border bg-background px-4 text-foreground transition-colors duration-150 focus:border-accent focus:outline-none"
       >
         <option value="" disabled>
           Выберите

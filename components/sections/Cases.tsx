@@ -1,5 +1,8 @@
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { MotionSection } from "@/components/shared/MotionSection";
+import { MotionStagger } from "@/components/shared/MotionStagger";
+import { MotionItem } from "@/components/shared/MotionItem";
 import { ArrowUpRight } from "lucide-react";
 
 const cases = [
@@ -57,7 +60,7 @@ const cases = [
 
 export function Cases() {
   return (
-    <section id="cases" className="py-24 md:py-28">
+    <MotionSection id="cases" className="py-24 md:py-28">
       <Container>
         <SectionHeading
           eyebrow="Кейсы"
@@ -65,11 +68,11 @@ export function Cases() {
           description="Каждый кейс — реальная разработка. Архитектуру, стек и продуктовые решения разберу на созвоне."
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-5 lg:grid-cols-3">
+        <MotionStagger className="mt-16 grid grid-cols-1 gap-5 lg:grid-cols-3">
           {cases.map((item) => (
-            <article
+            <MotionItem
               key={item.title}
-              className="group flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 transition-colors hover:border-accent"
+              className="group flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 transition-colors duration-200 hover:border-accent"
             >
               <div className="flex items-center justify-between">
                 <span className="font-mono text-xs uppercase tracking-[0.15em] text-accent-text">
@@ -103,10 +106,10 @@ export function Cases() {
                   <div className="text-foreground">{item.platform}</div>
                 </div>
               </div>
-            </article>
+            </MotionItem>
           ))}
-        </div>
+        </MotionStagger>
       </Container>
-    </section>
+    </MotionSection>
   );
 }

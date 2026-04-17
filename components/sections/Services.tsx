@@ -9,6 +9,9 @@ import {
 import Link from "next/link";
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
+import { MotionSection } from "@/components/shared/MotionSection";
+import { MotionStagger } from "@/components/shared/MotionStagger";
+import { MotionItem } from "@/components/shared/MotionItem";
 import { siteConfig } from "@/lib/metadata";
 
 const services = [
@@ -64,7 +67,7 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="py-24 md:py-28">
+    <MotionSection id="services" className="py-24 md:py-28">
       <Container>
         <SectionHeading
           eyebrow="Услуги"
@@ -72,11 +75,12 @@ export function Services() {
           description="Шесть направлений, где AI-стек дает разрыв с классической студией в разы: боты, автоматизации, MVP, мобильные, парсинг, аудит."
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <MotionStagger className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service) => (
-            <div
+            <MotionItem
               key={service.title}
-              className="group flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 transition-colors hover:border-accent"
+              interactive
+              className="group flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 transition-colors duration-200 hover:border-accent"
             >
               <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface text-accent-text">
                 <service.icon className="h-5 w-5" />
@@ -95,9 +99,9 @@ export function Services() {
                 </span>
                 <span className="text-xs text-subtle">{service.duration}</span>
               </div>
-            </div>
+            </MotionItem>
           ))}
-        </div>
+        </MotionStagger>
 
         <div className="mt-10 text-center">
           <Link
@@ -110,6 +114,6 @@ export function Services() {
           </Link>
         </div>
       </Container>
-    </section>
+    </MotionSection>
   );
 }
