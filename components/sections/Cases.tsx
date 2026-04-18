@@ -18,7 +18,7 @@ type CaseItem = {
 const cases: CaseItem[] = [
   {
     tag: "SaaS · Flagship",
-    title: "SaaS-платформа для AI-ботов в Telegram",
+    title: "SaaS для создания AI-ботов в Telegram без кода",
     description:
       "Multi-tenant платформа: пользователь без кода собирает своего AI-бота с подключением к Claude. Agent loop с tool use, биллинг через Lemon Squeezy, платные подписки.",
     stack: [
@@ -36,7 +36,7 @@ const cases: CaseItem[] = [
     url: "https://velabot.io",
   },
   {
-    tag: "Telegram · AI · Личный",
+    tag: "Telegram · AI",
     title: "Персональный AI-ассистент в Telegram",
     description:
       "Персональный AI-ассистент с 15+ модулями: погода, курсы валют и криптовалют, напоминания, утренний дайджест, Gmail, Google Calendar, Drive, Tasks, поиск авиабилетов, анализ фото, генерация изображений, голосовой ввод через Whisper. Долгосрочная память — помнит факты между сессиями.",
@@ -65,7 +65,7 @@ const cases: CaseItem[] = [
       "Claude",
     ],
     status: "В тестировании",
-    platform: "iOS + Android · СНГ",
+    platform: "iOS + Android",
     url: "https://duetaiapp.com",
   },
 ];
