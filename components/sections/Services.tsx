@@ -44,7 +44,7 @@ export const services = [
     title: "AI-автоматизации и workflows",
     description:
       "Agentic workflows, webhook-интеграции, multi-step процессы. Modal, Claude API, n8n — под задачу.",
-    price: "от 200 000 ₸",
+    price: "от 350 000 ₸",
     duration: "3–7 дней",
   },
   {
@@ -52,7 +52,7 @@ export const services = [
     title: "Мобильные приложения Flutter",
     description:
       "iOS и Android из одного кода. Бэкенд, push, прием оплат, выпуск в сторы.",
-    price: "от 1 800 000 ₸",
+    price: "от 2 500 000 ₸",
     duration: "3–4 недели",
   },
 ];
