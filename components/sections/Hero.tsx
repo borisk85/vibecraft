@@ -9,7 +9,7 @@ import { heroFadeIn } from "@/lib/animations";
 
 const proof = [
   { value: "11 лет", label: "в собственных проектах" },
-  { value: "3–4 дня", label: "MVP в работу" },
+  { value: "3–4 дня", label: "на MVP в работе" },
   { value: "SaaS", label: "собственный с платными подписками" },
 ];
 
