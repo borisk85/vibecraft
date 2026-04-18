@@ -39,7 +39,7 @@ const cases: CaseItem[] = [
     tag: "Telegram · AI · Личный",
     title: "Персональный AI-ассистент в Telegram",
     description:
-      "Голосовой ассистент с agent loop на Claude и распознаванием речи через Groq Whisper. Подключены Gmail, Google Calendar, Drive, Tasks, Brave Search, CoinGecko, Binance и fal.ai — все в одном интерфейсе.",
+      "Персональный AI-ассистент с 15+ модулями: погода, курсы валют и криптовалют, напоминания, утренний дайджест, Gmail, Google Calendar, Drive, Tasks, поиск авиабилетов, анализ фото, генерация изображений, голосовой ввод через Whisper. Долгосрочная память — помнит факты между сессиями.",
     stack: [
       "Python 3.12",
       "Claude",
