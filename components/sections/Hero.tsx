@@ -35,10 +35,8 @@ export function Hero() {
           </div>
 
           <h1 className="max-w-5xl text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-            Telegram-боты, MVP и автоматизации для бизнеса в Казахстане —{" "}
-            <span className="text-gradient md:whitespace-nowrap">
-              2–4 недели вместо месяцев
-            </span>
+            AI-разработка.{" "}
+            <span className="text-gradient">От идеи до продакшна.</span>
           </h1>
 
           <motion.p
@@ -46,10 +44,11 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             custom={0.1}
-            className="mt-6 max-w-2xl text-pretty text-lg text-muted md:text-xl"
+            className="mt-6 max-w-3xl text-pretty text-lg text-muted md:text-xl"
           >
-            Вместо классической студии — в 3 раза дешевле и в 5 раз быстрее,
-            без потери качества и исчезновений с предоплатой.
+            Собираю Telegram-боты, MVP, мобильные приложения и автоматизации
+            на современном AI-стеке. Быстрее классических студий, с реальными
+            кейсами в работе.
           </motion.p>
 
           <motion.div
