@@ -24,8 +24,8 @@ export default function BlogIndexPage() {
               Статьи скоро появятся
             </h1>
             <p className="max-w-2xl text-pretty text-lg text-muted">
-              Готовлю материалы о разработке Telegram-ботов, MVP на Next.js,
-              автоматизациях Make.com и ценах на рынке Казахстана. Первая партия —
+              Готовлю материалы о разработке Telegram-ботов, MVP,
+              автоматизациях и ценах на рынке Казахстана. Первая партия —
               в ближайшие недели.
             </p>
           </div>
