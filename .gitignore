@@ -47,3 +47,5 @@ home.html
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel

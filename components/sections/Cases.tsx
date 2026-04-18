@@ -77,7 +77,7 @@ export function Cases() {
         <SectionHeading
           eyebrow="Кейсы"
           title="Проекты, которые работают в продакшне"
-          description="Каждый кейс — реальная разработка на AI-стеке."
+          description="Каждый кейс — реальная разработка с Claude внутри."
         />
 
         <MotionStagger className="mt-16 grid grid-cols-1 gap-5 lg:grid-cols-3">
@@ -100,7 +100,7 @@ export function Cases() {
                 <p className="text-sm leading-relaxed text-muted">
                   {item.description}
                 </p>
-                <div className="mt-2 flex flex-wrap gap-1.5">
+                <div className="mt-auto flex flex-wrap gap-1.5 pt-2">
                   {item.stack.map((tech) => (
                     <span
                       key={tech}
@@ -110,7 +110,7 @@ export function Cases() {
                     </span>
                   ))}
                 </div>
-                <div className="mt-auto grid grid-cols-2 gap-4 border-t border-border pt-4 text-sm">
+                <div className="grid grid-cols-2 gap-4 border-t border-border pt-4 text-sm">
                   <div>
                     <div className="text-xs text-subtle">Статус</div>
                     <div className="text-foreground">{item.status}</div>

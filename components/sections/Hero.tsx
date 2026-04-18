@@ -42,7 +42,7 @@ export function Hero() {
             className="mt-6 max-w-3xl text-pretty text-lg text-muted md:text-xl"
           >
             Собираю Telegram-боты, MVP, мобильные приложения и автоматизации
-            на современном AI-стеке. От кода до запуска — быстрее классических
+            с Claude и Claude Code. От кода до запуска — быстрее классических
             студий.
           </motion.p>
 

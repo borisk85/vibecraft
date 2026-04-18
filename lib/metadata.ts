@@ -18,7 +18,7 @@ export const siteConfig = {
     "чат-бот с ChatGPT",
     "Flutter разработка Казахстан",
     "Supabase SaaS",
-    "разработка на AI-стеке",
+    "разработка с Claude Code",
   ],
   contacts: {
     telegram: "https://t.me/borisk85",
