@@ -12,7 +12,7 @@ interface LogoGradientProps extends React.SVGProps<SVGSVGElement> {
   idSuffix?: string;
 }
 
-const path = "M30 25 L40 25 L50 68 L60 25 L78 25 L50 82 L22 33 Z";
+const path = "M32 18 L46 18 L50 76 L54 18 L78 18 L50 88 L18 32 Z";
 
 /**
  * Градиентный логотип Vibecraft — фиолетово-розовый градиент 135°.
