@@ -72,61 +72,63 @@ export function Header() {
   }, [isOpen]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-lg">
-      <Container as="div" className="flex h-16 items-center justify-between">
-        <a
-          href="/"
-          onClick={handleLogoClick}
-          className="flex items-center gap-2 font-mono text-sm font-semibold tracking-tight"
-        >
-          <LogoMono className="h-8 w-8" />
-          vibecraft
-        </a>
+    <>
+      <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-lg">
+        <Container as="div" className="flex h-16 items-center justify-between">
+          <a
+            href="/"
+            onClick={handleLogoClick}
+            className="flex items-center gap-2 font-mono text-sm font-semibold tracking-tight"
+          >
+            <LogoMono className="h-8 w-8" />
+            vibecraft
+          </a>
 
-        <nav className="hidden items-center gap-8 md:flex">
-          {navLinks.map((link) => (
-            <NavLink
-              key={link.href}
-              href={link.href}
-              className="text-sm text-muted transition-colors duration-150 hover:text-foreground"
-            >
-              {link.label}
-            </NavLink>
-          ))}
-        </nav>
+          <nav className="hidden items-center gap-8 md:flex">
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.href}
+                href={link.href}
+                className="text-sm text-muted transition-colors duration-150 hover:text-foreground"
+              >
+                {link.label}
+              </NavLink>
+            ))}
+          </nav>
 
-        <motion.a
-          href={siteConfig.contacts.telegram}
-          target="_blank"
-          rel="noopener noreferrer"
-          whileHover={{
-            y: -2,
-            transition: { duration: 0.15, ease: "easeOut" },
-          }}
-          className="hidden h-10 items-center justify-center rounded-lg bg-gradient-accent px-4 text-sm font-medium text-white md:inline-flex"
-        >
-          Обсудить проект
-        </motion.a>
+          <motion.a
+            href={siteConfig.contacts.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+            whileHover={{
+              y: -2,
+              transition: { duration: 0.15, ease: "easeOut" },
+            }}
+            className="hidden h-10 items-center justify-center rounded-lg bg-gradient-accent px-4 text-sm font-medium text-white md:inline-flex"
+          >
+            Обсудить проект
+          </motion.a>
 
-        <button
-          type="button"
-          onClick={() => setIsOpen(true)}
-          aria-label="Открыть меню"
-          aria-expanded={isOpen}
-          className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card/40 text-foreground transition-colors duration-150 hover:border-accent md:hidden"
-        >
-          <Menu className="h-5 w-5" />
-        </button>
-      </Container>
+          <button
+            type="button"
+            onClick={() => setIsOpen(true)}
+            aria-label="Открыть меню"
+            aria-expanded={isOpen}
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card/40 text-foreground transition-colors duration-150 hover:border-accent md:hidden"
+          >
+            <Menu className="h-5 w-5" />
+          </button>
+        </Container>
+      </header>
 
       <AnimatePresence>
         {isOpen ? (
           <motion.div
             key="mobile-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
+            initial={{ y: "-100%" }}
+            animate={{ y: 0 }}
+            exit={{ y: "-100%" }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
             className="fixed inset-0 z-50 flex flex-col bg-background md:hidden"
           >
             <Container
@@ -176,6 +178,6 @@ export function Header() {
           </motion.div>
         ) : null}
       </AnimatePresence>
-    </header>
+    </>
   );
 }
