@@ -84,7 +84,7 @@ export function Header() {
             vibecraft
           </a>
 
-          <nav className="hidden items-center gap-8 md:flex">
+          <nav className="hidden items-center gap-8 lg:flex">
             {navLinks.map((link) => (
               <NavLink
                 key={link.href}
@@ -104,7 +104,7 @@ export function Header() {
               y: -2,
               transition: { duration: 0.15, ease: "easeOut" },
             }}
-            className="hidden h-10 items-center justify-center rounded-lg bg-gradient-accent px-4 text-sm font-medium text-white md:inline-flex"
+            className="hidden h-10 items-center justify-center rounded-lg bg-gradient-accent px-4 text-sm font-medium text-white lg:inline-flex"
           >
             Обсудить проект
           </motion.a>
@@ -114,7 +114,7 @@ export function Header() {
             onClick={() => setIsOpen(true)}
             aria-label="Открыть меню"
             aria-expanded={isOpen}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card/40 text-foreground transition-colors duration-150 hover:border-accent md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card/40 text-foreground transition-colors duration-150 hover:border-accent lg:hidden"
           >
             <Menu className="h-5 w-5" />
           </button>
@@ -129,7 +129,7 @@ export function Header() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed inset-0 z-50 flex flex-col bg-background md:hidden"
+            className="fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
           >
             <Container
               as="div"
