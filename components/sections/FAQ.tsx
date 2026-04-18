@@ -1,9 +1,16 @@
+import Link from "next/link";
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { Plus } from "lucide-react";
 
-export const faqs = [
+type Faq = {
+  q: string;
+  a: string;
+  node?: React.ReactNode;
+};
+
+export const faqs: Faq[] = [
   {
     q: "Почему так быстро? Это точно нормальное качество?",
     a: "Скорость — за счет Claude Code и Cursor: они берут boilerplate, тесты, типизацию, CRUD-обвязку. Архитектуру, безопасность и бизнес-логику пишу сам. Код уходит в продакшн, а не в демо.",
@@ -33,8 +40,23 @@ export const faqs = [
     a: "Да, два формата. Базовый пакет — до 5 часов в месяц за 90 000 ₸. Расширенный — до 15 часов за 240 000 ₸. Или почасово без подписки, если обращения редкие.",
   },
   {
-    q: "Что такое аудит скорости сайта и зачем он нужен?",
-    a: "Прогоняю ваш сайт через PSI (PageSpeed Insights от Google), анализирую метрики Core Web Vitals — LCP, CLS, FCP, TBT. Нахожу узкие места, которые замедляют загрузку и снижают ваши позиции в Яндексе и Google. Отдаю PDF-отчет с цифрами, расшифровкой проблем простым языком и приоритизированным планом исправлений. Срок: 1–2 дня. Цена: 15 000 ₸. Сами исправления в эту услугу не входят — только диагностика.",
+    q: "Что такое аудит скорости сайта?",
+    a: "Бесплатный инструмент на базе Google PageSpeed Insights — запускаем скоро. Введете URL — увидите главные проблемы скорости и приоритизированный план исправлений. Оставить email для уведомления о запуске можно на странице /audit.",
+    node: (
+      <>
+        Бесплатный инструмент на базе Google PageSpeed Insights — запускаем
+        скоро. Введете URL — увидите главные проблемы скорости и
+        приоритизированный план исправлений. Оставить email для уведомления
+        о запуске можно на странице{" "}
+        <Link
+          href="/audit"
+          className="text-accent-text underline-offset-4 hover:underline"
+        >
+          /audit
+        </Link>
+        .
+      </>
+    ),
   },
   {
     q: "А если мне нужно что-то, чего нет в списке услуг?",
@@ -64,7 +86,9 @@ export function FAQ() {
                 </h3>
                 <Plus className="mt-1 h-5 w-5 flex-shrink-0 text-muted transition-transform group-open:rotate-45" />
               </summary>
-              <p className="mt-4 text-muted leading-relaxed">{faq.a}</p>
+              <p className="mt-4 text-muted leading-relaxed">
+                {faq.node ?? faq.a}
+              </p>
             </details>
           ))}
         </div>
