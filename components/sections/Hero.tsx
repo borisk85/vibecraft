@@ -42,8 +42,8 @@ export function Hero() {
             className="mt-6 max-w-3xl text-pretty text-lg text-muted md:text-xl"
           >
             Собираю Telegram-боты, MVP, мобильные приложения и автоматизации
-            на современном AI-стеке. Быстрее классических студий, с реальными
-            кейсами в работе.
+            на современном AI-стеке. От кода до запуска — быстрее классических
+            студий.
           </motion.p>
 
           <motion.div
