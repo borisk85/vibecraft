@@ -1,12 +1,4 @@
-import {
-  Bot,
-  Code2,
-  Database,
-  Gauge,
-  MessageSquare,
-  Smartphone,
-  Workflow,
-} from "lucide-react";
+import { Bot, Code2, Smartphone, Sparkles, Workflow } from "lucide-react";
 import Link from "next/link";
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
@@ -20,17 +12,17 @@ export const services = [
     icon: Bot,
     title: "Telegram-боты с AI",
     description:
-      "Боты-консультанты и ассистенты с Claude, памятью диалога и приемом оплат.",
+      "Боты-консультанты, ассистенты, магазины. Claude, память диалога, прием оплат, интеграции с CRM.",
     price: "от 300 000 ₸",
     duration: "5–14 дней",
   },
   {
-    icon: Workflow,
-    title: "Автоматизации Make.com",
+    icon: Sparkles,
+    title: "AI-ассистенты и агенты",
     description:
-      "Соединяю CRM, таблицы, мессенджеры и AI в один автоматический процесс.",
-    price: "от 150 000 ₸",
-    duration: "2–7 дней",
+      "AI-агенты с tool use под личные и бизнес-задачи. Claude, интеграции с Gmail, Calendar, CRM и API, голосовой ввод, работа с данными.",
+    price: "от 500 000 ₸",
+    duration: "2–3 недели",
   },
   {
     icon: Code2,
@@ -41,36 +33,20 @@ export const services = [
     duration: "2–3 недели",
   },
   {
+    icon: Workflow,
+    title: "AI-автоматизации и workflows",
+    description:
+      "Agentic workflows, webhook-интеграции, multi-step процессы. Modal, Claude API, n8n — под задачу.",
+    price: "от 200 000 ₸",
+    duration: "3–7 дней",
+  },
+  {
     icon: Smartphone,
     title: "Мобильные приложения Flutter",
     description:
       "iOS и Android из одного кода. Бэкенд, push, прием оплат, выпуск в сторы.",
     price: "от 1 800 000 ₸",
     duration: "3–4 недели",
-  },
-  {
-    icon: Database,
-    title: "Парсинг и скрапинг",
-    description:
-      "Сбор данных с сайтов, маркетплейсов, социальных сетей. С защитой от блокировок.",
-    price: "от 120 000 ₸",
-    duration: "2–7 дней",
-  },
-  {
-    icon: Gauge,
-    title: "Аудит скорости сайта",
-    description:
-      "Проверю ваш сайт по Core Web Vitals и дам план исправлений",
-    price: "от 15 000 ₸",
-    duration: "1–2 дня",
-  },
-  {
-    icon: MessageSquare,
-    title: "Консультация и аудит",
-    description:
-      "30 минут разбора задачи. Подбираю стек, даю оценку срока и план работ.",
-    price: "30 000 ₸ / час",
-    duration: "в день обращения",
   },
 ];
 
@@ -81,7 +57,7 @@ export function Services() {
         <SectionHeading
           eyebrow="Услуги"
           title="Что делаю"
-          description="От простого Telegram-бота до полноценного SaaS. Выберите что подходит, либо напишите свою задачу — подберу стек."
+          description="Пять направлений AI-разработки — от ботов и ассистентов до мобильных приложений и workflows. Стек подбираю под задачу."
         />
 
         <MotionStagger className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
