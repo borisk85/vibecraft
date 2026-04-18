@@ -64,7 +64,7 @@ const cases: CaseItem[] = [
       "RevenueCat",
       "Claude",
     ],
-    status: "Закрытое тестирование",
+    status: "В тестировании",
     platform: "iOS + Android · СНГ",
     url: "https://duetaiapp.com",
   },
