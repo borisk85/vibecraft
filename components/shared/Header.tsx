@@ -21,13 +21,13 @@ export function Header() {
         as="div"
         className="flex h-16 items-center justify-between"
       >
-        <Link
-          href="/"
+        <a
+          href="/#hero"
           className="flex items-center gap-2 font-mono text-sm font-semibold tracking-tight"
         >
           <LogoMono className="h-8 w-8" />
           vibecraft
-        </Link>
+        </a>
 
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) =>
