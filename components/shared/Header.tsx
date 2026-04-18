@@ -10,12 +10,12 @@ import { LogoMono } from "./LogoMono";
 import { siteConfig } from "@/lib/metadata";
 
 const navLinks = [
-  { href: "#solution", label: "Подход" },
-  { href: "#services", label: "Услуги" },
-  { href: "#process", label: "Процесс" },
-  { href: "#cases", label: "Кейсы" },
-  { href: "#about", label: "Обо мне" },
-  { href: "#faq", label: "FAQ" },
+  { href: "/#solution", label: "Подход" },
+  { href: "/#services", label: "Услуги" },
+  { href: "/#process", label: "Процесс" },
+  { href: "/#cases", label: "Кейсы" },
+  { href: "/#about", label: "Обо мне" },
+  { href: "/#faq", label: "FAQ" },
   { href: "/blog", label: "Блог" },
 ];
 
@@ -30,7 +30,7 @@ function NavLink({
   onClick?: () => void;
   className?: string;
 }) {
-  if (href.startsWith("#")) {
+  if (href.includes("#")) {
     return (
       <a href={href} onClick={onClick} className={className}>
         {children}
