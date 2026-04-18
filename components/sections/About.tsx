@@ -1,7 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Send } from "lucide-react";
 import { Container } from "@/components/shared/Container";
-import { LogoGradient } from "@/components/shared/LogoGradient";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { siteConfig } from "@/lib/metadata";
 
@@ -10,11 +10,15 @@ export function About() {
     <MotionSection id="about" className="py-24 md:py-28">
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[320px_1fr] lg:gap-16">
-          {/* Заглушка под фото — до реального снимка */}
           <div className="relative mx-auto aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-accent/30 bg-card">
-            <div className="absolute inset-0 flex items-center justify-center">
-              <LogoGradient className="h-32 w-32" />
-            </div>
+            <Image
+              src="/boris.jpg"
+              alt="Борис Комаров — AI-фаундер Vibecraft"
+              fill
+              priority
+              sizes="(max-width: 1024px) 100vw, 320px"
+              className="object-cover"
+            />
           </div>
 
           <div className="flex flex-col gap-5">
