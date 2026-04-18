@@ -8,9 +8,9 @@ import { siteConfig } from "@/lib/metadata";
 import { heroFadeIn } from "@/lib/animations";
 
 const proof = [
-  { value: "28+", label: "проектов в продакшне" },
-  { value: "14 дней", label: "средний срок запуска MVP" },
-  { value: "SaaS", label: "собственный в проде" },
+  { value: "11 лет", label: "в собственных проектах и фрилансе" },
+  { value: "3–4 дня", label: "MVP в работу" },
+  { value: "SaaS", label: "собственный с платными подписками" },
 ];
 
 export function Hero() {
