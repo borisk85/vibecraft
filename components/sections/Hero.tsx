@@ -8,7 +8,7 @@ import { siteConfig } from "@/lib/metadata";
 import { heroFadeIn } from "@/lib/animations";
 
 const proof = [
-  { value: "11 лет", label: "в собственных проектах и фрилансе" },
+  { value: "11 лет", label: "в собственных проектах" },
   { value: "3–4 дня", label: "MVP в работу" },
   { value: "SaaS", label: "собственный с платными подписками" },
 ];
