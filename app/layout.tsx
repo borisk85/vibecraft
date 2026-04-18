@@ -61,9 +61,6 @@ export const metadata: Metadata = {
     yandex: "64462c309bbc4c86",
     google: "o0DZ87t1PIZRkKzVSbQTJaRuepF9OgzuNgc4Gnx2oYQ",
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
 };
 
 export const viewport: Viewport = {
