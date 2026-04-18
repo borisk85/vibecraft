@@ -72,13 +72,13 @@ export function Hero() {
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </motion.a>
 
-            <Link
+            <a
               href="#cases"
               className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-border bg-card/40 px-6 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent hover:bg-card"
             >
               <PlayCircle className="h-4 w-4" />
               Смотреть кейсы
-            </Link>
+            </a>
           </motion.div>
 
           <motion.dl
