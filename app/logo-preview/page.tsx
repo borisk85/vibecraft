@@ -46,10 +46,7 @@ export default function LogoPreviewPage() {
           <div className="flex flex-wrap items-end gap-10 rounded-2xl border border-border bg-surface p-10">
             {sizes.map((s) => (
               <div key={s.label} className="flex flex-col items-center gap-3">
-                <LogoGradient
-                  className={s.className}
-                  idSuffix={`preview-${s.label}`}
-                />
+                <LogoGradient className={s.className} />
                 <span className="font-mono text-xs text-subtle">{s.label}</span>
               </div>
             ))}
@@ -66,7 +63,7 @@ export default function LogoPreviewPage() {
               <span className="font-mono text-xs text-subtle">Mono</span>
             </div>
             <div className="flex flex-col items-center gap-3 rounded-xl bg-card p-8">
-              <LogoGradient className="h-24 w-24" idSuffix="side-by-side" />
+              <LogoGradient className="h-24 w-24" />
               <span className="font-mono text-xs text-subtle">Gradient</span>
             </div>
           </div>

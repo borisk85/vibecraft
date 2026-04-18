@@ -13,7 +13,7 @@ export function About() {
           {/* Заглушка под фото — до реального снимка */}
           <div className="relative mx-auto aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-accent/30 bg-card">
             <div className="absolute inset-0 flex items-center justify-center">
-              <LogoGradient className="h-32 w-32" idSuffix="about" />
+              <LogoGradient className="h-32 w-32" />
             </div>
           </div>
 
