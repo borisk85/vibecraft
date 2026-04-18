@@ -6,16 +6,19 @@ const stack = [
   "Next.js",
   "React",
   "TypeScript",
+  "Tailwind",
+  "Python",
+  "FastAPI",
+  "PostgreSQL",
   "Supabase",
   "Railway",
-  "Clerk",
   "Flutter",
+  "Firebase",
   "Claude",
   "Make.com",
   "Telegram",
-  "Tailwind",
+  "Clerk",
   "Vercel",
-  "Stripe",
 ];
 
 export function Stack() {
