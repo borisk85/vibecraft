@@ -80,10 +80,15 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             custom={0.45}
-            className="mt-10 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-muted sm:gap-x-10"
+            className="mt-10 flex flex-wrap items-center justify-center gap-y-3 text-sm text-muted"
           >
-            {proof.map((item) => (
-              <div key={item.label} className="flex items-baseline gap-2">
+            {proof.map((item, index) => (
+              <div
+                key={item.label}
+                className={`flex items-baseline gap-2 px-6 sm:px-8 ${
+                  index > 0 ? "border-l border-border" : ""
+                }`}
+              >
                 <dt className="font-mono text-base font-semibold text-foreground">
                   {item.value}
                 </dt>
