@@ -133,16 +133,8 @@ export function Header() {
           >
             <Container
               as="div"
-              className="flex h-16 items-center justify-between border-b border-border/60"
+              className="flex h-16 items-center justify-end"
             >
-              <a
-                href="/"
-                onClick={handleLogoClick}
-                className="flex items-center gap-2 font-mono text-sm font-semibold tracking-tight"
-              >
-                <LogoMono className="h-8 w-8" />
-                vibecraft
-              </a>
               <button
                 type="button"
                 onClick={() => setIsOpen(false)}
@@ -153,7 +145,7 @@ export function Header() {
               </button>
             </Container>
 
-            <nav className="flex flex-1 flex-col gap-2 px-6 pt-10">
+            <nav className="flex flex-1 flex-col gap-2 px-6 pt-6">
               {navLinks.map((link) => (
                 <NavLink
                   key={link.href}
