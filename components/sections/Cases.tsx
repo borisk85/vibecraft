@@ -77,7 +77,7 @@ export function Cases() {
         <SectionHeading
           eyebrow="Кейсы"
           title="Проекты, которые работают в продакшне"
-          description="Каждый кейс — реальная разработка. Архитектуру, стек и продуктовые решения разберу на созвоне."
+          description="Каждый кейс — реальная разработка на AI-стеке."
         />
 
         <MotionStagger className="mt-16 grid grid-cols-1 gap-5 lg:grid-cols-3">
