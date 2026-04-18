@@ -7,7 +7,7 @@ import { siteConfig } from "@/lib/metadata";
 
 export function About() {
   return (
-    <MotionSection className="py-24 md:py-28">
+    <MotionSection id="about" className="py-24 md:py-28">
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[320px_1fr] lg:gap-16">
           {/* Заглушка под фото — до реального снимка */}
