@@ -80,7 +80,7 @@ export function Services() {
       <Container>
         <SectionHeading
           eyebrow="Услуги"
-          title="Что делаю для бизнеса в Казахстане"
+          title="Что делаю"
           description="От простого Telegram-бота до полноценного SaaS. Выберите что подходит, либо напишите свою задачу — подберу стек."
         />
 
