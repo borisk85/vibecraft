@@ -31,7 +31,7 @@ export function Hero() {
         <div className="flex flex-col items-center text-center">
           <h1 className="max-w-5xl text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
             AI-разработка.{" "}
-            <span className="text-gradient">От идеи до продакшна.</span>
+            <span className="text-gradient">От идеи до продакшна</span>
           </h1>
 
           <motion.p
