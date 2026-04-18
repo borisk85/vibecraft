@@ -17,7 +17,7 @@ const stack = [
   "Firebase",
   "Claude",
   "Telegram",
-  "n8n",
+  "Make.com",
   "Clerk",
   "Vercel",
 ];
