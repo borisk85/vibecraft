@@ -7,6 +7,7 @@ const stack = [
   "React",
   "TypeScript",
   "Supabase",
+  "Railway",
   "Clerk",
   "Flutter",
   "Claude",
