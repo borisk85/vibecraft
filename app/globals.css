@@ -27,10 +27,11 @@
   /* Акценты.
      - accent (#8B5CF6) — крупные декор-элементы, градиенты, blob.
        Контраст к фону #0A0A0A = 3.8:1 (ниже AA для текста).
-     - accent-text (#A78BFA) — для любого текста и иконок <24px / не bold.
-       Контраст к фону #0A0A0A = 5.5:1 (AA ok). */
+     - accent-text (#C084FC) — для любого текста и иконок <24px / не bold.
+       Более теплый фиолетовый, ближе к центру градиента 8B5CF6→EC4899.
+       Контраст к фону #0A0A0A = 6.7:1 (AA large / AAA normal). */
   --color-accent: #8b5cf6;
-  --color-accent-text: #a78bfa;
+  --color-accent-text: #c084fc;
   --color-accent-pink: #ec4899;
 
   /* Служебные */

@@ -36,7 +36,9 @@ export function Hero() {
 
           <h1 className="max-w-5xl text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
             Telegram-боты, MVP и автоматизации для бизнеса в Казахстане —{" "}
-            <span className="text-gradient">2–4 недели вместо месяцев</span>
+            <span className="text-gradient md:whitespace-nowrap">
+              2–4 недели вместо месяцев
+            </span>
           </h1>
 
           <motion.p

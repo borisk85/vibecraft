@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Container } from "./Container";
+import { LogoMono } from "./LogoMono";
 import { siteConfig } from "@/lib/metadata";
 
 const navLinks = [
@@ -24,7 +25,7 @@ export function Header() {
           href="/"
           className="flex items-center gap-2 font-mono text-sm font-semibold tracking-tight"
         >
-          <span className="inline-block h-2.5 w-2.5 rounded-full bg-gradient-accent" />
+          <LogoMono className="h-8 w-8" />
           vibecraft
         </Link>
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Send } from "lucide-react";
 import { Container } from "@/components/shared/Container";
+import { LogoGradient } from "@/components/shared/LogoGradient";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { siteConfig } from "@/lib/metadata";
 
@@ -9,10 +10,10 @@ export function About() {
     <MotionSection className="py-24 md:py-28">
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[320px_1fr] lg:gap-16">
-          {/* Фото — placeholder под реальное */}
-          <div className="relative mx-auto aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-border bg-card bg-dot-pattern">
+          {/* Заглушка под фото — до реального снимка */}
+          <div className="relative mx-auto aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-accent/30 bg-card">
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="font-mono text-xs text-subtle">[фото]</span>
+              <LogoGradient className="h-32 w-32" idSuffix="about" />
             </div>
           </div>
 
