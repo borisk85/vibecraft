@@ -1,4 +1,11 @@
-import { Bot, Code2, Smartphone, Sparkles, Workflow } from "lucide-react";
+import {
+  ArrowRight,
+  Bot,
+  Code2,
+  Smartphone,
+  Sparkles,
+  Workflow,
+} from "lucide-react";
 import Link from "next/link";
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
@@ -86,18 +93,31 @@ export function Services() {
               </div>
             </MotionItem>
           ))}
-        </MotionStagger>
 
-        <div className="mt-10 text-center">
           <Link
             href={siteConfig.contacts.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm text-accent-text underline-offset-4 hover:underline"
+            className="block"
           >
-            Нет в списке? Напишите в Telegram — посмотрю задачу
+            <MotionItem
+              interactive
+              className="group flex h-full flex-col gap-4 rounded-2xl border border-accent/30 bg-transparent p-7 transition-colors duration-200 hover:border-accent"
+            >
+              <div>
+                <h3 className="mb-1.5 text-lg font-semibold tracking-tight text-foreground">
+                  Нет в списке?
+                </h3>
+                <p className="text-sm leading-relaxed text-muted">
+                  Напишите в Telegram — посмотрю задачу и предложу решение.
+                </p>
+              </div>
+              <div className="mt-auto flex items-center justify-end">
+                <ArrowRight className="h-5 w-5 text-accent-text transition-transform group-hover:translate-x-0.5" />
+              </div>
+            </MotionItem>
           </Link>
-        </div>
+        </MotionStagger>
       </Container>
     </MotionSection>
   );
