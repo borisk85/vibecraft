@@ -41,8 +41,8 @@ export function Hero() {
             custom={0.1}
             className="mt-6 max-w-3xl text-pretty text-lg text-muted md:text-xl"
           >
-            Собираю Telegram-боты, MVP, мобильные приложения и автоматизации.
-            От кода до запуска — быстрее классических студий.
+            Собираю Telegram-боты, MVP, мобильные приложения и автоматизации —
+            быстрее классических студий.
           </motion.p>
 
           <motion.div
@@ -71,7 +71,7 @@ export function Hero() {
               className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-border bg-card/40 px-6 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent hover:bg-card"
             >
               <PlayCircle className="h-4 w-4" />
-              Смотреть кейсы
+              Смотреть работы
             </a>
           </motion.div>
 

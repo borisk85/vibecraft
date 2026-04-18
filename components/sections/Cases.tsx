@@ -75,7 +75,7 @@ export function Cases() {
     <MotionSection id="cases" className="py-24 md:py-28">
       <Container>
         <SectionHeading
-          eyebrow="Кейсы"
+          eyebrow="Работы"
           title="Проекты, которые работают в продакшне"
           description="Каждый кейс — реальная разработка с Claude внутри."
         />

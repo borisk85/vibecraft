@@ -13,7 +13,7 @@ const navLinks = [
   { href: "/#solution", label: "Подход" },
   { href: "/#services", label: "Услуги" },
   { href: "/#process", label: "Процесс" },
-  { href: "/#cases", label: "Кейсы" },
+  { href: "/#cases", label: "Работы" },
   { href: "/#about", label: "Обо мне" },
   { href: "/#faq", label: "FAQ" },
   { href: "/blog", label: "Блог" },
