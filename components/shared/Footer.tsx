@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ArrowUp } from "lucide-react";
 import { Container } from "./Container";
 import { LogoMono } from "./LogoMono";
 import { siteConfig } from "@/lib/metadata";
@@ -37,7 +38,16 @@ export function Footer() {
           </a>
         </div>
 
-        <span className="text-xs text-subtle">© {year} Vibecraft</span>
+        <div className="flex items-center gap-5">
+          <a
+            href="#hero"
+            className="inline-flex items-center gap-1.5 text-xs text-muted transition-colors duration-150 hover:text-foreground"
+          >
+            <ArrowUp className="h-3.5 w-3.5" />
+            Наверх
+          </a>
+          <span className="text-xs text-subtle">© {year} Vibecraft</span>
+        </div>
       </Container>
     </footer>
   );
