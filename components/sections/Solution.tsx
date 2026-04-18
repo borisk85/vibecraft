@@ -10,13 +10,13 @@ const points = [
     icon: Gauge,
     title: "AI пишет код, человек отвечает за результат",
     description:
-      "Claude Code и Cursor берут на себя boilerplate, тесты, типизацию, CRUD-обвязку. Архитектуру, безопасность и бизнес-логику пишу сам.",
+      "Claude Code и Cursor берут рутину: boilerplate, тесты, типизацию, CRUD-обвязку. Архитектуру, безопасность и бизнес-логику проектирую и контролирую лично.",
   },
   {
     icon: Bot,
     title: "Фокус на вашей задаче, а не на шаблоне",
     description:
-      "Пишу под вашу логику: ваш CRM, Kaspi Pay, ваш процесс. Никаких коробочных ограничений.",
+      "Под вашу логику, ваш процесс, ваши интеграции. Будь то Kaspi Pay, подключение к вашему сервису или кастомный воркфлоу — коробочных ограничений нет.",
   },
   {
     icon: ShieldCheck,
@@ -32,8 +32,8 @@ export function Solution() {
       <Container>
         <SectionHeading
           eyebrow="Подход"
-          title="AI-разработка без магии и без рисков"
-          description="Использую Claude Code и Cursor там, где они дают 3–5-кратное ускорение. Архитектура, безопасность и результат — на мне."
+          title="Как я работаю"
+          description="Claude Code и Cursor берут рутину. Архитектура, безопасность и результат — на мне."
         />
 
         <MotionStagger className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">

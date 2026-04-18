@@ -81,7 +81,7 @@ export function Services() {
         <SectionHeading
           eyebrow="Услуги"
           title="Что делаю для бизнеса в Казахстане"
-          description="Семь направлений, где AI-стек дает разрыв с классической студией в разы: боты, автоматизации, MVP, мобильные, парсинг, аудит скорости, консультация."
+          description="От простого Telegram-бота до полноценного SaaS. Выберите что подходит, либо напишите свою задачу — подберу стек."
         />
 
         <MotionStagger className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
