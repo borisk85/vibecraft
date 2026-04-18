@@ -78,7 +78,7 @@ export function Header() {
           <a
             href="/"
             onClick={handleLogoClick}
-            className="flex items-center gap-2 font-mono text-sm font-semibold tracking-tight"
+            className="flex items-center gap-2 rounded-md font-mono text-sm font-semibold tracking-tight outline-none focus:outline-none focus-visible:outline-none"
           >
             <LogoMono className="h-8 w-8" />
             vibecraft
