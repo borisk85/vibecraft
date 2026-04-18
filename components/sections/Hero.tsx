@@ -29,11 +29,6 @@ export function Hero() {
 
       <Container className="relative">
         <div className="flex flex-col items-center text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-xs font-medium text-muted">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-success" />
-            Принимаю новые проекты · {siteConfig.location.city}
-          </div>
-
           <h1 className="max-w-5xl text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
             AI-разработка.{" "}
             <span className="text-gradient">От идеи до продакшна.</span>
