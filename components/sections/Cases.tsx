@@ -52,7 +52,7 @@ const cases: CaseItem[] = [
     platform: "Telegram",
   },
   {
-    tag: "Mobile · iOS + Android",
+    tag: "Mobile · B2C",
     title: "Дуэт — AI-эксперт по подбору напитков",
     description:
       "Мобильное приложение с AI-подбором напитка к любому блюду. Три режима ответа от простого до экспертного, история подборов и избранное, работа без регистрации. Streaming-ответы Claude, подписочная модель через RevenueCat.",
