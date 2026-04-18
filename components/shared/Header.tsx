@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { Container } from "./Container";
 import { LogoMono } from "./LogoMono";
@@ -15,6 +16,16 @@ const navLinks = [
 ];
 
 export function Header() {
+  const pathname = usePathname();
+
+  const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      history.replaceState(null, "", "/");
+    }
+  };
+
   return (
     <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-lg">
       <Container
@@ -22,7 +33,8 @@ export function Header() {
         className="flex h-16 items-center justify-between"
       >
         <a
-          href="/#hero"
+          href="/"
+          onClick={handleLogoClick}
           className="flex items-center gap-2 font-mono text-sm font-semibold tracking-tight"
         >
           <LogoMono className="h-8 w-8" />
