@@ -27,7 +27,7 @@ export function Pain() {
       <Container>
         <SectionHeading
           eyebrow="Проблема"
-          title="Студия против Vibecraft"
+          title="Студия или Vibecraft"
           description="Одна и та же задача — две разные истории."
         />
 
