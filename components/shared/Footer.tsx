@@ -11,7 +11,7 @@ export function Footer() {
     <footer className="border-t border-border/60 py-10 md:mt-24 md:py-12">
       <Container className="flex flex-col items-center gap-7 text-center md:flex-row md:items-center md:justify-between md:gap-6 md:text-left">
         <div className="flex flex-col items-center gap-3 md:flex-row md:gap-2">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 translate-x-[3px]">
             <LogoMono className="h-10 w-10 flex-shrink-0" />
             <span className="font-mono text-sm font-semibold">vibecraft</span>
           </div>
