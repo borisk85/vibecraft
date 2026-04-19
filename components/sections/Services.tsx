@@ -36,7 +36,7 @@ export const services = [
     description:
       "Agentic workflows, webhook-интеграции, multi-step процессы. Modal, Claude API, n8n — под задачу.",
     price: "от 350 000 ₸",
-    duration: "до 2 недель",
+    duration: "до 1 недели",
   },
   {
     icon: Smartphone,
