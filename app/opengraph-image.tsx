@@ -44,9 +44,9 @@ export default async function OgImage() {
           }}
         >
           <svg
-            width="112"
-            height="112"
-            viewBox={V_VIEWBOX}
+            width="200"
+            height="168"
+            viewBox="290 340 450 380"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path d={V_PATH} fill="#EDEDED" />
@@ -65,15 +65,15 @@ export default async function OgImage() {
         <div
           style={{
             marginTop: "40px",
-            fontSize: "36px",
+            fontSize: "30px",
             color: "#A1A1A1",
             fontWeight: 400,
             letterSpacing: "-0.01em",
             textAlign: "center",
-            maxWidth: "1080px",
+            maxWidth: "1100px",
           }}
         >
-          Telegram-боты · AI-ассистенты · MVP · Мобильные · Автоматизации
+          Telegram-боты · AI-ассистенты · MVP · SaaS · Мобильные · Автоматизации
         </div>
       </div>
     ),

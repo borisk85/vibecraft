@@ -18,7 +18,7 @@ const organizationSchema = {
   url: siteConfig.url,
   logo: `${siteConfig.url}/og-image.png`,
   description:
-    "AI-разработка для бизнеса в Казахстане: Telegram-боты, MVP и автоматизации за 2–4 недели — в 3 раза дешевле классической студии.",
+    "AI-разработка в Казахстане: Telegram-боты, AI-ассистенты, MVP, SaaS, мобильные приложения и автоматизации.",
   founder: { "@type": "Person", name: "Борис" },
   contactPoint: {
     "@type": "ContactPoint",
