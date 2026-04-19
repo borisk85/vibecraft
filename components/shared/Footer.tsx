@@ -37,7 +37,7 @@ export function Footer() {
             {siteConfig.contacts.email}
           </a>
           <BackToTop />
-          <span className="text-xs text-subtle">© {year} Vibecraft</span>
+          <span className="text-sm text-subtle">© {year} Vibecraft</span>
         </div>
       </Container>
     </footer>
