@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Send } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { siteConfig } from "@/lib/metadata";
@@ -148,9 +147,8 @@ export function FinalCTA() {
               href={siteConfig.contacts.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-foreground transition-colors duration-150 hover:text-accent-text"
+              className="text-foreground transition-colors duration-150 hover:text-accent-text"
             >
-              <Send className="h-4 w-4" />
               Telegram {siteConfig.contacts.telegramHandle}
             </Link>
           </div>
