@@ -104,7 +104,7 @@ export function FinalCTA() {
                 name="message"
                 rows={4}
                 placeholder="Опишите задачу в нескольких предложениях"
-                className="resize-none rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-subtle transition-colors duration-150 focus:border-accent focus:outline-none"
+                className="resize-none rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-subtle transition-colors duration-150 focus:border-accent focus:outline-none focus-visible:outline-none"
               />
             </div>
 
@@ -184,7 +184,7 @@ function Field({
         name={name}
         required={required}
         placeholder={placeholder}
-        className="h-11 rounded-lg border border-border bg-background px-4 text-foreground placeholder:text-subtle transition-colors duration-150 focus:border-accent focus:outline-none"
+        className="h-11 rounded-lg border border-border bg-background px-4 text-foreground placeholder:text-subtle transition-colors duration-150 focus:border-accent focus:outline-none focus-visible:outline-none"
       />
     </div>
   );
@@ -234,7 +234,7 @@ function SelectField({
           onClick={() => setOpen((o) => !o)}
           aria-haspopup="listbox"
           aria-expanded={open}
-          className="flex h-11 w-full items-center justify-between rounded-lg border border-border bg-background px-4 text-left text-foreground transition-colors duration-150 focus:border-accent focus:outline-none"
+          className="flex h-11 w-full items-center justify-between rounded-lg border border-border bg-background px-4 text-left text-foreground transition-colors duration-150 focus:border-accent focus:outline-none focus-visible:outline-none"
         >
           <span className={cn(value ? "text-foreground" : "text-subtle")}>
             {value || "Выберите"}
