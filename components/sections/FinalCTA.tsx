@@ -3,9 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { Send } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { MotionSection } from "@/components/shared/MotionSection";
-import { TelegramIcon } from "@/components/shared/TelegramIcon";
 import { siteConfig } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
@@ -149,7 +149,7 @@ export function FinalCTA() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-foreground transition-colors duration-150 hover:text-accent-text"
             >
-              <TelegramIcon className="h-4 w-4" />
+              <Send className="h-4 w-4" />
               {siteConfig.contacts.telegramHandle}
             </Link>
           </div>
@@ -208,13 +208,14 @@ function SelectField({
         id={id}
         name={name}
         defaultValue=""
+        style={{ colorScheme: "dark" }}
         className="h-11 rounded-lg border border-border bg-background px-4 text-foreground transition-colors duration-150 focus:border-accent focus:outline-none"
       >
-        <option value="" disabled>
+        <option value="" disabled style={{ backgroundColor: "#0a0a0a", color: "#8f8f8f" }}>
           Выберите
         </option>
         {options.map((opt) => (
-          <option key={opt} value={opt}>
+          <option key={opt} value={opt} style={{ backgroundColor: "#0a0a0a", color: "#ededed" }}>
             {opt}
           </option>
         ))}

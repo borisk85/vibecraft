@@ -1,7 +1,7 @@
 import Link from "next/link";
+import { Send } from "lucide-react";
 import { Container } from "./Container";
 import { LogoMono } from "./LogoMono";
-import { TelegramIcon } from "./TelegramIcon";
 import { siteConfig } from "@/lib/metadata";
 
 export function Footer() {
@@ -25,7 +25,7 @@ export function Footer() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 transition-colors hover:text-foreground"
           >
-            <TelegramIcon className="h-4 w-4" />
+            <Send className="h-4 w-4" />
             {siteConfig.contacts.telegramHandle}
           </Link>
           <a
