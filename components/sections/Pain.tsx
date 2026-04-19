@@ -27,14 +27,14 @@ export function Pain() {
       <Container>
         <SectionHeading
           eyebrow="Проблема"
-          title="Студия или Vibecraft"
+          title="Студия разработки или Vibecraft"
           description="Как было раньше и как сейчас."
         />
 
         <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
           <div className="rounded-2xl border border-border bg-surface/60 p-8 md:p-10">
             <h3 className="mb-8 font-mono text-sm uppercase tracking-[0.2em] text-subtle">
-              Классическая студия
+              Классическая студия разработки
             </h3>
             <ul className="flex flex-col gap-5">
               {studio.map((item) => (
