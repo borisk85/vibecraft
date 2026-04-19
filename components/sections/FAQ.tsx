@@ -71,7 +71,7 @@ export function FAQ() {
         <SectionHeading
           eyebrow="FAQ"
           title="Частые вопросы"
-          description="Если что-то осталось непонятным — пишите в Telegram, отвечу лично."
+          description="Если что-то осталось непонятным — напишите мне в Telegram, отвечу лично."
         />
 
         <div className="mx-auto mt-16 max-w-3xl divide-y divide-border border-y border-border">

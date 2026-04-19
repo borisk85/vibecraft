@@ -1,9 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Send } from "lucide-react";
+import { ChevronDown, Send } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { siteConfig } from "@/lib/metadata";
@@ -103,7 +103,7 @@ export function FinalCTA() {
                 id="field-message"
                 name="message"
                 rows={4}
-                placeholder="Опишите задачу в 2–3 предложениях"
+                placeholder="Опишите задачу в нескольких предложениях"
                 className="resize-none rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-subtle transition-colors duration-150 focus:border-accent focus:outline-none"
               />
             </div>
@@ -199,28 +199,81 @@ function SelectField({
   name: string;
   options: string[];
 }) {
-  const id = `select-${name}`;
+  const id = useId();
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState("");
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDocClick = (e: MouseEvent) => {
+      if (!containerRef.current?.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="text-sm text-muted">
         {label}
       </label>
-      <select
-        id={id}
-        name={name}
-        defaultValue=""
-        style={{ colorScheme: "dark" }}
-        className="h-11 rounded-lg border border-border bg-background px-4 text-foreground transition-colors duration-150 focus:border-accent focus:outline-none"
-      >
-        <option value="" disabled hidden style={{ backgroundColor: "#0a0a0a", color: "#8f8f8f" }}>
-          Выберите
-        </option>
-        {options.map((opt) => (
-          <option key={opt} value={opt} style={{ backgroundColor: "#0a0a0a", color: "#ededed" }}>
-            {opt}
-          </option>
-        ))}
-      </select>
+      <div ref={containerRef} className="relative">
+        <button
+          id={id}
+          type="button"
+          onClick={() => setOpen((o) => !o)}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          className="flex h-11 w-full items-center justify-between rounded-lg border border-border bg-background px-4 text-left text-foreground transition-colors duration-150 focus:border-accent focus:outline-none"
+        >
+          <span className={cn(value ? "text-foreground" : "text-subtle")}>
+            {value || "Выберите"}
+          </span>
+          <ChevronDown
+            className={cn(
+              "h-4 w-4 text-muted transition-transform duration-150",
+              open && "rotate-180",
+            )}
+          />
+        </button>
+        {open ? (
+          <ul
+            role="listbox"
+            className="absolute left-0 right-0 top-full z-20 mt-2 max-h-60 overflow-auto rounded-lg border border-border bg-card py-1 shadow-lg shadow-black/40"
+          >
+            {options.map((opt) => (
+              <li
+                key={opt}
+                role="option"
+                aria-selected={value === opt}
+                onClick={() => {
+                  setValue(opt);
+                  setOpen(false);
+                }}
+                className={cn(
+                  "cursor-pointer px-4 py-2 text-sm transition-colors",
+                  value === opt
+                    ? "bg-surface text-foreground"
+                    : "text-muted hover:bg-surface hover:text-foreground",
+                )}
+              >
+                {opt}
+              </li>
+            ))}
+          </ul>
+        ) : null}
+        <input type="hidden" name={name} value={value} />
+      </div>
     </div>
   );
 }
