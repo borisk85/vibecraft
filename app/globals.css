@@ -99,6 +99,7 @@ body {
 /* Плавный скролл для якорных ссылок из Hero */
 html {
   scroll-behavior: smooth;
+  color-scheme: dark;
 }
 
 /* Фокус для a11y — фиолетовый ring */
