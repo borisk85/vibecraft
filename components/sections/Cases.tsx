@@ -10,7 +10,6 @@ type CaseItem = {
   title: string;
   description: string;
   stack: string[];
-  status: string;
   platform: string;
   url?: string;
 };
@@ -35,7 +34,6 @@ const cases: CaseItem[] = [
       "Railway",
       "Vercel",
     ],
-    status: "В продакшне",
     platform: "Web + Telegram",
     url: "https://velabot.io",
   },
@@ -52,7 +50,6 @@ const cases: CaseItem[] = [
       "Railway",
       "fal.ai",
     ],
-    status: "В продакшне",
     platform: "Telegram",
   },
   {
@@ -68,7 +65,6 @@ const cases: CaseItem[] = [
       "Firebase Performance",
       "Claude",
     ],
-    status: "В тестировании",
     platform: "iOS + Android",
     url: "https://duetaiapp.com",
   },
@@ -114,15 +110,9 @@ export function Cases() {
                     </span>
                   ))}
                 </div>
-                <div className="grid grid-cols-2 gap-4 border-t border-border pt-4 text-sm">
-                  <div>
-                    <div className="text-xs text-subtle">Статус</div>
-                    <div className="text-foreground">{item.status}</div>
-                  </div>
-                  <div>
-                    <div className="text-xs text-subtle">Платформа</div>
-                    <div className="text-foreground">{item.platform}</div>
-                  </div>
+                <div className="border-t border-border pt-4 text-sm">
+                  <div className="text-xs text-subtle">Платформа</div>
+                  <div className="text-foreground">{item.platform}</div>
                 </div>
               </MotionItem>
             );
