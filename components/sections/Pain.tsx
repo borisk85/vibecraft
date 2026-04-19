@@ -1,34 +1,37 @@
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { MotionSection } from "@/components/shared/MotionSection";
-import { MotionStagger } from "@/components/shared/MotionStagger";
-import { MotionItem } from "@/components/shared/MotionItem";
-import { Clock, EyeOff, PackageX, Wallet } from "lucide-react";
 
-const pains = [
+const rows = [
   {
-    icon: Wallet,
-    title: "2 000 000 ₸ и 2 месяца за задачу на 2 недели",
-    description:
-      "Классическая цепочка аналитик → дизайнер → бэк → фронт → PM раздувает и смету, и сроки. Вы платите за иерархию, а не за результат.",
+    label: "Срок",
+    studio: "1-3 месяца",
+    vibecraft: "до 2 недель",
   },
   {
-    icon: EyeOff,
-    title: "Предоплата ушла — результата нет",
-    description:
-      "Одиночки без обязательств и студии без процессов — обе крайности ведут к одному: вы платите, но продукта не получаете.",
+    label: "Команда",
+    studio: "менеджер, дизайнер, разработчики — цепочка из 3-5 человек",
+    vibecraft: "один человек и Claude",
   },
   {
-    icon: PackageX,
-    title: "Коробка дает 70% функций и 0% гибкости",
-    description:
-      "Шаблонные платформы закрывают базу, но ломаются там, где нужна ваша логика: прием оплат через Kaspi, нестандартный воркфлоу, интеграции под ваш процесс.",
+    label: "Бюджет",
+    studio: "кратно выше за счет штата и процессов",
+    vibecraft: "прозрачный, стартовые цены открыто",
   },
   {
-    icon: Clock,
-    title: "Месяц молчания и «мы работаем над задачей»",
-    description:
-      "Нет этапов, нет демо, нет понимания, что именно сделано. Только «в работе» и «скоро покажем».",
+    label: "Коммуникация",
+    studio: "через менеджера, правки через брифы",
+    vibecraft: "напрямую с разработчиком",
+  },
+  {
+    label: "Прогресс",
+    studio: "«мы работаем над задачей» неделями",
+    vibecraft: "живые демо в процессе",
+  },
+  {
+    label: "Правки",
+    studio: "удлиняют проект и смету",
+    vibecraft: "вносятся в процессе работы",
   },
 ];
 
@@ -38,26 +41,46 @@ export function Pain() {
       <Container>
         <SectionHeading
           eyebrow="Проблема"
-          title="Почему разработка превращается в боль"
-          description="Знакомо? Это не про плохих подрядчиков — это про устаревший формат разработки."
+          title="Студия против Vibecraft"
+          description="Одна и та же задача — две разные истории. Сравнение по пунктам, которые реально влияют на результат."
         />
 
-        <MotionStagger className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2">
-          {pains.map((pain) => (
-            <MotionItem
-              key={pain.title}
-              className="group rounded-2xl border border-border bg-card p-8 transition-colors duration-200 hover:border-accent"
+        <div className="mx-auto mt-16 max-w-4xl overflow-hidden rounded-2xl border border-border">
+          <div className="hidden grid-cols-[1fr_1.5fr_1.5fr] border-b border-border bg-surface text-xs font-mono uppercase tracking-[0.15em] text-subtle md:grid">
+            <div className="px-6 py-4" />
+            <div className="border-l border-border px-6 py-4">
+              Классическая студия
+            </div>
+            <div className="border-l border-border bg-card px-6 py-4 text-accent-text">
+              Vibecraft
+            </div>
+          </div>
+
+          {rows.map((row, index) => (
+            <div
+              key={row.label}
+              className={`grid grid-cols-1 md:grid-cols-[1fr_1.5fr_1.5fr] ${
+                index > 0 ? "border-t border-border" : ""
+              }`}
             >
-              <div className="mb-5 inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface text-accent-text">
-                <pain.icon className="h-5 w-5" />
+              <div className="bg-surface px-6 py-4 font-mono text-xs uppercase tracking-[0.15em] text-muted md:border-r md:border-border md:py-5">
+                {row.label}
               </div>
-              <h3 className="mb-2 text-xl font-semibold tracking-tight text-foreground">
-                {pain.title}
-              </h3>
-              <p className="text-muted leading-relaxed">{pain.description}</p>
-            </MotionItem>
+              <div className="px-6 py-4 text-sm text-subtle md:border-r md:border-border md:py-5">
+                <div className="mb-1 font-mono text-xs uppercase tracking-[0.15em] text-subtle/80 md:hidden">
+                  Классическая студия
+                </div>
+                {row.studio}
+              </div>
+              <div className="bg-card px-6 py-4 text-sm text-foreground md:py-5">
+                <div className="mb-1 font-mono text-xs uppercase tracking-[0.15em] text-accent-text md:hidden">
+                  Vibecraft
+                </div>
+                {row.vibecraft}
+              </div>
+            </div>
           ))}
-        </MotionStagger>
+        </div>
       </Container>
     </MotionSection>
   );
