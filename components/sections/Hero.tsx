@@ -85,8 +85,8 @@ export function Hero() {
             {proof.map((item, index) => (
               <div
                 key={item.label}
-                className={`flex items-baseline gap-2 px-6 sm:px-8 ${
-                  index > 0 ? "border-l border-border" : ""
+                className={`flex w-full items-baseline justify-center gap-2 md:w-auto md:px-8 ${
+                  index > 0 ? "md:border-l md:border-border" : ""
                 }`}
               >
                 <dt className="font-mono text-base font-semibold text-foreground">
