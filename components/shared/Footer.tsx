@@ -21,28 +21,23 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col items-center gap-4 md:items-end md:gap-3">
-          <div className="flex flex-col items-center gap-2 text-sm text-muted md:flex-row md:items-center md:gap-6">
-            <Link
-              href={siteConfig.contacts.telegram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-foreground"
-            >
-              Telegram {siteConfig.contacts.telegramHandle}
-            </Link>
-            <a
-              href={`mailto:${siteConfig.contacts.email}`}
-              className="transition-colors hover:text-foreground"
-            >
-              {siteConfig.contacts.email}
-            </a>
-          </div>
-
-          <div className="flex items-center gap-8">
-            <BackToTop />
-            <span className="text-xs text-subtle">© {year} Vibecraft</span>
-          </div>
+        <div className="flex flex-col items-center gap-4 text-sm text-muted md:flex-row md:items-center md:gap-8">
+          <Link
+            href={siteConfig.contacts.telegram}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="transition-colors hover:text-foreground"
+          >
+            Telegram {siteConfig.contacts.telegramHandle}
+          </Link>
+          <a
+            href={`mailto:${siteConfig.contacts.email}`}
+            className="transition-colors hover:text-foreground"
+          >
+            {siteConfig.contacts.email}
+          </a>
+          <BackToTop />
+          <span className="text-xs text-subtle">© {year} Vibecraft</span>
         </div>
       </Container>
     </footer>

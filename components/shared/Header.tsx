@@ -7,7 +7,6 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Container } from "./Container";
 import { LogoMono } from "./LogoMono";
-import { siteConfig } from "@/lib/metadata";
 
 const navLinks = [
   { href: "/#solution", label: "Подход" },
@@ -97,9 +96,7 @@ export function Header() {
           </nav>
 
           <a
-            href={siteConfig.contacts.telegram}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/#contact"
             className="hidden h-10 items-center justify-center rounded-lg bg-gradient-accent px-4 text-sm font-medium text-white transition-shadow duration-200 hover:shadow-[0_0_24px_-8px_rgb(139_92_246/0.55)] lg:inline-flex"
           >
             Обсудить проект
@@ -154,9 +151,7 @@ export function Header() {
               ))}
 
               <a
-                href={siteConfig.contacts.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/#contact"
                 onClick={() => setIsOpen(false)}
                 className="mt-6 inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white"
               >
