@@ -36,7 +36,7 @@ export function Stack() {
           {stack.map((tech) => (
             <span
               key={tech}
-              className="rounded-lg border border-border bg-card px-4 py-2 font-mono text-sm text-muted transition-colors duration-150 hover:border-accent hover:text-foreground"
+              className="cursor-default rounded-lg border border-border bg-card px-4 py-2 font-mono text-sm text-muted transition-colors duration-150 hover:border-accent hover:text-foreground"
             >
               {tech}
             </span>
