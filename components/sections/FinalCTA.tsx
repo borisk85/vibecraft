@@ -211,7 +211,7 @@ function SelectField({
         style={{ colorScheme: "dark" }}
         className="h-11 rounded-lg border border-border bg-background px-4 text-foreground transition-colors duration-150 focus:border-accent focus:outline-none"
       >
-        <option value="" disabled style={{ backgroundColor: "#0a0a0a", color: "#8f8f8f" }}>
+        <option value="" disabled hidden style={{ backgroundColor: "#0a0a0a", color: "#8f8f8f" }}>
           Выберите
         </option>
         {options.map((opt) => (
