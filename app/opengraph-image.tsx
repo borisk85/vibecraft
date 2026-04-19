@@ -13,9 +13,9 @@ async function loadFont(url: string): Promise<ArrayBuffer> {
 }
 
 export default async function OgImage() {
-  const [interSemiBold, interRegular] = await Promise.all([
+  const [jetbrainsMono, interRegular] = await Promise.all([
     loadFont(
-      "https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/cyrillic-600-normal.ttf",
+      "https://cdn.jsdelivr.net/fontsource/fonts/jetbrains-mono@latest/cyrillic-600-normal.ttf",
     ),
     loadFont(
       "https://cdn.jsdelivr.net/fontsource/fonts/inter@latest/cyrillic-400-normal.ttf",
@@ -40,12 +40,12 @@ export default async function OgImage() {
           style={{
             display: "flex",
             alignItems: "center",
-            gap: "32px",
+            gap: "24px",
           }}
         >
           <svg
-            width="200"
-            height="168"
+            width="110"
+            height="92"
             viewBox="290 340 450 380"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -53,27 +53,27 @@ export default async function OgImage() {
           </svg>
           <div
             style={{
-              fontSize: "128px",
+              fontFamily: "JetBrains Mono",
+              fontSize: "88px",
               fontWeight: 600,
               color: "#EDEDED",
-              letterSpacing: "-0.03em",
+              letterSpacing: "-0.02em",
             }}
           >
-            Vibecraft
+            vibecraft
           </div>
         </div>
         <div
           style={{
-            marginTop: "40px",
-            fontSize: "30px",
+            marginTop: "48px",
+            fontSize: "40px",
             color: "#A1A1A1",
             fontWeight: 400,
             letterSpacing: "-0.01em",
             textAlign: "center",
-            maxWidth: "1100px",
           }}
         >
-          Telegram-боты · AI-ассистенты · MVP · SaaS · Мобильные · Автоматизации
+          AI-разработка в Казахстане под ключ
         </div>
       </div>
     ),
@@ -81,8 +81,8 @@ export default async function OgImage() {
       ...size,
       fonts: [
         {
-          name: "Inter",
-          data: interSemiBold,
+          name: "JetBrains Mono",
+          data: jetbrainsMono,
           style: "normal",
           weight: 600,
         },
