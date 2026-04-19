@@ -9,11 +9,10 @@ import { siteConfig } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
 const projectTypes = [
-  "Telegram-бот с AI",
-  "AI-ассистент или агент",
-  "MVP на Next.js + Supabase / Railway",
-  "AI-автоматизация / workflow",
-  "Мобильное приложение Flutter",
+  "Telegram-бот",
+  "Мобильное приложение",
+  "MVP / SaaS",
+  "Автоматизация",
   "Другое",
 ];
 
