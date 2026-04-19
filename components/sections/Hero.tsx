@@ -40,8 +40,8 @@ export function Hero() {
             custom={0.1}
             className="mt-6 max-w-3xl text-pretty text-lg text-muted md:text-xl"
           >
-            Собираю Telegram-боты, MVP, мобильные приложения и автоматизации —
-            быстрее и дешевле классических студий.
+            Собираю ботов, AI-ассистентов, MVP, SaaS, мобильные приложения и
+            автоматизации — быстрее и дешевле классических студий.
           </motion.p>
 
           <motion.div
