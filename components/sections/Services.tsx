@@ -3,7 +3,6 @@ import {
   Bot,
   Code2,
   Smartphone,
-  Sparkles,
   Workflow,
 } from "lucide-react";
 import Link from "next/link";
@@ -17,19 +16,11 @@ import { siteConfig } from "@/lib/metadata";
 export const services = [
   {
     icon: Bot,
-    title: "Telegram-боты с AI",
+    title: "Боты и AI-ассистенты",
     description:
-      "Боты-консультанты, ассистенты, магазины. Claude, память диалога, прием оплат, интеграции с CRM.",
+      "Telegram, WhatsApp. От простого бота с кнопками до умного ассистента с AI, памятью и интеграциями. Под вашу задачу — консультант, приём заказов, поддержка, персональный помощник.",
     price: "от 300 000 ₸",
-    duration: "5–14 дней",
-  },
-  {
-    icon: Sparkles,
-    title: "AI-ассистенты и агенты",
-    description:
-      "AI-агенты с tool use под личные и бизнес-задачи. Claude, интеграции с Gmail, Calendar, CRM и API, голосовой ввод, работа с данными.",
-    price: "от 500 000 ₸",
-    duration: "2–3 недели",
+    duration: "1–3 недели",
   },
   {
     icon: Code2,
@@ -64,7 +55,7 @@ export function Services() {
         <SectionHeading
           eyebrow="Услуги"
           title="Что делаю"
-          description="Пять направлений AI-разработки — от ботов и ассистентов до мобильных приложений и workflows. Стек подбираю под задачу."
+          description="Четыре направления AI-разработки — от ботов и ассистентов до мобильных приложений и workflows. Стек подбираю под задачу."
         />
 
         <MotionStagger className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
