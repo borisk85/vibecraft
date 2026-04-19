@@ -10,7 +10,7 @@ export function About() {
     <MotionSection id="about" className="py-24 md:py-28">
       <Container>
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[320px_1fr] lg:gap-16">
-          <div className="relative mx-auto aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-accent/30 bg-card">
+          <div className="relative mx-auto order-2 aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-accent/30 bg-card lg:order-1">
             <Image
               src="/boris.jpg"
               alt="Борис Комаров — AI-фаундер Vibecraft"
@@ -21,7 +21,7 @@ export function About() {
             />
           </div>
 
-          <div className="flex flex-col gap-5">
+          <div className="order-1 flex flex-col gap-5 lg:order-2">
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent-text">
               Обо мне
             </span>
