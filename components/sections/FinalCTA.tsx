@@ -9,11 +9,11 @@ import { siteConfig } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
 const projectTypes = [
-  "Telegram-бот",
-  "Автоматизация",
-  "MVP SaaS",
-  "Мобильное приложение",
-  "Парсинг",
+  "Telegram-бот с AI",
+  "AI-ассистент или агент",
+  "MVP на Next.js + Supabase / Railway",
+  "AI-автоматизация / workflow",
+  "Мобильное приложение Flutter",
   "Другое",
 ];
 
@@ -142,7 +142,7 @@ export function FinalCTA() {
           </form>
 
           <div className="mt-8 flex flex-col items-center gap-3 border-t border-border pt-8 text-sm text-muted md:flex-row md:justify-center md:gap-6">
-            <span>Или сразу в мессенджер:</span>
+            <span>Или напишите мне в мессенджер:</span>
             <Link
               href={siteConfig.contacts.telegram}
               target="_blank"
