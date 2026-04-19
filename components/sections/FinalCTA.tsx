@@ -3,7 +3,7 @@
 import { useEffect, useId, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ChevronDown, Send } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { siteConfig } from "@/lib/metadata";
@@ -141,19 +141,6 @@ export function FinalCTA() {
               </p>
             ) : null}
           </form>
-
-          <div className="mt-8 flex flex-col items-center gap-3 border-t border-border pt-8 text-sm text-muted md:flex-row md:justify-center md:gap-6">
-            <span>Или напишите мне в мессенджер:</span>
-            <Link
-              href={siteConfig.contacts.telegram}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm text-foreground transition-colors duration-150 hover:border-accent"
-            >
-              <Send className="h-4 w-4 text-accent-text" />
-              Telegram
-            </Link>
-          </div>
         </div>
       </Container>
     </MotionSection>
