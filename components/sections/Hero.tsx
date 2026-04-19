@@ -55,7 +55,7 @@ export function Hero() {
               href={siteConfig.contacts.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_40px_-8px_rgb(139_92_246/0.6)] transition-shadow duration-200 hover:shadow-[0_0_60px_-6px_rgb(139_92_246/0.9)]"
+              className="inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]"
             >
               Обсудить проект
             </a>

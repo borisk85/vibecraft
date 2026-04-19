@@ -100,7 +100,7 @@ export function Header() {
             href={siteConfig.contacts.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden h-10 items-center justify-center rounded-lg bg-gradient-accent px-4 text-sm font-medium text-white shadow-[0_0_24px_-8px_rgb(139_92_246/0.6)] transition-shadow duration-200 hover:shadow-[0_0_36px_-6px_rgb(139_92_246/0.9)] lg:inline-flex"
+            className="hidden h-10 items-center justify-center rounded-lg bg-gradient-accent px-4 text-sm font-medium text-white transition-shadow duration-200 hover:shadow-[0_0_24px_-8px_rgb(139_92_246/0.55)] lg:inline-flex"
           >
             Обсудить проект
           </a>
