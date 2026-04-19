@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Send } from "lucide-react";
+import { Send } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { siteConfig } from "@/lib/metadata";
@@ -68,7 +68,7 @@ export function FinalCTA() {
               Заявка
             </span>
             <h2 className="text-balance text-3xl font-semibold tracking-tight md:text-5xl">
-              Опишите задачу — отвечу в течение дня
+              Опишите задачу — отвечу за 1–2 часа
             </h2>
             <p className="max-w-xl text-muted md:text-lg">
               Отвечу, уточню детали и вернусь с планом, сроком и стоимостью.
@@ -111,21 +111,16 @@ export function FinalCTA() {
             <motion.button
               type="submit"
               disabled={state === "sending"}
-              whileHover={{
-                y: -2,
-                transition: { duration: 0.15, ease: "easeOut" },
-              }}
               whileTap={{
                 scale: 0.98,
                 transition: { duration: 0.15, ease: "easeOut" },
               }}
               className={cn(
-                "group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_40px_-8px_rgb(139_92_246/0.6)]",
+                "inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]",
                 state === "sending" && "opacity-70",
               )}
             >
               {state === "sending" ? "Отправляю…" : "Отправить заявку"}
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </motion.button>
 
             {state === "sent" ? (

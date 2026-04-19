@@ -9,9 +9,9 @@ export function Footer() {
 
   return (
     <footer className="mt-24 border-t border-border/60 py-12">
-      <Container className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-        <div className="flex items-center gap-3">
-          <LogoMono className="h-10 w-10 flex-shrink-0" />
+      <Container className="flex flex-col items-center gap-8 text-center md:flex-row md:items-center md:justify-between md:gap-6 md:text-left">
+        <div className="flex flex-col items-center gap-3 md:flex-row md:items-center">
+          <LogoMono className="h-14 w-14 flex-shrink-0 md:h-10 md:w-10" />
           <div className="flex flex-col">
             <span className="font-mono text-sm font-semibold">vibecraft</span>
             <span className="text-sm text-subtle">
@@ -21,7 +21,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2 text-sm text-muted md:flex-row md:items-center md:gap-6">
+        <div className="flex flex-col items-center gap-2 text-sm text-muted md:flex-row md:items-center md:gap-6">
           <Link
             href={siteConfig.contacts.telegram}
             target="_blank"
