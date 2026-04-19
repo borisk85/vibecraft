@@ -57,8 +57,8 @@ export function Footer() {
             <LogoMono className="h-10 w-10 flex-shrink-0" />
             <span className="font-mono text-sm font-semibold">vibecraft</span>
           </div>
-          <span className="text-sm text-subtle md:ml-1">
-            AI-разработка и автоматизации · {siteConfig.location.city}
+          <span className="text-sm text-subtle md:ml-4">
+            AI-разработка и автоматизации · Казахстан
           </span>
         </div>
 
