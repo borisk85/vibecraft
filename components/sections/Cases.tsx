@@ -81,7 +81,7 @@ export function Cases() {
         <SectionHeading
           eyebrow="Работы"
           title="Проекты, которые в продакшне"
-          description="Каждый кейс — реальная разработка с Claude внутри."
+          description="Каждый проект — реальная разработка с Claude Code с нуля до готового продукта."
         />
 
         <MotionStagger className="mt-16 grid grid-cols-1 gap-5 lg:grid-cols-3">
