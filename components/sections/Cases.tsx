@@ -80,7 +80,7 @@ export function Cases() {
       <Container>
         <SectionHeading
           eyebrow="Работы"
-          title="Проекты, которые работают в продакшне"
+          title="Проекты, которые в продакшне"
           description="Каждый кейс — реальная разработка с Claude внутри."
         />
 
