@@ -23,7 +23,9 @@ export const siteConfig = {
   contacts: {
     telegram: "https://t.me/borisk85",
     telegramHandle: "@borisk85",
-    instagram: "https://instagram.com/vibecraft",
+    linkedin: "https://www.linkedin.com/in/boriskomarov/",
+    instagram: "https://www.instagram.com/bkomarov85/",
+    facebook: "https://www.facebook.com/bkomarov85",
     email: "hello@vibecraft.kz",
   },
   location: {
