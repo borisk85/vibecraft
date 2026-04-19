@@ -8,7 +8,7 @@ import { heroFadeIn } from "@/lib/animations";
 
 const proof = [
   { value: "Solo", label: "без посредников и бюрократии" },
-  { value: "1–2 часа", label: "ответ в рабочее время" },
+  { value: "1–2 часа", label: "на ответ в рабочее время" },
   { value: "3 продукта", label: "в собственном продакшне" },
 ];
 
@@ -51,18 +51,14 @@ export function Hero() {
             custom={0.25}
             className="mt-10 flex flex-col items-center gap-3 sm:flex-row"
           >
-            <motion.a
+            <a
               href={siteConfig.contacts.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{
-                y: -2,
-                transition: { duration: 0.15, ease: "easeOut" },
-              }}
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_40px_-8px_rgb(139_92_246/0.6)]"
+              className="inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_40px_-8px_rgb(139_92_246/0.6)] transition-shadow duration-200 hover:shadow-[0_0_60px_-6px_rgb(139_92_246/0.9)]"
             >
               Обсудить проект
-            </motion.a>
+            </a>
 
             <a
               href="#cases"
