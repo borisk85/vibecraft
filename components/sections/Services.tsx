@@ -20,7 +20,7 @@ export const services = [
     description:
       "Telegram, WhatsApp. От простого бота с кнопками до умного ассистента с AI, памятью и интеграциями. Под вашу задачу — консультант, приём заказов, поддержка, персональный помощник.",
     price: "от 300 000 ₸",
-    duration: "1–3 недели",
+    duration: "до 1 недели",
   },
   {
     icon: Code2,
@@ -28,7 +28,7 @@ export const services = [
     description:
       "Веб-приложение с авторизацией, базой и платежами. Supabase для быстрых MVP, Railway (Postgres + Redis) для более сложных бэкендов. От лендинга до SaaS.",
     price: "от 1 200 000 ₸",
-    duration: "2–3 недели",
+    duration: "до 2 недель",
   },
   {
     icon: Workflow,
@@ -36,7 +36,7 @@ export const services = [
     description:
       "Agentic workflows, webhook-интеграции, multi-step процессы. Modal, Claude API, n8n — под задачу.",
     price: "от 350 000 ₸",
-    duration: "3–7 дней",
+    duration: "до 2 недель",
   },
   {
     icon: Smartphone,
@@ -44,7 +44,7 @@ export const services = [
     description:
       "iOS и Android из одного кода. Бэкенд, push, прием оплат, выпуск в сторы.",
     price: "от 2 500 000 ₸",
-    duration: "3–4 недели",
+    duration: "до 2 недель",
   },
 ];
 
