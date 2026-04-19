@@ -28,7 +28,7 @@ export function Pain() {
         <SectionHeading
           eyebrow="Проблема"
           title="Студия или Vibecraft"
-          description="Одна и та же задача — две разные истории."
+          description="Как было раньше и как сейчас."
         />
 
         <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
