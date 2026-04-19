@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, PlayCircle } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { siteConfig } from "@/lib/metadata";
 import { heroFadeIn } from "@/lib/animations";
@@ -42,7 +41,7 @@ export function Hero() {
             className="mt-6 max-w-3xl text-pretty text-lg text-muted md:text-xl"
           >
             Собираю Telegram-боты, MVP, мобильные приложения и автоматизации —
-            быстрее классических студий.
+            быстрее и дешевле классических студий.
           </motion.p>
 
           <motion.div
@@ -60,17 +59,15 @@ export function Hero() {
                 y: -2,
                 transition: { duration: 0.15, ease: "easeOut" },
               }}
-              className="group inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_40px_-8px_rgb(139_92_246/0.6)]"
+              className="inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_40px_-8px_rgb(139_92_246/0.6)]"
             >
               Обсудить проект
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </motion.a>
 
             <a
               href="#cases"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-xl border border-border bg-card/40 px-6 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent hover:bg-card"
+              className="inline-flex h-12 items-center justify-center rounded-xl border border-border bg-card/40 px-6 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent hover:bg-card"
             >
-              <PlayCircle className="h-4 w-4" />
               Смотреть работы
             </a>
           </motion.div>
