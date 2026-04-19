@@ -23,10 +23,10 @@ export function Footer() {
             href={siteConfig.contacts.telegram}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 transition-colors hover:text-foreground"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2 text-sm text-foreground transition-colors duration-150 hover:border-accent"
           >
-            <Send className="h-4 w-4" />
-            {siteConfig.contacts.telegramHandle}
+            <Send className="h-4 w-4 text-accent-text" />
+            Telegram
           </Link>
           <a
             href={`mailto:${siteConfig.contacts.email}`}
