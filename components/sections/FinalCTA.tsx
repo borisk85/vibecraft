@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Container } from "@/components/shared/Container";
 import { MotionSection } from "@/components/shared/MotionSection";
+import { TelegramIcon } from "@/components/shared/TelegramIcon";
 import { siteConfig } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
@@ -141,14 +142,15 @@ export function FinalCTA() {
           </form>
 
           <div className="mt-8 flex flex-col items-center gap-3 border-t border-border pt-8 text-sm text-muted md:flex-row md:justify-center md:gap-6">
-            <span>Или напишите мне в мессенджер:</span>
+            <span>Или напишите мне в Telegram:</span>
             <Link
               href={siteConfig.contacts.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground transition-colors duration-150 hover:text-accent-text"
+              className="inline-flex items-center gap-2 text-foreground transition-colors duration-150 hover:text-accent-text"
             >
-              Telegram {siteConfig.contacts.telegramHandle}
+              <TelegramIcon className="h-4 w-4" />
+              {siteConfig.contacts.telegramHandle}
             </Link>
           </div>
         </div>
