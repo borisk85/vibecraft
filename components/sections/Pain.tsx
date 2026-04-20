@@ -32,25 +32,27 @@ export function Pain() {
         />
 
         <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
-          <div className="rounded-2xl border border-border bg-surface/60 p-8 md:p-10">
-            <h3 className="mb-8 font-mono text-sm uppercase tracking-[0.2em] text-subtle">
+          <div className="rounded-2xl border border-border/70 bg-surface/40 p-8 md:p-10">
+            <h3 className="mb-8 font-mono text-sm uppercase tracking-[0.2em] text-subtle/70">
               Классическая студия разработки
             </h3>
             <ul className="flex flex-col gap-5">
               {studio.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 text-base leading-relaxed text-subtle"
+                  className="flex items-start gap-3 text-base leading-relaxed text-subtle/80"
                 >
-                  <X className="mt-0.5 h-5 w-5 flex-shrink-0 text-subtle/70" />
+                  <X className="mt-0.5 h-5 w-5 flex-shrink-0 text-subtle/40" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="relative overflow-hidden rounded-2xl border border-accent/30 bg-card p-8 md:p-10">
-            <div className="pointer-events-none absolute inset-0 -z-0 bg-gradient-accent opacity-[0.04]" />
+          <div className="group relative overflow-hidden rounded-2xl border border-accent/40 bg-card p-8 shadow-[0_10px_40px_-20px_rgba(139,92,246,0.35)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/70 hover:shadow-[0_25px_70px_-15px_rgba(139,92,246,0.55)] md:p-10">
+            <div className="pointer-events-none absolute inset-0 -z-0 bg-gradient-accent opacity-[0.08] transition-opacity duration-300 group-hover:opacity-[0.14]" />
+            <div className="pointer-events-none absolute -right-24 -top-24 h-64 w-64 rounded-full bg-accent/25 blur-[90px] transition-opacity duration-300 group-hover:bg-accent/40" />
+            <div className="pointer-events-none absolute -bottom-20 -left-16 h-48 w-48 rounded-full bg-accent-pink/15 blur-[80px]" />
             <div className="relative">
               <h3 className="mb-8 font-mono text-sm uppercase tracking-[0.2em] text-accent-text">
                 Vibecraft
@@ -61,7 +63,10 @@ export function Pain() {
                     key={item}
                     className="flex items-start gap-3 text-base leading-relaxed text-foreground"
                   >
-                    <Check className="mt-0.5 h-5 w-5 flex-shrink-0 text-accent-text" />
+                    <Check
+                      className="mt-0.5 h-6 w-6 flex-shrink-0 text-accent-text drop-shadow-[0_0_6px_rgba(139,92,246,0.5)]"
+                      strokeWidth={2.5}
+                    />
                     <span>{item}</span>
                   </li>
                 ))}
