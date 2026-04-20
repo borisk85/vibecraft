@@ -26,14 +26,17 @@ export function Pain() {
     <MotionSection className="py-24 md:py-28">
       <Container>
         <SectionHeading
-          eyebrow="Проблема"
-          title="Студия разработки или Vibecraft"
+          eyebrow="Сравнение"
+          title="Один результат — две реальности"
           description="Одна задача — разные сроки, цены и количество людей в работе над проектом."
         />
 
         <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
           <div className="rounded-2xl border border-border bg-card p-8 transition-colors duration-300 hover:border-border/90 md:p-10">
-            <h3 className="mb-8 font-mono text-sm uppercase tracking-[0.2em] text-subtle">
+            <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-muted">
+              Старый подход
+            </p>
+            <h3 className="mb-8 text-2xl font-semibold tracking-tight text-subtle">
               Классическая студия разработки
             </h3>
             <ul className="flex flex-col gap-5">
@@ -50,7 +53,10 @@ export function Pain() {
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-8 transition-colors duration-300 hover:border-accent/40 md:p-10">
-            <h3 className="mb-8 font-mono text-sm uppercase tracking-[0.2em] text-accent-text">
+            <p className="mb-2 font-mono text-xs uppercase tracking-[0.2em] text-accent-text">
+              AI-разработка
+            </p>
+            <h3 className="mb-8 text-2xl font-semibold tracking-tight text-foreground">
               Vibecraft
             </h3>
             <ul className="flex flex-col gap-5">
