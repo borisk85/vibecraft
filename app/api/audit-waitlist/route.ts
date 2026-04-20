@@ -2,9 +2,9 @@ import { NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase-admin";
 
 /*
-  Приём email'ов со страницы /audit (waitlist для будущего инструмента).
+  Прием email'ов со страницы /audit (waitlist для будущего инструмента).
   Сохраняет email в Supabase (таблица audit_waitlist, unique по email)
-  и параллельно шлёт дубль-уведомление в Telegram. Duplicate email
+  и параллельно шлет дубль-уведомление в Telegram. Duplicate email
   (Postgres 23505) не ошибка — возвращаем ok с флагом duplicate.
 
   Env:

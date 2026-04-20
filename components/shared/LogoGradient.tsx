@@ -11,7 +11,7 @@ interface LogoProps extends React.SVGProps<SVGSVGElement> {
 /**
  * Градиентный логотип Vibecraft — векторизованный из Ideogram-референса.
  * Client-компонент из-за useId: несколько экземпляров на странице требуют
- * уникальный gradient ID (иначе в Safari/iOS все кроме первого — чёрные).
+ * уникальный gradient ID (иначе в Safari/iOS все кроме первого — черные).
  */
 export function LogoGradient({ className, ...props }: LogoProps) {
   const gradientId = useId();

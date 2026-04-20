@@ -19,7 +19,7 @@ create table if not exists public.audit_waitlist (
 
 alter table public.audit_waitlist enable row level security;
 
--- Anon может только вставлять (на случай, если форма пойдёт напрямую через anon client)
+-- Anon может только вставлять (на случай, если форма пойдет напрямую через anon client)
 create policy "audit_waitlist anon insert"
   on public.audit_waitlist
   for insert
@@ -27,11 +27,11 @@ create policy "audit_waitlist anon insert"
   with check (true);
 
 -- SELECT и DELETE не разрешены никому через RLS.
--- service_role ключ bypass'ает RLS автоматически — доступ остаётся
+-- service_role ключ bypass'ает RLS автоматически — доступ остается
 -- у владельца проекта через Supabase Studio и API-роутов сервера.
 ```
 
-4. Проверить в `Table Editor`: таблица `audit_waitlist` с колонками `id / email / created_at`, RLS включён.
+4. Проверить в `Table Editor`: таблица `audit_waitlist` с колонками `id / email / created_at`, RLS включен.
 
 ## 2. Env в Vercel
 

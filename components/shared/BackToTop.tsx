@@ -4,7 +4,7 @@ import { ArrowUp } from "lucide-react";
 
 /*
   Кнопка "Наверх" в Footer. Работает cross-route: на главной
-  скроллит к верху (HashCleaner уберёт #hash из URL), на /blog
+  скроллит к верху (HashCleaner уберет #hash из URL), на /blog
   и других страницах — к началу текущего документа.
 */
 export function BackToTop() {

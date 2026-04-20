@@ -109,7 +109,7 @@ html {
 }
 
 /* На полях формы фокус показывается через border-accent на самом элементе,
-   глобальный outline даёт визуальный шум (двойная рамка при клике). */
+   глобальный outline дает визуальный шум (двойная рамка при клике). */
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible,

@@ -14,7 +14,7 @@ npm run build    # проходит без ошибок
 
 ## 1. GitHub репозиторий
 
-1. https://github.com/new → имя `vibecraft` → **Private** (кодовая база не публичная) → без README, без .gitignore, без лицензии (всё уже локально).
+1. https://github.com/new → имя `vibecraft` → **Private** (кодовая база не публичная) → без README, без .gitignore, без лицензии (все уже локально).
 2. После создания GitHub покажет две команды push-блока. Выполните локально:
    ```bash
    git remote add origin git@github.com:<YOUR_USERNAME>/vibecraft.git
@@ -36,7 +36,7 @@ npm run build    # проходит без ошибок
 |---|---|---|
 | `TELEGRAM_BOT_TOKEN` | токен бота Vibecraft Leads | Production, Preview, Development |
 | `TELEGRAM_CHAT_ID` | `661638470` (ваш личный chat_id) | Production, Preview, Development |
-| `NEXT_PUBLIC_YM_ID` | пустое (заполнить после создания счётчика Яндекс.Метрики) | Production |
+| `NEXT_PUBLIC_YM_ID` | пустое (заполнить после создания счетчика Яндекс.Метрики) | Production |
 | `NEXT_PUBLIC_GA_ID` | пустое (заполнить после создания ресурса GA4) | Production |
 | `NEXT_PUBLIC_SITE_URL` | `https://vibecraft.kz` | Production |
 
@@ -69,7 +69,7 @@ npm run build    # проходит без ошибок
    nslookup www.vibecraft.kz
    ```
    Должен вернуть CNAME на `cname.vercel-dns.com`.
-6. SSL-сертификат Let's Encrypt Vercel выпустит автоматически сразу после того, как DNS резолвится на их anycast. В Vercel Dashboard у обоих доменов появится зелёная галочка «Valid Configuration».
+6. SSL-сертификат Let's Encrypt Vercel выпустит автоматически сразу после того, как DNS резолвится на их anycast. В Vercel Dashboard у обоих доменов появится зеленая галочка «Valid Configuration».
 
 ## 4. Post-deploy проверки
 
@@ -78,7 +78,7 @@ npm run build    # проходит без ошибок
 ### 4.1. Домен и SSL
 - https://vibecraft.kz открывается напрямую (без редиректа на www или на `vibecraft-xxx.vercel.app`).
 - https://www.vibecraft.kz делает **301 редирект на** https://vibecraft.kz (apex — primary, www — redirect, а не наоборот).
-- В адресной строке зелёный замок — SSL-сертификат валидный.
+- В адресной строке зеленый замок — SSL-сертификат валидный.
 - Проверить редирект без браузера:
   ```bash
   curl -sI https://www.vibecraft.kz | grep -iE "^(HTTP|Location)"
@@ -110,7 +110,7 @@ npm run build    # проходит без ошибок
 ### 4.5. OG-превью
 - https://www.opengraph.xyz/url/https%3A%2F%2Fvibecraft.kz — проверка Facebook / LinkedIn / Telegram превью.
 - https://cards-dev.twitter.com/validator — проверка Twitter Card (`summary_large_image`).
-- Превью должно показывать чёрный фон, gradient-круг, заголовок «Vibecraft», субтитр «AI-разработка · Telegram-боты · MVP».
+- Превью должно показывать черный фон, gradient-круг, заголовок «Vibecraft», субтитр «AI-разработка · Telegram-боты · MVP».
 - Если превью пустое — открыть `https://vibecraft.kz/opengraph-image` напрямую, должен вернуться PNG 1200×630.
 
 ### 4.6. Robots и Sitemap
@@ -118,7 +118,7 @@ npm run build    # проходит без ошибок
 - https://vibecraft.kz/sitemap.xml — список URL (`/`, `/blog`).
 
 ### 4.7. Аналитика (после заполнения env)
-- Яндекс.Метрика: Settings → Environment Variables → `NEXT_PUBLIC_YM_ID` = цифровой ID счётчика. Redeploy. В DevTools → Network после загрузки страницы должен появиться запрос к `mc.yandex.ru/metrika/tag.js`.
+- Яндекс.Метрика: Settings → Environment Variables → `NEXT_PUBLIC_YM_ID` = цифровой ID счетчика. Redeploy. В DevTools → Network после загрузки страницы должен появиться запрос к `mc.yandex.ru/metrika/tag.js`.
 - GA4: то же с `NEXT_PUBLIC_GA_ID`. В Network — запрос к `googletagmanager.com/gtag/js`.
 
 ## 5. Автоматический redeploy
@@ -129,5 +129,5 @@ npm run build    # проходит без ошибок
 
 - **Build fails**: открыть Vercel Dashboard → Deployments → failed deployment → Logs. Скопировать ошибку и вернуться к коду.
 - **Env-переменные не подтянулись**: после изменения env нужен redeploy (Settings → Environment Variables → Save → вернуться в Deployments → кликнуть Redeploy).
-- **Домен не указывает**: ещё не распространился DNS (до 2 часов) или запись в ps.kz некорректная. Проверить через `nslookup`.
+- **Домен не указывает**: еще не распространился DNS (до 2 часов) или запись в ps.kz некорректная. Проверить через `nslookup`.
 - **Telegram API ругается 400/401**: токен или chat_id в Vercel env отличаются от `.env.local`. Пересинхронизировать.
