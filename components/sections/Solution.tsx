@@ -37,11 +37,17 @@ export function Solution() {
         />
 
         <MotionStagger className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {points.map((point) => (
+          {points.map((point, index) => (
             <MotionItem
               key={point.title}
-              className="flex flex-col gap-4 rounded-2xl border border-border bg-card p-8"
+              className="relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40"
             >
+              <span
+                aria-hidden
+                className="pointer-events-none absolute right-5 top-4 font-mono text-5xl font-bold leading-none text-foreground/10"
+              >
+                0{index + 1}
+              </span>
               <div className="inline-flex h-11 w-11 items-center justify-center rounded-lg bg-gradient-accent text-white">
                 <point.icon className="h-5 w-5" />
               </div>
