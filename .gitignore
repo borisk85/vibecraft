@@ -43,6 +43,7 @@ yarn-error.log*
 screenshots/
 lighthouse-*.json
 home.html
+/*.png
 
 # typescript
 *.tsbuildinfo
