@@ -45,10 +45,9 @@ export default function LoginPage() {
         >
           ← На главную
         </Link>
-        <h1 className="mb-2 text-2xl font-semibold tracking-tight">
+        <h1 className="mb-6 text-2xl font-semibold tracking-tight">
           Вход
         </h1>
-        <p className="mb-6 text-sm text-muted">Введи email — пришлю ссылку.</p>
 
         {status.type === "sent" ? (
           <div className="rounded-xl border border-success/30 bg-success/5 p-4 text-sm text-success">
