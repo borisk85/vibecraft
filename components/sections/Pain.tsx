@@ -38,9 +38,9 @@ export function Pain() {
               {studio.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 text-base leading-relaxed text-subtle"
+                  className="flex items-center gap-3 text-base leading-relaxed text-foreground"
                 >
-                  <X className="mt-0.5 h-5 w-5 flex-shrink-0 text-subtle/70" />
+                  <X className="h-5 w-5 flex-shrink-0 text-subtle/70" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -55,10 +55,10 @@ export function Pain() {
               {vibecraft.map((item) => (
                 <li
                   key={item}
-                  className="flex items-start gap-3 text-base leading-relaxed text-foreground"
+                  className="flex items-center gap-3 text-base leading-relaxed text-foreground"
                 >
                   <Check
-                    className="mt-0.5 h-5 w-5 flex-shrink-0 text-accent-text"
+                    className="h-5 w-5 flex-shrink-0 text-accent-text"
                     strokeWidth={2.5}
                   />
                   <span>{item}</span>
