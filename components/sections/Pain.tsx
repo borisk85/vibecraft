@@ -45,7 +45,7 @@ export function Pain() {
                 </li>
               ))}
             </ul>
-            <div className="mt-8 flex flex-wrap gap-2">
+            <div className="mt-8 flex flex-wrap gap-3">
               {["Долго", "Сложно", "Дорого"].map((tag) => (
                 <span
                   key={tag}
@@ -75,7 +75,7 @@ export function Pain() {
                 </li>
               ))}
             </ul>
-            <div className="mt-8 flex flex-wrap gap-2">
+            <div className="mt-8 flex flex-wrap gap-3">
               {["Быстро", "Просто", "Доступно"].map((tag) => (
                 <span
                   key={tag}
