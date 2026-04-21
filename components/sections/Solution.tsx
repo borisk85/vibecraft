@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { MotionStagger } from "@/components/shared/MotionStagger";
 import { MotionItem } from "@/components/shared/MotionItem";
-import { Gauge, ShieldCheck, Target } from "lucide-react";
+import { Eye, Gauge, Target } from "lucide-react";
 
 const points = [
   {
@@ -19,8 +19,8 @@ const points = [
       "Учитываю все уникальные особенности вашего заказа: логику, процессы и необходимые интеграции — от платежных сервисов до нестандартных сценариев.",
   },
   {
-    icon: ShieldCheck,
-    title: "Прозрачные этапы и контроль на вашей стороне",
+    icon: Eye,
+    title: "Прозрачные этапы работы и ваш контроль",
     description:
       "Демо каждые 3–5 дней. Видите работающий продукт в процессе, а не в конце. Оплата поэтапно — никаких вложений вслепую.",
   },
