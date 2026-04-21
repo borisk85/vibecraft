@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { MotionStagger } from "@/components/shared/MotionStagger";
 import { MotionItem } from "@/components/shared/MotionItem";
-import { Bot, Gauge, ShieldCheck } from "lucide-react";
+import { Gauge, ShieldCheck, Target } from "lucide-react";
 
 const points = [
   {
@@ -13,10 +13,10 @@ const points = [
       "Claude Code берет на себя всю рутину и архитектуру. Безопасность, функционал и бизнес-логика — на мне.",
   },
   {
-    icon: Bot,
-    title: "Под вашу задачу, не под шаблон",
+    icon: Target,
+    title: "Решение точно под вашу задачу",
     description:
-      "Под вашу логику, ваш процесс, ваши интеграции. Будь то Kaspi Pay, подключение к вашему сервису или кастомный воркфлоу — коробочных ограничений нет.",
+      "Не подгоняю задачу под готовое решение. Учитываю вашу логику, процессы и нужные интеграции — Kaspi Pay, CRM, ваш сервис или нестандартный сценарий.",
   },
   {
     icon: ShieldCheck,
