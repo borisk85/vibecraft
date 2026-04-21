@@ -2,6 +2,7 @@ import {
   ArrowRight,
   Bot,
   Code2,
+  MessageCircle,
   Smartphone,
   Workflow,
 } from "lucide-react";
@@ -93,8 +94,11 @@ export function Services() {
           >
             <MotionItem
               interactive
-              className="group flex h-full flex-col gap-4 rounded-2xl border border-accent/30 bg-transparent p-7 transition-colors duration-200 hover:border-accent"
+              className="group flex h-full flex-col gap-4 rounded-2xl border border-accent/30 bg-card p-7 transition-colors duration-200 hover:border-accent"
             >
+              <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface text-accent-text">
+                <MessageCircle className="h-5 w-5" />
+              </div>
               <div>
                 <h3 className="mb-1.5 text-lg font-semibold tracking-tight text-foreground">
                   Нет в списке?
