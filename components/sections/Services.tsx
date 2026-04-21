@@ -100,7 +100,7 @@ export function Services() {
                   Нет в списке?
                 </h3>
                 <p className="text-sm leading-relaxed text-muted">
-                  Напишите в Telegram — посмотрю задачу и предложу решение.
+                  Напишите мне в Telegram — посмотрю задачу и предложу решение.
                 </p>
               </div>
               <div className="mt-auto flex items-center justify-end">
