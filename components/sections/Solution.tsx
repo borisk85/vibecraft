@@ -45,7 +45,7 @@ export function Solution() {
               left: "calc((100% - 3rem) / 3)",
               width: "1.5rem",
               height: "1px",
-              background: "rgba(249, 168, 212, 0.6)",
+              background: "rgba(249, 168, 212, 0.35)",
             }}
           />
           <div
@@ -56,7 +56,7 @@ export function Solution() {
               left: "calc(2 * (100% - 3rem) / 3 + 1.5rem)",
               width: "1.5rem",
               height: "1px",
-              background: "rgba(249, 168, 212, 0.6)",
+              background: "rgba(249, 168, 212, 0.35)",
             }}
           />
           {points.map((point, index) => (
