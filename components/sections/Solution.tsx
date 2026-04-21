@@ -36,7 +36,29 @@ export function Solution() {
           description="Максимум сосредоточения над каждой задачей. Быстрый и понятный процесс от начала до конечного продукта, без исчезновений, удлинения сроков и стоимости."
         />
 
-        <MotionStagger className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <MotionStagger className="relative mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute hidden md:block"
+            style={{
+              top: "3.5rem",
+              left: "calc((100% - 3rem) / 3)",
+              width: "1.5rem",
+              height: "1px",
+              background: "rgba(236, 72, 153, 0.5)",
+            }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute hidden md:block"
+            style={{
+              top: "3.5rem",
+              left: "calc(2 * (100% - 3rem) / 3 + 1.5rem)",
+              width: "1.5rem",
+              height: "1px",
+              background: "rgba(236, 72, 153, 0.5)",
+            }}
+          />
           {points.map((point, index) => (
             <MotionItem
               key={point.title}
