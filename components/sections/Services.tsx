@@ -28,7 +28,7 @@ export const services = [
     description:
       "Запускаемый прототип с одной ключевой функцией — авторизация, база, платежи. Проверка идеи в проде за 1-2 недели, без полировки готового SaaS. Стек Next.js + Supabase или Railway.",
     price: "от 1 200 000 ₸",
-    duration: "до 2 недель",
+    duration: "1-2 недели",
   },
   {
     icon: Workflow,
@@ -40,9 +40,9 @@ export const services = [
   },
   {
     icon: Smartphone,
-    title: "Мобильные приложения Flutter",
+    title: "MVP мобильных приложений",
     description:
-      "iOS и Android из одного кода. Бэкенд, push, прием оплат, выпуск в сторы.",
+      "iOS и Android из одного кода на Flutter. Прототип с одной ключевой функцией для проверки идеи — без полной полировки и долгих публикаций в сторе.",
     price: "от 2 500 000 ₸",
     duration: "до 2 недель",
   },
