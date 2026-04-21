@@ -54,7 +54,7 @@ export function Services() {
       <Container>
         <SectionHeading
           eyebrow="Услуги"
-          title="Что делаю"
+          title="Что я делаю"
           description="Четыре направления AI-разработки — от ботов и ассистентов до мобильных приложений и workflows. Стек подбираю под задачу."
         />
 
