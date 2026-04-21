@@ -49,7 +49,7 @@ export function Pain() {
               {["Долго", "Сложно", "Дорого"].map((tag) => (
                 <span
                   key={tag}
-                  className="rounded-full border border-border px-3 py-1 font-mono text-xs uppercase tracking-[0.15em] text-foreground/60"
+                  className="rounded-full border border-foreground/25 bg-foreground/5 px-3 py-1 font-mono text-xs uppercase tracking-[0.15em] text-foreground/85"
                 >
                   {tag}
                 </span>
