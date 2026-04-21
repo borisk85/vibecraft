@@ -46,16 +46,13 @@ export default function LoginPage() {
           ← На главную
         </Link>
         <h1 className="mb-2 text-2xl font-semibold tracking-tight">
-          Вход в админку
+          Вход
         </h1>
-        <p className="mb-6 text-sm text-muted">
-          Введите email — отправлю ссылку для входа. Доступ только у
-          администраторов.
-        </p>
+        <p className="mb-6 text-sm text-muted">Введи email — пришлю ссылку.</p>
 
         {status.type === "sent" ? (
           <div className="rounded-xl border border-success/30 bg-success/5 p-4 text-sm text-success">
-            Ссылка отправлена на <strong>{email}</strong>. Откройте её с того же
+            Ссылка отправлена на <strong>{email}</strong>. Открой с того же
             устройства.
           </div>
         ) : (
@@ -75,9 +72,7 @@ export default function LoginPage() {
               disabled={status.type === "sending"}
               className="rounded-xl bg-accent px-4 py-3 font-semibold text-white transition-colors hover:bg-accent/90 disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {status.type === "sending"
-                ? "Отправляю..."
-                : "Отправить ссылку на email"}
+              {status.type === "sending" ? "Отправляю..." : "Отправить ссылку"}
             </button>
             {status.type === "error" && (
               <div className="rounded-xl border border-error/30 bg-error/5 p-3 text-sm text-error">
