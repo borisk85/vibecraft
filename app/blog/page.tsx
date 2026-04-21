@@ -6,7 +6,7 @@ import { Footer } from "@/components/shared/Footer";
 export const metadata: Metadata = {
   title: "Блог",
   description:
-    "Статьи о разработке Telegram-ботов, MVP, SaaS и автоматизаций в Казахстане. Цены, стек, процесс работы и разборы реальных проектов.",
+    "Статьи о разработке Telegram-ботов, MVP и автоматизаций в Казахстане. Цены, стек, процесс работы и разборы реальных проектов.",
   alternates: { canonical: "/blog" },
 };
 

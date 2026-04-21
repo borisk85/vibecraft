@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 const projectTypes = [
   "Бот или AI-ассистент",
   "Мобильное приложение",
-  "MVP / SaaS",
+  "MVP",
   "Автоматизация",
   "Другое",
 ];

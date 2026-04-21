@@ -26,7 +26,7 @@ export const services = [
     icon: Code2,
     title: "MVP на Next.js + Supabase / Railway",
     description:
-      "Веб-приложение с авторизацией, базой и платежами. Supabase для быстрых MVP, Railway (Postgres + Redis) для более сложных бэкендов. От лендинга до SaaS.",
+      "Веб-приложение с авторизацией, базой и платежами. Supabase для быстрых MVP, Railway (Postgres + Redis) для более сложных бэкендов.",
     price: "от 1 200 000 ₸",
     duration: "до 2 недель",
   },
