@@ -32,9 +32,9 @@ export const services = [
   },
   {
     icon: Workflow,
-    title: "AI-автоматизации и workflows",
+    title: "Автоматизации",
     description:
-      "Agentic workflows, webhook-интеграции, multi-step процессы. Modal, Claude API, n8n — под задачу.",
+      "Свяжу ваши сервисы и процессы в единый поток без рутины. n8n или Make — для типовых задач, кастомные решения — для нестандартных сценариев.",
     price: "от 350 000 ₸",
     duration: "до 1 недели",
   },
