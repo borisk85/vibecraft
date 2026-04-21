@@ -45,6 +45,16 @@ export function Pain() {
                 </li>
               ))}
             </ul>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {["Долго", "Сложно", "Дорого"].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-border px-3 py-1 font-mono text-xs uppercase tracking-[0.15em] text-foreground/60"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
 
           <div className="rounded-2xl border border-border bg-card p-8 transition-colors duration-300 hover:border-accent/40 md:p-10">
@@ -65,6 +75,16 @@ export function Pain() {
                 </li>
               ))}
             </ul>
+            <div className="mt-8 flex flex-wrap gap-2">
+              {["Быстро", "Просто", "Доступно"].map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full border border-accent/40 bg-accent/10 px-3 py-1 font-mono text-xs uppercase tracking-[0.15em] text-accent-text"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </Container>
