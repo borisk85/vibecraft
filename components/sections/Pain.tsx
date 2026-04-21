@@ -31,16 +31,16 @@ export function Pain() {
 
         <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
           <div className="rounded-2xl border border-border bg-card p-8 transition-colors duration-300 hover:border-border/90 md:p-10">
-            <h3 className="mb-8 font-mono text-sm uppercase tracking-[0.2em] text-foreground/75">
+            <h3 className="mb-8 font-mono text-sm uppercase tracking-[0.2em] text-foreground">
               Классическая студия разработки
             </h3>
             <ul className="flex flex-col gap-5">
               {studio.map((item) => (
                 <li
                   key={item}
-                  className="flex items-center gap-3 text-base leading-relaxed text-foreground/75"
+                  className="flex items-center gap-3 text-base leading-relaxed text-foreground"
                 >
-                  <X className="h-5 w-5 flex-shrink-0 text-foreground/75" />
+                  <X className="h-5 w-5 flex-shrink-0 text-foreground" />
                   <span>{item}</span>
                 </li>
               ))}
