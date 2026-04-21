@@ -8,7 +8,7 @@ import { Bot, Gauge, ShieldCheck } from "lucide-react";
 const points = [
   {
     icon: Gauge,
-    title: "AI — для скорости, я — для решений",
+    title: "AI — скорость и качество, я — решения и управление",
     description:
       "Claude Code берет рутину: типизацию, CRUD-обвязку, тесты, boilerplate. Архитектуру, безопасность и бизнес-логику проектирую и контролирую лично.",
   },
