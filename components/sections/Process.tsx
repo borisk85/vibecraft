@@ -21,7 +21,7 @@ const steps = [
     step: "03",
     title: "Собираю продукт",
     description:
-      "Боты и автоматизации будут готовы в течение 1 недели, AI-ассистенты — за 1-2 недели. MVP веб- или мобильного приложения будет представлено в качестве демо до финальной полировки.",
+      "Готовый функционал бота или автоматизации, либо кликабельный прототип MVP. Тестируете в деле до финальной полировки.",
   },
   {
     step: "04",
@@ -66,7 +66,7 @@ export function Process() {
             <MotionItem
               key={step.step}
               interactive
-              className="relative flex h-full flex-col gap-3 rounded-2xl border border-border bg-card p-5 transition-colors duration-200 hover:border-accent lg:p-5"
+              className="relative flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6 transition-colors duration-200 hover:border-accent"
             >
               <span className="font-mono text-sm text-accent-text">
                 {step.step}
@@ -74,7 +74,7 @@ export function Process() {
               <h3 className="text-balance text-base font-semibold tracking-tight text-foreground lg:text-[17px]">
                 {step.title}
               </h3>
-              <p className="text-sm leading-relaxed text-muted">
+              <p className="text-[15px] leading-relaxed text-muted">
                 {step.description}
               </p>
             </MotionItem>
