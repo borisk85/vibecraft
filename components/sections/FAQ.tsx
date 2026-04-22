@@ -42,27 +42,41 @@ export function FAQ() {
             const isOpen = openIndex === index;
             return (
               <div key={faq.q} className="group relative py-6">
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (
-                      typeof window !== "undefined" &&
-                      window.getSelection()?.toString()
-                    ) {
-                      return;
-                    }
-                    setOpenIndex(isOpen ? null : index);
-                  }}
-                  aria-expanded={isOpen}
-                  className="flex w-full cursor-pointer select-text items-start justify-between gap-6 text-left"
-                >
-                  <h3 className="select-text text-lg font-medium text-foreground transition-colors group-hover:text-accent-text">
+                <div className="flex w-full items-start justify-between gap-6 text-left">
+                  <h3
+                    onClick={() => {
+                      if (
+                        typeof window !== "undefined" &&
+                        window.getSelection()?.toString()
+                      ) {
+                        return;
+                      }
+                      setOpenIndex(isOpen ? null : index);
+                    }}
+                    className="flex-1 cursor-pointer select-text text-lg font-medium text-foreground transition-colors group-hover:text-accent-text"
+                  >
                     {faq.q}
                   </h3>
-                  <Plus
-                    className={`mt-1 h-5 w-5 flex-shrink-0 text-muted transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}
-                  />
-                </button>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (
+                        typeof window !== "undefined" &&
+                        window.getSelection()?.toString()
+                      ) {
+                        window.getSelection()?.removeAllRanges();
+                      }
+                      setOpenIndex(isOpen ? null : index);
+                    }}
+                    aria-expanded={isOpen}
+                    aria-label={isOpen ? "Свернуть" : "Развернуть"}
+                    className="flex-shrink-0 cursor-pointer p-1 -m-1"
+                  >
+                    <Plus
+                      className={`mt-1 h-5 w-5 text-muted transition-transform duration-300 ${isOpen ? "rotate-45" : ""}`}
+                    />
+                  </button>
+                </div>
                 <AnimatePresence initial={false}>
                   {isOpen ? (
                     <motion.div
