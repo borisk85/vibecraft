@@ -39,8 +39,7 @@ export default async function AdminBlogPage() {
         <div className="rounded-2xl border border-white/10 p-12 text-center text-muted">
           Сейчас нет открытых черновиков статей.
           <br />
-          Сгенерируй новую через @velamarketing_bot — /project vibecraft →
-          /article
+          Сгенерируй через маркетинг-бот: /project vibecraft → /article
         </div>
       ) : (
         <div className="grid gap-3">
