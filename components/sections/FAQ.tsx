@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Container } from "@/components/shared/Container";
@@ -8,24 +7,6 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { Plus } from "lucide-react";
 import { faqs } from "@/lib/faqs";
-
-const nodeOverrides: Record<string, React.ReactNode> = {
-  "Что такое аудит скорости сайта?": (
-    <>
-      Бесплатный инструмент на базе Google PageSpeed Insights — запускаем
-      скоро. Введете URL — увидите главные проблемы скорости и
-      приоритизированный план исправлений. Оставить email для уведомления о
-      запуске можно на странице{" "}
-      <Link
-        href="/audit"
-        className="text-accent-text underline-offset-4 hover:underline"
-      >
-        /audit
-      </Link>
-      .
-    </>
-  ),
-};
 
 export function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -96,7 +77,7 @@ export function FAQ() {
                       className="overflow-hidden"
                     >
                       <p className="mt-4 text-muted leading-relaxed">
-                        {nodeOverrides[faq.q] ?? faq.a}
+                        {faq.a}
                       </p>
                     </motion.div>
                   ) : null}
