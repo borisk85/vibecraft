@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { createSupabaseServerClient } from "@/lib/supabase-server";
 
 /*
-  Magic link callback — Supabase шлёт ссылку с code/token_hash, обмениваем на сессию.
+  Magic link callback — Supabase шлет ссылку с code/token_hash, обмениваем на сессию.
   После успеха редирект на /admin/blog.
 */
 export async function GET(request: NextRequest) {
