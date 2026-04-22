@@ -82,6 +82,7 @@ export function FAQ() {
           {faqs.map((faq) => (
             <details
               key={faq.q}
+              name="faq"
               className="group relative py-6"
             >
               <summary className="flex cursor-pointer list-none items-start justify-between gap-6 text-left">
