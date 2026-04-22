@@ -63,11 +63,19 @@ export function FAQ() {
               <div key={faq.q} className="group relative py-6">
                 <button
                   type="button"
-                  onClick={() => setOpenIndex(isOpen ? null : index)}
+                  onClick={() => {
+                    if (
+                      typeof window !== "undefined" &&
+                      window.getSelection()?.toString()
+                    ) {
+                      return;
+                    }
+                    setOpenIndex(isOpen ? null : index);
+                  }}
                   aria-expanded={isOpen}
-                  className="flex w-full cursor-pointer items-start justify-between gap-6 text-left"
+                  className="flex w-full cursor-pointer select-text items-start justify-between gap-6 text-left"
                 >
-                  <h3 className="text-lg font-medium text-foreground transition-colors group-hover:text-accent-text">
+                  <h3 className="select-text text-lg font-medium text-foreground transition-colors group-hover:text-accent-text">
                     {faq.q}
                   </h3>
                   <Plus
