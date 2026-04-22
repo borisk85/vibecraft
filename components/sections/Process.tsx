@@ -47,7 +47,21 @@ export function Process() {
           description="Прозрачные этапы, регулярные демо и поэтапная оплата. Вы видите прогресс и управляете тонкостями разработки на всех этапах."
         />
 
-        <MotionStagger className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6 lg:grid-cols-5 lg:gap-4">
+        <MotionStagger className="relative mt-16 grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6 lg:grid-cols-5 lg:gap-4">
+          {[1, 2, 3, 4].map((i) => (
+            <div
+              key={`line-${i}`}
+              aria-hidden
+              className="pointer-events-none absolute hidden lg:block"
+              style={{
+                top: "1.75rem",
+                left: `calc(${i} * (100% - 4rem) / 5 + ${i - 1}rem)`,
+                width: "1rem",
+                height: "1px",
+                background: "rgba(249, 168, 212, 0.35)",
+              }}
+            />
+          ))}
           {steps.map((step) => (
             <MotionItem
               key={step.step}
