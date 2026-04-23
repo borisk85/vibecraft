@@ -114,7 +114,7 @@ export function Services() {
             href="/calculator"
             className="inline-flex h-11 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]"
           >
-            Прикинуть стоимость
+            Посчитать стоимость
           </Link>
         </div>
       </Container>
