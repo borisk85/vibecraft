@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { X, Send, MessageCircle, ThumbsUp, ThumbsDown } from "lucide-react";
+import { siteConfig } from "@/lib/metadata";
 
 interface Message {
   role: "user" | "assistant";
@@ -342,8 +343,15 @@ export default function ChatWidget() {
               </div>
             </div>
             <p className="mt-2 text-center text-[10px] leading-snug text-subtle">
-              AI-консультант может ошибаться — важное уточняйте у Бориса в
-              Telegram
+              Точные детали и условия — у Бориса в{" "}
+              <a
+                href={siteConfig.contacts.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-accent-text hover:underline"
+              >
+                Telegram →
+              </a>
             </p>
           </div>
         </div>
