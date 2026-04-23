@@ -171,12 +171,31 @@ export default function ChatWidget() {
   }
 
   function rate(idx: number, val: "up" | "down") {
+    const wasRated = ratings[idx];
+
     setRatings((prev) => {
       const copy = { ...prev };
       if (copy[idx] === val) delete copy[idx];
       else copy[idx] = val;
       return copy;
     });
+
+    if (wasRated === val) return;
+
+    const message = messages[idx];
+    if (!message || message.role !== "assistant") return;
+
+    const userQuestion = idx > 0 ? messages[idx - 1] : null;
+
+    fetch("/api/chat/feedback", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        rating: val,
+        assistantReply: message.content,
+        userQuestion: userQuestion?.content ?? null,
+      }),
+    }).catch(() => {});
   }
 
   function insertEmoji(emoji: string) {
