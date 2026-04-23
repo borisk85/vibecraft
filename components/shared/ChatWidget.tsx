@@ -407,7 +407,7 @@ export default function ChatWidget() {
                   ))}
                 </div>
               )}
-              <div className="flex items-end gap-2 rounded-xl bg-surface px-4 py-3">
+              <div className="flex items-center gap-2 rounded-xl bg-surface px-3 py-1.5">
                 <textarea
                   ref={inputRef}
                   value={input}
@@ -421,7 +421,7 @@ export default function ChatWidget() {
                   placeholder="Задайте вопрос..."
                   maxLength={500}
                   rows={1}
-                  className="flex-1 resize-none bg-transparent leading-relaxed text-foreground placeholder:text-subtle outline-none"
+                  className="flex-1 resize-none bg-transparent text-foreground placeholder:text-subtle outline-none"
                   style={{
                     height: "24px",
                     maxHeight: "80px",
@@ -431,17 +431,17 @@ export default function ChatWidget() {
                 />
                 <button
                   onClick={() => setShowEmoji((v) => !v)}
-                  className="mb-0.5 flex-shrink-0 text-muted transition-colors hover:text-foreground"
+                  className="flex-shrink-0 text-muted transition-colors hover:text-foreground"
                   title="Эмодзи"
                   aria-label="Эмодзи"
                 >
-                  <span className="text-lg leading-none">😊</span>
+                  <span className="text-base leading-none">😊</span>
                 </button>
                 <button
                   onClick={send}
                   disabled={loading || !input.trim()}
                   aria-label="Отправить сообщение"
-                  className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-accent transition-all hover:opacity-90 disabled:opacity-30"
+                  className="flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-lg bg-accent transition-all hover:opacity-90 disabled:opacity-30"
                 >
                   <Send className="h-3.5 w-3.5 text-white" />
                 </button>
