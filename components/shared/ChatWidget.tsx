@@ -62,6 +62,8 @@ export default function ChatWidget() {
   const [loading, setLoading] = useState(false);
   const [showEmoji, setShowEmoji] = useState(false);
   const [ratings, setRatings] = useState<Record<number, "up" | "down">>({});
+  const [sessionDislikes, setSessionDislikes] = useState(0);
+  const MAX_SESSION_DISLIKES = 3;
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const initialized = useRef(false);
@@ -185,6 +187,8 @@ export default function ChatWidget() {
     const message = messages[idx];
     if (!message || message.role !== "assistant") return;
 
+    if (val === "down" && sessionDislikes >= MAX_SESSION_DISLIKES) return;
+
     ratedIdxRef.current.add(idx);
 
     if (val === "up") {
@@ -207,6 +211,8 @@ export default function ChatWidget() {
         isFeedback: true,
       },
     ]);
+
+    setSessionDislikes((prev) => prev + 1);
 
     const userQuestion = idx > 0 ? messages[idx - 1] : null;
 
@@ -291,7 +297,11 @@ export default function ChatWidget() {
                     </button>
                     <button
                       onClick={() => rate(i, "down")}
-                      className={`rounded-md p-1.5 transition-colors ${
+                      disabled={
+                        !ratings[i] &&
+                        sessionDislikes >= MAX_SESSION_DISLIKES
+                      }
+                      className={`rounded-md p-1.5 transition-colors disabled:cursor-not-allowed disabled:opacity-30 ${
                         ratings[i] === "down"
                           ? "text-error"
                           : "text-subtle hover:text-muted"
