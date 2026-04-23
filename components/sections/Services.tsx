@@ -1,4 +1,5 @@
 import {
+  ArrowRight,
   Bot,
   Code2,
   Globe,
@@ -6,6 +7,7 @@ import {
   Sparkles,
   Workflow,
 } from "lucide-react";
+import Link from "next/link";
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { MotionSection } from "@/components/shared/MotionSection";
@@ -100,6 +102,23 @@ export function Services() {
             </MotionItem>
           ))}
         </MotionStagger>
+
+        <div className="mt-12 flex flex-col items-center gap-4 rounded-2xl border border-accent/30 bg-card/40 p-8 text-center md:p-10">
+          <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+            Не знаете, в какую услугу попадает ваша задача?
+          </h3>
+          <p className="max-w-xl text-muted">
+            Опишите ее обычным текстом — AI-калькулятор прикинет стоимость и
+            срок за минуту. Без созвона и опросников.
+          </p>
+          <Link
+            href="/calculator"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]"
+          >
+            Прикинуть стоимость
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
       </Container>
     </MotionSection>
   );

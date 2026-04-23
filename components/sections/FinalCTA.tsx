@@ -141,6 +141,17 @@ export function FinalCTA() {
                 .
               </p>
             ) : null}
+
+            <p className="text-center text-sm text-muted">
+              Не уверены в бюджете? —{" "}
+              <Link
+                href="/calculator"
+                className="text-accent-text hover:underline"
+              >
+                прикиньте стоимость в калькуляторе
+              </Link>{" "}
+              за минуту.
+            </p>
           </form>
         </div>
       </Container>
