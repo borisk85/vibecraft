@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     }) as ReactElement<DocumentProps>;
     const pdfBuffer = await renderToBuffer(element);
 
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(new Uint8Array(pdfBuffer), {
       status: 200,
       headers: {
         "Content-Type": "application/pdf",
