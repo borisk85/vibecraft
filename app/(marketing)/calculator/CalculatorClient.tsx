@@ -82,8 +82,35 @@ export function CalculatorClient() {
     }
   }
 
-  function handleDownloadPdf() {
-    window.print();
+  const [pdfLoading, setPdfLoading] = useState(false);
+
+  async function handleDownloadPdf() {
+    if (!reply || pdfLoading) return;
+    setPdfLoading(true);
+    try {
+      const res = await fetch("/api/calculator/pdf", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ description, smeta: reply }),
+      });
+      if (!res.ok) {
+        setError("Не удалось сгенерировать PDF. Попробуйте позже.");
+        return;
+      }
+      const blob = await res.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "vibecraft-smeta.pdf";
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch {
+      setError("Не удалось сгенерировать PDF.");
+    } finally {
+      setPdfLoading(false);
+    }
   }
 
   return (
@@ -111,7 +138,7 @@ export function CalculatorClient() {
 
           <form
             onSubmit={handleCalculate}
-            className="mt-10 space-y-4 print:hidden"
+            className="mx-auto mt-10 max-w-xl space-y-4 print:hidden"
           >
             <textarea
               value={description}
@@ -169,9 +196,10 @@ export function CalculatorClient() {
                 <button
                   type="button"
                   onClick={handleDownloadPdf}
-                  className="inline-flex h-12 w-full items-center justify-center rounded-xl border border-border bg-card px-6 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent sm:w-auto"
+                  disabled={pdfLoading}
+                  className="inline-flex h-12 w-full items-center justify-center rounded-xl border border-border bg-card px-6 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent disabled:opacity-50 sm:w-auto"
                 >
-                  Скачать смету в PDF
+                  {pdfLoading ? "Готовлю PDF..." : "Скачать смету в PDF"}
                 </button>
                 <Link
                   href="/#contact"
