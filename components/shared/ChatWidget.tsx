@@ -15,7 +15,7 @@ const PROACTIVE_KEY = "vibecraft_chat_proactive_shown";
 const GREETING =
   "Здравствуйте! Я AI-консультант Vibecraft. Помогу разобраться с услугами, ценами, сроками — что вас интересует?";
 const PROACTIVE_TEXT =
-  "Здравствуйте 👋 Если появятся вопросы по услугам или ценам — напишите.";
+  "Здравствуйте 👋 Если появятся вопросы по услугам или ценам — напишите мне.";
 const HISTORY_TTL_MS = 24 * 60 * 60 * 1000;
 
 const EMOJIS = [
