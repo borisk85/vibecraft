@@ -219,8 +219,8 @@ export default function ChatWidget() {
                   }`}
                 >
                   {m.role === "assistant" && (
-                    <div className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-surface text-[11px] font-semibold text-accent-text">
-                      AI
+                    <div className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-surface text-xs font-semibold text-accent-text">
+                      V
                     </div>
                   )}
                   <div
@@ -265,8 +265,8 @@ export default function ChatWidget() {
             ))}
             {loading && (
               <div className="flex justify-start gap-3">
-                <div className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-surface text-[11px] font-semibold text-accent-text">
-                  AI
+                <div className="mt-0.5 flex h-7 w-7 flex-shrink-0 items-center justify-center rounded-full bg-surface text-xs font-semibold text-accent-text">
+                  V
                 </div>
                 <div className="flex items-center gap-2 rounded-2xl rounded-bl-sm bg-surface px-4 py-3">
                   <svg
