@@ -128,7 +128,7 @@ export function CalculatorClient() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Ваш email (необязательно) — для получения копии сметы себе на почту"
+                placeholder="Ваш email (необязательно) — для получения копии сметы себе на почту."
                 maxLength={200}
                 disabled={loading}
                 className="w-full rounded-xl border border-border bg-card pl-11 pr-4 py-3 text-foreground placeholder:text-subtle outline-none transition-colors duration-150 focus:border-accent disabled:opacity-50"
