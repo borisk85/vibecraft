@@ -36,35 +36,43 @@ export function Process() {
         />
 
         <MotionStagger className="relative mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {[1, 2].map((i) => (
-            <div
-              key={`line-${i}`}
-              aria-hidden
-              className="pointer-events-none absolute hidden md:block"
-              style={{
-                top: "1.75rem",
-                left: `calc(${i} * (100% - 3rem) / 3 + ${i - 1}rem)`,
-                width: "1.5rem",
-                height: "1px",
-                background: "rgba(249, 168, 212, 0.35)",
-              }}
-            />
-          ))}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute hidden md:block"
+            style={{
+              top: "3.5rem",
+              left: "calc((100% - 3rem) / 3)",
+              width: "1.5rem",
+              height: "1px",
+              background: "rgba(249, 168, 212, 0.35)",
+            }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute hidden md:block"
+            style={{
+              top: "3.5rem",
+              left: "calc(2 * (100% - 3rem) / 3 + 1.5rem)",
+              width: "1.5rem",
+              height: "1px",
+              background: "rgba(249, 168, 212, 0.35)",
+            }}
+          />
           {steps.map((step) => (
             <MotionItem
               key={step.step}
-              interactive
-              className="relative flex h-full flex-col gap-4 rounded-2xl border border-border bg-card p-6 transition-colors duration-200 hover:border-accent"
+              className="relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40"
             >
-              <span className="font-mono text-sm text-accent-text">
+              <span
+                aria-hidden
+                className="pointer-events-none absolute right-5 top-4 font-mono text-5xl font-bold leading-none text-foreground/10"
+              >
                 {step.step}
               </span>
-              <h3 className="text-balance text-base font-semibold tracking-tight text-foreground lg:text-[17px]">
+              <h3 className="text-xl font-semibold tracking-tight text-foreground">
                 {step.title}
               </h3>
-              <p className="text-[15px] leading-relaxed text-muted">
-                {step.description}
-              </p>
+              <p className="text-muted leading-relaxed">{step.description}</p>
             </MotionItem>
           ))}
         </MotionStagger>
