@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 
 export function CalculatorClient() {
@@ -100,10 +99,9 @@ export function CalculatorClient() {
               <div className="text-center">
                 <Link
                   href="/#contact"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]"
+                  className="inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]"
                 >
                   Перейти к заявке
-                  <ArrowRight className="h-4 w-4" />
                 </Link>
                 <p className="mt-3 text-sm text-muted">
                   Точная стоимость и срок — после короткого созвона.
