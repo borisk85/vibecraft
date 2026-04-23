@@ -109,7 +109,7 @@ export function Services() {
           </h3>
           <p className="max-w-xl text-muted">
             Опишите ее обычным текстом — AI-калькулятор прикинет стоимость и
-            срок за минуту. Без созвона и опросников.
+            срок за минуту.
           </p>
           <Link
             href="/calculator"

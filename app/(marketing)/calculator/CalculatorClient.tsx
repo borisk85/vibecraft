@@ -57,8 +57,7 @@ export function CalculatorClient() {
             </h1>
             <p className="mt-4 text-muted md:text-lg">
               Опишите задачу обычным текстом — AI прогонит через прайс
-              Vibecraft и выдаст ориентировочную смету. Без созвона и
-              опросников.
+              Vibecraft и выдаст ориентировочную смету.
             </p>
           </div>
 
