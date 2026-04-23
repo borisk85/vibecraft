@@ -28,6 +28,45 @@ interface StoredHistory {
   lastActivity: number;
 }
 
+const FEEDBACK_KEY = "vibecraft_chat_feedback";
+
+interface StoredFeedback {
+  dislikes: number;
+  ratedIdx: number[];
+  lastActivity: number;
+}
+
+function loadFeedback(): { dislikes: number; ratedIdx: number[] } {
+  try {
+    const raw = localStorage.getItem(FEEDBACK_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw) as StoredFeedback;
+      if (
+        parsed &&
+        typeof parsed.dislikes === "number" &&
+        Array.isArray(parsed.ratedIdx) &&
+        typeof parsed.lastActivity === "number" &&
+        Date.now() - parsed.lastActivity <= HISTORY_TTL_MS
+      ) {
+        return { dislikes: parsed.dislikes, ratedIdx: parsed.ratedIdx };
+      }
+      localStorage.removeItem(FEEDBACK_KEY);
+    }
+  } catch {}
+  return { dislikes: 0, ratedIdx: [] };
+}
+
+function saveFeedback(dislikes: number, ratedIdx: number[]) {
+  try {
+    const stored: StoredFeedback = {
+      dislikes,
+      ratedIdx,
+      lastActivity: Date.now(),
+    };
+    localStorage.setItem(FEEDBACK_KEY, JSON.stringify(stored));
+  } catch {}
+}
+
 function loadHistory(): Message[] {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -74,6 +113,9 @@ export default function ChatWidget() {
     if (!initialized.current) {
       initialized.current = true;
       setMessages(loadHistory());
+      const { dislikes, ratedIdx } = loadFeedback();
+      setSessionDislikes(dislikes);
+      ratedIdxRef.current = new Set(ratedIdx);
     }
   }, []);
 
@@ -200,6 +242,7 @@ export default function ChatWidget() {
           isFeedback: true,
         },
       ]);
+      saveFeedback(sessionDislikes, Array.from(ratedIdxRef.current));
       return;
     }
 
@@ -212,7 +255,9 @@ export default function ChatWidget() {
       },
     ]);
 
-    setSessionDislikes((prev) => prev + 1);
+    const newDislikes = sessionDislikes + 1;
+    setSessionDislikes(newDislikes);
+    saveFeedback(newDislikes, Array.from(ratedIdxRef.current));
 
     const userQuestion = idx > 0 ? messages[idx - 1] : null;
 
