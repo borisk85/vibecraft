@@ -343,7 +343,7 @@ export default function ChatWidget() {
               </div>
             </div>
             <p className="mt-2 text-center text-[10px] leading-snug text-subtle">
-              AI-консультант может ошибаться — точные детали у Бориса в{" "}
+              Важные моменты уточняйте лично у Бориса в{" "}
               <a
                 href={siteConfig.contacts.telegram}
                 target="_blank"
