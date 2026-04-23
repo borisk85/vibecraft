@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { renderToBuffer } from "@react-pdf/renderer";
+import type { ReactElement } from "react";
+import { renderToBuffer, type DocumentProps } from "@react-pdf/renderer";
 import { CalculatorPdf } from "@/lib/calculator-pdf";
 
 export const runtime = "nodejs";
@@ -19,9 +20,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const pdfBuffer = await renderToBuffer(
-      CalculatorPdf({ description, smeta }) as React.ReactElement,
-    );
+    const element = CalculatorPdf({
+      description,
+      smeta,
+    }) as ReactElement<DocumentProps>;
+    const pdfBuffer = await renderToBuffer(element);
 
     return new NextResponse(pdfBuffer, {
       status: 200,
