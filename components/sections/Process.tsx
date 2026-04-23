@@ -32,7 +32,7 @@ export function Process() {
         <SectionHeading
           eyebrow="Процесс"
           title="Как происходит работа"
-          description="Прозрачные этапы, регулярные демо и поэтапная оплата. Вы видите прогресс и управляете тонкостями разработки до конца."
+          description="Прозрачные этапы, регулярные демо и поэтапная оплата. Вы видите прогресс разработки и управляете тонкостями до самого конца."
         />
 
         <MotionStagger className="relative mt-16 grid grid-cols-1 gap-6 md:grid-cols-3">
