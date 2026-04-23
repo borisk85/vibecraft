@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
+import { Ratelimit } from "@upstash/ratelimit";
+import { Redis } from "@upstash/redis";
 import { CALCULATOR_SYSTEM_PROMPT } from "@/lib/calculator-system-prompt";
 
 export const runtime = "nodejs";
@@ -8,6 +10,27 @@ export const dynamic = "force-dynamic";
 const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
+
+// Серверный rate limit: 5 расчетов в час с одного IP.
+// Если ENV для Upstash не настроены — graceful degradation, лимит пропускается
+// (полагаемся только на frontend защиту через localStorage).
+const ratelimit =
+  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
+    ? new Ratelimit({
+        redis: Redis.fromEnv(),
+        limiter: Ratelimit.slidingWindow(5, "1 h"),
+        prefix: "vibecraft:calc",
+        analytics: true,
+      })
+    : null;
+
+function getClientIp(req: NextRequest): string {
+  const xff = req.headers.get("x-forwarded-for");
+  if (xff) return xff.split(",")[0].trim();
+  const real = req.headers.get("x-real-ip");
+  if (real) return real.trim();
+  return "unknown";
+}
 
 function escapeHtml(value: string): string {
   return value
@@ -54,6 +77,23 @@ async function notifyTelegram(
 
 export async function POST(req: NextRequest) {
   try {
+    if (ratelimit) {
+      const ip = getClientIp(req);
+      const { success, reset } = await ratelimit.limit(ip);
+      if (!success) {
+        const minutesLeft = Math.max(
+          1,
+          Math.ceil((reset - Date.now()) / 60000),
+        );
+        return NextResponse.json(
+          {
+            error: `Лимит расчетов исчерпан (5 в час). Попробуйте через ${minutesLeft} мин или напишите в Telegram @borisk85.`,
+          },
+          { status: 429 },
+        );
+      }
+    }
+
     const body = await req.json();
     const description =
       typeof body?.description === "string" ? body.description.trim() : "";
