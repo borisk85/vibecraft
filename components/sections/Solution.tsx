@@ -62,7 +62,7 @@ export function Solution() {
           {points.map((point, index) => (
             <MotionItem
               key={point.title}
-              className="relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-300 hover:-translate-y-0.5 hover:border-accent/40"
+              className="relative flex flex-col gap-4 overflow-hidden rounded-2xl border border-border bg-card p-8 transition-colors duration-200 hover:border-accent/40"
             >
               <span
                 aria-hidden
