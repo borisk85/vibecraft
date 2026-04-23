@@ -359,16 +359,14 @@ export default function ChatWidget() {
                 >
                   <span className="text-lg leading-none">😊</span>
                 </button>
-                {input.trim() && (
-                  <button
-                    onClick={send}
-                    disabled={loading}
-                    aria-label="Отправить сообщение"
-                    className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-accent transition-all hover:opacity-90 disabled:opacity-30"
-                  >
-                    <Send className="h-3.5 w-3.5 text-white" />
-                  </button>
-                )}
+                <button
+                  onClick={send}
+                  disabled={loading || !input.trim()}
+                  aria-label="Отправить сообщение"
+                  className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-accent transition-all hover:opacity-90 disabled:opacity-30"
+                >
+                  <Send className="h-3.5 w-3.5 text-white" />
+                </button>
               </div>
             </div>
             <p className="mt-2 text-center text-[10px] leading-snug text-subtle">
