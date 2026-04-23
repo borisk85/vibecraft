@@ -10,7 +10,7 @@ import { siteConfig } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
 
 const projectTypes = [
-  "Бот или AI-ассистент",
+  "Бот или AI-агент",
   "Мобильное приложение",
   "MVP",
   "Автоматизация",

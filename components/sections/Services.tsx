@@ -3,6 +3,7 @@ import {
   Bot,
   Code2,
   Smartphone,
+  Sparkles,
   Workflow,
 } from "lucide-react";
 import Link from "next/link";
@@ -16,11 +17,19 @@ import { siteConfig } from "@/lib/metadata";
 export const services = [
   {
     icon: Bot,
-    title: "Боты и AI-ассистенты",
+    title: "Боты",
     description:
-      "Telegram или WhatsApp. От простого бота до умного AI-ассистента, с памятью и интеграциями. Под вашу задачу — бот-консультант, прием заказов, поддержка, персональный помощник и т.д.",
+      "Telegram или WhatsApp. Бот с кнопками, меню и сценариями для типовых задач — прием заказов, уведомления, FAQ, рассылки, сбор заявок.",
     price: "от 300 000 ₸",
     duration: "до 1 недели",
+  },
+  {
+    icon: Sparkles,
+    title: "AI-агенты",
+    description:
+      "Кастомный AI-агент под вашу задачу: память, контекст, интеграции с CRM, базами и внешними API. Заточен под нишу — поддержка клиентов, продажи, SEO, юр-консультации, любая узкая экспертиза.",
+    price: "от 600 000 ₸",
+    duration: "до 2 недель",
   },
   {
     icon: Code2,
