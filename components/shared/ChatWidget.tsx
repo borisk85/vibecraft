@@ -341,7 +341,7 @@ export default function ChatWidget() {
                 )}
               </div>
             </div>
-            <p className="mt-2 text-center text-xs text-subtle">
+            <p className="mt-2 text-center text-[10px] leading-snug text-subtle">
               AI-консультант может ошибаться — важное уточняйте у Бориса в
               Telegram
             </p>
