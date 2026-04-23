@@ -4,8 +4,36 @@ import { useState } from "react";
 import Link from "next/link";
 import { Container } from "@/components/shared/Container";
 
+const RATE_LIMIT_KEY = "vibecraft_calc_requests";
+const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;
+
+function getRecentRequests(): number[] {
+  try {
+    const raw = localStorage.getItem(RATE_LIMIT_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    const now = Date.now();
+    return parsed.filter(
+      (t) => typeof t === "number" && now - t < RATE_LIMIT_WINDOW_MS,
+    );
+  } catch {
+    return [];
+  }
+}
+
+function recordRequest() {
+  try {
+    const list = getRecentRequests();
+    list.push(Date.now());
+    localStorage.setItem(RATE_LIMIT_KEY, JSON.stringify(list));
+  } catch {}
+}
+
 export function CalculatorClient() {
   const [description, setDescription] = useState("");
+  const [email, setEmail] = useState("");
   const [reply, setReply] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -13,6 +41,18 @@ export function CalculatorClient() {
   async function handleCalculate(e: React.FormEvent) {
     e.preventDefault();
     if (!description.trim() || loading) return;
+
+    const recent = getRecentRequests();
+    if (recent.length >= RATE_LIMIT_MAX) {
+      const earliest = Math.min(...recent);
+      const minutesLeft = Math.ceil(
+        (RATE_LIMIT_WINDOW_MS - (Date.now() - earliest)) / 60000,
+      );
+      setError(
+        `Лимит расчетов исчерпан (3 в час). Попробуйте через ${minutesLeft} мин или напишите в Telegram @borisk85.`,
+      );
+      return;
+    }
 
     setLoading(true);
     setError(null);
@@ -22,13 +62,17 @@ export function CalculatorClient() {
       const res = await fetch("/api/calculator", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ description }),
+        body: JSON.stringify({
+          description,
+          email: email.trim() || null,
+        }),
       });
       const data = await res.json();
       if (!res.ok) {
         setError(data.error ?? "Не удалось рассчитать");
       } else {
         setReply(data.reply ?? "");
+        recordRequest();
       }
     } catch {
       setError("Не удалось отправить запрос. Попробуйте позже.");
@@ -37,16 +81,20 @@ export function CalculatorClient() {
     }
   }
 
+  function handleDownloadPdf() {
+    window.print();
+  }
+
   return (
     <section className="relative overflow-hidden py-16 md:py-24">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[400px] w-[700px] -translate-x-1/2 rounded-full bg-gradient-accent opacity-20 blur-[120px]"
+        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[400px] w-[700px] -translate-x-1/2 rounded-full bg-gradient-accent opacity-20 blur-[120px] print:hidden"
       />
 
       <Container>
         <div className="mx-auto max-w-3xl">
-          <div className="text-center">
+          <div className="text-center print:hidden">
             <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent-text">
               Калькулятор
             </span>
@@ -60,7 +108,10 @@ export function CalculatorClient() {
             </p>
           </div>
 
-          <form onSubmit={handleCalculate} className="mt-10 space-y-4">
+          <form
+            onSubmit={handleCalculate}
+            className="mt-10 space-y-4 print:hidden"
+          >
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -70,43 +121,64 @@ export function CalculatorClient() {
               disabled={loading}
               className="w-full resize-none rounded-xl border border-border bg-card p-4 text-foreground placeholder:text-subtle outline-none transition-colors duration-150 focus:border-accent disabled:opacity-50"
             />
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email (необязательно — для копии сметы себе и связи)"
+              maxLength={200}
+              disabled={loading}
+              className="w-full rounded-xl border border-border bg-card px-4 py-3 text-foreground placeholder:text-subtle outline-none transition-colors duration-150 focus:border-accent disabled:opacity-50"
+            />
             <button
               type="submit"
               disabled={loading || !description.trim()}
               className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-gradient-accent text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)] disabled:opacity-50"
             >
-              {loading ? "Считаю..." : "Рассчитать стоимость"}
+              {loading ? "Считаю..." : "Посчитать стоимость"}
             </button>
           </form>
 
           {error ? (
-            <p className="mt-4 text-center text-sm text-error">{error}</p>
+            <p className="mt-4 text-center text-sm text-error print:hidden">
+              {error}
+            </p>
           ) : null}
 
           {reply ? (
-            <div className="mt-10 space-y-6">
-              <div className="rounded-2xl border border-border bg-card p-6 md:p-8">
+            <div className="mt-10 space-y-6 print:mt-0">
+              <div className="rounded-2xl border border-border bg-card p-6 md:p-8 print:border-0 print:bg-white print:p-0 print:text-black">
                 <div className="flex items-center justify-between">
-                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent-text">
-                    Смета
+                  <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent-text print:text-black">
+                    Смета — Vibecraft
                   </span>
                 </div>
-                <pre className="mt-4 whitespace-pre-wrap break-words font-sans text-[15px] leading-relaxed text-foreground">
+                <pre className="mt-4 whitespace-pre-wrap break-words font-sans text-[15px] leading-relaxed text-foreground print:text-black">
                   {reply}
                 </pre>
+                <p className="mt-6 border-t border-border pt-4 text-xs text-subtle print:border-gray-300 print:text-gray-600">
+                  vibecraft.kz · Telegram: @borisk85 · hello@vibecraft.kz
+                </p>
               </div>
 
-              <div className="text-center">
+              <div className="flex flex-col items-center gap-3 print:hidden sm:flex-row sm:justify-center">
+                <button
+                  type="button"
+                  onClick={handleDownloadPdf}
+                  className="inline-flex h-12 w-full items-center justify-center rounded-xl border border-border bg-card px-6 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent sm:w-auto"
+                >
+                  Скачать смету в PDF
+                </button>
                 <Link
                   href="/#contact"
-                  className="inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]"
+                  className="inline-flex h-12 w-full items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)] sm:w-auto"
                 >
                   Перейти к заявке
                 </Link>
-                <p className="mt-3 text-sm text-muted">
-                  Точная стоимость и срок — после короткого созвона.
-                </p>
               </div>
+              <p className="text-center text-sm text-muted print:hidden">
+                Точная стоимость и срок — после короткого созвона.
+              </p>
             </div>
           ) : null}
         </div>

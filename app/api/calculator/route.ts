@@ -9,15 +9,68 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+async function notifyTelegram(
+  description: string,
+  reply: string,
+  email: string | null,
+) {
+  const token = process.env.TELEGRAM_BOT_TOKEN;
+  const chatId = process.env.TELEGRAM_CHAT_ID;
+  if (!token || !chatId) return;
+
+  const lines = [
+    "<b>Калькулятор: новый расчет</b>",
+    "",
+    email ? `<b>Email клиента:</b> ${escapeHtml(email)}` : null,
+    `<b>Описание задачи:</b>\n${escapeHtml(description.slice(0, 1500))}`,
+    "",
+    `<b>Смета:</b>\n${escapeHtml(reply.slice(0, 2000))}`,
+  ];
+
+  const text = lines.filter(Boolean).join("\n").slice(0, 4000);
+
+  try {
+    await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        chat_id: chatId,
+        text,
+        parse_mode: "HTML",
+        disable_web_page_preview: true,
+      }),
+    });
+  } catch (e) {
+    console.error("[calculator] Telegram notify error", e);
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
     const description =
       typeof body?.description === "string" ? body.description.trim() : "";
+    const email =
+      typeof body?.email === "string" && body.email.trim()
+        ? body.email.trim().slice(0, 200)
+        : null;
 
     if (!description) {
+      return NextResponse.json({ error: "Опишите задачу" }, { status: 400 });
+    }
+    if (description.length < 20) {
       return NextResponse.json(
-        { error: "Опишите задачу" },
+        {
+          error:
+            "Слишком короткое описание. Опишите задачу хотя бы парой предложений.",
+        },
         { status: 400 },
       );
     }
@@ -55,11 +108,13 @@ export async function POST(req: NextRequest) {
       .split(YO_UPPER)
       .join("Е");
 
-    return NextResponse.json({
-      reply:
-        reply ||
-        "Не получилось рассчитать смету. Напишите Борису в Telegram @borisk85.",
-    });
+    const finalReply =
+      reply ||
+      "Не получилось рассчитать смету. Напишите Борису в Telegram @borisk85.";
+
+    notifyTelegram(description, finalReply, email).catch(() => {});
+
+    return NextResponse.json({ reply: finalReply });
   } catch (error) {
     console.error("Calculator API error:", error);
     return NextResponse.json(
