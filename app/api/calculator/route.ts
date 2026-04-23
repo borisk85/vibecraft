@@ -12,17 +12,26 @@ const anthropic = new Anthropic({
 });
 
 // Серверный rate limit: 5 расчетов в час с одного IP.
-// Если ENV для Upstash не настроены — graceful degradation, лимит пропускается
-// (полагаемся только на frontend защиту через localStorage).
-const ratelimit =
-  process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN
-    ? new Ratelimit({
-        redis: Redis.fromEnv(),
-        limiter: Ratelimit.slidingWindow(5, "1 h"),
-        prefix: "vibecraft:calc",
-        analytics: true,
-      })
-    : null;
+// Vercel при подключении Upstash через Marketplace создает env с префиксом
+// KV_* (KV_REST_API_URL, KV_REST_API_TOKEN). Для совместимости проверяем
+// оба варианта префикса. Если ничего не настроено — graceful degradation.
+function buildRatelimit(): Ratelimit | null {
+  const url =
+    process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
+  const token =
+    process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
+
+  if (!url || !token) return null;
+
+  return new Ratelimit({
+    redis: new Redis({ url, token }),
+    limiter: Ratelimit.slidingWindow(5, "1 h"),
+    prefix: "vibecraft:calc",
+    analytics: true,
+  });
+}
+
+const ratelimit = buildRatelimit();
 
 function getClientIp(req: NextRequest): string {
   const xff = req.headers.get("x-forwarded-for");
