@@ -1,5 +1,4 @@
 import {
-  ArrowRight,
   Bot,
   Code2,
   Globe,
@@ -7,13 +6,11 @@ import {
   Sparkles,
   Workflow,
 } from "lucide-react";
-import Link from "next/link";
 import { Container } from "@/components/shared/Container";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { MotionStagger } from "@/components/shared/MotionStagger";
 import { MotionItem } from "@/components/shared/MotionItem";
-import { siteConfig } from "@/lib/metadata";
 
 export const services = [
   {
@@ -102,30 +99,6 @@ export function Services() {
               </div>
             </MotionItem>
           ))}
-
-          <Link
-            href={siteConfig.contacts.telegram}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block"
-          >
-            <MotionItem
-              interactive
-              className="group flex h-full flex-col gap-4 rounded-2xl border border-accent/30 bg-transparent p-7 transition-colors duration-200 hover:border-accent"
-            >
-              <div>
-                <h3 className="mb-1.5 text-lg font-semibold tracking-tight text-foreground">
-                  Нет в списке?
-                </h3>
-                <p className="text-sm leading-relaxed text-muted">
-                  Напишите мне в Telegram — посмотрю задачу и предложу решение.
-                </p>
-              </div>
-              <div className="mt-auto flex items-center justify-end">
-                <ArrowRight className="h-5 w-5 text-accent-text transition-transform group-hover:translate-x-0.5" />
-              </div>
-            </MotionItem>
-          </Link>
         </MotionStagger>
       </Container>
     </MotionSection>
