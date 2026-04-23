@@ -13,6 +13,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.90.0",
     "@blocknote/mantine": "^0.48.1",
     "@blocknote/react": "^0.48.1",
     "@supabase/ssr": "^0.10.2",

@@ -4,6 +4,7 @@ import "./globals.css";
 import { siteConfig } from "@/lib/metadata";
 import { MotionProvider } from "@/components/shared/MotionProvider";
 import { Analytics } from "@/components/shared/Analytics";
+import { ChatWidgetMount } from "@/components/shared/ChatWidgetMount";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -81,6 +82,7 @@ export default function RootLayout({
     >
       <body className="min-h-screen bg-background text-foreground font-sans">
         <MotionProvider>{children}</MotionProvider>
+        <ChatWidgetMount />
         <Analytics />
       </body>
     </html>
