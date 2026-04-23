@@ -55,8 +55,8 @@ export function CalculatorClient() {
               <span className="text-gradient">за минуту</span>
             </h1>
             <p className="mt-4 text-muted md:text-lg">
-              Опишите задачу обычным текстом — AI прогонит через прайс
-              Vibecraft и выдаст ориентировочную смету.
+              Опишите задачу обычным текстом — наш AI-калькулятор выдаст вам
+              ориентировочную смету.
             </p>
           </div>
 
