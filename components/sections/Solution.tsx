@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/shared/SectionHeading";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { MotionStagger } from "@/components/shared/MotionStagger";
 import { MotionItem } from "@/components/shared/MotionItem";
-import { Eye, Gauge, Target } from "lucide-react";
+import { Eye, Gauge, Puzzle } from "lucide-react";
 
 const points = [
   {
@@ -13,7 +13,7 @@ const points = [
       "Claude Code берет на себя всю рутину и архитектуру. Безопасность, функционал и бизнес-логика — на мне.",
   },
   {
-    icon: Target,
+    icon: Puzzle,
     title: "Кастомное решение точно под вашу задачу",
     description:
       "Учитываю все уникальные особенности вашего заказа: логику, процессы и необходимые интеграции — от платежных сервисов до нестандартных сценариев.",

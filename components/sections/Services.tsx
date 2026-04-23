@@ -73,7 +73,7 @@ export function Services() {
         <SectionHeading
           eyebrow="Услуги"
           title="Что я делаю"
-          description="Шесть направлений — от ботов и AI-агентов до AI-сайтов и мобильных приложений. Стек подбирается под каждую задачу."
+          description="Шесть направлений — от простых ботов до MVP веб и мобильных приложений. Стек подбирается индивидуально под каждую задачу."
         />
 
         <MotionStagger className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
