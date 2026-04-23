@@ -2,6 +2,7 @@ import {
   ArrowRight,
   Bot,
   Code2,
+  Globe,
   Smartphone,
   Sparkles,
   Workflow,
@@ -40,6 +41,14 @@ export const services = [
     duration: "до 2 недель",
   },
   {
+    icon: Globe,
+    title: "AI-сайты",
+    description:
+      "Лендинг или корпоративный сайт с встроенной AI-фичей: чат-консультант на ваших материалах, AI-калькулятор стоимости, AI-аудит как лид-магнит, semantic search по каталогу. Не просто красивый сайт — а тот, который ловит лиды и продает.",
+    price: "от 800 000 ₸",
+    duration: "до 2 недель",
+  },
+  {
     icon: Workflow,
     title: "Автоматизации",
     description:
@@ -64,7 +73,7 @@ export function Services() {
         <SectionHeading
           eyebrow="Услуги"
           title="Что я делаю"
-          description="Четыре направления AI-разработки — от простых ботов до сложных автоматизаций. Стек подбирается под каждую конкретную задачу."
+          description="Шесть направлений — от ботов и AI-агентов до AI-сайтов и мобильных приложений. Стек подбирается под каждую задачу."
         />
 
         <MotionStagger className="mt-16 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
