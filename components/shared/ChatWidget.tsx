@@ -7,6 +7,7 @@ import { siteConfig } from "@/lib/metadata";
 interface Message {
   role: "user" | "assistant";
   content: string;
+  isFeedback?: boolean;
 }
 
 const STORAGE_KEY = "vibecraft_chat";
@@ -65,6 +66,7 @@ export default function ChatWidget() {
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const initialized = useRef(false);
   const proactiveShown = useRef(false);
+  const ratedIdxRef = useRef<Set<number>>(new Set());
 
   useEffect(() => {
     if (!initialized.current) {
@@ -171,8 +173,6 @@ export default function ChatWidget() {
   }
 
   function rate(idx: number, val: "up" | "down") {
-    const wasRated = ratings[idx];
-
     setRatings((prev) => {
       const copy = { ...prev };
       if (copy[idx] === val) delete copy[idx];
@@ -180,10 +180,33 @@ export default function ChatWidget() {
       return copy;
     });
 
-    if (wasRated === val) return;
+    if (ratedIdxRef.current.has(idx)) return;
 
     const message = messages[idx];
     if (!message || message.role !== "assistant") return;
+
+    ratedIdxRef.current.add(idx);
+
+    if (val === "up") {
+      setMessages((prev) => [
+        ...prev,
+        {
+          role: "assistant",
+          content: "Спасибо за оценку!",
+          isFeedback: true,
+        },
+      ]);
+      return;
+    }
+
+    setMessages((prev) => [
+      ...prev,
+      {
+        role: "assistant",
+        content: "Спасибо за обратную связь — передам это автору.",
+        isFeedback: true,
+      },
+    ]);
 
     const userQuestion = idx > 0 ? messages[idx - 1] : null;
 
@@ -252,7 +275,7 @@ export default function ChatWidget() {
                     {m.content}
                   </div>
                 </div>
-                {m.role === "assistant" && i > 0 && (
+                {m.role === "assistant" && i > 0 && !m.isFeedback && (
                   <div className="ml-10 mt-1 flex gap-0.5">
                     <button
                       onClick={() => rate(i, "up")}
