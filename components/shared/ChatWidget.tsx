@@ -314,13 +314,23 @@ export default function ChatWidget() {
                 <textarea
                   ref={inputRef}
                   value={input}
-                  onChange={(e) => setInput(e.target.value)}
+                  onChange={(e) => {
+                    setInput(e.target.value);
+                    e.target.style.height = "24px";
+                    e.target.style.height =
+                      Math.min(e.target.scrollHeight, 80) + "px";
+                  }}
                   onKeyDown={onKey}
                   placeholder="Задайте вопрос..."
                   maxLength={500}
                   rows={1}
                   className="flex-1 resize-none bg-transparent leading-relaxed text-foreground placeholder:text-subtle outline-none"
-                  style={{ maxHeight: "80px", fontSize: "16px" }}
+                  style={{
+                    height: "24px",
+                    maxHeight: "80px",
+                    fontSize: "16px",
+                    lineHeight: "24px",
+                  }}
                 />
                 <button
                   onClick={() => setShowEmoji((v) => !v)}
