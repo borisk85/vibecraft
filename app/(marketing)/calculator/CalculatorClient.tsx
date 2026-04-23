@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Mail } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 
 const RATE_LIMIT_KEY = "vibecraft_calc_requests";
@@ -121,15 +122,18 @@ export function CalculatorClient() {
               disabled={loading}
               className="w-full resize-none rounded-xl border border-border bg-card p-4 text-foreground placeholder:text-subtle outline-none transition-colors duration-150 focus:border-accent disabled:opacity-50"
             />
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Email (необязательно — для копии сметы себе и связи)"
-              maxLength={200}
-              disabled={loading}
-              className="w-full rounded-xl border border-border bg-card px-4 py-3 text-foreground placeholder:text-subtle outline-none transition-colors duration-150 focus:border-accent disabled:opacity-50"
-            />
+            <div className="relative">
+              <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-subtle" />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Ваш email (необязательно) — для получения копии сметы себе на почту"
+                maxLength={200}
+                disabled={loading}
+                className="w-full rounded-xl border border-border bg-card pl-11 pr-4 py-3 text-foreground placeholder:text-subtle outline-none transition-colors duration-150 focus:border-accent disabled:opacity-50"
+              />
+            </div>
             <button
               type="submit"
               disabled={loading || !description.trim()}
