@@ -17,7 +17,7 @@ type CaseItem = {
 const cases: CaseItem[] = [
   {
     tag: "SaaS · B2C",
-    title: "SaaS для создания AI-ботов в Telegram без кода",
+    title: "SaaS для создания AI-ассистентов в Telegram без кода",
     description:
       "Multi-tenant платформа: пользователь без кода собирает своего AI-бота с подключением к Claude. Agent loop с tool use, биллинг через Lemon Squeezy, платные подписки.",
     stack: [
