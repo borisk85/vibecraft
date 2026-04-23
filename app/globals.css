@@ -67,12 +67,6 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-/* Выделение — фиолетовый полупрозрачный */
-::selection {
-  background-color: rgb(139 92 246 / 0.35);
-  color: var(--color-foreground);
-}
-
 /* Градиентный текст — использовать только точечно (H1 Hero и т.п.) */
 .text-gradient {
   background: var(--gradient-accent);
