@@ -252,8 +252,8 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
         <View style={styles.highlightBox}>
           <Text style={styles.highlightText}>
             <Text style={styles.highlightBold}>Готовы обсудить?</Text> Напишите
-            Борису в Telegram @borisk85 или на hello@vibecraft.kz — отвечу в
-            течение 1-2 часов в рабочее время.
+            мне в Telegram на @borisk85 — отвечу в течении 1-2 часа в рабочее
+            время.
           </Text>
         </View>
 
