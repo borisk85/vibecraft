@@ -73,7 +73,7 @@ export default async function OgImage() {
             textAlign: "center",
           }}
         >
-          AI-разработка в Казахстане под ключ
+          AI-разработка и автоматизации в Казахстане
         </div>
       </div>
     ),

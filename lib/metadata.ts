@@ -1,8 +1,8 @@
 export const siteConfig = {
   name: "Vibecraft",
-  title: "Vibecraft — AI-разработка в Казахстане",
+  title: "Vibecraft — AI-разработка и автоматизации в Казахстане",
   description:
-    "Боты в Telegram и WhatsApp, AI-агенты, AI-сайты, MVP, мобильные приложения и автоматизации.",
+    "Боты, AI-агенты, AI-сайты, MVP веб- и мобильных приложений, автоматизации. Под ключ за 1-2 недели.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://vibecraft.kz",
   author: "Vibecraft",
   locale: "ru_KZ",

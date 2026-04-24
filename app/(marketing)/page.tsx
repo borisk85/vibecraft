@@ -19,7 +19,7 @@ const organizationSchema = {
   url: siteConfig.url,
   logo: `${siteConfig.url}/og-image.png`,
   description:
-    "AI-разработка: боты в Telegram и WhatsApp, AI-агенты, AI-сайты, MVP, мобильные приложения и автоматизации.",
+    "AI-разработка и автоматизации: боты, AI-агенты, AI-сайты, MVP веб- и мобильных приложений. Под ключ за 1-2 недели.",
   founder: { "@type": "Person", name: "Борис" },
   contactPoint: {
     "@type": "ContactPoint",
