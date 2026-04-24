@@ -3,6 +3,7 @@ import Anthropic from "@anthropic-ai/sdk";
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import { Resend } from "resend";
+import { waitUntil } from "@vercel/functions";
 import { CALCULATOR_SYSTEM_PROMPT } from "@/lib/calculator-system-prompt";
 import { generateCalculatorPdfBuffer } from "@/lib/calculator-pdf";
 
@@ -258,10 +259,21 @@ export async function POST(req: NextRequest) {
       reply ||
       "Не получилось рассчитать смету. Напишите Борису в Telegram @borisk85.";
 
-    notifyTelegram(description, finalReply, email).catch(() => {});
+    // waitUntil говорит Vercel держать serverless-функцию живой пока background-
+    // задачи не завершатся. Без него Vercel закрывает runtime после return и
+    // unawaited fetch к Telegram/Resend убивается до отправки.
+    waitUntil(
+      notifyTelegram(description, finalReply, email).catch((e) => {
+        console.error("[calculator] Telegram notify failed", e);
+      }),
+    );
 
     if (email) {
-      sendEmailToClient(email, description, finalReply).catch(() => {});
+      waitUntil(
+        sendEmailToClient(email, description, finalReply).catch((e) => {
+          console.error("[calculator] Email send failed", e);
+        }),
+      );
     }
 
     return NextResponse.json({ reply: finalReply });
