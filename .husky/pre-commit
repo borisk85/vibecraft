@@ -4,7 +4,7 @@
 
 files=$(git diff --cached --name-only --diff-filter=ACM \
   | grep -E '\.(tsx?|jsx?|mdx?|md|css|html|ya?ml|sql|sh)$' \
-  | grep -vE '^(CLAUDE\.md|docs/no-yo-hook\.md)$')
+  | grep -vE '^(CLAUDE\.md|docs/no-yo-hook\.md)$' || true)
 
 if [ -z "$files" ]; then
   exit 0
