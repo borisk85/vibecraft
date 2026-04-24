@@ -54,14 +54,14 @@ export function Hero() {
           >
             <a
               href="#contact"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-4 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)] sm:px-6"
+              className="inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-4 text-sm sm:text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)] sm:px-6"
             >
               Обсудить проект
             </a>
 
             <a
               href="#cases"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-border bg-card/40 px-4 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent hover:bg-card sm:px-6"
+              className="inline-flex h-12 items-center justify-center rounded-xl border border-border bg-card/40 px-4 text-sm sm:text-base font-medium text-foreground transition-colors duration-150 hover:border-accent hover:bg-card sm:px-6"
             >
               Смотреть работы
             </a>
