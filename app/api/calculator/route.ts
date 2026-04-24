@@ -4,6 +4,7 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 import { Resend } from "resend";
 import { CALCULATOR_SYSTEM_PROMPT } from "@/lib/calculator-system-prompt";
+import { generateCalculatorPdfBuffer } from "@/lib/calculator-pdf";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -98,6 +99,17 @@ async function sendEmailToClient(
   </div>
 </body></html>`;
 
+  let pdfBase64: string | null = null;
+  try {
+    const pdfBuffer = await generateCalculatorPdfBuffer({
+      description,
+      smeta,
+    });
+    pdfBase64 = pdfBuffer.toString("base64");
+  } catch (e) {
+    console.error("[calculator] PDF generation for email failed", e);
+  }
+
   try {
     const result = await resend.emails.send({
       from: "Vibecraft <onboarding@resend.dev>",
@@ -105,8 +117,20 @@ async function sendEmailToClient(
       replyTo: "hello@vibecraft.kz",
       subject: "Ваша смета по проекту — Vibecraft",
       html,
+      attachments: pdfBase64
+        ? [
+            {
+              filename: "vibecraft-smeta.pdf",
+              content: pdfBase64,
+            },
+          ]
+        : undefined,
     });
-    console.log("[calculator] email sent", { to: email, id: result.data?.id });
+    console.log("[calculator] email sent", {
+      to: email,
+      id: result.data?.id,
+      withPdf: Boolean(pdfBase64),
+    });
   } catch (e) {
     console.error("[calculator] Resend error", e);
   }

@@ -5,8 +5,11 @@ import {
   View,
   StyleSheet,
   Font,
+  renderToBuffer,
+  type DocumentProps,
 } from "@react-pdf/renderer";
 import path from "node:path";
+import type { ReactElement } from "react";
 
 // Шрифт Inter с кириллической поддержкой регистрируется один раз при импорте.
 // Файлы в /public/fonts/ скачаны с github.com/rsms/inter.
@@ -196,6 +199,13 @@ function formatDate(): string {
 export interface CalculatorPdfProps {
   description: string;
   smeta: string;
+}
+
+export async function generateCalculatorPdfBuffer(
+  props: CalculatorPdfProps,
+): Promise<Buffer> {
+  const element = CalculatorPdf(props) as ReactElement<DocumentProps>;
+  return renderToBuffer(element);
 }
 
 export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
