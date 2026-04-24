@@ -8,20 +8,23 @@ import {
   renderToBuffer,
   type DocumentProps,
 } from "@react-pdf/renderer";
-import path from "node:path";
 import type { ReactElement } from "react";
 
-// Шрифт Inter с кириллической поддержкой регистрируется один раз при импорте.
-// Файлы в /public/fonts/ скачаны с github.com/rsms/inter.
+// Шрифт Inter с кириллической поддержкой. Файлы в /public/fonts/.
+// На Vercel serverless process.cwd() не имеет доступа к public/ из API routes,
+// поэтому загружаем через HTTP с самого сайта (CDN кеширует, так что fast).
+const FONT_BASE =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://vibecraft.kz";
+
 Font.register({
   family: "Inter",
   fonts: [
     {
-      src: path.join(process.cwd(), "public/fonts/Inter-Regular.ttf"),
+      src: `${FONT_BASE}/fonts/Inter-Regular.ttf`,
       fontWeight: "normal",
     },
     {
-      src: path.join(process.cwd(), "public/fonts/Inter-Bold.ttf"),
+      src: `${FONT_BASE}/fonts/Inter-Bold.ttf`,
       fontWeight: "bold",
     },
   ],
