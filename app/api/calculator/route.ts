@@ -191,6 +191,13 @@ async function isSpamDescription(description: string): Promise<boolean> {
   }
 }
 
+function extractUpsells(reply: string): string {
+  const match = reply.match(
+    /ВОЗМОЖНЫЕ АПСЕЙЛЫ:\s*([\s\S]*?)(?=\nПРИМЕЧАНИЕ:|$)/,
+  );
+  return match ? match[1].trim() : "";
+}
+
 async function notifyTelegram(
   description: string,
   reply: string,
@@ -200,16 +207,30 @@ async function notifyTelegram(
   const chatId = process.env.TELEGRAM_CHAT_ID;
   if (!token || !chatId) return;
 
-  const lines = [
-    "<b>Калькулятор: новый расчет</b>",
+  const clientReply = stripUpsells(reply);
+  const upsells = extractUpsells(reply);
+
+  const lines: (string | null)[] = [
+    "🧮 <b>Новый расчет в калькуляторе</b>",
     "",
-    email ? `<b>Email клиента:</b> ${escapeHtml(email)}` : null,
-    `<b>Описание задачи:</b>\n${escapeHtml(description.slice(0, 1500))}`,
+    email ? `📧 <code>${escapeHtml(email)}</code>` : null,
+    email ? "" : null,
+    "📝 <b>Описание клиента:</b>",
+    `<blockquote>${escapeHtml(description.slice(0, 1500))}</blockquote>`,
     "",
-    `<b>Смета:</b>\n${escapeHtml(reply.slice(0, 2000))}`,
+    "📊 <b>Смета (что увидит клиент):</b>",
+    `<pre>${escapeHtml(clientReply.slice(0, 2000))}</pre>`,
+    upsells ? "" : null,
+    upsells
+      ? "💡 <b>Апсейлы (для тебя, в разговоре с клиентом):</b>"
+      : null,
+    upsells ? `<pre>${escapeHtml(upsells.slice(0, 1000))}</pre>` : null,
   ];
 
-  const text = lines.filter(Boolean).join("\n").slice(0, 4000);
+  const text = lines
+    .filter((l): l is string => l !== null)
+    .join("\n")
+    .slice(0, 4000);
 
   try {
     await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
