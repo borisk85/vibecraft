@@ -231,10 +231,7 @@ const styles = StyleSheet.create({
   },
   // Footer
   footer: {
-    position: "absolute",
-    bottom: 32,
-    left: 48,
-    right: 48,
+    marginTop: 18,
     paddingTop: 14,
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
@@ -422,7 +419,7 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
         </View>
 
         {/* Footer */}
-        <View style={styles.footer} fixed>
+        <View style={styles.footer}>
           <Text style={styles.footerBrand}>
             <Text style={styles.footerBrandBold}>Vibecraft</Text> —
             AI-разработка и автоматизации · Казахстан
