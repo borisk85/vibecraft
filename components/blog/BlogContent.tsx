@@ -7,8 +7,8 @@ import PostCover from "@/components/blog/PostCover"
 
 const CATEGORIES = [
   { label: "Все",        slug: "all" },
-  { label: "Сравнения",  slug: "comparisons" },
-  { label: "Практика",   slug: "practice" },
+  { label: "Обзоры",     slug: "reviews" },
+  { label: "Сценарии",   slug: "scenarios" },
 ]
 const PAGE_SIZE = 9
 

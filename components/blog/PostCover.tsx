@@ -6,7 +6,7 @@ type Props = {
 }
 
 const COVER_CONFIG: Record<string, { color: string; bg: string; icon: string }> = {
-  "Сравнения": {
+  "Обзоры": {
     color: "#A78BFA",
     bg: "linear-gradient(135deg, rgba(167,139,250,0.14) 0%, rgba(139,92,246,0.06) 100%)",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -15,15 +15,13 @@ const COVER_CONFIG: Record<string, { color: string; bg: string; icon: string }> 
       <line x1="12" y1="3" x2="12" y2="21"/>
     </svg>`,
   },
-  "Практика": {
+  "Сценарии": {
     color: "#10B981",
     bg: "linear-gradient(135deg, rgba(16,185,129,0.14) 0%, rgba(5,150,105,0.06) 100%)",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="m9 12 2 2 4-4"/>
-      <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"/>
-      <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"/>
-      <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"/>
-      <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3"/>
+      <polyline points="4 7 4 4 20 4 20 7"/>
+      <line x1="9" y1="20" x2="15" y2="20"/>
+      <line x1="12" y1="4" x2="12" y2="20"/>
     </svg>`,
   },
 }
