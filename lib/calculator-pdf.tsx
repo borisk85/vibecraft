@@ -10,21 +10,25 @@ import {
 } from "@react-pdf/renderer";
 import type { ReactElement } from "react";
 
-// Шрифт Inter с кириллической поддержкой. Файлы в /public/fonts/.
+// Шрифт PT Sans (Google Fonts) с поддержкой кириллицы. Файлы в /public/fonts/.
 // На Vercel serverless process.cwd() не имеет доступа к public/ из API routes,
 // поэтому загружаем через HTTP с самого сайта (CDN кеширует, так что fast).
+//
+// Раньше пробовали Inter, но github URL отдавал HTML 404 вместо TTF — шрифт
+// в репо был битый, PDF падал с «Unknown font format». PT Sans скачан с
+// официального google/fonts репо как настоящий TrueType.
 const FONT_BASE =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://vibecraft.kz";
 
 Font.register({
-  family: "Inter",
+  family: "PTSans",
   fonts: [
     {
-      src: `${FONT_BASE}/fonts/Inter-Regular.ttf`,
+      src: `${FONT_BASE}/fonts/PTSans-Regular.ttf`,
       fontWeight: "normal",
     },
     {
-      src: `${FONT_BASE}/fonts/Inter-Bold.ttf`,
+      src: `${FONT_BASE}/fonts/PTSans-Bold.ttf`,
       fontWeight: "bold",
     },
   ],
@@ -42,7 +46,7 @@ const COLORS = {
 const styles = StyleSheet.create({
   page: {
     padding: 48,
-    fontFamily: "Inter",
+    fontFamily: "PTSans",
     backgroundColor: COLORS.bg,
     color: COLORS.text,
     fontSize: 10,
