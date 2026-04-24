@@ -32,9 +32,12 @@ export async function POST(req: NextRequest) {
       },
     });
   } catch (error) {
-    console.error("PDF generation error:", error);
+    const message = error instanceof Error ? error.message : String(error);
+    const stack = error instanceof Error ? error.stack : "";
+    console.error("PDF generation error:", message);
+    console.error("Stack:", stack);
     return NextResponse.json(
-      { error: "Не удалось сгенерировать PDF" },
+      { error: "Не удалось сгенерировать PDF", detail: message },
       { status: 500 },
     );
   }

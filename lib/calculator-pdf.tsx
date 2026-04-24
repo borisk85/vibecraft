@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
   page: {
     paddingTop: 48,
     paddingBottom: 80,
-    paddingHorizontal: 48,
+    paddingLeft: 48,
+    paddingRight: 48,
     fontFamily: "Inter",
     backgroundColor: COLORS.bg,
     color: COLORS.text,
@@ -62,11 +63,11 @@ const styles = StyleSheet.create({
   headerLeft: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 12,
   },
   logoImage: {
     width: 44,
     height: 44,
+    marginRight: 12,
   },
   logoBlock: {
     flexDirection: "column",
@@ -135,12 +136,12 @@ const styles = StyleSheet.create({
   },
   smetaRow: {
     flexDirection: "row",
-    gap: 24,
     marginBottom: 18,
   },
   smetaCol: {
     flexDirection: "column",
-    flex: 1,
+    width: "50%",
+    paddingRight: 12,
   },
   miniLabel: {
     fontSize: 7,
@@ -184,13 +185,13 @@ const styles = StyleSheet.create({
   includedText: {
     fontSize: 11,
     color: COLORS.text,
-    flex: 1,
+    flexGrow: 1,
+    flexShrink: 1,
     lineHeight: 1.5,
   },
   note: {
     fontSize: 9,
     color: COLORS.textMuted,
-    fontStyle: "italic",
     marginTop: 14,
     paddingTop: 12,
     borderTopWidth: 1,
