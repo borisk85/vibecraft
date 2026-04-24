@@ -100,7 +100,7 @@ async function sendEmailToClient(
     <pre style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:13px;line-height:1.6;white-space:pre-wrap;margin:0 0 24px 0;color:#0a0a0a;">${escapeHtml(clientSmeta)}</pre>
 
     <div style="background:#f5f0ff;padding:14px;border-radius:6px;font-size:13px;line-height:1.5;margin-bottom:24px;">
-      <strong>Готовы обсудить?</strong> Напишите мне в Telegram на <a href="https://t.me/borisk85" style="color:#8B5CF6;text-decoration:none;font-weight:700;">@borisk85</a> — отвечу в течении 1-2 часа в рабочее время.
+      <strong>Готовы обсудить?</strong> Напишите мне в Telegram на <a href="https://t.me/borisk85" style="color:#8B5CF6;text-decoration:none;font-weight:700;">@borisk85</a> — отвечу в течение 1-2 часа в рабочее время.
     </div>
 
     <div style="border-top:1px solid #e5e5e5;padding-top:16px;font-size:11px;color:#5a5a5a;">
@@ -123,7 +123,7 @@ async function sendEmailToClient(
 
   try {
     const result = await resend.emails.send({
-      from: "Vibecraft <onboarding@resend.dev>",
+      from: "Vibecraft <noreply@vibecraft.kz>",
       to: email,
       replyTo: "hello@vibecraft.kz",
       subject: buildSubject(description),
