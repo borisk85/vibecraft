@@ -11,25 +11,21 @@ import {
 } from "@react-pdf/renderer";
 import type { ReactElement } from "react";
 
-// Шрифт PT Sans (Google Fonts) с поддержкой кириллицы. Файлы в /public/fonts/.
-// На Vercel serverless process.cwd() не имеет доступа к public/ из API routes,
-// поэтому загружаем через HTTP с самого сайта (CDN кеширует, так что fast).
-//
-// Раньше пробовали Inter, но github URL отдавал HTML 404 вместо TTF — шрифт
-// в репо был битый, PDF падал с «Unknown font format». PT Sans скачан с
-// официального google/fonts репо как настоящий TrueType.
+// Шрифт Inter v4.1 (rsms.me/inter), извлечен из официального GitHub release.
+// Полная поддержка кириллицы И символа ₸ (тенге) — ранее PT Sans не имел ₸,
+// в PDF цена показывалась как «от 300 000 , до 400 000 ,» (mojibake).
 const FONT_BASE =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://vibecraft.kz";
 
 Font.register({
-  family: "PTSans",
+  family: "Inter",
   fonts: [
     {
-      src: `${FONT_BASE}/fonts/PTSans-Regular.ttf`,
+      src: `${FONT_BASE}/fonts/Inter-Regular.ttf`,
       fontWeight: "normal",
     },
     {
-      src: `${FONT_BASE}/fonts/PTSans-Bold.ttf`,
+      src: `${FONT_BASE}/fonts/Inter-Bold.ttf`,
       fontWeight: "bold",
     },
   ],
@@ -47,7 +43,7 @@ const COLORS = {
 const styles = StyleSheet.create({
   page: {
     padding: 48,
-    fontFamily: "PTSans",
+    fontFamily: "Inter",
     backgroundColor: COLORS.bg,
     color: COLORS.text,
     fontSize: 10,
@@ -69,9 +65,8 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   logoImage: {
-    width: 32,
-    height: 32,
-    borderRadius: 6,
+    width: 44,
+    height: 44,
   },
   logoBlock: {
     flexDirection: "column",
@@ -95,13 +90,14 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     color: COLORS.text,
-    marginBottom: 8,
+    marginBottom: 12,
     letterSpacing: -0.4,
   },
   subtitle: {
     fontSize: 10,
     color: COLORS.textMuted,
-    marginBottom: 24,
+    marginBottom: 28,
+    lineHeight: 1.6,
   },
   sectionLabel: {
     fontSize: 8,
@@ -116,9 +112,11 @@ const styles = StyleSheet.create({
     padding: 14,
     borderRadius: 6,
     marginBottom: 24,
+    borderWidth: 1,
+    borderColor: COLORS.border,
+    borderStyle: "solid",
     borderLeftWidth: 3,
     borderLeftColor: COLORS.accent,
-    borderLeftStyle: "solid",
   },
   taskText: {
     fontSize: 10,
@@ -159,36 +157,22 @@ const styles = StyleSheet.create({
     borderTopColor: COLORS.border,
     borderTopStyle: "solid",
   },
-  footerRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-  },
-  footerBlock: {
-    flexDirection: "column",
-  },
-  footerLabel: {
-    fontSize: 7,
-    fontWeight: "bold",
-    color: COLORS.textMuted,
-    letterSpacing: 1,
-    textTransform: "uppercase",
-    marginBottom: 4,
-  },
-  footerValue: {
+  footerBrand: {
     fontSize: 10,
     color: COLORS.text,
+    marginBottom: 6,
+  },
+  footerBrandBold: {
     fontWeight: "bold",
   },
-  footerValueLink: {
-    fontSize: 10,
-    color: COLORS.accent,
-    fontWeight: "bold",
-  },
-  footerValueMuted: {
+  footerContacts: {
     fontSize: 9,
     color: COLORS.textMuted,
-    marginTop: 2,
+    lineHeight: 1.5,
+  },
+  footerLink: {
+    color: COLORS.accent,
+    fontWeight: "bold",
   },
 });
 
@@ -273,22 +257,17 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
         </View>
 
         <View style={styles.footer} fixed>
-          <View style={styles.footerRow}>
-            <View style={styles.footerBlock}>
-              <Text style={styles.footerLabel}>Telegram</Text>
-              <Text style={styles.footerValueLink}>@borisk85</Text>
-            </View>
-            <View style={styles.footerBlock}>
-              <Text style={styles.footerLabel}>Email</Text>
-              <Text style={styles.footerValue}>hello@vibecraft.kz</Text>
-            </View>
-            <View style={styles.footerBlock}>
-              <Text style={styles.footerLabel}>Сайт</Text>
-              <Text style={styles.footerValueLink}>vibecraft.kz</Text>
-            </View>
-          </View>
-          <Text style={styles.footerValueMuted}>
-            Vibecraft — AI-разработка и автоматизации · Казахстан
+          <Text style={styles.footerBrand}>
+            <Text style={styles.footerBrandBold}>Vibecraft</Text> —
+            AI-разработка и автоматизации · Казахстан
+          </Text>
+          <Text style={styles.footerContacts}>
+            Telegram:{" "}
+            <Text style={styles.footerLink}>@borisk85</Text>
+            {"   ·   "}
+            Email: hello@vibecraft.kz
+            {"   ·   "}
+            Сайт: <Text style={styles.footerLink}>vibecraft.kz</Text>
           </Text>
         </View>
       </Page>
