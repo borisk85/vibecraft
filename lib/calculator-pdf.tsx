@@ -3,26 +3,29 @@ import {
   Page,
   Text,
   View,
-  Image,
+  Svg,
+  Path,
   StyleSheet,
   Font,
   renderToBuffer,
   type DocumentProps,
 } from "@react-pdf/renderer";
 import type { ReactElement } from "react";
+import { V_PATH } from "./logo-path";
 
-// Шрифт Inter v4.1 (rsms.me/inter), извлечен из официального GitHub release.
-// Полная поддержка кириллицы И символа ₸ (тенге). Файлы в /public/fonts/.
+// Шрифт Roboto (googlefonts/roboto) — полная кириллица, стабильно работает
+// в @react-pdf: корректные glyph-metrics и ToUnicode cmap, текст копируется
+// без искажений. Inter v4 имел баг — при больших PDF extraction ломался.
 // На Vercel serverless process.cwd() не имеет доступа к public/, поэтому
 // загружаем через HTTP с самого сайта (CDN кеширует).
 const FONT_BASE =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://vibecraft.kz";
 
 Font.register({
-  family: "Inter",
+  family: "Roboto",
   fonts: [
-    { src: `${FONT_BASE}/fonts/Inter-Regular.ttf`, fontWeight: "normal" },
-    { src: `${FONT_BASE}/fonts/Inter-Bold.ttf`, fontWeight: "bold" },
+    { src: `${FONT_BASE}/fonts/Roboto-Regular.ttf`, fontWeight: "normal" },
+    { src: `${FONT_BASE}/fonts/Roboto-Bold.ttf`, fontWeight: "bold" },
   ],
 });
 
@@ -40,22 +43,22 @@ const COLORS = {
 
 const styles = StyleSheet.create({
   page: {
-    paddingTop: 40,
-    paddingBottom: 60,
+    paddingTop: 34,
+    paddingBottom: 34,
     paddingLeft: 42,
     paddingRight: 42,
-    fontFamily: "Inter",
+    fontFamily: "Roboto",
     backgroundColor: COLORS.bg,
     color: COLORS.text,
     fontSize: 10,
-    lineHeight: 1.5,
+    lineHeight: 1.4,
   },
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 22,
-    paddingBottom: 14,
+    marginBottom: 16,
+    paddingBottom: 10,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
     borderBottomStyle: "solid",
@@ -64,10 +67,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  logoImage: {
-    width: 44,
-    height: 44,
-    marginRight: 12,
+  logoSvg: {
+    width: 32,
+    height: 32,
+    marginRight: 10,
   },
   logoBlock: {
     flexDirection: "column",
@@ -89,31 +92,32 @@ const styles = StyleSheet.create({
     color: COLORS.textMuted,
   },
   title: {
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: "bold",
     color: COLORS.text,
     marginBottom: 10,
+    lineHeight: 1.15,
     letterSpacing: -0.4,
   },
   subtitle: {
     fontSize: 10,
     color: COLORS.textMuted,
-    marginBottom: 22,
-    lineHeight: 1.5,
+    marginBottom: 16,
+    lineHeight: 1.45,
   },
   sectionLabel: {
     fontSize: 8,
     fontWeight: "bold",
     color: COLORS.accent,
-    marginBottom: 6,
+    marginBottom: 5,
     letterSpacing: 1.5,
     textTransform: "uppercase",
   },
   taskBlock: {
     backgroundColor: COLORS.cardBg,
-    padding: 12,
+    padding: 10,
     borderRadius: 8,
-    marginBottom: 18,
+    marginBottom: 14,
     borderWidth: 1,
     borderColor: COLORS.border,
     borderStyle: "solid",
@@ -121,9 +125,9 @@ const styles = StyleSheet.create({
     borderLeftColor: COLORS.accent,
   },
   taskText: {
-    fontSize: 10.5,
+    fontSize: 10,
     color: COLORS.text,
-    lineHeight: 1.5,
+    lineHeight: 1.45,
   },
   // Структурированная смета
   smetaCard: {
@@ -131,12 +135,12 @@ const styles = StyleSheet.create({
     borderColor: COLORS.border,
     borderStyle: "solid",
     borderRadius: 8,
-    padding: 14,
-    marginBottom: 16,
+    padding: 12,
+    marginBottom: 12,
   },
   smetaRow: {
     flexDirection: "row",
-    marginBottom: 12,
+    marginBottom: 10,
   },
   smetaCol: {
     flexDirection: "column",
@@ -152,48 +156,48 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   serviceValue: {
-    fontSize: 14,
+    fontSize: 13,
     fontWeight: "bold",
     color: COLORS.accent,
   },
   priceValue: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: "bold",
     color: COLORS.text,
   },
   durationValue: {
-    fontSize: 13,
+    fontSize: 12,
     color: COLORS.text,
   },
   includedSection: {
     marginTop: 2,
-    paddingTop: 12,
+    paddingTop: 10,
     borderTopWidth: 1,
     borderTopColor: COLORS.borderLight,
     borderTopStyle: "solid",
   },
   includedItem: {
     flexDirection: "row",
-    marginBottom: 4,
+    marginBottom: 3,
   },
   bullet: {
-    fontSize: 10.5,
+    fontSize: 10,
     color: COLORS.accent,
     marginRight: 6,
     width: 8,
   },
   includedText: {
-    fontSize: 10.5,
+    fontSize: 10,
     color: COLORS.text,
     flexGrow: 1,
     flexShrink: 1,
-    lineHeight: 1.45,
+    lineHeight: 1.4,
   },
   note: {
     fontSize: 9,
     color: COLORS.textMuted,
-    marginTop: 10,
-    paddingTop: 8,
+    marginTop: 8,
+    paddingTop: 6,
     borderTopWidth: 1,
     borderTopColor: COLORS.borderLight,
     borderTopStyle: "solid",
@@ -217,22 +221,22 @@ const styles = StyleSheet.create({
   // CTA
   ctaBox: {
     backgroundColor: COLORS.accentBg,
-    padding: 12,
+    padding: 10,
     borderRadius: 8,
-    marginBottom: 12,
+    marginBottom: 10,
   },
   ctaText: {
-    fontSize: 10.5,
+    fontSize: 10,
     color: COLORS.text,
-    lineHeight: 1.45,
+    lineHeight: 1.4,
   },
   ctaBold: {
     fontWeight: "bold",
   },
   // Footer
   footer: {
-    marginTop: 18,
-    paddingTop: 14,
+    marginTop: 10,
+    paddingTop: 10,
     borderTopWidth: 1,
     borderTopColor: COLORS.border,
     borderTopStyle: "solid",
@@ -240,7 +244,7 @@ const styles = StyleSheet.create({
   footerBrand: {
     fontSize: 10,
     color: COLORS.text,
-    marginBottom: 6,
+    marginBottom: 4,
   },
   footerBrandBold: {
     fontWeight: "bold",
@@ -254,7 +258,25 @@ const styles = StyleSheet.create({
     color: COLORS.accent,
     fontWeight: "bold",
   },
+  // Невидимый прогон всего алфавита — заставляет @react-pdf subsetter
+  // зарегистрировать ToUnicode-mapping для всех букв. Без этого некоторые
+  // буквы (p, y и др.) могут отсутствовать в ToUnicode cmap, и
+  // copy-paste / pdftotext будет терять символы.
+  hiddenGlyphProbe: {
+    position: "absolute",
+    top: -1000,
+    left: -1000,
+    color: "#FFFFFF",
+    fontSize: 1,
+    opacity: 0,
+  },
 });
+
+const GLYPH_PROBE =
+  "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+  "абвгдежзийклмнопрстуфхцчшщъыьэюяАБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ" +
+  "0123456789 .,:;!?()[]{}+-=/\\*&@#$%_<>'\"" +
+  "—–·•₸№«»→←↑↓✓";
 
 function formatDate(): string {
   const now = new Date();
@@ -334,7 +356,8 @@ export async function generateCalculatorPdfBuffer(
 }
 
 export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
-  const parsed = parseSmeta(smeta);
+  const normalizedDescription = description.normalize("NFC");
+  const parsed = parseSmeta(smeta.normalize("NFC"));
 
   return (
     <Document
@@ -343,10 +366,19 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
       subject="Ориентировочная смета"
     >
       <Page size="A4" style={styles.page}>
+        {/* Glyph probe: регистрирует весь алфавит в ToUnicode cmap */}
+        <Text style={styles.hiddenGlyphProbe} fixed>
+          {GLYPH_PROBE}
+        </Text>
+        <Text style={[styles.hiddenGlyphProbe, { fontWeight: "bold" }]} fixed>
+          {GLYPH_PROBE}
+        </Text>
         {/* Header */}
         <View style={styles.header}>
           <View style={styles.headerLeft}>
-            <Image src={`${FONT_BASE}/icon`} style={styles.logoImage} />
+            <Svg viewBox="0 0 1024 1024" style={styles.logoSvg}>
+              <Path d={V_PATH} fill={COLORS.text} />
+            </Svg>
             <View style={styles.logoBlock}>
               <Text style={styles.logoText}>vibecraft</Text>
               <Text style={styles.logoSubtext}>
@@ -367,7 +399,7 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
         {/* Описание задачи */}
         <Text style={styles.sectionLabel}>Описание задачи</Text>
         <View style={styles.taskBlock}>
-          <Text style={styles.taskText}>{description}</Text>
+          <Text style={styles.taskText}>{normalizedDescription}</Text>
         </View>
 
         {/* Расчет — структурированный или fallback */}
@@ -411,15 +443,15 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
         )}
 
         {/* CTA */}
-        <View style={styles.ctaBox}>
+        <View style={styles.ctaBox} wrap={false}>
           <Text style={styles.ctaText}>
             <Text style={styles.ctaBold}>Готовы обсудить?</Text> Напишите мне в
-            Telegram на @borisk85 — отвечу в течении 1-2 часа в рабочее время.
+            Telegram на @borisk85 — отвечу в течение 1-2 часа в рабочее время.
           </Text>
         </View>
 
         {/* Footer */}
-        <View style={styles.footer}>
+        <View style={styles.footer} wrap={false}>
           <Text style={styles.footerBrand}>
             <Text style={styles.footerBrandBold}>Vibecraft</Text> —
             AI-разработка и автоматизации · Казахстан
