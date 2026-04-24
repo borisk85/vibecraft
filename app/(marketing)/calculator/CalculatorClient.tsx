@@ -132,7 +132,7 @@ export function CalculatorClient() {
             </h1>
             <p className="mt-4 text-muted md:text-lg">
               Опишите задачу обычным текстом — наш AI-калькулятор выдаст вам
-              ориентировочную смету.
+              ориентировочную стоимость.
             </p>
           </div>
 
