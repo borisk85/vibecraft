@@ -40,10 +40,10 @@ const COLORS = {
 
 const styles = StyleSheet.create({
   page: {
-    paddingTop: 48,
-    paddingBottom: 80,
-    paddingLeft: 48,
-    paddingRight: 48,
+    paddingTop: 40,
+    paddingBottom: 60,
+    paddingLeft: 42,
+    paddingRight: 42,
     fontFamily: "Inter",
     backgroundColor: COLORS.bg,
     color: COLORS.text,
@@ -54,8 +54,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginBottom: 36,
-    paddingBottom: 18,
+    marginBottom: 22,
+    paddingBottom: 14,
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
     borderBottomStyle: "solid",
@@ -89,31 +89,31 @@ const styles = StyleSheet.create({
     color: COLORS.textMuted,
   },
   title: {
-    fontSize: 24,
+    fontSize: 22,
     fontWeight: "bold",
     color: COLORS.text,
-    marginBottom: 12,
+    marginBottom: 10,
     letterSpacing: -0.4,
   },
   subtitle: {
     fontSize: 10,
     color: COLORS.textMuted,
-    marginBottom: 32,
-    lineHeight: 1.6,
+    marginBottom: 22,
+    lineHeight: 1.5,
   },
   sectionLabel: {
     fontSize: 8,
     fontWeight: "bold",
     color: COLORS.accent,
-    marginBottom: 8,
+    marginBottom: 6,
     letterSpacing: 1.5,
     textTransform: "uppercase",
   },
   taskBlock: {
     backgroundColor: COLORS.cardBg,
-    padding: 16,
+    padding: 12,
     borderRadius: 8,
-    marginBottom: 28,
+    marginBottom: 18,
     borderWidth: 1,
     borderColor: COLORS.border,
     borderStyle: "solid",
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     borderLeftColor: COLORS.accent,
   },
   taskText: {
-    fontSize: 11,
+    fontSize: 10.5,
     color: COLORS.text,
     lineHeight: 1.5,
   },
@@ -131,12 +131,12 @@ const styles = StyleSheet.create({
     borderColor: COLORS.border,
     borderStyle: "solid",
     borderRadius: 8,
-    padding: 20,
-    marginBottom: 24,
+    padding: 14,
+    marginBottom: 16,
   },
   smetaRow: {
     flexDirection: "row",
-    marginBottom: 18,
+    marginBottom: 12,
   },
   smetaCol: {
     flexDirection: "column",
@@ -166,37 +166,38 @@ const styles = StyleSheet.create({
     color: COLORS.text,
   },
   includedSection: {
-    marginTop: 6,
-    paddingTop: 16,
+    marginTop: 2,
+    paddingTop: 12,
     borderTopWidth: 1,
     borderTopColor: COLORS.borderLight,
     borderTopStyle: "solid",
   },
   includedItem: {
     flexDirection: "row",
-    marginBottom: 6,
+    marginBottom: 4,
   },
   bullet: {
-    fontSize: 11,
+    fontSize: 10.5,
     color: COLORS.accent,
-    marginRight: 8,
+    marginRight: 6,
     width: 8,
   },
   includedText: {
-    fontSize: 11,
+    fontSize: 10.5,
     color: COLORS.text,
     flexGrow: 1,
     flexShrink: 1,
-    lineHeight: 1.5,
+    lineHeight: 1.45,
   },
   note: {
     fontSize: 9,
     color: COLORS.textMuted,
-    marginTop: 14,
-    paddingTop: 12,
+    marginTop: 10,
+    paddingTop: 8,
     borderTopWidth: 1,
     borderTopColor: COLORS.borderLight,
     borderTopStyle: "solid",
+    lineHeight: 1.4,
   },
   // Fallback для не-стандартных ответов AI (отказ, уточнение)
   fallbackBlock: {
@@ -216,14 +217,14 @@ const styles = StyleSheet.create({
   // CTA
   ctaBox: {
     backgroundColor: COLORS.accentBg,
-    padding: 16,
+    padding: 12,
     borderRadius: 8,
-    marginBottom: 16,
+    marginBottom: 12,
   },
   ctaText: {
-    fontSize: 11,
+    fontSize: 10.5,
     color: COLORS.text,
-    lineHeight: 1.5,
+    lineHeight: 1.45,
   },
   ctaBold: {
     fontWeight: "bold",
@@ -363,8 +364,7 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
         <Text style={styles.title}>Ваша смета по проекту</Text>
         <Text style={styles.subtitle}>
           Спасибо что воспользовались калькулятором на сайте Vibecraft. Ниже —
-          ориентировочный расчет стоимости вашей задачи. Точные цифры — после
-          короткого обсуждения задачи.
+          ориентировочный расчет стоимости вашей задачи.
         </Text>
 
         {/* Описание задачи */}
