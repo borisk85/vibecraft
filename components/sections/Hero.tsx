@@ -50,18 +50,18 @@ export function Hero() {
             initial="hidden"
             animate="visible"
             custom={0.25}
-            className="mt-10 flex flex-col items-center gap-3 sm:flex-row"
+            className="mt-10 flex flex-row items-center justify-center gap-3"
           >
             <a
               href="#contact"
-              className="inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]"
+              className="inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-4 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)] sm:px-6"
             >
               Обсудить проект
             </a>
 
             <a
               href="#cases"
-              className="inline-flex h-12 items-center justify-center rounded-xl border border-border bg-card/40 px-6 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent hover:bg-card"
+              className="inline-flex h-12 items-center justify-center rounded-xl border border-border bg-card/40 px-4 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent hover:bg-card sm:px-6"
             >
               Смотреть работы
             </a>
