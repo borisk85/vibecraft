@@ -3,6 +3,7 @@ import {
   Page,
   Text,
   View,
+  Image,
   StyleSheet,
   Font,
   renderToBuffer,
@@ -61,6 +62,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: COLORS.border,
     borderBottomStyle: "solid",
+  },
+  headerLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  logoImage: {
+    width: 32,
+    height: 32,
+    borderRadius: 6,
   },
   logoBlock: {
     flexDirection: "column",
@@ -224,19 +235,23 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
     >
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <View style={styles.logoBlock}>
-            <Text style={styles.logoText}>vibecraft</Text>
-            <Text style={styles.logoSubtext}>
-              AI-разработка и автоматизации · Казахстан
-            </Text>
+          <View style={styles.headerLeft}>
+            <Image src={`${FONT_BASE}/icon`} style={styles.logoImage} />
+            <View style={styles.logoBlock}>
+              <Text style={styles.logoText}>vibecraft</Text>
+              <Text style={styles.logoSubtext}>
+                AI-разработка и автоматизации · Казахстан
+              </Text>
+            </View>
           </View>
           <Text style={styles.dateText}>{formatDate()}</Text>
         </View>
 
-        <Text style={styles.title}>Ориентировочная смета</Text>
+        <Text style={styles.title}>Ваша смета по проекту</Text>
         <Text style={styles.subtitle}>
-          По описанию вашей задачи рассчитан примерный диапазон стоимости и
-          сроков. Точные цифры — после короткого обсуждения задачи.
+          Спасибо что воспользовались калькулятором на сайте Vibecraft. Ниже —
+          ориентировочный расчет стоимости вашей задачи. Точные цифры — после
+          короткого обсуждения задачи.
         </Text>
 
         <Text style={styles.sectionLabel}>Описание задачи</Text>
