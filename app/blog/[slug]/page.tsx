@@ -6,6 +6,8 @@ import { Container } from "@/components/shared/Container";
 import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
 import { posts } from "@/lib/blog-posts";
+import ShareButtons from "@/components/blog/ShareButtons";
+import BlogCtaBlock from "@/components/blog/BlogCtaBlock";
 
 marked.setOptions({ gfm: true, breaks: false });
 
@@ -151,6 +153,13 @@ export default async function PostPage({
             <article
               className="blog-content"
               dangerouslySetInnerHTML={{ __html: htmlWithIds }}
+            />
+
+            <BlogCtaBlock />
+
+            <ShareButtons
+              url={`https://vibecraft.kz/blog/${post.slug}`}
+              title={post.title}
             />
           </div>
         </Container>
