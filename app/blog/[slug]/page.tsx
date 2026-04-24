@@ -5,6 +5,7 @@ import { marked } from "marked";
 import { Container } from "@/components/shared/Container";
 import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
+import { JsonLd } from "@/components/shared/JsonLd";
 import { posts } from "@/lib/blog-posts";
 import ShareButtons from "@/components/blog/ShareButtons";
 import BlogCtaBlock from "@/components/blog/BlogCtaBlock";
@@ -79,8 +80,39 @@ export default async function PostPage({
     );
   }
 
+  const postUrl = `https://vibecraft.kz/blog/${post.slug}`;
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.excerpt,
+    url: postUrl,
+    mainEntityOfPage: postUrl,
+    image: `${postUrl}/opengraph-image`,
+    datePublished: post.date,
+    dateModified: post.date,
+    inLanguage: "ru",
+    about: "Разработка Telegram-ботов, MVP и автоматизаций в Казахстане",
+    articleSection: post.category,
+    author: {
+      "@type": "Person",
+      name: "Борис Комаров",
+      url: "https://vibecraft.kz",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Vibecraft",
+      url: "https://vibecraft.kz",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://vibecraft.kz/og-image.png",
+      },
+    },
+  };
+
   return (
     <>
+      <JsonLd data={articleSchema} />
       <Header />
       <main className="flex-1 py-24 md:py-32">
         <Container>

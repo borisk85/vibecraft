@@ -21,13 +21,19 @@ const organizationSchema = {
   description:
     "AI-разработка и автоматизации: боты, AI-агенты, AI-сайты, MVP веб- и мобильных приложений. Под ключ за 1-2 недели.",
   founder: { "@type": "Person", name: "Борис" },
+  address: {
+    "@type": "PostalAddress",
+    addressCountry: "KZ",
+    addressLocality: "Алматы",
+  },
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
     availableLanguage: ["Russian", "Kazakh"],
     url: siteConfig.contacts.telegram,
+    areaServed: ["KZ", "RU"],
   },
-  areaServed: ["Kazakhstan"],
+  areaServed: ["Kazakhstan", "Russia"],
   sameAs: [] as string[],
 };
 
