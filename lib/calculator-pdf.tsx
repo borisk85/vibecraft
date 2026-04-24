@@ -219,7 +219,9 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
         <View style={styles.header}>
           <View style={styles.logoBlock}>
             <Text style={styles.logoText}>vibecraft</Text>
-            <Text style={styles.logoSubtext}>AI-разработка · Алматы</Text>
+            <Text style={styles.logoSubtext}>
+              AI-разработка и автоматизации · Казахстан
+            </Text>
           </View>
           <Text style={styles.dateText}>{formatDate()}</Text>
         </View>
@@ -227,7 +229,7 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
         <Text style={styles.title}>Ориентировочная смета</Text>
         <Text style={styles.subtitle}>
           По описанию вашей задачи рассчитан примерный диапазон стоимости и
-          сроков. Точные цифры — после короткого созвона.
+          сроков. Точные цифры — после короткого обсуждения задачи.
         </Text>
 
         <Text style={styles.sectionLabel}>Описание задачи</Text>
@@ -264,7 +266,7 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
             </View>
           </View>
           <Text style={styles.footerValueMuted}>
-            Vibecraft — AI-разработка для малого и среднего бизнеса в Казахстане
+            Vibecraft — AI-разработка и автоматизации · Казахстан
           </Text>
         </View>
       </Page>

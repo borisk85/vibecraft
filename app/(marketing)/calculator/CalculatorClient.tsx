@@ -209,7 +209,7 @@ export function CalculatorClient() {
                 </Link>
               </div>
               <p className="text-center text-sm text-muted print:hidden">
-                Точная стоимость и срок — после короткого созвона.
+                Точная стоимость и срок — после короткого обсуждения задачи.
               </p>
             </div>
           ) : null}
