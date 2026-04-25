@@ -5,6 +5,8 @@ import { siteConfig } from "@/lib/metadata";
 import { MotionProvider } from "@/components/shared/MotionProvider";
 import { Analytics } from "@/components/shared/Analytics";
 import { ChatWidgetMount } from "@/components/shared/ChatWidgetMount";
+import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -84,6 +86,8 @@ export default function RootLayout({
         <MotionProvider>{children}</MotionProvider>
         <ChatWidgetMount />
         <Analytics />
+        <VercelAnalytics />
+        <SpeedInsights />
       </body>
     </html>
   );
