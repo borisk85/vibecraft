@@ -16,10 +16,10 @@ type CaseItem = {
 
 const cases: CaseItem[] = [
   {
-    tag: "SaaS · B2C",
-    title: "Платформа для создания AI-ассистентов в Telegram без кода",
+    tag: "SaaS · B2B",
+    title: "White-label платформа для AI-ассистентов в Telegram",
     description:
-      "Multi-tenant архитектура: пользователь без кода собирает своего личного AI-ассистента с подключением к Claude. Agent loop с tool use, биллинг через Lemon Squeezy, платные подписки.",
+      "Multi-tenant архитектура для агентств и инфлюенсеров: каждый клиент получает своего AI-ассистента в Telegram под брендом агентства. Под капотом — Claude с tool use, Google OAuth, биллинг через Lemon Squeezy. Стек собран один раз, ассистент клиента деплоится за день.",
     stack: [
       "Next.js",
       "TypeScript",
