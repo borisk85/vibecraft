@@ -131,7 +131,7 @@ export function Services() {
               <div className="mt-6">
                 <Link
                   href="/#contact"
-                  className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-xl bg-accent px-6 text-base font-medium text-white transition-colors duration-150 hover:bg-accent/90"
+                  className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-xl border border-border bg-transparent px-6 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent hover:text-accent-text"
                 >
                   Обсудить поддержку
                 </Link>
