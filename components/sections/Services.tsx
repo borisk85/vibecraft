@@ -117,7 +117,55 @@ export function Services() {
             Посчитать стоимость
           </Link>
         </div>
+
+        <div className="mt-6 rounded-2xl border border-border bg-card/40 p-8 md:p-10">
+          <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between md:gap-8">
+            <div className="md:max-w-md">
+              <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+                Уже есть продукт — нужна помощь?
+              </h3>
+              <p className="mt-2 text-muted">
+                Если бот, MVP или автоматизация собраны самостоятельно через
+                AI или другим разработчиком — помогу с правками, фиксами и
+                мелкими доработками.
+              </p>
+            </div>
+
+            <div className="flex flex-col gap-2 md:min-w-[280px]">
+              <SupportRow label="Разово, по часу" price="25 000 ₸/час" />
+              <SupportRow label="Пакет — 5 часов в месяц" price="90 000 ₸" />
+              <SupportRow
+                label="Пакет — 15 часов в месяц"
+                price="240 000 ₸"
+              />
+            </div>
+          </div>
+
+          <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <Link
+              href="/#contact"
+              className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-surface px-6 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent"
+            >
+              Обсудить поддержку
+            </Link>
+            <span className="text-sm text-subtle">
+              Подписка без обязательств — можно закрыть в любой месяц.
+              Крупные новые фичи — отдельный проект.
+            </span>
+          </div>
+        </div>
       </Container>
     </MotionSection>
+  );
+}
+
+function SupportRow({ label, price }: { label: string; price: string }) {
+  return (
+    <div className="flex items-center justify-between gap-4 border-b border-border/60 py-2 last:border-0">
+      <span className="text-sm text-muted">{label}</span>
+      <span className="font-mono text-sm font-medium text-foreground">
+        {price}
+      </span>
+    </div>
   );
 }
