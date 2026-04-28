@@ -12,6 +12,11 @@ import {
 } from "@react-pdf/renderer";
 import type { ReactElement } from "react";
 import { V_PATH } from "./logo-path";
+import {
+  parseSmeta,
+  isSupportService,
+  SUPPORT_PLANS,
+} from "./parse-smeta";
 
 // Шрифт Roboto (googlefonts/roboto) — полная кириллица, стабильно работает
 // в @react-pdf: корректные glyph-metrics и ToUnicode cmap, текст копируется
@@ -258,6 +263,37 @@ const styles = StyleSheet.create({
     color: COLORS.accent,
     fontWeight: "bold",
   },
+  // Блок «Форматы поддержки» — таблица 3 пакетов вместо цены-простыни
+  supportPlans: {
+    marginTop: 2,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.borderLight,
+    borderTopStyle: "solid",
+  },
+  supportRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 5,
+    borderBottomWidth: 1,
+    borderBottomColor: COLORS.borderLight,
+    borderBottomStyle: "solid",
+  },
+  supportRowLast: {
+    borderBottomWidth: 0,
+  },
+  supportPlanName: {
+    fontSize: 10,
+    color: COLORS.text,
+    flexGrow: 1,
+    flexShrink: 1,
+  },
+  supportPlanPrice: {
+    fontSize: 10,
+    fontWeight: "bold",
+    color: COLORS.text,
+  },
   // Невидимый прогон всего алфавита — заставляет @react-pdf subsetter
   // зарегистрировать ToUnicode-mapping для всех букв. Без этого некоторые
   // буквы (p, y и др.) могут отсутствовать в ToUnicode cmap, и
@@ -298,51 +334,6 @@ function formatDate(): string {
   return `${day} ${months[now.getMonth()]} ${now.getFullYear()}`;
 }
 
-interface ParsedSmeta {
-  service: string;
-  price: string;
-  duration: string;
-  included: string[];
-  note: string;
-  parsed: boolean;
-}
-
-function parseSmeta(text: string): ParsedSmeta {
-  const lines = text
-    .split("\n")
-    .map((l) => l.trim())
-    .filter(Boolean);
-  let service = "";
-  let price = "";
-  let duration = "";
-  let note = "";
-  const included: string[] = [];
-  let mode: "none" | "included" = "none";
-
-  for (const line of lines) {
-    if (line.startsWith("УСЛУГА:")) {
-      service = line.slice("УСЛУГА:".length).trim();
-      mode = "none";
-    } else if (line.startsWith("ЦЕНА:")) {
-      price = line.slice("ЦЕНА:".length).trim();
-      mode = "none";
-    } else if (line.startsWith("СРОК:")) {
-      duration = line.slice("СРОК:".length).trim();
-      mode = "none";
-    } else if (line.startsWith("ЧТО ВХОДИТ:")) {
-      mode = "included";
-    } else if (line.startsWith("ПРИМЕЧАНИЕ:")) {
-      note = line.slice("ПРИМЕЧАНИЕ:".length).trim();
-      mode = "none";
-    } else if (mode === "included" && (line.startsWith("—") || line.startsWith("-"))) {
-      included.push(line.replace(/^[—-]\s*/, ""));
-    }
-  }
-
-  const parsed = Boolean(service && price && duration && included.length > 0);
-  return { service, price, duration, included, note, parsed };
-}
-
 export interface CalculatorPdfProps {
   description: string;
   smeta: string;
@@ -358,6 +349,7 @@ export async function generateCalculatorPdfBuffer(
 export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
   const normalizedDescription = description.normalize("NFC");
   const parsed = parseSmeta(smeta.normalize("NFC"));
+  const isSupport = isSupportService(parsed.service);
 
   return (
     <Document
@@ -413,16 +405,45 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
               </View>
             </View>
 
-            <View style={styles.smetaRow}>
-              <View style={styles.smetaCol}>
-                <Text style={styles.miniLabel}>Цена</Text>
-                <Text style={styles.priceValue}>{parsed.price}</Text>
+            {isSupport ? (
+              <View style={styles.smetaRow}>
+                <View style={styles.smetaCol}>
+                  <Text style={styles.miniLabel}>Срок</Text>
+                  <Text style={styles.durationValue}>{parsed.duration}</Text>
+                </View>
               </View>
-              <View style={styles.smetaCol}>
-                <Text style={styles.miniLabel}>Срок</Text>
-                <Text style={styles.durationValue}>{parsed.duration}</Text>
+            ) : (
+              <View style={styles.smetaRow}>
+                <View style={styles.smetaCol}>
+                  <Text style={styles.miniLabel}>Цена</Text>
+                  <Text style={styles.priceValue}>{parsed.price}</Text>
+                </View>
+                <View style={styles.smetaCol}>
+                  <Text style={styles.miniLabel}>Срок</Text>
+                  <Text style={styles.durationValue}>{parsed.duration}</Text>
+                </View>
               </View>
-            </View>
+            )}
+
+            {isSupport ? (
+              <View style={styles.supportPlans}>
+                <Text style={styles.miniLabel}>Форматы поддержки</Text>
+                {SUPPORT_PLANS.map((plan, i) => (
+                  <View
+                    key={plan.name}
+                    style={[
+                      styles.supportRow,
+                      i === SUPPORT_PLANS.length - 1
+                        ? styles.supportRowLast
+                        : {},
+                    ]}
+                  >
+                    <Text style={styles.supportPlanName}>{plan.name}</Text>
+                    <Text style={styles.supportPlanPrice}>{plan.price}</Text>
+                  </View>
+                ))}
+              </View>
+            ) : null}
 
             <View style={styles.includedSection}>
               <Text style={styles.miniLabel}>Что входит</Text>

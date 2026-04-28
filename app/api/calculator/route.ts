@@ -7,6 +7,11 @@ import { waitUntil } from "@vercel/functions";
 import { CALCULATOR_SYSTEM_PROMPT } from "@/lib/calculator-system-prompt";
 import { generateCalculatorPdfBuffer } from "@/lib/calculator-pdf";
 import { stripUpsells } from "@/lib/strip-upsells";
+import {
+  parseSmeta,
+  isSupportService,
+  SUPPORT_PLANS,
+} from "@/lib/parse-smeta";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -78,6 +83,37 @@ async function sendEmailToClient(
     return;
   }
 
+  // Для услуги «Поддержка» — рендерим вместо одной длинной строки ЦЕНА
+  // отдельную таблицу из 3 пакетов, чтобы клиент видел форматы аккуратно.
+  const parsed = parseSmeta(clientSmeta);
+  const support = isSupportService(parsed.service);
+
+  let smetaHtml: string;
+  if (support) {
+    // Из smeta-текста режем строку ЦЕНА — она уйдет в таблицу пакетов ниже.
+    const smetaWithoutPrice = clientSmeta
+      .split("\n")
+      .filter((l) => !l.trim().startsWith("ЦЕНА:"))
+      .join("\n");
+
+    const plansRows = SUPPORT_PLANS.map(
+      (p) => `
+        <tr>
+          <td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;font-size:13px;color:#0a0a0a;">${escapeHtml(p.name)}</td>
+          <td style="padding:8px 12px;border-bottom:1px solid #f0f0f0;font-size:13px;font-weight:700;color:#0a0a0a;text-align:right;white-space:nowrap;">${escapeHtml(p.price)}</td>
+        </tr>`,
+    ).join("");
+
+    smetaHtml = `
+    <pre style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:13px;line-height:1.6;white-space:pre-wrap;margin:0 0 16px 0;color:#0a0a0a;">${escapeHtml(smetaWithoutPrice)}</pre>
+    <div style="font-size:9px;font-weight:700;color:#8B5CF6;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">Форматы поддержки</div>
+    <table style="width:100%;border-collapse:collapse;border:1px solid #e5e5e5;border-radius:6px;margin-bottom:24px;">
+      ${plansRows}
+    </table>`;
+  } else {
+    smetaHtml = `<pre style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:13px;line-height:1.6;white-space:pre-wrap;margin:0 0 24px 0;color:#0a0a0a;">${escapeHtml(clientSmeta)}</pre>`;
+  }
+
   const html = `<!DOCTYPE html>
 <html lang="ru"><head><meta charset="utf-8"></head>
 <body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#0a0a0a;">
@@ -97,7 +133,7 @@ async function sendEmailToClient(
     <div style="background:#fafafa;border-left:3px solid #8B5CF6;padding:12px 14px;margin-bottom:24px;font-size:13px;line-height:1.5;">${escapeHtml(description)}</div>
 
     <div style="font-size:9px;font-weight:700;color:#8B5CF6;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Расчет</div>
-    <pre style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:13px;line-height:1.6;white-space:pre-wrap;margin:0 0 24px 0;color:#0a0a0a;">${escapeHtml(clientSmeta)}</pre>
+    ${smetaHtml}
 
     <div style="background:#f5f0ff;padding:14px;border-radius:6px;font-size:13px;line-height:1.5;margin-bottom:24px;">
       <strong>Готовы обсудить?</strong> Напишите мне в Telegram на <a href="https://t.me/borisk85" style="color:#8B5CF6;text-decoration:none;font-weight:700;">@borisk85</a> — отвечу в течение 1-2 часа в рабочее время.

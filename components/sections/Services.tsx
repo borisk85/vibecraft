@@ -131,11 +131,17 @@ export function Services() {
               </p>
             </div>
 
-            <div className="flex flex-col gap-2 md:min-w-[280px]">
-              <SupportRow label="Разово, по часу" price="25 000 ₸/час" />
-              <SupportRow label="Пакет — 5 часов в месяц" price="90 000 ₸" />
+            <div className="flex flex-col gap-2 md:min-w-[300px]">
               <SupportRow
-                label="Пакет — 15 часов в месяц"
+                label="«По часу» — разовое обращение"
+                price="25 000 ₸/час"
+              />
+              <SupportRow
+                label="Пакет «Базовый» — 5 часов/мес"
+                price="90 000 ₸"
+              />
+              <SupportRow
+                label="Пакет «Расширенный» — 15 часов/мес"
                 price="240 000 ₸"
               />
             </div>
@@ -149,8 +155,8 @@ export function Services() {
               Обсудить поддержку
             </Link>
             <span className="text-sm text-subtle">
-              Подписка без обязательств — можно закрыть в любой месяц.
-              Крупные новые фичи — отдельный проект.
+              Пакеты без обязательств — закрыть можно в любой момент или
+              заморозить на будущее. Крупные новые фичи — отдельный проект.
             </span>
           </div>
         </div>
