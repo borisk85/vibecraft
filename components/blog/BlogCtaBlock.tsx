@@ -11,7 +11,7 @@ export default function BlogCtaBlock() {
           Нужна разработка под вашу задачу?
         </h3>
         <p className="max-w-2xl text-pretty text-sm text-muted md:text-base">
-          Опишите задачу — отвечу за 1-2 часа. Бесплатный бриф за 30 минут: план, сроки и финальная стоимость без долгих согласований.
+          Опишите задачу — отвечу за 1-2 часа. Предложу план, сроки и финальную стоимость без долгих согласований.
         </p>
         <div className="mt-2 flex flex-wrap items-center gap-3">
           <Link

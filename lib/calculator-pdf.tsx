@@ -467,7 +467,7 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
         <View style={styles.ctaBox} wrap={false}>
           <Text style={styles.ctaText}>
             <Text style={styles.ctaBold}>Готовы обсудить?</Text> Напишите мне в
-            Telegram на @borisk85 — отвечу в течение 1-2 часов в рабочее время.
+            Telegram @borisk85 — отвечу в течение 1-2 часов в рабочее время.
           </Text>
         </View>
 
