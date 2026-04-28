@@ -144,8 +144,7 @@ export function Services() {
 
             <div className="grid gap-3 sm:grid-cols-3">
               <SupportTier
-                name="Разово"
-                detail="по часу"
+                name="По часовая поддержка"
                 price="25 000"
                 unit="₸/час"
               />
@@ -160,7 +159,6 @@ export function Services() {
                 detail="15 часов в месяц"
                 price="240 000"
                 unit="₸"
-                highlight
               />
             </div>
           </div>
@@ -175,27 +173,21 @@ function SupportTier({
   detail,
   price,
   unit,
-  highlight = false,
 }: {
   name: string;
-  detail: string;
+  detail?: string;
   price: string;
   unit: string;
-  highlight?: boolean;
 }) {
   return (
-    <div
-      className={`flex flex-col gap-1 rounded-xl border p-4 transition-colors ${
-        highlight
-          ? "border-accent/40 bg-accent/5"
-          : "border-border bg-surface/40"
-      }`}
-    >
-      <span className="text-xs font-medium uppercase tracking-wider text-foreground">
-        {name}
-      </span>
-      <span className="text-xs text-muted">{detail}</span>
-      <span className="mt-3 font-mono text-base font-semibold text-foreground">
+    <div className="flex flex-col justify-between gap-3 rounded-xl border border-border bg-surface/40 p-4">
+      <div className="flex flex-col gap-1">
+        <span className="text-sm font-medium text-foreground">{name}</span>
+        {detail ? (
+          <span className="text-xs text-muted">{detail}</span>
+        ) : null}
+      </div>
+      <span className="font-mono text-base font-semibold text-foreground">
         {price}{" "}
         <span className="text-xs font-normal text-muted">{unit}</span>
       </span>
