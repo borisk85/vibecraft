@@ -1,0 +1,36 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/inject_rules.py'",
+            "statusMessage": "Подмешиваю жесткие правила vibecraft"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/validate_text.py'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_text_changes.py'"
+          }
+        ]
+      }
+    ]
+  }
+}
