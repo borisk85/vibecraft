@@ -26,7 +26,8 @@ export function About() {
               Обо мне
             </span>
             <h2 className="text-balance text-3xl font-semibold tracking-tight md:text-4xl">
-              Привет. Я AI-фаундер из Алматы
+              Привет. Я <span className="text-gradient">AI-фаундер</span> из
+              Алматы
             </h2>
             <div className="flex flex-col gap-4 text-muted leading-relaxed md:text-lg">
               <p>
