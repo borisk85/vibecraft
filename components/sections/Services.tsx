@@ -104,7 +104,7 @@ export function Services() {
 
         <div className="mt-12 flex flex-col items-center gap-4 rounded-2xl border border-accent/30 bg-card/40 p-8 text-center md:p-10">
           <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-            Не знаете, в какую услугу попадает ваша задача?
+            Не знаете, под какую услугу попадает ваша задача?
           </h3>
           <p className="max-w-xl text-muted">
             Опишите ее обычным текстом — AI-калькулятор посчитает стоимость и
