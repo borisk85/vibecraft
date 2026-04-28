@@ -122,26 +122,19 @@ export function Services() {
           <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between md:gap-8">
             <div className="md:max-w-md">
               <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-                Уже есть продукт — нужна помощь?
+                Есть готовый продукт или еще в разработке?
               </h3>
               <p className="mt-2 text-muted">
-                Если бот, MVP или автоматизация собраны самостоятельно через
-                AI или другим разработчиком — помогу с правками, фиксами и
-                мелкими доработками.
+                Помогу с правками, доработками, внедрением новых функций, а
+                также проконсультирую по всем возможным вопросам.
               </p>
             </div>
 
             <div className="flex flex-col gap-2 md:min-w-[300px]">
+              <SupportRow label="Разово, по часу" price="25 000 ₸/час" />
+              <SupportRow label="Пакет — 5 часов в месяц" price="90 000 ₸" />
               <SupportRow
-                label="«По часу» — разовое обращение"
-                price="25 000 ₸/час"
-              />
-              <SupportRow
-                label="Пакет «Базовый» — 5 часов/мес"
-                price="90 000 ₸"
-              />
-              <SupportRow
-                label="Пакет «Расширенный» — 15 часов/мес"
+                label="Пакет — 15 часов в месяц"
                 price="240 000 ₸"
               />
             </div>
@@ -150,13 +143,13 @@ export function Services() {
           <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
             <Link
               href="/#contact"
-              className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-surface px-6 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent"
+              className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-xl bg-accent px-6 text-base font-medium text-white transition-colors duration-150 hover:bg-accent/90"
             >
               Обсудить поддержку
             </Link>
             <span className="text-sm text-subtle">
-              Пакеты без обязательств — закрыть можно в любой момент или
-              заморозить на будущее. Крупные новые фичи — отдельный проект.
+              Подписка без обязательств — можно закрыть или заморозить в любой
+              момент. Разработка продукта с нуля не входит в услугу.
             </span>
           </div>
         </div>

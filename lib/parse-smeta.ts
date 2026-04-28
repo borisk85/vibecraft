@@ -56,7 +56,7 @@ export function isSupportService(service: string): boolean {
 }
 
 export const SUPPORT_PLANS: { name: string; price: string }[] = [
-  { name: "«По часу» — разовое обращение", price: "25 000 ₸/час" },
-  { name: "Пакет «Базовый» — 5 часов/мес", price: "90 000 ₸" },
-  { name: "Пакет «Расширенный» — 15 часов/мес", price: "240 000 ₸" },
+  { name: "Разово, по часу", price: "25 000 ₸/час" },
+  { name: "Пакет — 5 часов в месяц", price: "90 000 ₸" },
+  { name: "Пакет — 15 часов в месяц", price: "240 000 ₸" },
 ];
