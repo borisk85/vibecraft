@@ -127,7 +127,7 @@ async function sendEmailToClient(
     </div>
 
     <h1 style="font-size:22px;font-weight:700;margin:0 0 8px 0;letter-spacing:-0.4px;">Ваша смета по проекту</h1>
-    <p style="font-size:13px;color:#5a5a5a;margin:0 0 24px 0;">Спасибо что воспользовались калькулятором на сайте Vibecraft. Ниже — ориентировочный расчет стоимости вашей задачи.</p>
+    <p style="font-size:13px;color:#5a5a5a;margin:0 0 24px 0;">Спасибо, что воспользовались калькулятором на сайте Vibecraft. Ниже — ориентировочный расчет стоимости вашей задачи.</p>
 
     <div style="font-size:9px;font-weight:700;color:#8B5CF6;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Описание задачи</div>
     <div style="background:#fafafa;border-left:3px solid #8B5CF6;padding:12px 14px;margin-bottom:24px;font-size:13px;line-height:1.5;">${escapeHtml(description)}</div>
@@ -136,7 +136,7 @@ async function sendEmailToClient(
     ${smetaHtml}
 
     <div style="background:#f5f0ff;padding:14px;border-radius:6px;font-size:13px;line-height:1.5;margin-bottom:24px;">
-      <strong>Готовы обсудить?</strong> Напишите мне в Telegram на <a href="https://t.me/borisk85" style="color:#8B5CF6;text-decoration:none;font-weight:700;">@borisk85</a> — отвечу в течение 1-2 часа в рабочее время.
+      <strong>Готовы обсудить?</strong> Напишите мне в Telegram на <a href="https://t.me/borisk85" style="color:#8B5CF6;text-decoration:none;font-weight:700;">@borisk85</a> — отвечу в течение 1-2 часов в рабочее время.
     </div>
 
     <div style="border-top:1px solid #e5e5e5;padding-top:16px;font-size:11px;color:#5a5a5a;">

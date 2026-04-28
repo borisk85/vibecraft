@@ -33,10 +33,10 @@ export default function BlogIndexPage() {
               Блог
             </span>
             <h1 className="text-balance text-4xl font-semibold tracking-tight md:text-5xl">
-              Статьи о AI-разработке и рынке КЗ
+              Статьи об AI-разработке и рынке КЗ
             </h1>
             <p className="max-w-2xl text-pretty text-base text-muted md:text-lg">
-              Разборы реальных проектов, цены, процесс работы с AI-стеком
+              Разборы реальных проектов, цены, процесс разработки с Claude
               и тренды на казахстанском рынке.
             </p>
           </div>

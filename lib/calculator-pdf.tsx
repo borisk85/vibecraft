@@ -384,7 +384,7 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
         {/* Title + Subtitle */}
         <Text style={styles.title}>Ваша смета по проекту</Text>
         <Text style={styles.subtitle}>
-          Спасибо что воспользовались калькулятором на сайте Vibecraft. Ниже —
+          Спасибо, что воспользовались калькулятором на сайте Vibecraft. Ниже —
           ориентировочный расчет стоимости вашей задачи.
         </Text>
 
@@ -467,7 +467,7 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
         <View style={styles.ctaBox} wrap={false}>
           <Text style={styles.ctaText}>
             <Text style={styles.ctaBold}>Готовы обсудить?</Text> Напишите мне в
-            Telegram на @borisk85 — отвечу в течение 1-2 часа в рабочее время.
+            Telegram на @borisk85 — отвечу в течение 1-2 часов в рабочее время.
           </Text>
         </View>
 
