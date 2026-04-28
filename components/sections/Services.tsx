@@ -142,24 +142,15 @@ export function Services() {
               </div>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-3">
-              <SupportTier
-                name="По часу"
-                detail="разовая поддержка"
-                price="25 000"
-                unit="₸/час"
+            <div className="flex flex-col">
+              <SupportRow label="Почасовая поддержка" price="25 000 ₸/час" />
+              <SupportRow
+                label="«Базовый» — 5 часов в месяц"
+                price="90 000 ₸/мес"
               />
-              <SupportTier
-                name="Базовый"
-                detail="5 часов в месяц"
-                price="90 000"
-                unit="₸/мес"
-              />
-              <SupportTier
-                name="Расширенный"
-                detail="15 часов в месяц"
-                price="240 000"
-                unit="₸/мес"
+              <SupportRow
+                label="«Расширенный» — 15 часов в месяц"
+                price="240 000 ₸/мес"
               />
             </div>
           </div>
@@ -169,33 +160,13 @@ export function Services() {
   );
 }
 
-function SupportTier({
-  name,
-  detail,
-  price,
-  unit,
-}: {
-  name: string;
-  detail?: string;
-  price: string;
-  unit: string;
-}) {
+function SupportRow({ label, price }: { label: string; price: string }) {
   return (
-    <div className="flex flex-col justify-between gap-5 rounded-xl border border-border bg-surface/40 p-5">
-      <div className="flex flex-col gap-1">
-        <span className="text-base font-semibold tracking-tight text-foreground">
-          {name}
-        </span>
-        {detail ? (
-          <span className="text-xs text-muted">{detail}</span>
-        ) : null}
-      </div>
-      <div className="flex items-baseline gap-1.5 border-t border-border/60 pt-4">
-        <span className="font-mono text-2xl font-bold tracking-tight text-foreground">
-          {price}
-        </span>
-        <span className="text-xs text-muted">{unit}</span>
-      </div>
+    <div className="flex items-center justify-between gap-4 border-b border-border/60 py-3 last:border-0">
+      <span className="text-sm text-muted">{label}</span>
+      <span className="whitespace-nowrap font-mono text-sm font-medium text-foreground">
+        {price}
+      </span>
     </div>
   );
 }
