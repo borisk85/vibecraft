@@ -118,55 +118,7 @@ export function Services() {
           </Link>
         </div>
 
-        <div className="mt-6 rounded-2xl border border-border bg-card/40 p-8 md:p-10">
-          <div className="grid gap-8 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] md:items-center md:gap-12">
-            <div>
-              <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-                Есть готовый продукт или еще в разработке?
-              </h3>
-              <p className="mt-2 text-muted">
-                Помогу с правками, доработками, внедрением новых функций, а
-                также проконсультирую по всем возможным вопросам.
-              </p>
-              <div className="mt-6">
-                <Link
-                  href="/#contact"
-                  className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-xl border border-border bg-transparent px-6 text-base font-medium text-foreground transition-colors duration-150 hover:border-accent hover:text-accent-text"
-                >
-                  Обсудить поддержку
-                </Link>
-                <p className="mt-3 max-w-md text-xs leading-relaxed text-subtle">
-                  Подписка без обязательств — можно закрыть или заморозить в
-                  любой момент. Разработка продукта с нуля не входит в услугу.
-                </p>
-              </div>
-            </div>
-
-            <div className="flex flex-col">
-              <SupportRow label="Почасовая поддержка" price="25 000 ₸/час" />
-              <SupportRow
-                label="«Базовый» — 5 часов в месяц"
-                price="90 000 ₸/мес"
-              />
-              <SupportRow
-                label="«Расширенный» — 15 часов в месяц"
-                price="240 000 ₸/мес"
-              />
-            </div>
-          </div>
-        </div>
       </Container>
     </MotionSection>
-  );
-}
-
-function SupportRow({ label, price }: { label: string; price: string }) {
-  return (
-    <div className="flex items-center justify-between gap-4 border-b border-border/60 py-3 last:border-0">
-      <span className="text-sm text-muted">{label}</span>
-      <span className="whitespace-nowrap font-mono text-sm font-medium text-foreground">
-        {price}
-      </span>
-    </div>
   );
 }
