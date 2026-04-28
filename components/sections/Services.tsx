@@ -144,7 +144,8 @@ export function Services() {
 
             <div className="grid gap-3 sm:grid-cols-3">
               <SupportTier
-                name="По часовая поддержка"
+                name="По часу"
+                detail="разовая поддержка"
                 price="25 000"
                 unit="₸/час"
               />
@@ -152,13 +153,13 @@ export function Services() {
                 name="Базовый"
                 detail="5 часов в месяц"
                 price="90 000"
-                unit="₸"
+                unit="₸/мес"
               />
               <SupportTier
                 name="Расширенный"
                 detail="15 часов в месяц"
                 price="240 000"
-                unit="₸"
+                unit="₸/мес"
               />
             </div>
           </div>
@@ -180,17 +181,21 @@ function SupportTier({
   unit: string;
 }) {
   return (
-    <div className="flex flex-col justify-between gap-3 rounded-xl border border-border bg-surface/40 p-4">
+    <div className="flex flex-col justify-between gap-5 rounded-xl border border-border bg-surface/40 p-5">
       <div className="flex flex-col gap-1">
-        <span className="text-sm font-medium text-foreground">{name}</span>
+        <span className="text-base font-semibold tracking-tight text-foreground">
+          {name}
+        </span>
         {detail ? (
           <span className="text-xs text-muted">{detail}</span>
         ) : null}
       </div>
-      <span className="font-mono text-base font-semibold text-foreground">
-        {price}{" "}
-        <span className="text-xs font-normal text-muted">{unit}</span>
-      </span>
+      <div className="flex items-baseline gap-1.5 border-t border-border/60 pt-4">
+        <span className="font-mono text-2xl font-bold tracking-tight text-foreground">
+          {price}
+        </span>
+        <span className="text-xs text-muted">{unit}</span>
+      </div>
     </div>
   );
 }
