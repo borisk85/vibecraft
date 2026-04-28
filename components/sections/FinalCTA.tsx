@@ -27,10 +27,21 @@ const budgets = [
   "от 3 000 000 ₸",
 ];
 
+const supportBudgets = [
+  "Разово — 25 000 ₸/час",
+  "Базовый — 5 ч/мес, 90 000 ₸",
+  "Расширенный — 15 ч/мес, 240 000 ₸",
+];
+
+const supportType = "Поддержка существующего проекта";
+
 export function FinalCTA() {
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
   );
+  const [type, setType] = useState("");
+  const isSupport = type === supportType;
+  const budgetOptions = isSupport ? supportBudgets : budgets;
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -95,8 +106,19 @@ export function FinalCTA() {
               />
             </div>
 
-            <SelectField label="Тип проекта" name="type" options={projectTypes} />
-            <SelectField label="Бюджет" name="budget" options={budgets} />
+            <SelectField
+              label="Тип проекта"
+              name="type"
+              options={projectTypes}
+              value={type}
+              onChange={setType}
+            />
+            <SelectField
+              key={isSupport ? "support" : "default"}
+              label={isSupport ? "Формат поддержки" : "Бюджет"}
+              name="budget"
+              options={budgetOptions}
+            />
 
             <div className="flex flex-col gap-2">
               <label htmlFor="field-message" className="text-sm text-muted">
@@ -195,14 +217,23 @@ function SelectField({
   label,
   name,
   options,
+  value: controlledValue,
+  onChange,
 }: {
   label: string;
   name: string;
   options: string[];
+  value?: string;
+  onChange?: (value: string) => void;
 }) {
   const id = useId();
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
+  const [innerValue, setInnerValue] = useState("");
+  const value = controlledValue !== undefined ? controlledValue : innerValue;
+  const setValue = (v: string) => {
+    if (onChange) onChange(v);
+    if (controlledValue === undefined) setInnerValue(v);
+  };
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {

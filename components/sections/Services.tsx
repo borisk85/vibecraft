@@ -119,8 +119,8 @@ export function Services() {
         </div>
 
         <div className="mt-6 rounded-2xl border border-border bg-card/40 p-8 md:p-10">
-          <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between md:gap-8">
-            <div className="md:max-w-md">
+          <div className="grid gap-8 md:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] md:items-center md:gap-12">
+            <div>
               <h3 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
                 Есть готовый продукт или еще в разработке?
               </h3>
@@ -128,29 +128,41 @@ export function Services() {
                 Помогу с правками, доработками, внедрением новых функций, а
                 также проконсультирую по всем возможным вопросам.
               </p>
+              <div className="mt-6">
+                <Link
+                  href="/#contact"
+                  className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-xl bg-accent px-6 text-base font-medium text-white transition-colors duration-150 hover:bg-accent/90"
+                >
+                  Обсудить поддержку
+                </Link>
+                <p className="mt-3 max-w-md text-xs leading-relaxed text-subtle">
+                  Подписка без обязательств — можно закрыть или заморозить в
+                  любой момент. Разработка продукта с нуля не входит в услугу.
+                </p>
+              </div>
             </div>
 
-            <div className="flex flex-col gap-2 md:min-w-[300px]">
-              <SupportRow label="Разово, по часу" price="25 000 ₸/час" />
-              <SupportRow label="Пакет — 5 часов в месяц" price="90 000 ₸" />
-              <SupportRow
-                label="Пакет — 15 часов в месяц"
-                price="240 000 ₸"
+            <div className="grid gap-3 sm:grid-cols-3">
+              <SupportTier
+                name="Разово"
+                detail="по часу"
+                price="25 000"
+                unit="₸/час"
+              />
+              <SupportTier
+                name="Базовый"
+                detail="5 часов в месяц"
+                price="90 000"
+                unit="₸"
+              />
+              <SupportTier
+                name="Расширенный"
+                detail="15 часов в месяц"
+                price="240 000"
+                unit="₸"
+                highlight
               />
             </div>
-          </div>
-
-          <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-            <Link
-              href="/#contact"
-              className="inline-flex h-11 items-center justify-center whitespace-nowrap rounded-xl bg-accent px-6 text-base font-medium text-white transition-colors duration-150 hover:bg-accent/90"
-            >
-              Обсудить поддержку
-            </Link>
-            <span className="text-sm text-subtle">
-              Подписка без обязательств — можно закрыть или заморозить в любой
-              момент. Разработка продукта с нуля не входит в услугу.
-            </span>
           </div>
         </div>
       </Container>
@@ -158,12 +170,34 @@ export function Services() {
   );
 }
 
-function SupportRow({ label, price }: { label: string; price: string }) {
+function SupportTier({
+  name,
+  detail,
+  price,
+  unit,
+  highlight = false,
+}: {
+  name: string;
+  detail: string;
+  price: string;
+  unit: string;
+  highlight?: boolean;
+}) {
   return (
-    <div className="flex items-center justify-between gap-4 border-b border-border/60 py-2 last:border-0">
-      <span className="text-sm text-muted">{label}</span>
-      <span className="font-mono text-sm font-medium text-foreground">
-        {price}
+    <div
+      className={`flex flex-col gap-1 rounded-xl border p-4 transition-colors ${
+        highlight
+          ? "border-accent/40 bg-accent/5"
+          : "border-border bg-surface/40"
+      }`}
+    >
+      <span className="text-xs font-medium uppercase tracking-wider text-foreground">
+        {name}
+      </span>
+      <span className="text-xs text-muted">{detail}</span>
+      <span className="mt-3 font-mono text-base font-semibold text-foreground">
+        {price}{" "}
+        <span className="text-xs font-normal text-muted">{unit}</span>
       </span>
     </div>
   );
