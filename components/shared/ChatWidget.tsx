@@ -1,8 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { X, Send, MessageCircle, ThumbsUp, ThumbsDown } from "lucide-react";
+import { X, Send, MessageCircle, ThumbsUp, ThumbsDown, ArrowLeft } from "lucide-react";
 import { siteConfig } from "@/lib/metadata";
+
+type View = "chat" | "contact" | "sent";
 
 interface Message {
   role: "user" | "assistant";
@@ -93,6 +95,7 @@ function loadHistory(): Message[] {
 
 export default function ChatWidget() {
   const [open, setOpen] = useState(false);
+  const [view, setView] = useState<View>("chat");
   const [proactive, setProactive] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     { role: "assistant", content: GREETING },
@@ -103,11 +106,20 @@ export default function ChatWidget() {
   const [ratings, setRatings] = useState<Record<number, "up" | "down">>({});
   const [sessionDislikes, setSessionDislikes] = useState(0);
   const MAX_SESSION_DISLIKES = 3;
+
+  // Contact form state
+  const [cfName, setCfName] = useState("");
+  const [cfEmail, setCfEmail] = useState("");
+  const [cfMessage, setCfMessage] = useState("");
+  const [cfSending, setCfSending] = useState(false);
+
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const initialized = useRef(false);
   const proactiveShown = useRef(false);
   const ratedIdxRef = useRef<Set<number>>(new Set());
+
+  const hasConversation = messages.filter((m) => !m.isFeedback).length > 1;
 
   useEffect(() => {
     if (!initialized.current) {
@@ -278,25 +290,159 @@ export default function ChatWidget() {
     inputRef.current?.focus();
   }
 
+  function openContactForm() {
+    const lastUserMsg = [...messages]
+      .reverse()
+      .find((m) => m.role === "user" && !m.isFeedback);
+    setCfMessage(lastUserMsg ? lastUserMsg.content : "");
+    setView("contact");
+  }
+
+  async function submitContact(e: React.FormEvent) {
+    e.preventDefault();
+    if (!cfEmail.trim() || !cfMessage.trim() || cfSending) return;
+    setCfSending(true);
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: cfName.trim(),
+          email: cfEmail.trim(),
+          message: cfMessage.trim(),
+        }),
+      });
+      setView("sent");
+    } catch {
+      setView("sent");
+    } finally {
+      setCfSending(false);
+    }
+  }
+
+  const panelClass =
+    "flex w-[calc(100vw-3rem)] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl shadow-black/60 sm:w-[380px]";
+
+  function closeAll() {
+    setOpen(false);
+    setView("chat");
+  }
+
+  const chatHeader = (title: string, onBack?: () => void) => (
+    <div className="flex items-center justify-between border-b border-border bg-surface px-5 py-4">
+      <div className="flex items-center gap-2">
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="mr-1 p-1 text-muted transition-colors hover:text-foreground"
+            aria-label="Назад"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </button>
+        )}
+        <div>
+          <p className="text-sm font-semibold text-foreground">{title}</p>
+          <p className="text-xs text-success">Онлайн</p>
+        </div>
+      </div>
+      <button
+        onClick={closeAll}
+        aria-label="Закрыть чат"
+        className="p-1 text-muted transition-colors hover:text-foreground"
+      >
+        <X className="h-5 w-5" />
+      </button>
+    </div>
+  );
+
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
-      {open && (
-        <div className="flex w-[calc(100vw-3rem)] flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl shadow-black/60 sm:w-[380px]">
-          <div className="flex items-center justify-between border-b border-border bg-surface px-5 py-4">
-            <div>
-              <p className="text-sm font-semibold text-foreground">
-                AI-консультант
-              </p>
-              <p className="text-xs text-success">Онлайн</p>
+      {/* Contact form view */}
+      {open && view === "contact" && (
+        <div className={panelClass}>
+          {chatHeader("Написать нам", () => setView("chat"))}
+          <form onSubmit={submitContact} className="flex flex-col gap-3 px-5 py-5">
+            <p className="text-sm text-muted">Ответим в течение 24 часов.</p>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs font-medium text-foreground">Ваше имя</label>
+              <input
+                type="text"
+                value={cfName}
+                onChange={(e) => setCfName(e.target.value)}
+                placeholder="Алексей"
+                maxLength={100}
+                className="rounded-xl bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle outline-none focus:ring-1 focus:ring-accent/50"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs font-medium text-foreground">
+                Email <span className="text-red-400">*</span>
+              </label>
+              <input
+                type="email"
+                required
+                value={cfEmail}
+                onChange={(e) => setCfEmail(e.target.value)}
+                placeholder="you@example.com"
+                maxLength={200}
+                className="rounded-xl bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle outline-none focus:ring-1 focus:ring-accent/50"
+              />
+            </div>
+            <div className="flex flex-col gap-1">
+              <label className="text-xs font-medium text-foreground">
+                Вопрос <span className="text-red-400">*</span>
+              </label>
+              <textarea
+                required
+                value={cfMessage}
+                onChange={(e) => setCfMessage(e.target.value)}
+                placeholder="Опишите вашу задачу или вопрос..."
+                maxLength={2000}
+                rows={4}
+                className="resize-none rounded-xl bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle outline-none focus:ring-1 focus:ring-accent/50"
+              />
             </div>
             <button
-              onClick={() => setOpen(false)}
-              aria-label="Закрыть чат"
-              className="p-1 text-muted transition-colors hover:text-foreground"
+              type="submit"
+              disabled={cfSending || !cfEmail.trim() || !cfMessage.trim()}
+              className="flex items-center justify-center gap-2 rounded-xl bg-gradient-accent py-2.5 text-sm font-medium text-white transition-all hover:opacity-90 disabled:opacity-40"
             >
-              <X className="h-5 w-5" />
+              {cfSending ? "Отправляем..." : "Отправить"}
+            </button>
+            <p className="text-center text-[10px] text-subtle">
+              Или сразу в Telegram{" "}
+              <a href={siteConfig.contacts.telegram} target="_blank" rel="noopener noreferrer" className="text-accent-text hover:underline">
+                @borisk85 →
+              </a>
+            </p>
+          </form>
+        </div>
+      )}
+
+      {/* Sent confirmation */}
+      {open && view === "sent" && (
+        <div className={panelClass}>
+          {chatHeader("Написать нам")}
+          <div className="flex flex-col items-center gap-4 px-5 py-10 text-center">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-success/15">
+              <svg className="h-6 w-6 text-success" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-foreground">Сообщение отправлено!</p>
+              <p className="mt-1 text-xs text-muted">Ответим в течение 24 часов.</p>
+            </div>
+            <button onClick={() => setView("chat")} className="text-xs text-accent-text hover:underline">
+              ← Вернуться в чат
             </button>
           </div>
+        </div>
+      )}
+
+      {open && view === "chat" && (
+        <div className={panelClass}>
+          {chatHeader("AI-консультант")}
 
           <div className="flex-1 space-y-3 overflow-y-auto overflow-x-hidden px-4 py-4 min-h-[260px] max-h-[340px] sm:min-h-[340px] sm:max-h-[440px]">
             {messages.map((m, i) => (
@@ -447,18 +593,18 @@ export default function ChatWidget() {
                 </button>
               </div>
             </div>
-            <p className="mt-2 text-center text-[10px] leading-snug text-subtle">
-              AI-консультант может ошибаться — важные моменты уточняйте лично
-              у Бориса в{" "}
-              <a
-                href={siteConfig.contacts.telegram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-accent-text hover:underline"
+            {hasConversation ? (
+              <button
+                onClick={openContactForm}
+                className="mt-2 flex w-full items-center justify-center gap-1 text-[10px] text-subtle transition-colors hover:text-muted"
               >
-                Telegram →
-              </a>
-            </p>
+                Не нашли ответ? Напишите нам →
+              </button>
+            ) : (
+              <p className="mt-2 text-center text-[10px] leading-snug text-subtle">
+                AI-консультант может ошибаться. Для точных деталей — спросите у консультанта.
+              </p>
+            )}
           </div>
         </div>
       )}
@@ -487,7 +633,10 @@ export default function ChatWidget() {
       <div className="relative">
         <button
           onClick={() => {
-            setOpen((v) => !v);
+            setOpen((v) => {
+              if (v) setView("chat");
+              return !v;
+            });
             setProactive(false);
           }}
           className="flex h-14 w-14 items-center justify-center rounded-full bg-gradient-accent shadow-[0_0_30px_-10px_rgb(139_92_246/0.6)] transition-all hover:scale-105 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.75)] active:scale-95"
