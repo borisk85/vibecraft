@@ -600,11 +600,7 @@ export default function ChatWidget() {
               >
                 Не нашли ответ? Напишите нам →
               </button>
-            ) : (
-              <p className="mt-2 text-center text-[10px] leading-snug text-subtle">
-                AI-консультант может ошибаться. Для точных деталей — спросите у консультанта.
-              </p>
-            )}
+            ) : null}
           </div>
         </div>
       )}
