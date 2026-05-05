@@ -600,7 +600,19 @@ export default function ChatWidget() {
               >
                 Не нашли ответ? Напишите нам →
               </button>
-            ) : null}
+            ) : (
+              <p className="mt-2 text-center text-[10px] leading-snug text-subtle">
+                AI-консультант может ошибаться — важные моменты уточняйте лично у Бориса в{" "}
+                <a
+                  href={siteConfig.contacts.telegram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-accent-text hover:underline"
+                >
+                  Telegram →
+                </a>
+              </p>
+            )}
           </div>
         </div>
       )}
