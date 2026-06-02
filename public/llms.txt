@@ -1,0 +1,26 @@
+# Vibecraft — AI-разработка и автоматизации в Казахстане
+
+> Vibecraft — студия AI-разработки в Алматы (Казахстан). Создаём Telegram-боты, AI-агенты, веб-приложения и автоматизации под ключ за 1-2 недели. Работаем на Claude, GPT, Make.com, Next.js, Flutter.
+
+## Что делаем
+
+- AI-агенты и Telegram-боты (Claude, ChatGPT)
+- MVP веб- и мобильных приложений (Next.js, Flutter)
+- Автоматизации бизнес-процессов (Make.com, n8n)
+- AI-сайты и лендинги
+
+## Ключевые страницы
+
+- [Главная](https://vibecraft.kz): услуги, портфолио, FAQ, цены
+- [Блог](https://vibecraft.kz/blog): статьи об AI-разработке и автоматизации
+
+## Контакты
+
+- Сайт: https://vibecraft.kz
+- Email: hello@vibecraft.kz
+- Telegram: https://t.me/borisk85
+- Локация: Алматы, Казахстан
+
+## Основатель
+
+Борис Комаров — AI Native Founder, vibe coder, строит AI-продукты без команды разработчиков.

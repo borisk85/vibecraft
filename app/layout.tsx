@@ -72,6 +72,17 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://vibecraft.kz/#website",
+  url: "https://vibecraft.kz",
+  name: "Vibecraft",
+  description: siteConfig.description,
+  inLanguage: "ru-KZ",
+  publisher: { "@type": "Organization", name: "Vibecraft", url: "https://vibecraft.kz" },
+}
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -82,6 +93,9 @@ export default function RootLayout({
       lang="ru"
       className={`${inter.variable} ${jetbrainsMono.variable} antialiased`}
     >
+      <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
+      </head>
       <body className="min-h-screen bg-background text-foreground font-sans">
         <MotionProvider>{children}</MotionProvider>
         <ChatWidgetMount />
