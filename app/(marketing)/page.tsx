@@ -20,7 +20,7 @@ const organizationSchema = {
   logo: `${siteConfig.url}/og-image.png`,
   description:
     "AI-разработка и автоматизации: боты, AI-агенты, AI-сайты, MVP веб- и мобильных приложений. Под ключ за 1-2 недели.",
-  founder: { "@type": "Person", name: "Борис" },
+  founder: { "@type": "Person", name: "Борис Комаров", url: "https://vibecraft.kz/#about" },
   address: {
     "@type": "PostalAddress",
     addressCountry: "KZ",
