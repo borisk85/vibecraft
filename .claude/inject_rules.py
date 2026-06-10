@@ -1,30 +1,19 @@
-"""UserPromptSubmit hook — подмешивает жесткие правила vibecraft в контекст перед каждым ответом."""
+"""UserPromptSubmit hook — компактная выжимка жестких правил vibecraft (урезано 11.06.2026).
+
+Полные версии правил — в memory: feedback_proofread_always.md, feedback_writing_style.md.
+Блокирующие проверки делают Stop-хуки (check_text_changes.py, validate_text.py).
+"""
 import json
-from pathlib import Path
 
-MEMORY_DIR = Path(r"C:/Users/bkoma/.claude/projects/c--Claude-Code-vibecraft/memory")
-FILES = [
-    "feedback_proofread_always.md",
-    "feedback_text_consistency.md",
-    "feedback_pricing_highlight.md",
-    "feedback_style_changes.md",
-    "feedback_writing_style.md",
-    "feedback_public_terminology.md",
-    "feedback_gradient_usage.md",
-]
+RULES = """## Жесткие правила vibecraft (нарушение = баг):
 
-parts = []
-for fname in FILES:
-    p = MEMORY_DIR / fname
-    if p.exists():
-        parts.append(f"=== {fname} ===\n{p.read_text(encoding='utf-8')}")
-
-header = "## Жесткие правила vibecraft (auto-injected перед каждым ответом — нарушение = баг):\n\n"
-content = header + "\n\n".join(parts)
+1. ВЫЧИТКА любого русского клиентского текста перед коммитом (FAQ, лендинг, блог, email, PDF) — включая текст, который прислал Boris: нашел ошибку → коротко спросить, не вставлять молча. Чек: запятые (перед «чем/что/если/чтобы», после вводных), согласование падежей и числительных («1-2 часов», не «1-2 часа»), «о/об», слитно/раздельно, тавтология, двойные пробелы. Всегда Е вместо Ё. Запрещенные слова — по CLAUDE.md.
+2. ЖИВОЙ стиль текстов, не LLM-ный: открытые перечисления с «и т.д.» вместо закрытых списков; без защитных «мелкий/небольшой/только»; додумать сценарии клиента (заморозка, возврат, «что если»); финал — конкретное предупреждение, не общий ярлык-категория. Звучит как человек, который думает о клиенте, — иначе переписать.
+3. Перед любым утверждением о коде/файлах — Read/Grep, не из памяти."""
 
 print(json.dumps({
     "hookSpecificOutput": {
         "hookEventName": "UserPromptSubmit",
-        "additionalContext": content
+        "additionalContext": RULES
     }
 }))
