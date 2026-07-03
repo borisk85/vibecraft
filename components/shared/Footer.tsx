@@ -66,7 +66,8 @@ export function Footer() {
 
   return (
     <footer className="border-t border-border/60 py-10 md:mt-24 md:py-12">
-      <Container className="flex flex-col items-center gap-7 text-center md:flex-row md:items-center md:justify-between md:gap-6 md:text-left">
+      <Container className="flex flex-col gap-8 text-center md:text-left">
+        <div className="flex flex-col items-center gap-7 md:flex-row md:items-center md:justify-between md:gap-6">
         <div className="flex flex-col items-center gap-3 md:flex-row md:gap-2">
           <div className="flex items-center gap-2 translate-x-[3px]">
             <LogoMono className="h-10 w-10 flex-shrink-0" />
@@ -131,8 +132,14 @@ export function Footer() {
           >
             {siteConfig.contacts.email}
           </a>
+        </div>
+        </div>
+
+        <div className="flex items-center justify-between border-t border-border/60 pt-5">
           <span className="text-sm text-subtle">© {year} Vibecraft</span>
-          <BackToTop />
+          <div className="pr-16 md:pr-24">
+            <BackToTop />
+          </div>
         </div>
       </Container>
     </footer>
