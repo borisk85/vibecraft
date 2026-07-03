@@ -97,7 +97,7 @@ export default function RootLayout({
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
       </head>
-      <body id="top" className="min-h-screen bg-background text-foreground font-sans">
+      <body className="min-h-screen bg-background text-foreground font-sans">
         <MotionProvider>{children}</MotionProvider>
         <ChatWidgetMount />
         <Analytics />

@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { ChevronUp, Send } from "lucide-react";
+import { Send } from "lucide-react";
+import { BackToTop } from "./BackToTop";
 import { Container } from "./Container";
 import { LogoMono } from "./LogoMono";
 import { siteConfig } from "@/lib/metadata";
@@ -131,13 +132,7 @@ export function Footer() {
             {siteConfig.contacts.email}
           </a>
           <span className="text-sm text-subtle">© {year} Vibecraft</span>
-          <Link
-            href="#top"
-            aria-label="Наверх"
-            className="transition-colors hover:text-foreground"
-          >
-            <ChevronUp className="h-5 w-5" />
-          </Link>
+          <BackToTop />
         </div>
       </Container>
     </footer>
