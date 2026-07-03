@@ -7,6 +7,7 @@ import { Analytics } from "@/components/shared/Analytics";
 import { ChatWidgetMount } from "@/components/shared/ChatWidgetMount";
 import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import Script from "next/script";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -102,6 +103,15 @@ export default function RootLayout({
         <Analytics />
         <VercelAnalytics />
         <SpeedInsights />
+        {process.env.NEXT_PUBLIC_CLARITY_ID && (
+          <Script id="ms-clarity" strategy="lazyOnload">{`
+            (function(c,l,a,r,i,t,y){
+              c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+              t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+              y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "${process.env.NEXT_PUBLIC_CLARITY_ID}");
+          `}</Script>
+        )}
       </body>
     </html>
   );
