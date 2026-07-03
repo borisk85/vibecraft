@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Send } from "lucide-react";
-import { BackToTop } from "./BackToTop";
 import { Container } from "./Container";
 import { LogoMono } from "./LogoMono";
 import { siteConfig } from "@/lib/metadata";
@@ -47,27 +46,12 @@ function FacebookIcon({ className }: { className?: string }) {
   );
 }
 
-function XIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
-
 export function Footer() {
   const year = new Date().getFullYear();
 
   return (
     <footer className="border-t border-border/60 py-10 md:mt-24 md:py-12">
-      <Container className="flex flex-col gap-8 text-center md:text-left">
-        <div className="flex flex-col items-center gap-7 md:flex-row md:items-center md:justify-between md:gap-6">
+      <Container className="flex flex-col items-center gap-7 text-center md:flex-row md:items-center md:justify-between md:gap-6 md:text-left">
         <div className="flex flex-col items-center gap-3 md:flex-row md:gap-2">
           <div className="flex items-center gap-2 translate-x-[3px]">
             <LogoMono className="h-10 w-10 flex-shrink-0" />
@@ -116,15 +100,6 @@ export function Footer() {
             >
               <FacebookIcon className="h-5 w-5" />
             </Link>
-            <Link
-              href="https://x.com/borisfounder"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="X"
-              className="transition-colors hover:text-foreground"
-            >
-              <XIcon className="h-5 w-5" />
-            </Link>
           </div>
           <a
             href={`mailto:${siteConfig.contacts.email}`}
@@ -132,14 +107,7 @@ export function Footer() {
           >
             {siteConfig.contacts.email}
           </a>
-        </div>
-        </div>
-
-        <div className="flex items-center justify-between border-t border-border/60 pt-5">
           <span className="text-sm text-subtle">© {year} Vibecraft</span>
-          <div className="pr-16 md:pr-24">
-            <BackToTop />
-          </div>
         </div>
       </Container>
     </footer>
