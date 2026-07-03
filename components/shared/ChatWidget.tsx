@@ -112,6 +112,7 @@ export default function ChatWidget() {
   const [cfEmail, setCfEmail] = useState("");
   const [cfMessage, setCfMessage] = useState("");
   const [cfSending, setCfSending] = useState(false);
+  const [cfTicket, setCfTicket] = useState<number | null>(null);
 
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -303,7 +304,7 @@ export default function ChatWidget() {
     if (!cfEmail.trim() || !cfMessage.trim() || cfSending) return;
     setCfSending(true);
     try {
-      await fetch("/api/contact", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
@@ -312,8 +313,11 @@ export default function ChatWidget() {
           message: cfMessage.trim(),
         }),
       });
+      const data = await res.json().catch(() => ({}));
+      setCfTicket(typeof data.ticket === "number" ? data.ticket : null);
       setView("sent");
     } catch {
+      setCfTicket(null);
       setView("sent");
     } finally {
       setCfSending(false);
@@ -430,8 +434,10 @@ export default function ChatWidget() {
               </svg>
             </div>
             <div>
-              <p className="text-sm font-semibold text-foreground">Сообщение отправлено!</p>
-              <p className="mt-1 text-xs text-muted">Ответим в течение 24 часов.</p>
+              <p className="text-sm font-semibold text-foreground">
+                {cfTicket ? `Обращение #${cfTicket} отправлено!` : "Сообщение отправлено!"}
+              </p>
+              <p className="mt-1 text-xs text-muted">Копия ушла на вашу почту — ответим в течение 24 часов.</p>
             </div>
             <button onClick={() => setView("chat")} className="text-xs text-accent-text hover:underline">
               ← Вернуться в чат
