@@ -7,7 +7,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: `${base}/`,
+      url: base,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 1,
