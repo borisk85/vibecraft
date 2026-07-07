@@ -177,16 +177,6 @@ export default async function ServicePage({
               <p className="text-muted leading-relaxed">{page.forWhom}</p>
 
               <h2 className="mb-4 mt-14 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
-                Цена и сроки
-              </h2>
-              <div className="flex items-center justify-between rounded-2xl border border-border bg-card p-6 md:p-8">
-                <span className="font-mono text-xl font-medium text-foreground">
-                  {meta?.price}
-                </span>
-                <span className="text-sm text-subtle">{meta?.duration}</span>
-              </div>
-
-              <h2 className="mb-4 mt-14 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
                 Почему Vibecraft
               </h2>
               <p className="text-muted leading-relaxed">{page.why}</p>
