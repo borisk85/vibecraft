@@ -10,12 +10,20 @@ import { LogoMono } from "./LogoMono";
 
 const navLinks = [
   { href: "/#solution", label: "Подход" },
-  { href: "/#services", label: "Услуги" },
   { href: "/#process", label: "Процесс" },
   { href: "/#cases", label: "Работы" },
   { href: "/#about", label: "Обо мне" },
   { href: "/#faq", label: "FAQ" },
   { href: "/blog", label: "Блог" },
+];
+
+const serviceLinks = [
+  { href: "/uslugi/chat-boty", label: "Чат-боты" },
+  { href: "/uslugi/ai-agenty", label: "AI-агенты" },
+  { href: "/uslugi/veb-prilozheniya", label: "Веб и MVP" },
+  { href: "/uslugi/ai-sajty", label: "AI-сайты" },
+  { href: "/uslugi/avtomatizacii", label: "Автоматизация" },
+  { href: "/uslugi/mobilnye-prilozheniya", label: "Мобильные приложения" },
 ];
 
 function NavLink({
@@ -84,6 +92,36 @@ export function Header() {
           </a>
 
           <nav className="hidden items-center gap-8 lg:flex">
+            <div className="group relative">
+              <a
+                href="/#services"
+                className="flex items-center gap-1 text-sm text-muted transition-colors duration-150 hover:text-foreground"
+              >
+                Услуги
+                <svg
+                  className="h-3.5 w-3.5 transition-transform duration-150 group-hover:rotate-180"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+              <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 pt-3 opacity-0 transition-all duration-150 group-hover:visible group-hover:opacity-100">
+                <div className="flex w-60 flex-col rounded-xl border border-border bg-card p-2 shadow-[0_12px_40px_-12px_rgb(0_0_0/0.6)]">
+                  {serviceLinks.map((s) => (
+                    <Link
+                      key={s.href}
+                      href={s.href}
+                      className="rounded-lg px-3 py-2 text-sm text-muted transition-colors duration-150 hover:bg-surface hover:text-foreground"
+                    >
+                      {s.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
             {navLinks.map((link) => (
               <NavLink
                 key={link.href}
@@ -138,7 +176,27 @@ export function Header() {
               </button>
             </Container>
 
-            <nav className="flex flex-1 flex-col gap-2 px-6 pt-6">
+            <nav className="flex flex-1 flex-col gap-2 overflow-y-auto px-6 pt-6">
+              <a
+                href="/#services"
+                onClick={() => setIsOpen(false)}
+                className="py-3 text-2xl font-semibold tracking-tight text-foreground transition-colors duration-150 hover:text-accent-text"
+              >
+                Услуги
+              </a>
+              <div className="mb-2 flex flex-col gap-1 border-l border-border pl-4">
+                {serviceLinks.map((s) => (
+                  <Link
+                    key={s.href}
+                    href={s.href}
+                    onClick={() => setIsOpen(false)}
+                    className="py-1.5 text-base text-muted transition-colors duration-150 hover:text-foreground"
+                  >
+                    {s.label}
+                  </Link>
+                ))}
+              </div>
+
               {navLinks.map((link) => (
                 <NavLink
                   key={link.href}
