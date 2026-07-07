@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { Check } from "lucide-react";
 import { Container } from "@/components/shared/Container";
 import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
 import { JsonLd } from "@/components/shared/JsonLd";
+import { SectionHeading } from "@/components/shared/SectionHeading";
+import { MotionSection } from "@/components/shared/MotionSection";
+import { FaqAccordion } from "@/components/shared/FaqAccordion";
 import {
   servicePages,
   getServicePage,
@@ -50,7 +54,6 @@ export default async function ServicePage({
   const page = getServicePage(slug);
   if (!page) notFound();
   const meta = getServiceMeta(page.serviceTitle);
-
   const url = `https://vibecraft.kz/uslugi/${page.slug}`;
 
   const serviceSchema = {
@@ -65,11 +68,7 @@ export default async function ServicePage({
       { "@type": "City", name: "Алматы" },
       { "@type": "City", name: "Астана" },
     ],
-    provider: {
-      "@type": "Organization",
-      name: "Vibecraft",
-      url: "https://vibecraft.kz",
-    },
+    provider: { "@type": "Organization", name: "Vibecraft", url: "https://vibecraft.kz" },
     ...(meta?.price
       ? {
           offers: {
@@ -81,7 +80,6 @@ export default async function ServicePage({
         }
       : {}),
   };
-
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -91,7 +89,6 @@ export default async function ServicePage({
       acceptedAnswer: { "@type": "Answer", text: f.a },
     })),
   };
-
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -102,7 +99,7 @@ export default async function ServicePage({
     ],
   };
 
-  const related = servicePages.filter((p) => p.slug !== page.slug).slice(0, 3);
+  const related = servicePages.filter((p) => p.slug !== page.slug);
 
   return (
     <>
@@ -110,32 +107,32 @@ export default async function ServicePage({
       <JsonLd data={faqSchema} />
       <JsonLd data={breadcrumbSchema} />
       <Header />
-      <main className="flex-1 py-24 md:py-32">
-        <Container>
-          <div className="mx-auto max-w-3xl">
-            {/* Хлебные крошки */}
-            <nav className="mb-8 flex items-center gap-2 text-sm text-muted">
-              <Link href="/" className="transition-colors hover:text-foreground">
-                Главная
-              </Link>
-              <span>/</span>
-              <a href="/#services" className="transition-colors hover:text-foreground">
-                Услуги
-              </a>
-              <span>/</span>
-              <span className="text-foreground">{page.serviceTitle}</span>
-            </nav>
-
-            {/* Hero — above the fold */}
-            <header className="mb-10">
-              <h1 className="mb-4 text-3xl font-semibold leading-snug tracking-tight text-foreground md:text-4xl">
+      <main className="flex-1">
+        {/* Hero */}
+        <MotionSection className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-20">
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[360px] w-[560px] -translate-x-1/2 rounded-full bg-gradient-accent opacity-15 blur-[120px]"
+          />
+          <Container>
+            <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
+              <nav className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.15em] text-muted">
+                <Link href="/" className="transition-colors hover:text-foreground">
+                  Главная
+                </Link>
+                <span>/</span>
+                <a href="/#services" className="transition-colors hover:text-foreground">
+                  Услуги
+                </a>
+              </nav>
+              <h1 className="text-balance text-4xl font-semibold tracking-tight text-foreground md:text-5xl lg:text-6xl">
                 {page.h1}
               </h1>
-              <p className="mb-6 text-lg text-muted leading-relaxed">
+              <p className="max-w-2xl text-pretty text-lg text-muted md:text-xl">
                 {page.heroIntro}
               </p>
               {meta ? (
-                <div className="mb-6 flex flex-wrap items-center gap-4">
+                <div className="flex flex-wrap items-center justify-center gap-4">
                   <span className="font-mono text-lg font-medium text-foreground">
                     {meta.price}
                   </span>
@@ -144,127 +141,138 @@ export default async function ServicePage({
               ) : null}
               <a
                 href="/#contact"
-                className="inline-flex h-11 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]"
+                className="mt-2 inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]"
               >
                 Обсудить проект
               </a>
-            </header>
+            </div>
+          </Container>
+        </MotionSection>
 
-            {/* GEO-блок: прямой ответ первым */}
-            <section className="mb-12 rounded-2xl border border-border bg-card/40 p-6 md:p-8">
-              <p className="text-foreground/90 leading-relaxed">
-                {page.geoAnswer}
-              </p>
-            </section>
+        {/* GEO-ответ + что входит + для кого + почему */}
+        <MotionSection className="py-16 md:py-20">
+          <Container>
+            <div className="mx-auto max-w-3xl">
+              <div className="rounded-2xl border border-border bg-card p-8 md:p-10">
+                <p className="text-lg text-foreground/90 leading-relaxed">
+                  {page.geoAnswer}
+                </p>
+              </div>
 
-            {/* Что входит */}
-            <section className="mb-12">
-              <h2 className="mb-5 text-2xl font-semibold tracking-tight text-foreground">
+              <h2 className="mb-6 mt-14 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
                 Что входит
               </h2>
-              <ul className="flex flex-col gap-3">
+              <ul className="flex flex-col gap-4">
                 {page.included.map((item) => (
-                  <li key={item} className="flex gap-3 text-muted leading-relaxed">
-                    <span className="mt-2 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent" />
+                  <li key={item} className="flex items-start gap-3 text-base leading-relaxed text-foreground">
+                    <Check className="mt-1 h-5 w-5 flex-shrink-0 text-accent-text" strokeWidth={2.5} />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
-            </section>
 
-            {/* Для кого */}
-            <section className="mb-12">
-              <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">
+              <h2 className="mb-4 mt-14 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
                 Для кого
               </h2>
               <p className="text-muted leading-relaxed">{page.forWhom}</p>
-            </section>
 
-            {/* Цена и сроки */}
-            <section className="mb-12">
-              <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">
+              <h2 className="mb-4 mt-14 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
                 Цена и сроки
               </h2>
-              <div className="flex items-center justify-between rounded-2xl border border-border bg-card p-6">
-                <span className="font-mono text-lg font-medium text-foreground">
+              <div className="flex items-center justify-between rounded-2xl border border-border bg-card p-6 md:p-8">
+                <span className="font-mono text-xl font-medium text-foreground">
                   {meta?.price}
                 </span>
                 <span className="text-sm text-subtle">{meta?.duration}</span>
               </div>
-            </section>
 
-            {/* Почему Vibecraft / E-E-A-T */}
-            <section className="mb-12">
-              <h2 className="mb-4 text-2xl font-semibold tracking-tight text-foreground">
+              <h2 className="mb-4 mt-14 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
                 Почему Vibecraft
               </h2>
               <p className="text-muted leading-relaxed">{page.why}</p>
-            </section>
+            </div>
+          </Container>
+        </MotionSection>
 
-            {/* FAQ */}
-            <section className="mb-12">
-              <h2 className="mb-6 text-2xl font-semibold tracking-tight text-foreground">
-                Частые вопросы
-              </h2>
-              <div className="flex flex-col gap-3">
-                {page.faq.map((f) => (
-                  <details
-                    key={f.q}
-                    className="rounded-xl border border-border bg-card/40 p-5"
-                  >
-                    <summary className="cursor-pointer select-none font-medium text-foreground">
-                      {f.q}
-                    </summary>
-                    <p className="mt-3 text-muted leading-relaxed">{f.a}</p>
-                  </details>
-                ))}
-              </div>
-            </section>
+        {/* FAQ — как на сайте */}
+        <MotionSection className="py-16 md:py-20">
+          <Container>
+            <SectionHeading eyebrow="FAQ" title="Частые вопросы" />
+            <div className="mx-auto mt-14 max-w-3xl">
+              <FaqAccordion items={page.faq} />
+            </div>
+          </Container>
+        </MotionSection>
 
-            {/* CTA */}
-            <section className="flex flex-col items-center gap-4 rounded-2xl border border-accent/30 bg-card/40 p-8 text-center md:p-10">
-              <h2 className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">
+        {/* CTA — как FinalCTA */}
+        <MotionSection className="py-16 md:py-20">
+          <Container>
+            <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 rounded-3xl border border-border bg-card/60 p-8 text-center backdrop-blur md:p-12">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent-text">
+                Заявка
+              </span>
+              <h2 className="text-balance text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
                 Обсудим ваш проект?
               </h2>
-              <p className="max-w-xl text-muted">
-                Опишите задачу — AI-калькулятор посчитает стоимость и срок за
-                минуту.
+              <p className="max-w-xl text-muted md:text-lg">
+                Опишите задачу — предложу план, сроки и стоимость. Без долгих
+                согласований.
               </p>
-              <div className="flex flex-wrap items-center justify-center gap-3">
-                <a
-                  href="/#contact"
-                  className="inline-flex h-11 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white"
-                >
-                  Обсудить проект
-                </a>
-                <Link
-                  href="/calculator"
-                  className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-card px-6 text-base font-medium text-foreground transition-colors hover:border-accent"
-                >
-                  Посчитать стоимость
-                </Link>
-              </div>
-            </section>
+              <a
+                href="/#contact"
+                className="mt-2 inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]"
+              >
+                Оставить заявку
+              </a>
+              <p className="text-sm text-muted">
+                Не уверены в бюджете?{" "}
+                <Link href="/calculator" className="text-accent-text hover:underline">
+                  прикиньте стоимость в калькуляторе
+                </Link>{" "}
+                за минуту.
+              </p>
+            </div>
+          </Container>
+        </MotionSection>
 
-            {/* Перелинковка на related-услуги */}
-            <section className="mt-14 border-t border-border pt-10">
-              <h2 className="mb-5 text-sm font-semibold uppercase tracking-wider text-muted">
-                Другие услуги
-              </h2>
-              <div className="flex flex-col gap-2">
-                {related.map((r) => (
+        {/* Другие услуги — карточки как Services */}
+        <MotionSection className="py-16 md:py-20">
+          <Container>
+            <SectionHeading eyebrow="Услуги" title="Другие направления" />
+            <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {related.map((r) => {
+                const rMeta = getServiceMeta(r.serviceTitle);
+                const Icon = rMeta?.icon;
+                return (
                   <Link
                     key={r.slug}
                     href={`/uslugi/${r.slug}`}
-                    className="text-foreground transition-colors hover:text-accent-text"
+                    className="group flex flex-col gap-4 rounded-2xl border border-border bg-card p-7 transition-colors duration-200 hover:border-accent"
                   >
-                    {r.serviceTitle} →
+                    {Icon ? (
+                      <div className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-surface text-accent-text">
+                        <Icon className="h-5 w-5" />
+                      </div>
+                    ) : null}
+                    <div>
+                      <h3 className="mb-1.5 text-lg font-semibold tracking-tight text-foreground">
+                        {r.serviceTitle}
+                      </h3>
+                      {rMeta ? (
+                        <p className="text-sm text-muted leading-relaxed">
+                          {rMeta.price}, {rMeta.duration}
+                        </p>
+                      ) : null}
+                    </div>
+                    <span className="mt-auto text-sm text-accent-text transition-colors group-hover:text-foreground">
+                      Подробнее →
+                    </span>
                   </Link>
-                ))}
-              </div>
-            </section>
-          </div>
-        </Container>
+                );
+              })}
+            </div>
+          </Container>
+        </MotionSection>
       </main>
       <Footer />
     </>
