@@ -6,62 +6,57 @@
     <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
       <circle cx="1.5" cy="1.5" r="1.2" fill="#ffffff" fill-opacity="0.045"/>
     </pattern>
-    <clipPath id="win2"><rect x="140" y="88" width="920" height="476" rx="16"/></clipPath>
+    <filter id="drop" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="28" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="80"/></filter>
+    <clipPath id="win"><rect x="150" y="76" width="900" height="520" rx="18"/></clipPath>
   </defs>
 
   <rect x="1" y="1" width="1198" height="638" rx="20" fill="#0b0b0b" stroke="#1f1f1f"/>
   <rect x="1" y="1" width="1198" height="638" rx="20" fill="url(#dots)"/>
-  <text x="600" y="56" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">САЙТ С AI-ПОМОЩНИКОМ</text>
+  <ellipse cx="600" cy="330" rx="300" ry="200" fill="#8b5cf6" opacity="0.10" filter="url(#glow)"/>
 
-  <rect x="140" y="88" width="920" height="476" rx="16" fill="#111111" stroke="#2a2a2a"/>
-  <g clip-path="url(#win2)">
-    <!-- titlebar -->
-    <rect x="140" y="88" width="920" height="46" fill="#161616"/>
-    <circle cx="170" cy="111" r="6" fill="#333333"/><circle cx="192" cy="111" r="6" fill="#333333"/><circle cx="214" cy="111" r="6" fill="#333333"/>
-    <rect x="256" y="99" width="470" height="24" rx="12" fill="#1a1a1a" stroke="#242424"/>
-    <text x="272" y="116" fill="#8f8f8f" font-size="12" font-family="ui-monospace, monospace">vibecraft-demo.kz</text>
-    <line x1="140" y1="134" x2="1060" y2="134" stroke="#2a2a2a"/>
-
-    <!-- шапка сайта -->
-    <rect x="176" y="158" width="94" height="16" rx="4" fill="#2a2a2a"/>
-    <rect x="712" y="160" width="56" height="10" rx="4" fill="#333333"/>
-    <rect x="784" y="160" width="56" height="10" rx="4" fill="#333333"/>
-    <rect x="856" y="160" width="56" height="10" rx="4" fill="#333333"/>
-    <rect x="936" y="150" width="88" height="30" rx="8" fill="url(#grad)"/>
-
-    <!-- hero -->
-    <rect x="350" y="212" width="500" height="26" rx="6" fill="#2a2a2a"/>
-    <rect x="420" y="248" width="360" height="26" rx="6" fill="#8b5cf6" fill-opacity="0.55"/>
-    <rect x="440" y="294" width="320" height="12" rx="4" fill="#333333"/>
-    <rect x="520" y="322" width="160" height="42" rx="10" fill="url(#grad)"/>
-    <text x="600" y="349" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">Оставить заявку</text>
-
-    <!-- карточки-фичи -->
-    <rect x="176" y="410" width="264" height="120" rx="12" fill="#1a1a1a" stroke="#2a2a2a"/>
-    <rect x="200" y="434" width="40" height="40" rx="10" fill="#111111" stroke="#2a2a2a"/>
-    <rect x="200" y="490" width="150" height="10" rx="4" fill="#2a2a2a"/>
-    <rect x="200" y="508" width="110" height="8" rx="4" fill="#333333"/>
-    <rect x="468" y="410" width="264" height="120" rx="12" fill="#1a1a1a" stroke="#2a2a2a"/>
-    <rect x="492" y="434" width="40" height="40" rx="10" fill="#111111" stroke="#2a2a2a"/>
-    <rect x="492" y="490" width="150" height="10" rx="4" fill="#2a2a2a"/>
-    <rect x="492" y="508" width="110" height="8" rx="4" fill="#333333"/>
-
-    <!-- AI-чат: всплывающее окно -->
-    <rect x="792" y="392" width="232" height="120" rx="16" fill="#161616" stroke="#8b5cf6" stroke-width="1.4"/>
-    <circle cx="820" cy="422" r="14" fill="url(#grad)"/>
-    <g transform="translate(811,413)" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M7.9 20A5 5 0 0 0 12 22a10 10 0 1 0-10-10 5 5 0 0 0 2 4"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/>
-    </g>
-    <text x="844" y="420" fill="#ededed" font-size="13" font-weight="600">AI-консультант</text>
-    <text x="844" y="437" fill="#8f8f8f" font-size="11">онлайн</text>
-    <rect x="812" y="454" width="150" height="40" rx="12" fill="#1f1f1f"/>
-    <text x="828" y="472" fill="#ededed" font-size="12">Здравствуйте! Помочь</text>
-    <text x="828" y="488" fill="#ededed" font-size="12">подобрать услугу?</text>
+  <!-- окно браузера: сайт клиента с AI-калькулятором -->
+  <g filter="url(#drop)">
+    <rect x="150" y="76" width="900" height="520" rx="18" fill="#131313" stroke="#2a2a2a"/>
   </g>
+  <g clip-path="url(#win)">
+    <!-- titlebar -->
+    <rect x="150" y="76" width="900" height="48" fill="#181818"/>
+    <circle cx="182" cy="100" r="6" fill="#333333"/><circle cx="204" cy="100" r="6" fill="#333333"/><circle cx="226" cy="100" r="6" fill="#333333"/>
+    <rect x="270" y="87" width="420" height="26" rx="13" fill="#111111" stroke="#242424"/>
+    <text x="288" y="105" fill="#8f8f8f" font-size="13" font-family="ui-monospace, monospace">kuhni-almaty.kz</text>
+    <line x1="150" y1="124" x2="1050" y2="124" stroke="#242424"/>
 
-  <!-- кнопка-лаунчер чата -->
-  <circle cx="1008" cy="540" r="26" fill="url(#grad)"/>
-  <g transform="translate(994,526)" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M7.9 20A5 5 0 0 0 12 22a10 10 0 1 0-10-10 5 5 0 0 0 2 4"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/>
+    <!-- шапка сайта клиента -->
+    <text x="190" y="164" fill="#ededed" font-size="17" font-weight="700">Кухни Алматы</text>
+    <text x="800" y="163" fill="#8f8f8f" font-size="14">Каталог</text>
+    <text x="884" y="163" fill="#8f8f8f" font-size="14">Цены</text>
+    <text x="952" y="163" fill="#8f8f8f" font-size="14">Контакты</text>
+
+    <!-- заголовок с AI-бейджем -->
+    <text x="600" y="228" text-anchor="middle" fill="#ededed" font-size="30" font-weight="700">Узнайте стоимость своей кухни</text>
+    <text x="600" y="258" text-anchor="middle" fill="#a1a1a1" font-size="15">Опишите задачу обычным текстом, AI-калькулятор посчитает смету</text>
+
+    <!-- поле ввода с запросом человека -->
+    <rect x="280" y="286" width="640" height="64" rx="14" fill="#1a1a1a" stroke="#2a2a2a"/>
+    <text x="304" y="324" fill="#ededed" font-size="15.5">Кухня под ключ 3 метра, фасады МДФ, со встроенной техникой</text>
+
+    <!-- кнопка -->
+    <rect x="500" y="370" width="200" height="46" rx="12" fill="url(#grad)"/>
+    <text x="600" y="399" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">Посчитать стоимость</text>
+
+    <!-- результат: смета -->
+    <rect x="280" y="440" width="640" height="122" rx="14" fill="#161616" stroke="#8b5cf6" stroke-width="1.3"/>
+    <circle cx="316" cy="476" r="15" fill="url(#grad)"/>
+    <g transform="translate(308,468)" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9.94 14.5A2 2 0 0 0 8.5 13.06l-4.6-1.19a.4.4 0 0 1 0-.74l4.6-1.19A2 2 0 0 0 9.94 8.5l1.19-4.6a.4.4 0 0 1 .74 0l1.19 4.6A2 2 0 0 0 15.5 9.94l4.6 1.19a.4.4 0 0 1 0 .74l-4.6 1.19A2 2 0 0 0 13.06 14.5l-1.19 4.6a.4.4 0 0 1-.74 0z" transform="scale(0.67)"/>
+    </g>
+    <text x="342" y="472" fill="#8f8f8f" font-size="13">Примерная смета</text>
+    <text x="342" y="500" fill="#ededed" font-size="21" font-weight="700" font-family="ui-monospace, monospace">850 000 – 1 200 000 ₸</text>
+    <text x="342" y="530" fill="#a1a1a1" font-size="14">срок 3-4 недели, точная цена после замера</text>
+    <rect x="756" y="486" width="140" height="40" rx="11" fill="url(#grad)"/>
+    <text x="826" y="511" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="600">Оставить заявку</text>
   </g>
 </svg>

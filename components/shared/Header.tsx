@@ -18,12 +18,12 @@ const navLinks = [
 ];
 
 const serviceLinks = [
-  { href: "/uslugi/chat-boty", label: "Чат-боты" },
+  { href: "/uslugi/chat-boty", label: "Боты" },
   { href: "/uslugi/ai-agenty", label: "AI-агенты" },
-  { href: "/uslugi/veb-prilozheniya", label: "Веб и MVP" },
+  { href: "/uslugi/veb-prilozheniya", label: "MVP веб-приложений" },
   { href: "/uslugi/ai-sajty", label: "AI-сайты" },
-  { href: "/uslugi/avtomatizacii", label: "Автоматизация" },
-  { href: "/uslugi/mobilnye-prilozheniya", label: "Мобильные приложения" },
+  { href: "/uslugi/avtomatizacii", label: "Автоматизации" },
+  { href: "/uslugi/mobilnye-prilozheniya", label: "MVP мобильных приложений" },
 ];
 
 function NavLink({

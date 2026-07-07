@@ -8,6 +8,7 @@ import { Footer } from "@/components/shared/Footer";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { SectionHeading } from "@/components/shared/SectionHeading";
 import { MotionSection } from "@/components/shared/MotionSection";
+import { MotionFadeIn } from "@/components/shared/MotionFadeIn";
 import { FaqAccordion } from "@/components/shared/FaqAccordion";
 import {
   servicePages,
@@ -109,13 +110,13 @@ export default async function ServicePage({
       <Header />
       <main className="flex-1">
         {/* Hero */}
-        <MotionSection className="relative overflow-hidden pt-28 pb-16 md:pt-36 md:pb-20">
+        <section className="relative isolate overflow-hidden pt-28 pb-16 md:pt-36 md:pb-20">
           <div
             aria-hidden="true"
             className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[360px] w-[560px] -translate-x-1/2 rounded-full bg-gradient-accent opacity-15 blur-[120px]"
           />
           <Container>
-            <div className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
+            <MotionFadeIn className="mx-auto flex max-w-3xl flex-col items-center gap-6 text-center">
               <nav className="flex items-center gap-2 font-mono text-xs uppercase tracking-[0.15em] text-muted">
                 <Link href="/" className="transition-colors hover:text-foreground">
                   Главная
@@ -132,22 +133,20 @@ export default async function ServicePage({
                 {page.heroIntro}
               </p>
               {meta ? (
-                <div className="flex flex-wrap items-center justify-center gap-4">
+                <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
                   <span className="font-mono text-lg font-medium text-foreground">
                     {meta.price}
                   </span>
+                  <span
+                    aria-hidden="true"
+                    className="hidden h-4 w-px bg-border sm:block"
+                  />
                   <span className="text-sm text-subtle">{meta.duration}</span>
                 </div>
               ) : null}
-              <a
-                href="/#contact"
-                className="mt-2 inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow duration-200 hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]"
-              >
-                Обсудить проект
-              </a>
-            </div>
+            </MotionFadeIn>
           </Container>
-        </MotionSection>
+        </section>
 
         {/* Иллюстрация услуги — брендовая SVG-схема, показывает суть наглядно */}
         <MotionSection className="pb-4 md:pb-6">
@@ -167,37 +166,54 @@ export default async function ServicePage({
           </Container>
         </MotionSection>
 
-        {/* GEO-ответ + что входит + для кого + почему */}
+        {/* GEO-ответ + что входит + для кого + почему — карточки как на лендинге */}
         <MotionSection className="py-16 md:py-20">
           <Container>
-            <div className="mx-auto max-w-3xl">
-              <div className="rounded-2xl border border-border bg-card p-8 md:p-10">
+            <div className="mx-auto max-w-5xl">
+              <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card p-8 md:p-10">
                 <p className="text-lg text-foreground/90 leading-relaxed">
                   {page.geoAnswer}
                 </p>
               </div>
 
-              <h2 className="mb-6 mt-14 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+              <h2 className="mb-8 mt-16 text-center text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
                 Что входит
               </h2>
-              <ul className="flex flex-col gap-4">
-                {page.included.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-base leading-relaxed text-foreground">
-                    <Check className="mt-1 h-5 w-5 flex-shrink-0 text-accent-text" strokeWidth={2.5} />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card p-8 md:p-10">
+                <ul className="flex flex-col gap-5">
+                  {page.included.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-3 text-base leading-relaxed text-foreground"
+                    >
+                      <Check
+                        className="h-5 w-5 flex-shrink-0 text-accent-text"
+                        strokeWidth={2.5}
+                      />
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-              <h2 className="mb-4 mt-14 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
-                Для кого
-              </h2>
-              <p className="text-muted leading-relaxed">{page.forWhom}</p>
-
-              <h2 className="mb-4 mt-14 text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
-                Почему Vibecraft
-              </h2>
-              <p className="text-muted leading-relaxed">{page.why}</p>
+              <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+                <div className="rounded-2xl border border-border bg-card p-8 md:p-10">
+                  <h3 className="mb-6 font-mono text-sm uppercase tracking-[0.2em] text-accent-text">
+                    Для кого
+                  </h3>
+                  <p className="text-base leading-relaxed text-foreground">
+                    {page.forWhom}
+                  </p>
+                </div>
+                <div className="rounded-2xl border border-border bg-card p-8 md:p-10">
+                  <h3 className="mb-6 font-mono text-sm uppercase tracking-[0.2em] text-accent-text">
+                    Почему Vibecraft
+                  </h3>
+                  <p className="text-base leading-relaxed text-foreground">
+                    {page.why}
+                  </p>
+                </div>
+              </div>
             </div>
           </Container>
         </MotionSection>
@@ -205,8 +221,15 @@ export default async function ServicePage({
         {/* FAQ — как на сайте */}
         <MotionSection className="py-16 md:py-20">
           <Container>
-            <SectionHeading eyebrow="FAQ" title="Частые вопросы" />
-            <div className="mx-auto mt-14 max-w-3xl">
+            <div className="flex flex-col items-center gap-3 text-center">
+              <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent-text">
+                FAQ
+              </span>
+              <h2 className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+                Частые вопросы
+              </h2>
+            </div>
+            <div className="mx-auto mt-10 max-w-3xl">
               <FaqAccordion items={page.faq} />
             </div>
           </Container>
@@ -219,7 +242,7 @@ export default async function ServicePage({
               <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent-text">
                 Заявка
               </span>
-              <h2 className="text-balance text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+              <h2 className="text-balance text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
                 Обсудим ваш проект?
               </h2>
               <p className="max-w-xl text-muted md:text-lg">
@@ -246,8 +269,10 @@ export default async function ServicePage({
         {/* Другие услуги — карточки как Services */}
         <MotionSection className="py-16 md:py-20">
           <Container>
-            <SectionHeading eyebrow="Услуги" title="Другие направления" />
-            <div className="mt-14 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+            <h2 className="text-center text-2xl font-semibold tracking-tight text-foreground md:text-3xl">
+              Другие направления
+            </h2>
+            <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
               {related.map((r) => {
                 const rMeta = getServiceMeta(r.serviceTitle);
                 const Icon = rMeta?.icon;
@@ -272,9 +297,6 @@ export default async function ServicePage({
                         </p>
                       ) : null}
                     </div>
-                    <span className="mt-auto text-sm text-accent-text transition-colors group-hover:text-foreground">
-                      Подробнее →
-                    </span>
                   </Link>
                 );
               })}
