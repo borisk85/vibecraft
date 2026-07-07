@@ -7,7 +7,10 @@ import { useEffect } from "react";
   Без этого: кликнули по "Кейсы" → URL стал /#cases → проскроллили
   наверх → URL остался /#cases, хотя визуально юзер на главной.
   IntersectionObserver на #hero → replaceState без хеша, когда Hero
-  виден >50%.
+  виден >90% (юзер реально на самом верху). Порог именно 90%, а не 50%:
+  при клике на близкую к верху секцию Hero еще оставался бы в кадре на
+  50%, и ссылка на секцию мгновенно схлопывалась бы в чистый /. С 90%
+  прямые якорные ссылки живут, а «грязь» при возврате наверх убирается.
 */
 export function HashCleaner() {
   useEffect(() => {
@@ -33,7 +36,7 @@ export function HashCleaner() {
           }
         }
       },
-      { threshold: 0.5 },
+      { threshold: 0.9 },
     );
 
     observer.observe(hero);

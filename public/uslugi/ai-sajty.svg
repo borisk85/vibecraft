@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.2" fill="#ffffff" fill-opacity="0.045"/>
+    </pattern>
+    <clipPath id="win2"><rect x="140" y="88" width="920" height="476" rx="16"/></clipPath>
+  </defs>
+
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="#0b0b0b" stroke="#1f1f1f"/>
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="url(#dots)"/>
+  <text x="600" y="56" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">САЙТ С AI-ПОМОЩНИКОМ</text>
+
+  <rect x="140" y="88" width="920" height="476" rx="16" fill="#111111" stroke="#2a2a2a"/>
+  <g clip-path="url(#win2)">
+    <!-- titlebar -->
+    <rect x="140" y="88" width="920" height="46" fill="#161616"/>
+    <circle cx="170" cy="111" r="6" fill="#333333"/><circle cx="192" cy="111" r="6" fill="#333333"/><circle cx="214" cy="111" r="6" fill="#333333"/>
+    <rect x="256" y="99" width="470" height="24" rx="12" fill="#1a1a1a" stroke="#242424"/>
+    <text x="272" y="116" fill="#8f8f8f" font-size="12" font-family="ui-monospace, monospace">vibecraft-demo.kz</text>
+    <line x1="140" y1="134" x2="1060" y2="134" stroke="#2a2a2a"/>
+
+    <!-- шапка сайта -->
+    <rect x="176" y="158" width="94" height="16" rx="4" fill="#2a2a2a"/>
+    <rect x="712" y="160" width="56" height="10" rx="4" fill="#333333"/>
+    <rect x="784" y="160" width="56" height="10" rx="4" fill="#333333"/>
+    <rect x="856" y="160" width="56" height="10" rx="4" fill="#333333"/>
+    <rect x="936" y="150" width="88" height="30" rx="8" fill="url(#grad)"/>
+
+    <!-- hero -->
+    <rect x="350" y="212" width="500" height="26" rx="6" fill="#2a2a2a"/>
+    <rect x="420" y="248" width="360" height="26" rx="6" fill="#8b5cf6" fill-opacity="0.55"/>
+    <rect x="440" y="294" width="320" height="12" rx="4" fill="#333333"/>
+    <rect x="520" y="322" width="160" height="42" rx="10" fill="url(#grad)"/>
+    <text x="600" y="349" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">Оставить заявку</text>
+
+    <!-- карточки-фичи -->
+    <rect x="176" y="410" width="264" height="120" rx="12" fill="#1a1a1a" stroke="#2a2a2a"/>
+    <rect x="200" y="434" width="40" height="40" rx="10" fill="#111111" stroke="#2a2a2a"/>
+    <rect x="200" y="490" width="150" height="10" rx="4" fill="#2a2a2a"/>
+    <rect x="200" y="508" width="110" height="8" rx="4" fill="#333333"/>
+    <rect x="468" y="410" width="264" height="120" rx="12" fill="#1a1a1a" stroke="#2a2a2a"/>
+    <rect x="492" y="434" width="40" height="40" rx="10" fill="#111111" stroke="#2a2a2a"/>
+    <rect x="492" y="490" width="150" height="10" rx="4" fill="#2a2a2a"/>
+    <rect x="492" y="508" width="110" height="8" rx="4" fill="#333333"/>
+
+    <!-- AI-чат: всплывающее окно -->
+    <rect x="792" y="392" width="232" height="120" rx="16" fill="#161616" stroke="#8b5cf6" stroke-width="1.4"/>
+    <circle cx="820" cy="422" r="14" fill="url(#grad)"/>
+    <g transform="translate(811,413)" fill="none" stroke="#ffffff" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7.9 20A5 5 0 0 0 12 22a10 10 0 1 0-10-10 5 5 0 0 0 2 4"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/>
+    </g>
+    <text x="844" y="420" fill="#ededed" font-size="13" font-weight="600">AI-консультант</text>
+    <text x="844" y="437" fill="#8f8f8f" font-size="11">онлайн</text>
+    <rect x="812" y="454" width="150" height="40" rx="12" fill="#1f1f1f"/>
+    <text x="828" y="472" fill="#ededed" font-size="12">Здравствуйте! Помочь</text>
+    <text x="828" y="488" fill="#ededed" font-size="12">подобрать услугу?</text>
+  </g>
+
+  <!-- кнопка-лаунчер чата -->
+  <circle cx="1008" cy="540" r="26" fill="url(#grad)"/>
+  <g transform="translate(994,526)" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M7.9 20A5 5 0 0 0 12 22a10 10 0 1 0-10-10 5 5 0 0 0 2 4"/><path d="M8 12h.01"/><path d="M12 12h.01"/><path d="M16 12h.01"/>
+  </g>
+</svg>

@@ -149,6 +149,24 @@ export default async function ServicePage({
           </Container>
         </MotionSection>
 
+        {/* Иллюстрация услуги — брендовая SVG-схема, показывает суть наглядно */}
+        <MotionSection className="pb-4 md:pb-6">
+          <Container>
+            <div className="mx-auto max-w-4xl overflow-hidden rounded-2xl border border-border bg-card">
+              {/* SVG-иллюстрация из /public/uslugi: вектор, оптимизация next/image не нужна */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`/uslugi/${page.slug}.svg`}
+                alt={page.h1}
+                width={1200}
+                height={640}
+                loading="lazy"
+                className="h-auto w-full"
+              />
+            </div>
+          </Container>
+        </MotionSection>
+
         {/* GEO-ответ + что входит + для кого + почему */}
         <MotionSection className="py-16 md:py-20">
           <Container>

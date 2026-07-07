@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.2" fill="#ffffff" fill-opacity="0.045"/>
+    </pattern>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="70"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#8b5cf6"/>
+    </marker>
+    <marker id="arrowsoft" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#5a5a5a"/>
+    </marker>
+  </defs>
+
+  <!-- панель -->
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="#0b0b0b" stroke="#1f1f1f" stroke-width="1"/>
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="url(#dots)"/>
+
+  <!-- мягкая акцентная подсветка за AI-нодой (статичная) -->
+  <ellipse cx="600" cy="320" rx="150" ry="110" fill="#8b5cf6" opacity="0.12" filter="url(#glow)"/>
+
+  <!-- eyebrow -->
+  <text x="600" y="56" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">ПРИМЕР СЦЕНАРИЯ АВТОМАТИЗАЦИИ</text>
+
+  <!-- стрелки -->
+  <path d="M310 320 L470 320" fill="none" stroke="#8b5cf6" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M725 300 C 800 300, 815 155, 885 155" fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.85" marker-end="url(#arrow)"/>
+  <path d="M725 320 L885 320" fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.85" marker-end="url(#arrow)"/>
+  <path d="M725 340 C 800 340, 815 485, 885 485" fill="none" stroke="#8b5cf6" stroke-width="2" opacity="0.85" marker-end="url(#arrow)"/>
+
+  <!-- Node A: Заявка -->
+  <rect x="60" y="250" width="250" height="140" rx="16" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1"/>
+  <rect x="84" y="276" width="44" height="44" rx="10" fill="#111111" stroke="#2a2a2a"/>
+  <g transform="translate(94,286)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 12h-6l-2 3h-4l-2-3H2"/>
+    <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
+  </g>
+  <text x="84" y="352" fill="#ededed" font-size="21" font-weight="600">Заявка клиента</text>
+  <text x="84" y="376" fill="#a1a1a1" font-size="14">сайт, WhatsApp, форма</text>
+
+  <!-- Node B: AI -->
+  <rect x="475" y="230" width="250" height="180" rx="16" fill="#1a1a1a" stroke="#8b5cf6" stroke-width="1.5"/>
+  <rect x="499" y="262" width="48" height="48" rx="12" fill="url(#grad)"/>
+  <g transform="translate(511,274)" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9.94 14.5A2 2 0 0 0 8.5 13.06l-4.6-1.19a.4.4 0 0 1 0-.74l4.6-1.19A2 2 0 0 0 9.94 8.5l1.19-4.6a.4.4 0 0 1 .74 0l1.19 4.6A2 2 0 0 0 15.5 9.94l4.6 1.19a.4.4 0 0 1 0 .74l-4.6 1.19A2 2 0 0 0 13.06 14.5l-1.19 4.6a.4.4 0 0 1-.74 0z"/>
+  </g>
+  <text x="499" y="356" fill="#ededed" font-size="22" font-weight="600">AI разбирает</text>
+  <text x="499" y="382" fill="#a1a1a1" font-size="14">понимает суть, извлекает данные</text>
+
+  <!-- Node C1: CRM -->
+  <rect x="890" y="90" width="250" height="130" rx="16" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1"/>
+  <rect x="914" y="114" width="44" height="44" rx="10" fill="#111111" stroke="#2a2a2a"/>
+  <g transform="translate(924,124)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <ellipse cx="12" cy="5" rx="9" ry="3"/>
+    <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+    <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+  </g>
+  <text x="914" y="184" fill="#ededed" font-size="20" font-weight="600">Запись в CRM</text>
+  <text x="914" y="206" fill="#a1a1a1" font-size="14">клиент и заявка сохранены</text>
+
+  <!-- Node C2: Telegram -->
+  <rect x="890" y="255" width="250" height="130" rx="16" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1"/>
+  <rect x="914" y="279" width="44" height="44" rx="10" fill="#111111" stroke="#2a2a2a"/>
+  <g transform="translate(924,289)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 2 11 13"/>
+    <path d="M22 2 15 22 11 13 2 9 22 2z"/>
+  </g>
+  <text x="914" y="349" fill="#ededed" font-size="20" font-weight="600">Уведомление вам</text>
+  <text x="914" y="371" fill="#a1a1a1" font-size="14">сразу в Telegram</text>
+
+  <!-- Node C3: Счет + ЭСФ -->
+  <rect x="890" y="420" width="250" height="130" rx="16" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1"/>
+  <rect x="914" y="444" width="44" height="44" rx="10" fill="#111111" stroke="#2a2a2a"/>
+  <g transform="translate(924,454)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <path d="M14 2v6h6"/>
+    <path d="M16 13H8"/>
+    <path d="M16 17H8"/>
+    <path d="M10 9H8"/>
+  </g>
+  <text x="914" y="514" fill="#ededed" font-size="20" font-weight="600">Счет и ЭСФ</text>
+  <text x="914" y="536" fill="#a1a1a1" font-size="14">формируются автоматически</text>
+</svg>

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.2" fill="#ffffff" fill-opacity="0.045"/>
+    </pattern>
+    <clipPath id="win"><rect x="140" y="88" width="920" height="476" rx="16"/></clipPath>
+  </defs>
+
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="#0b0b0b" stroke="#1f1f1f"/>
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="url(#dots)"/>
+  <text x="600" y="56" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">ПРИМЕР ВЕБ-ПРИЛОЖЕНИЯ</text>
+
+  <!-- окно браузера -->
+  <rect x="140" y="88" width="920" height="476" rx="16" fill="#111111" stroke="#2a2a2a"/>
+  <g clip-path="url(#win)">
+    <!-- titlebar -->
+    <rect x="140" y="88" width="920" height="46" fill="#161616"/>
+    <circle cx="170" cy="111" r="6" fill="#333333"/><circle cx="192" cy="111" r="6" fill="#333333"/><circle cx="214" cy="111" r="6" fill="#333333"/>
+    <rect x="256" y="99" width="470" height="24" rx="12" fill="#1a1a1a" stroke="#242424"/>
+    <text x="272" y="116" fill="#8f8f8f" font-size="12" font-family="ui-monospace, monospace">app.biznes.kz</text>
+    <line x1="140" y1="134" x2="1060" y2="134" stroke="#2a2a2a"/>
+
+    <!-- сайдбар -->
+    <rect x="140" y="134" width="182" height="430" fill="#151515"/>
+    <rect x="164" y="158" width="120" height="18" rx="5" fill="#2a2a2a"/>
+    <rect x="152" y="200" width="158" height="34" rx="8" fill="#8b5cf6" fill-opacity="0.15"/>
+    <rect x="166" y="209" width="16" height="16" rx="4" fill="none" stroke="#c084fc" stroke-width="1.6"/>
+    <rect x="194" y="212" width="92" height="10" rx="4" fill="#c084fc" fill-opacity="0.7"/>
+    <rect x="166" y="253" width="16" height="16" rx="4" fill="none" stroke="#3a3a3a" stroke-width="1.6"/>
+    <rect x="194" y="256" width="80" height="10" rx="4" fill="#333333"/>
+    <rect x="166" y="297" width="16" height="16" rx="4" fill="none" stroke="#3a3a3a" stroke-width="1.6"/>
+    <rect x="194" y="300" width="86" height="10" rx="4" fill="#333333"/>
+    <rect x="166" y="341" width="16" height="16" rx="4" fill="none" stroke="#3a3a3a" stroke-width="1.6"/>
+    <rect x="194" y="344" width="70" height="10" rx="4" fill="#333333"/>
+  </g>
+
+  <!-- метрики -->
+  <rect x="340" y="158" width="214" height="96" rx="12" fill="#1a1a1a" stroke="#2a2a2a"/>
+  <text x="360" y="192" fill="#8f8f8f" font-size="13">Заявок за месяц</text>
+  <text x="360" y="228" fill="#ededed" font-size="27" font-weight="700" font-family="ui-monospace, monospace">1 248</text>
+  <rect x="576" y="158" width="214" height="96" rx="12" fill="#1a1a1a" stroke="#2a2a2a"/>
+  <text x="596" y="192" fill="#8f8f8f" font-size="13">Конверсия</text>
+  <text x="596" y="228" fill="#ededed" font-size="27" font-weight="700" font-family="ui-monospace, monospace">86%</text>
+  <rect x="812" y="158" width="208" height="96" rx="12" fill="#1a1a1a" stroke="#2a2a2a"/>
+  <text x="832" y="192" fill="#8f8f8f" font-size="13">Выручка</text>
+  <text x="832" y="228" fill="#ededed" font-size="24" font-weight="700" font-family="ui-monospace, monospace">342 000 ₸</text>
+
+  <!-- график -->
+  <rect x="340" y="278" width="680" height="176" rx="12" fill="#1a1a1a" stroke="#2a2a2a"/>
+  <text x="364" y="308" fill="#a1a1a1" font-size="13">Заявки по дням</text>
+  <g>
+    <rect x="366" y="390" width="40" height="40" rx="6" fill="#3a3a3a"/>
+    <rect x="420" y="360" width="40" height="70" rx="6" fill="#3a3a3a"/>
+    <rect x="474" y="375" width="40" height="55" rx="6" fill="#3a3a3a"/>
+    <rect x="528" y="340" width="40" height="90" rx="6" fill="#3a3a3a"/>
+    <rect x="582" y="365" width="40" height="65" rx="6" fill="#3a3a3a"/>
+    <rect x="636" y="330" width="40" height="100" rx="6" fill="#3a3a3a"/>
+    <rect x="690" y="350" width="40" height="80" rx="6" fill="#3a3a3a"/>
+    <rect x="744" y="320" width="40" height="110" rx="6" fill="#3a3a3a"/>
+    <rect x="798" y="335" width="40" height="95" rx="6" fill="#8b5cf6"/>
+    <rect x="852" y="325" width="40" height="105" rx="6" fill="url(#grad)"/>
+  </g>
+</svg>

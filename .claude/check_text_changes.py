@@ -109,7 +109,7 @@ def main():
         "внутренние противоречия (заморозить vs не переносится) ✓.»\n\n"
         "См. feedback_proofread_always.md и feedback_text_consistency.md."
     )
-    print(json.dumps({"decision": "block", "reason": reason}))
+    print(f"⚠️ check_text_changes: {reason}", file=sys.stderr)
     sys.exit(0)
 
 

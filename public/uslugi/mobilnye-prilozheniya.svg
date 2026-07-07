@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/><stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.2" fill="#ffffff" fill-opacity="0.045"/>
+    </pattern>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="70"/></filter>
+    <clipPath id="screen"><rect x="500" y="82" width="200" height="476" rx="30"/></clipPath>
+  </defs>
+
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="#0b0b0b" stroke="#1f1f1f"/>
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="url(#dots)"/>
+  <ellipse cx="600" cy="320" rx="210" ry="150" fill="#8b5cf6" opacity="0.09" filter="url(#glow)"/>
+  <text x="600" y="56" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">ЭКРАН МОБИЛЬНОГО ПРИЛОЖЕНИЯ</text>
+
+  <!-- корпус телефона -->
+  <rect x="486" y="80" width="228" height="512" rx="40" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="2"/>
+  <rect x="500" y="82" width="200" height="476" rx="30" fill="#0c0c0c"/>
+
+  <g clip-path="url(#screen)">
+    <!-- статус-бар -->
+    <text x="522" y="112" fill="#ededed" font-size="13" font-weight="600" font-family="ui-monospace, monospace">9:41</text>
+    <rect x="640" y="102" width="18" height="10" rx="2" fill="#8f8f8f"/>
+    <rect x="664" y="102" width="26" height="10" rx="3" fill="none" stroke="#8f8f8f" stroke-width="1.4"/>
+    <rect x="666" y="104" width="18" height="6" rx="1.5" fill="#8f8f8f"/>
+    <rect x="566" y="90" width="68" height="16" rx="8" fill="#1a1a1a"/>
+
+    <!-- заголовок -->
+    <text x="520" y="152" fill="#ededed" font-size="18" font-weight="700">Мои заказы</text>
+    <circle cx="678" cy="146" r="15" fill="url(#grad)"/>
+
+    <!-- карточки списка -->
+    <g>
+      <rect x="516" y="178" width="168" height="74" rx="14" fill="#161616" stroke="#242424"/>
+      <rect x="530" y="196" width="40" height="40" rx="10" fill="#111111" stroke="#2a2a2a"/>
+      <g transform="translate(540,206)" fill="none" stroke="#c084fc" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="M3.3 7 12 12l8.7-5"/><path d="M12 22V12"/>
+      </g>
+      <rect x="582" y="198" width="86" height="11" rx="4" fill="#2a2a2a"/>
+      <rect x="582" y="218" width="58" height="9" rx="4" fill="#333333"/>
+      <text x="668" y="243" text-anchor="end" fill="#c084fc" font-size="13" font-weight="600" font-family="ui-monospace, monospace">4 500 ₸</text>
+    </g>
+    <g>
+      <rect x="516" y="266" width="168" height="74" rx="14" fill="#161616" stroke="#242424"/>
+      <rect x="530" y="284" width="40" height="40" rx="10" fill="#111111" stroke="#2a2a2a"/>
+      <g transform="translate(540,294)" fill="none" stroke="#c084fc" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M10 2v2"/><path d="M14 2v2"/><path d="M16 8a1 1 0 0 1 1 1v8a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V9a1 1 0 0 1 1-1h14a4 4 0 1 1 0 8h-1"/><path d="M6 2v2"/>
+      </g>
+      <rect x="582" y="286" width="86" height="11" rx="4" fill="#2a2a2a"/>
+      <rect x="582" y="306" width="58" height="9" rx="4" fill="#333333"/>
+      <text x="668" y="331" text-anchor="end" fill="#c084fc" font-size="13" font-weight="600" font-family="ui-monospace, monospace">1 200 ₸</text>
+    </g>
+    <g>
+      <rect x="516" y="354" width="168" height="74" rx="14" fill="#161616" stroke="#242424"/>
+      <rect x="530" y="372" width="40" height="40" rx="10" fill="#111111" stroke="#2a2a2a"/>
+      <g transform="translate(540,382)" fill="none" stroke="#10b981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M21.801 10A10 10 0 1 1 17 3.335"/><path d="m9 11 3 3L22 4"/>
+      </g>
+      <rect x="582" y="374" width="86" height="11" rx="4" fill="#2a2a2a"/>
+      <rect x="582" y="394" width="58" height="9" rx="4" fill="#333333"/>
+      <text x="668" y="419" text-anchor="end" fill="#10b981" font-size="12" font-weight="600">готово</text>
+    </g>
+
+    <!-- нижний таб-бар -->
+    <rect x="500" y="496" width="200" height="62" fill="#111111"/>
+    <line x1="500" y1="496" x2="700" y2="496" stroke="#242424"/>
+    <g transform="translate(524,514)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 9.5 12 3l9 6.5"/><path d="M5 10v9a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-9"/>
+    </g>
+    <circle cx="536" cy="540" r="2.5" fill="#c084fc"/>
+    <g transform="translate(572,514)" fill="none" stroke="#5a5a5a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+    </g>
+    <g transform="translate(620,514)" fill="none" stroke="#5a5a5a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>
+    </g>
+    <g transform="translate(668,514)" fill="none" stroke="#5a5a5a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+    </g>
+  </g>
+</svg>

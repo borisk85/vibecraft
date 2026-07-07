@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.2" fill="#ffffff" fill-opacity="0.045"/>
+    </pattern>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="70"/>
+    </filter>
+  </defs>
+
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="#0b0b0b" stroke="#1f1f1f"/>
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="url(#dots)"/>
+  <ellipse cx="600" cy="330" rx="220" ry="150" fill="#8b5cf6" opacity="0.08" filter="url(#glow)"/>
+
+  <text x="600" y="56" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">ПРИМЕР ДИАЛОГА С БОТОМ</text>
+
+  <!-- окно чата -->
+  <rect x="340" y="90" width="520" height="476" rx="22" fill="#111111" stroke="#2a2a2a"/>
+
+  <!-- шапка -->
+  <circle cx="382" cy="132" r="20" fill="url(#grad)"/>
+  <g transform="translate(371,121)" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 8V4H8"/><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/>
+  </g>
+  <text x="414" y="127" fill="#ededed" font-size="17" font-weight="600">Бот кофейни</text>
+  <circle cx="418" cy="147" r="4" fill="#10b981"/>
+  <text x="430" y="152" fill="#a1a1a1" font-size="13">онлайн</text>
+  <line x1="340" y1="176" x2="860" y2="176" stroke="#2a2a2a"/>
+
+  <!-- пузырь бота -->
+  <rect x="364" y="200" width="270" height="46" rx="14" fill="#1f1f1f"/>
+  <text x="384" y="228" fill="#ededed" font-size="15">Здравствуйте! Чем могу помочь?</text>
+
+  <!-- пузырь клиента -->
+  <rect x="470" y="262" width="366" height="46" rx="14" fill="#8b5cf6"/>
+  <text x="816" y="290" text-anchor="end" fill="#ffffff" font-size="15">Столик на 4, сегодня в 19:00</text>
+
+  <!-- пузырь бота с подтверждением -->
+  <rect x="364" y="324" width="352" height="46" rx="14" fill="#1f1f1f"/>
+  <g transform="translate(380,340)" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 6 9 17l-5-5"/>
+  </g>
+  <text x="410" y="352" fill="#ededed" font-size="15">Готово, стол забронирован на 19:00</text>
+
+  <!-- inline-кнопки -->
+  <rect x="364" y="388" width="120" height="38" rx="10" fill="#161616" stroke="#3a3a3a"/>
+  <text x="424" y="412" text-anchor="middle" fill="#c084fc" font-size="14">Меню</text>
+  <rect x="496" y="388" width="168" height="38" rx="10" fill="#161616" stroke="#3a3a3a"/>
+  <text x="580" y="412" text-anchor="middle" fill="#c084fc" font-size="14">Как проехать</text>
+
+  <!-- поле ввода -->
+  <rect x="364" y="454" width="472" height="46" rx="23" fill="#1a1a1a" stroke="#2a2a2a"/>
+  <text x="388" y="482" fill="#8f8f8f" font-size="14">Сообщение…</text>
+  <circle cx="812" cy="477" r="18" fill="url(#grad)"/>
+  <g transform="translate(802,467)" fill="none" stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 2 11 13"/><path d="M22 2 15 22 11 13 2 9 22 2z"/>
+  </g>
+</svg>
