@@ -37,7 +37,7 @@
   </g>
   <text x="362" y="116" fill="#ededed" font-size="19" font-weight="600">Бот салона красоты</text>
   <circle cx="367" cy="134" r="4" fill="#10b981"/>
-  <text x="379" y="139" fill="#a1a1a1" font-size="13.5">онлайн, отвечает мгновенно</text>
+  <text x="379" y="139" fill="#a1a1a1" font-size="13.5">онлайн</text>
   <line x1="280" y1="158" x2="920" y2="158" stroke="#242424"/>
 
   <!-- клиент: запрос -->
@@ -54,17 +54,18 @@
   <text x="854" y="367" text-anchor="middle" fill="#ffffff" font-size="16.5">16:30</text>
 
   <!-- бот: подтверждение -->
-  <rect x="304" y="400" width="347" height="50" rx="16" fill="#1f1f1f"/>
-  <g transform="translate(322,414)" fill="none" stroke="#10b981" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M20 6 9 17l-5-5" transform="scale(0.9)"/>
-  </g>
-  <text x="350" y="431" fill="#ededed" font-size="16.5">Записал на 16:30. Напомню за 2 часа</text>
+  <rect x="304" y="400" width="321" height="50" rx="16" fill="#1f1f1f"/>
+  <text x="324" y="431" fill="#ededed" font-size="16.5">Записал на 16:30. Напомню за 2 часа</text>
 
   <!-- быстрые кнопки -->
   <rect x="304" y="470" width="81" height="40" rx="12" fill="#191919" stroke="#3a3a3a"/>
   <text x="344" y="495" text-anchor="middle" fill="#c084fc" font-size="14.5">Прайс</text>
   <rect x="397" y="470" width="160" height="40" rx="12" fill="#191919" stroke="#3a3a3a"/>
   <text x="477" y="495" text-anchor="middle" fill="#c084fc" font-size="14.5">Перенести запись</text>
+  <rect x="569" y="470" width="80" height="40" rx="12" fill="#191919" stroke="#3a3a3a"/>
+  <text x="609" y="495" text-anchor="middle" fill="#c084fc" font-size="14.5">Адрес</text>
+  <rect x="661" y="470" width="97" height="40" rx="12" fill="#191919" stroke="#3a3a3a"/>
+  <text x="709" y="495" text-anchor="middle" fill="#c084fc" font-size="14.5">Мастера</text>
 
   <!-- поле ввода -->
   <rect x="304" y="528" width="592" height="48" rx="24" fill="#1a1a1a" stroke="#2a2a2a"/>
