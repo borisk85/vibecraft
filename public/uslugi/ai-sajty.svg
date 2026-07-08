@@ -27,12 +27,17 @@
     <!-- шапка браузера: строка вкладок + панель навигации -->
     <rect x="150" y="76" width="900" height="72" fill="#181818"/>
     <rect x="150" y="76" width="900" height="38" fill="#0f0f0f"/>
-    <circle cx="172" cy="95" r="5" fill="#ff5f57"/><circle cx="190" cy="95" r="5" fill="#febc2e"/><circle cx="208" cy="95" r="5" fill="#28c840"/>
-    <path d="M230 114 v-22 a8 8 0 0 1 8-8 h174 a8 8 0 0 1 8 8 v22 z" fill="#181818"/>
-    <circle cx="248" cy="99" r="6" fill="url(#grad)"/>
-    <text x="264" y="103" fill="#ededed" font-size="12.5" font-weight="600">Кухни Алматы</text>
-    <g transform="translate(400,95)" stroke="#8f8f8f" stroke-width="1.3" stroke-linecap="round"><path d="M0 0l7 7M7 0l-7 7"/></g>
-    <g transform="translate(440,93)" stroke="#6b6b6b" stroke-width="1.5" stroke-linecap="round"><path d="M6 0v12M0 6h12"/></g>
+    <path d="M162 114 v-22 a8 8 0 0 1 8-8 h176 a8 8 0 0 1 8 8 v22 z" fill="#181818"/>
+    <circle cx="180" cy="99" r="6" fill="url(#grad)"/>
+    <text x="196" y="103" fill="#ededed" font-size="12.5" font-weight="600">Кухни Алматы</text>
+    <g transform="translate(334,95)" stroke="#8f8f8f" stroke-width="1.3" stroke-linecap="round"><path d="M0 0l7 7M7 0l-7 7"/></g>
+    <g transform="translate(372,93)" stroke="#6b6b6b" stroke-width="1.5" stroke-linecap="round"><path d="M6 0v12M0 6h12"/></g>
+    <!-- кнопки окна Windows: свернуть, развернуть, закрыть -->
+    <g stroke="#c9c9c9" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M964 95h11"/>
+      <rect x="996" y="90" width="10" height="10" rx="1"/>
+      <path d="M1028 90l10 10M1038 90l-10 10"/>
+    </g>
     <!-- навигация: назад, вперёд, обновить, домой -->
     <g fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
       <g transform="translate(172,124)" stroke="#b0b0b0"><path d="M13 6H1"/><path d="M6 1 1 6l5 5"/></g>
