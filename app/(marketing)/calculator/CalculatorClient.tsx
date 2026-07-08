@@ -131,7 +131,7 @@ export function CalculatorClient() {
               <span className="text-gradient">за минуту</span>
             </h1>
             <p className="mt-4 text-muted md:text-lg">
-              Опишите задачу обычным текстом, и наш ИИ-калькулятор выдаст вам
+              Опишите задачу обычным текстом, и мой ИИ-калькулятор выдаст вам
               ориентировочную стоимость.
             </p>
           </div>

@@ -604,7 +604,7 @@ export default function ChatWidget() {
                 onClick={openContactForm}
                 className="mt-2 flex w-full items-center justify-center gap-1 text-[10px] text-subtle transition-colors hover:text-muted"
               >
-                Не нашли ответ? Напишите нам →
+                Не нашли ответ? Напишите Борису →
               </button>
             ) : (
               <p className="mt-2 text-center text-[10px] leading-snug text-subtle">

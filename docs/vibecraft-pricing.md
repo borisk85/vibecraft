@@ -106,7 +106,7 @@ stylesheet_encoding: utf-8
 
 ТОЛЬКО бизнес-автоматизации с production-надежностью. Personal automation (Gmail/Calendar/Notion для одного пользователя) клиент сделает сам в Claude Desktop за 15 минут — за это денег НЕ берем.
 
-**Что входит в нашу услугу:**
+**Что входит в услугу:**
 - Серверный backend (24/7, не локальная машина клиента)
 - Триггеры из внешнего мира: webhooks с лендинга, формы CRM, входящие в WhatsApp/Telegram
 - Multi-user workflow для всей команды
