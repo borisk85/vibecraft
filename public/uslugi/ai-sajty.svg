@@ -14,7 +14,7 @@
     </filter>
     <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="80"/></filter>
     <clipPath id="win"><rect x="150" y="76" width="900" height="520" rx="18"/></clipPath>
-    <clipPath id="chat"><rect x="664" y="252" width="356" height="272" rx="16"/></clipPath>
+    <clipPath id="chat"><rect x="700" y="252" width="300" height="256" rx="16"/></clipPath>
   </defs>
 
   <rect x="1" y="1" width="1198" height="638" rx="20" fill="#0b0b0b" stroke="#1f1f1f"/>
@@ -33,7 +33,7 @@
     <rect x="150" y="76" width="900" height="38" fill="#0f0f0f"/>
     <path d="M162 114 v-22 a8 8 0 0 1 8-8 h176 a8 8 0 0 1 8 8 v22 z" fill="#181818"/>
     <circle cx="180" cy="99" r="6" fill="url(#grad)"/>
-    <text x="196" y="103" fill="#ededed" font-size="12.5" font-weight="600">Ваш бизнес</text>
+    <text x="196" y="103" fill="#ededed" font-size="12.5" font-weight="600">Nova</text>
     <g transform="translate(334,95)" stroke="#8f8f8f" stroke-width="1.3" stroke-linecap="round"><path d="M0 0l7 7M7 0l-7 7"/></g>
     <g transform="translate(372,93)" stroke="#6b6b6b" stroke-width="1.5" stroke-linecap="round"><path d="M6 0v12M0 6h12"/></g>
     <g stroke="#c9c9c9" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -51,85 +51,67 @@
     <g transform="translate(300,124)" stroke="#8f8f8f" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <rect x="0" y="5" width="9" height="6.5" rx="1.4"/><path d="M1.7 5V3.7a2.8 2.8 0 0 1 5.6 0V5"/>
     </g>
-    <text x="320" y="135" fill="#8f8f8f" font-size="12.5" font-family="ui-monospace, monospace">vashbiznes.kz</text>
+    <text x="320" y="135" fill="#8f8f8f" font-size="12.5" font-family="ui-monospace, monospace">nova.kz</text>
     <g transform="translate(902,125)" fill="none" stroke="#8f8f8f" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 0.5l1.6 3.5 3.9.4-2.9 2.6.8 3.8L6 8.9 2.6 10.8l.8-3.8L.5 4.4l3.9-.4z"/></g>
     <g transform="translate(1010,123)" fill="#8f8f8f"><circle cx="0" cy="0" r="1.5"/><circle cx="0" cy="5.5" r="1.5"/><circle cx="0" cy="11" r="1.5"/></g>
     <line x1="150" y1="148" x2="1050" y2="148" stroke="#242424"/>
 
     <!-- навигация сайта -->
-    <rect x="188" y="186" width="24" height="24" rx="7" fill="url(#grad)"/>
-    <text x="222" y="205" fill="#ededed" font-size="16" font-weight="700">Ваш бизнес</text>
-    <text x="600" y="204" fill="#8f8f8f" font-size="14">Услуги</text>
-    <text x="686" y="204" fill="#8f8f8f" font-size="14">Цены</text>
-    <text x="748" y="204" fill="#8f8f8f" font-size="14">Кейсы</text>
-    <text x="822" y="204" fill="#8f8f8f" font-size="14">Контакты</text>
-    <line x1="150" y1="224" x2="1050" y2="224" stroke="#1e1e1e"/>
+    <text x="210" y="192" fill="#ededed" font-size="18" font-weight="700">Nova</text>
+    <text x="560" y="191" fill="#8f8f8f" font-size="14">Возможности</text>
+    <text x="696" y="191" fill="#8f8f8f" font-size="14">Тарифы</text>
+    <text x="786" y="191" fill="#8f8f8f" font-size="14">Контакты</text>
+    <line x1="150" y1="212" x2="1050" y2="212" stroke="#1c1c1c"/>
 
-    <!-- герой -->
-    <rect x="190" y="250" width="188" height="28" rx="14" fill="#1a1a1a" stroke="#2a2a2a"/>
-    <text x="207" y="268" fill="#c084fc" font-size="12" font-weight="600">★ 4.9</text>
-    <text x="249" y="268" fill="#a1a1a1" font-size="12">240 отзывов клиентов</text>
-    <text x="190" y="330" fill="#ededed" font-size="31" font-weight="700">Услуги и запись</text>
-    <text x="190" y="370" fill="#ededed" font-size="31" font-weight="700">онлайн за минуту</text>
-    <text x="190" y="410" fill="#a1a1a1" font-size="15">Отвечаем на вопросы и оформляем заявки круглосуточно</text>
-    <rect x="190" y="436" width="206" height="48" rx="12" fill="url(#grad)"/>
-    <text x="293" y="466" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">Оставить заявку</text>
-    <text x="418" y="465" fill="#c084fc" font-size="14" font-weight="500">Смотреть услуги →</text>
-
-    <!-- доверие: логотипы клиентов -->
-    <text x="190" y="524" fill="#6b6b6b" font-size="12" letter-spacing="0.5">НАМ ДОВЕРЯЮТ</text>
-    <rect x="190" y="536" width="70" height="28" rx="7" fill="#141414" stroke="#232323"/>
-    <circle cx="208" cy="550" r="6" fill="#3a3a3a"/><rect x="220" y="547" width="28" height="6" rx="3" fill="#333333"/>
-    <rect x="274" y="536" width="82" height="28" rx="7" fill="#141414" stroke="#232323"/>
-    <rect x="288" y="546" width="54" height="8" rx="4" fill="#333333"/>
-    <rect x="370" y="536" width="66" height="28" rx="7" fill="#141414" stroke="#232323"/>
-    <circle cx="388" cy="550" r="6" fill="#3a3a3a"/><rect x="400" y="547" width="24" height="6" rx="3" fill="#333333"/>
-    <rect x="450" y="536" width="88" height="28" rx="7" fill="#141414" stroke="#232323"/>
-    <rect x="464" y="546" width="60" height="8" rx="4" fill="#333333"/>
+    <!-- герой: минимум элементов, крупные интервалы -->
+    <rect x="210" y="240" width="196" height="28" rx="14" fill="#1a1a1a" stroke="#2a2a2a"/>
+    <text x="228" y="258" fill="#c084fc" font-size="12" font-weight="600">★ 4.9</text>
+    <text x="270" y="258" fill="#a1a1a1" font-size="12">· 240 отзывов</text>
+    <text x="210" y="328" fill="#ededed" font-size="30" font-weight="700">Запись и заявки</text>
+    <text x="210" y="372" fill="#ededed" font-size="30" font-weight="700">на автопилоте</text>
+    <text x="210" y="416" fill="#a1a1a1" font-size="15">Отвечаем клиентам и оформляем записи 24/7</text>
+    <rect x="210" y="446" width="212" height="50" rx="12" fill="url(#grad)"/>
+    <text x="316" y="477" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">Начать бесплатно</text>
 
     <!-- чат-виджет в правом нижнем углу (по образцу ChatWidget.tsx) -->
     <g filter="url(#drop)">
-      <rect x="664" y="252" width="356" height="272" rx="16" fill="#1a1a1a" stroke="#2a2a2a"/>
+      <rect x="700" y="252" width="300" height="256" rx="16" fill="#1a1a1a" stroke="#2a2a2a"/>
     </g>
     <g clip-path="url(#chat)">
-      <rect x="664" y="252" width="356" height="52" fill="#111111"/>
+      <rect x="700" y="252" width="300" height="50" fill="#111111"/>
     </g>
-    <line x1="664" y1="304" x2="1020" y2="304" stroke="#2a2a2a"/>
+    <line x1="700" y1="302" x2="1000" y2="302" stroke="#2a2a2a"/>
 
     <!-- шапка виджета -->
-    <text x="688" y="280" fill="#ededed" font-size="15" font-weight="600">ИИ-консультант</text>
-    <text x="688" y="297" fill="#10b981" font-size="12">Онлайн</text>
-    <g transform="translate(1000,278)" stroke="#8f8f8f" stroke-width="1.5" stroke-linecap="round"><path d="M0 0l11 11M11 0l-11 11"/></g>
+    <text x="720" y="280" fill="#ededed" font-size="14" font-weight="600">ИИ-консультант</text>
+    <text x="720" y="296" fill="#10b981" font-size="11.5">Онлайн</text>
+    <g transform="translate(982,278)" stroke="#8f8f8f" stroke-width="1.5" stroke-linecap="round"><path d="M0 0l10 10M10 0l-10 10"/></g>
 
-    <!-- приветствие ассистента -->
-    <circle cx="688" cy="334" r="14" fill="#111111"/>
-    <text x="688" y="339" text-anchor="middle" fill="#c084fc" font-size="13" font-weight="600">V</text>
-    <rect x="712" y="320" width="245" height="52" rx="14" fill="#111111"/>
-    <text x="728" y="343" fill="#ededed" font-size="13.5">Здравствуйте! Я ИИ-консультант.</text>
-    <text x="728" y="362" fill="#ededed" font-size="13.5">Помогу с услугами и записью.</text>
+    <!-- приветствие ассистента (нейтральный аватар — градиентный кружок) -->
+    <circle cx="710" cy="332" r="11" fill="url(#grad)"/>
+    <rect x="728" y="316" width="204" height="32" rx="13" fill="#111111"/>
+    <text x="744" y="337" fill="#ededed" font-size="13.5">Здравствуйте! Чем помочь?</text>
 
     <!-- сообщение посетителя -->
-    <rect x="837" y="386" width="163" height="34" rx="14" fill="url(#grad)"/>
-    <text x="984" y="408" text-anchor="end" fill="#ffffff" font-size="13.5">Работаете в субботу?</text>
+    <rect x="818" y="362" width="166" height="32" rx="13" fill="url(#grad)"/>
+    <text x="968" y="383" text-anchor="end" fill="#ffffff" font-size="13.5">Работаете в субботу?</text>
 
     <!-- ответ ассистента -->
-    <circle cx="688" cy="448" r="14" fill="#111111"/>
-    <text x="688" y="453" text-anchor="middle" fill="#c084fc" font-size="13" font-weight="600">V</text>
-    <rect x="712" y="434" width="210" height="34" rx="14" fill="#111111"/>
-    <text x="728" y="456" fill="#ededed" font-size="13.5">Да, в субботу с 9:00 до 18:00.</text>
+    <circle cx="710" cy="424" r="11" fill="url(#grad)"/>
+    <rect x="728" y="408" width="172" height="32" rx="13" fill="#111111"/>
+    <text x="744" y="429" fill="#ededed" font-size="13.5">Да, с 9:00 до 18:00.</text>
 
     <!-- поле ввода -->
-    <line x1="664" y1="482" x2="1020" y2="482" stroke="#2a2a2a"/>
-    <rect x="684" y="492" width="316" height="34" rx="11" fill="#111111"/>
-    <text x="700" y="514" fill="#8f8f8f" font-size="13.5">Задайте вопрос...</text>
-    <text x="950" y="516" font-size="16">😊</text>
-    <rect x="970" y="496" width="26" height="26" rx="7" fill="#8b5cf6"/>
-    <g transform="translate(976,502)" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 0L0 5l5 2 2 5z"/></g>
+    <line x1="700" y1="460" x2="1000" y2="460" stroke="#2a2a2a"/>
+    <rect x="720" y="470" width="260" height="30" rx="11" fill="#111111"/>
+    <text x="736" y="490" fill="#8f8f8f" font-size="12.5">Задайте вопрос...</text>
+    <rect x="946" y="472" width="26" height="26" rx="7" fill="#8b5cf6"/>
+    <g transform="translate(952,478)" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 0L0 5l5 2 2 5z"/></g>
 
     <!-- плавающая кнопка виджета (FAB) -->
     <g filter="url(#fab)">
-      <circle cx="996" cy="560" r="20" fill="url(#grad)"/>
+      <circle cx="996" cy="556" r="19" fill="url(#grad)"/>
     </g>
-    <g transform="translate(988,552)" stroke="#ffffff" stroke-width="2" stroke-linecap="round"><path d="M0 0l16 16M16 0l-16 16"/></g>
+    <g transform="translate(988,548)" stroke="#ffffff" stroke-width="2" stroke-linecap="round"><path d="M0 0l16 16M16 0l-16 16"/></g>
   </g>
 </svg>
