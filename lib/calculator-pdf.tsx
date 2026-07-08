@@ -374,7 +374,7 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
             <View style={styles.logoBlock}>
               <Text style={styles.logoText}>vibecraft</Text>
               <Text style={styles.logoSubtext}>
-                AI-разработка и автоматизации · Казахстан
+                ИИ-разработка и автоматизации · Казахстан
               </Text>
             </View>
           </View>
@@ -475,7 +475,7 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
         <View style={styles.footer} wrap={false}>
           <Text style={styles.footerBrand}>
             <Text style={styles.footerBrandBold}>Vibecraft</Text> —
-            AI-разработка и автоматизации · Казахстан
+            ИИ-разработка и автоматизации · Казахстан
           </Text>
           <Text style={styles.footerContacts}>
             Telegram:{" "}

@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { V_PATH, V_VIEWBOX } from "@/lib/logo-path";
 
 export const runtime = "edge";
-export const alt = "Vibecraft · AI-разработка";
+export const alt = "Vibecraft · ИИ-разработка";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -73,7 +73,7 @@ export default async function OgImage() {
             textAlign: "center",
           }}
         >
-          AI-разработка и автоматизации в Казахстане
+          ИИ-разработка и автоматизации в Казахстане
         </div>
       </div>
     ),

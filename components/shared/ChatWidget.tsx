@@ -15,7 +15,7 @@ interface Message {
 const STORAGE_KEY = "vibecraft_chat";
 const PROACTIVE_KEY = "vibecraft_chat_proactive_shown";
 const GREETING =
-  "Здравствуйте! Я AI-консультант Vibecraft. Помогу разобраться с услугами, ценами, сроками — что вас интересует?";
+  "Здравствуйте! Я ИИ-консультант Vibecraft. Помогу разобраться с услугами, ценами, сроками — что вас интересует?";
 const PROACTIVE_TEXT =
   "Здравствуйте 👋 Если появятся вопросы по услугам или ценам — напишите мне.";
 const HISTORY_TTL_MS = 24 * 60 * 60 * 1000;
@@ -448,7 +448,7 @@ export default function ChatWidget() {
 
       {open && view === "chat" && (
         <div className={panelClass}>
-          {chatHeader("AI-консультант")}
+          {chatHeader("ИИ-консультант")}
 
           <div className="flex-1 space-y-3 overflow-y-auto overflow-x-hidden px-4 py-4 min-h-[260px] max-h-[340px] sm:min-h-[340px] sm:max-h-[440px]">
             {messages.map((m, i) => (
@@ -608,7 +608,7 @@ export default function ChatWidget() {
               </button>
             ) : (
               <p className="mt-2 text-center text-[10px] leading-snug text-subtle">
-                AI-консультант может ошибаться — важные моменты уточняйте лично у Бориса в{" "}
+                ИИ-консультант может ошибаться — важные моменты уточняйте лично у Бориса в{" "}
                 <a
                   href={siteConfig.contacts.telegram}
                   target="_blank"

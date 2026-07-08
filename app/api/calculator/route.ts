@@ -122,7 +122,7 @@ async function sendEmailToClient(
       <img src="https://vibecraft.kz/icon" alt="Vibecraft" width="32" height="32" style="display:block;border-radius:6px;" />
       <div>
         <div style="font-size:20px;font-weight:700;letter-spacing:-0.4px;color:#0a0a0a;line-height:1;">vibecraft</div>
-        <div style="font-size:11px;color:#5a5a5a;margin-top:4px;">AI-разработка и автоматизации · Казахстан</div>
+        <div style="font-size:11px;color:#5a5a5a;margin-top:4px;">ИИ-разработка и автоматизации · Казахстан</div>
       </div>
     </div>
 
@@ -140,7 +140,7 @@ async function sendEmailToClient(
     </div>
 
     <div style="border-top:1px solid #e5e5e5;padding-top:16px;font-size:11px;color:#5a5a5a;">
-      <div style="margin-bottom:8px;"><strong style="color:#0a0a0a;">Vibecraft</strong> — AI-разработка и автоматизации · Казахстан</div>
+      <div style="margin-bottom:8px;"><strong style="color:#0a0a0a;">Vibecraft</strong> — ИИ-разработка и автоматизации · Казахстан</div>
       <div>Telegram: <a href="https://t.me/borisk85" style="color:#8B5CF6;text-decoration:none;">@borisk85</a> · Email: hello@vibecraft.kz · Сайт: <a href="https://vibecraft.kz" style="color:#8B5CF6;text-decoration:none;">vibecraft.kz</a></div>
     </div>
   </div>
@@ -188,7 +188,7 @@ async function sendEmailToClient(
 // $0.005 которые сжигает Sonnet на бессмысленный запрос.
 const SPAM_FILTER_PROMPT = `Ты классифицируешь описание клиента для ИИ-калькулятора стоимости разработки.
 
-Услуги: боты, ИИ-агенты, AI-сайты, MVP веб/мобильных приложений, автоматизации.
+Услуги: боты, ИИ-агенты, ИИ-сайты, MVP веб/мобильных приложений, автоматизации.
 
 Категории:
 

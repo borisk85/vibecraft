@@ -33,7 +33,7 @@ export default function BlogIndexPage() {
               Блог
             </span>
             <h1 className="text-balance text-4xl font-semibold tracking-tight md:text-5xl">
-              Статьи об AI-разработке и рынке КЗ
+              Статьи об ИИ-разработке и рынке КЗ
             </h1>
             <p className="max-w-2xl text-pretty text-base text-muted md:text-lg">
               Разборы реальных проектов, цены, процесс разработки с Claude

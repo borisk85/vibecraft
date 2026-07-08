@@ -21,7 +21,7 @@ const serviceLinks = [
   { href: "/uslugi/chat-boty", label: "Боты" },
   { href: "/uslugi/ai-agenty", label: "ИИ-агенты" },
   { href: "/uslugi/veb-prilozheniya", label: "MVP веб-приложений" },
-  { href: "/uslugi/ai-sajty", label: "AI-сайты" },
+  { href: "/uslugi/ai-sajty", label: "ИИ-сайты" },
   { href: "/uslugi/avtomatizacii", label: "Автоматизации" },
   { href: "/uslugi/mobilnye-prilozheniya", label: "MVP мобильных приложений" },
 ];

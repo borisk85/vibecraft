@@ -29,7 +29,7 @@ export function Hero() {
       <Container className="relative">
         <div className="flex flex-col items-center text-center">
           <h1 className="max-w-5xl text-balance text-5xl font-semibold leading-[1.05] tracking-tight md:text-6xl lg:text-7xl">
-            AI-разработка.{" "}
+            ИИ-разработка.{" "}
             <span className="text-gradient">От идеи до продакшна.</span>
           </h1>
 
@@ -40,7 +40,7 @@ export function Hero() {
             custom={0.1}
             className="mt-6 max-w-3xl text-pretty text-lg text-muted md:text-xl"
           >
-            Собираю ботов, ИИ-агентов, AI-сайты, MVP веб- и мобильных
+            Собираю ботов, ИИ-агентов, ИИ-сайты, MVP веб- и мобильных
             приложений, автоматизации. Запускаю за недели, не месяцы — без
             бюджета большой студии.
           </motion.p>

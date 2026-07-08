@@ -58,7 +58,7 @@ export function Footer() {
             <span className="font-mono text-sm font-semibold">vibecraft</span>
           </div>
           <span className="text-sm text-subtle md:ml-4">
-            AI-разработка и автоматизации · Казахстан
+            ИИ-разработка и автоматизации · Казахстан
           </span>
         </div>
 

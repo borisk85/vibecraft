@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 /*
   Прием feedback от чат-виджета. При нажатии thumbs up/down на ответ
-  AI-консультанта шлет уведомление в Telegram владельца с вопросом
+  ИИ-консультанта шлет уведомление в Telegram владельца с вопросом
   клиента и ответом AI — чтобы видеть когда AI облажался или сработал
   хорошо, и подкручивать системный промпт.
 */
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
     const label = rating === "up" ? "лайк" : "дизлайк";
 
     const lines = [
-      `${emoji} <b>AI-консультант: ${label}</b>`,
+      `${emoji} <b>ИИ-консультант: ${label}</b>`,
       "",
       userQuestion
         ? `<b>Вопрос клиента:</b>\n${escapeHtml(userQuestion)}\n`

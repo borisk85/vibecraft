@@ -13,7 +13,7 @@ export function About() {
           <div className="relative mx-auto order-2 aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-accent/30 bg-card lg:order-1">
             <Image
               src="/boris.jpg"
-              alt="Борис Комаров — AI-фаундер Vibecraft"
+              alt="Борис Комаров — ИИ-фаундер Vibecraft"
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 320px"
@@ -26,7 +26,7 @@ export function About() {
               Обо мне
             </span>
             <h2 className="text-balance text-3xl font-semibold tracking-tight md:text-4xl">
-              Привет. Я <span className="text-gradient">AI-фаундер</span> из
+              Привет. Я <span className="text-gradient">ИИ-фаундер</span> из
               Алматы
             </h2>
             <div className="flex flex-col gap-4 text-muted leading-relaxed md:text-lg">
