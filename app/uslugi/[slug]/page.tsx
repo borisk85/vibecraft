@@ -258,7 +258,7 @@ export default async function ServicePage({
               <p className="text-sm text-muted">
                 Не уверены в бюджете?{" "}
                 <Link href="/calculator" className="text-accent-text hover:underline">
-                  прикиньте стоимость в калькуляторе
+                  Прикиньте стоимость в калькуляторе
                 </Link>{" "}
                 за минуту.
               </p>

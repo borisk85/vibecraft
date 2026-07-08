@@ -172,7 +172,7 @@ export function FinalCTA() {
                 href="/calculator"
                 className="text-accent-text hover:underline"
               >
-                прикиньте стоимость в калькуляторе
+                Прикиньте стоимость в калькуляторе
               </Link>{" "}
               за минуту.
             </p>
