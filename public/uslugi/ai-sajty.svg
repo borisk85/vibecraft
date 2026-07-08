@@ -54,7 +54,7 @@
     <g transform="translate(1010,123)" fill="#8f8f8f"><circle cx="0" cy="0" r="1.5"/><circle cx="0" cy="5.5" r="1.5"/><circle cx="0" cy="11" r="1.5"/></g>
     <line x1="150" y1="148" x2="1050" y2="148" stroke="#242424"/>
 
-    <g transform="translate(0,24)">
+    <g transform="translate(0,148) scale(1,0.94) translate(0,-124)">
     <!-- шапка сайта клиента -->
     <text x="190" y="164" fill="#ededed" font-size="17" font-weight="700">Кухни Алматы</text>
     <text x="800" y="163" fill="#8f8f8f" font-size="14">Каталог</text>
