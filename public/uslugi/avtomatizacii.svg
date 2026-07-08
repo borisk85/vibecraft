@@ -36,7 +36,6 @@
 
   <!-- Node A: Заявка -->
   <rect x="60" y="250" width="250" height="140" rx="16" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1"/>
-  <rect x="84" y="276" width="44" height="44" rx="10" fill="#111111" stroke="#2a2a2a"/>
   <g transform="translate(94,286)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <path d="M22 12h-6l-2 3h-4l-2-3H2"/>
     <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/>
@@ -50,12 +49,11 @@
   <g transform="translate(511,274)" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <path d="M9.94 14.5A2 2 0 0 0 8.5 13.06l-4.6-1.19a.4.4 0 0 1 0-.74l4.6-1.19A2 2 0 0 0 9.94 8.5l1.19-4.6a.4.4 0 0 1 .74 0l1.19 4.6A2 2 0 0 0 15.5 9.94l4.6 1.19a.4.4 0 0 1 0 .74l-4.6 1.19A2 2 0 0 0 13.06 14.5l-1.19 4.6a.4.4 0 0 1-.74 0z"/>
   </g>
-  <text x="499" y="356" fill="#ededed" font-size="22" font-weight="600">AI разбирает</text>
+  <text x="499" y="356" fill="#ededed" font-size="22" font-weight="600">ИИ разбирает</text>
   <text x="499" y="382" fill="#a1a1a1" font-size="14">понимает суть, извлекает данные</text>
 
   <!-- Node C1: CRM -->
   <rect x="890" y="90" width="250" height="130" rx="16" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1"/>
-  <rect x="914" y="114" width="44" height="44" rx="10" fill="#111111" stroke="#2a2a2a"/>
   <g transform="translate(924,124)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <ellipse cx="12" cy="5" rx="9" ry="3"/>
     <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
@@ -66,17 +64,15 @@
 
   <!-- Node C2: Telegram -->
   <rect x="890" y="255" width="250" height="130" rx="16" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1"/>
-  <rect x="914" y="279" width="44" height="44" rx="10" fill="#111111" stroke="#2a2a2a"/>
   <g transform="translate(924,289)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <path d="M22 2 11 13"/>
     <path d="M22 2 15 22 11 13 2 9 22 2z"/>
   </g>
-  <text x="914" y="349" fill="#ededed" font-size="20" font-weight="600">Уведомление вам</text>
-  <text x="914" y="371" fill="#a1a1a1" font-size="14">сразу в Telegram</text>
+  <text x="914" y="349" fill="#ededed" font-size="20" font-weight="600">Уведомление</text>
+  <text x="914" y="371" fill="#a1a1a1" font-size="14">менеджеру сразу в Telegram</text>
 
   <!-- Node C3: Счет + ЭСФ -->
   <rect x="890" y="420" width="250" height="130" rx="16" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="1"/>
-  <rect x="914" y="444" width="44" height="44" rx="10" fill="#111111" stroke="#2a2a2a"/>
   <g transform="translate(924,454)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
     <path d="M14 2v6h6"/>
