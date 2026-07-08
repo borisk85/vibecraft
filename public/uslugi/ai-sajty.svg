@@ -19,7 +19,7 @@
 
   <text x="600" y="40" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">САЙТ С ИИ-ФУНКЦИЕЙ</text>
 
-  <!-- окно браузера: сайт клиента с AI-калькулятором -->
+  <!-- окно браузера: сайт клиента со встроенным ИИ-чат-консультантом -->
   <g filter="url(#drop)">
     <rect x="150" y="76" width="900" height="520" rx="18" fill="#131313" stroke="#2a2a2a"/>
   </g>
@@ -29,7 +29,7 @@
     <rect x="150" y="76" width="900" height="38" fill="#0f0f0f"/>
     <path d="M162 114 v-22 a8 8 0 0 1 8-8 h176 a8 8 0 0 1 8 8 v22 z" fill="#181818"/>
     <circle cx="180" cy="99" r="6" fill="url(#grad)"/>
-    <text x="196" y="103" fill="#ededed" font-size="12.5" font-weight="600">Кухни Алматы</text>
+    <text x="196" y="103" fill="#ededed" font-size="12.5" font-weight="600">Клиника Улыбка</text>
     <g transform="translate(334,95)" stroke="#8f8f8f" stroke-width="1.3" stroke-linecap="round"><path d="M0 0l7 7M7 0l-7 7"/></g>
     <g transform="translate(372,93)" stroke="#6b6b6b" stroke-width="1.5" stroke-linecap="round"><path d="M6 0v12M0 6h12"/></g>
     <!-- кнопки окна Windows: свернуть, развернуть, закрыть -->
@@ -49,41 +49,53 @@
     <g transform="translate(300,124)" stroke="#8f8f8f" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <rect x="0" y="5" width="9" height="6.5" rx="1.4"/><path d="M1.7 5V3.7a2.8 2.8 0 0 1 5.6 0V5"/>
     </g>
-    <text x="320" y="135" fill="#8f8f8f" font-size="12.5" font-family="ui-monospace, monospace">kuhni-almaty.kz</text>
+    <text x="320" y="135" fill="#8f8f8f" font-size="12.5" font-family="ui-monospace, monospace">ulybka.kz</text>
     <g transform="translate(902,125)" fill="none" stroke="#8f8f8f" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 0.5l1.6 3.5 3.9.4-2.9 2.6.8 3.8L6 8.9 2.6 10.8l.8-3.8L.5 4.4l3.9-.4z"/></g>
     <g transform="translate(1010,123)" fill="#8f8f8f"><circle cx="0" cy="0" r="1.5"/><circle cx="0" cy="5.5" r="1.5"/><circle cx="0" cy="11" r="1.5"/></g>
     <line x1="150" y1="148" x2="1050" y2="148" stroke="#242424"/>
 
     <g transform="translate(0,148) scale(1,0.94) translate(0,-124)">
     <!-- шапка сайта клиента -->
-    <text x="190" y="164" fill="#ededed" font-size="17" font-weight="700">Кухни Алматы</text>
-    <text x="800" y="163" fill="#8f8f8f" font-size="14">Каталог</text>
-    <text x="884" y="163" fill="#8f8f8f" font-size="14">Цены</text>
-    <text x="952" y="163" fill="#8f8f8f" font-size="14">Контакты</text>
+    <text x="190" y="164" fill="#ededed" font-size="17" font-weight="700">Клиника Улыбка</text>
+    <text x="470" y="163" fill="#8f8f8f" font-size="14">Услуги</text>
+    <text x="548" y="163" fill="#8f8f8f" font-size="14">Цены</text>
+    <text x="612" y="163" fill="#8f8f8f" font-size="14">Контакты</text>
 
-    <!-- заголовок с AI-бейджем -->
-    <text x="600" y="228" text-anchor="middle" fill="#ededed" font-size="30" font-weight="700">Узнайте стоимость своей кухни</text>
-    <text x="600" y="258" text-anchor="middle" fill="#a1a1a1" font-size="15">Опишите задачу обычным текстом, ИИ-калькулятор посчитает смету</text>
+    <!-- левая колонка: сайт клиента -->
+    <text x="190" y="256" fill="#ededed" font-size="27" font-weight="700">Стоматология</text>
+    <text x="190" y="292" fill="#ededed" font-size="27" font-weight="700">без боли и очередей</text>
+    <text x="190" y="332" fill="#a1a1a1" font-size="15">Запишитесь онлайн за минуту</text>
+    <rect x="190" y="360" width="210" height="46" rx="12" fill="url(#grad)"/>
+    <text x="295" y="389" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">Записаться на прием</text>
 
-    <!-- поле ввода с запросом человека -->
-    <rect x="280" y="286" width="640" height="64" rx="14" fill="#1a1a1a" stroke="#2a2a2a"/>
-    <text x="304" y="324" fill="#ededed" font-size="15.5">Кухня под ключ 3 метра, фасады МДФ, со встроенной техникой</text>
+    <!-- правая колонка: встроенный ИИ-чат-консультант -->
+    <rect x="636" y="186" width="382" height="382" rx="18" fill="#161616" stroke="#8b5cf6" stroke-width="1.3"/>
+    <circle cx="668" cy="224" r="15" fill="url(#grad)"/>
+    <text x="692" y="220" fill="#ededed" font-size="15" font-weight="600">Консультант</text>
+    <circle cx="694" cy="238" r="3.2" fill="#10b981"/>
+    <text x="705" y="242" fill="#8f8f8f" font-size="12">онлайн</text>
+    <line x1="636" y1="258" x2="1018" y2="258" stroke="#2a2a2a"/>
 
-    <!-- кнопка -->
-    <rect x="500" y="370" width="200" height="46" rx="12" fill="url(#grad)"/>
-    <text x="600" y="399" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">Посчитать стоимость</text>
+    <!-- сообщение ассистента -->
+    <rect x="656" y="276" width="304" height="54" rx="12" fill="#8b5cf6" fill-opacity="0.16"/>
+    <text x="674" y="300" fill="#ededed" font-size="13.5">Здравствуйте! Помогу записаться и</text>
+    <text x="674" y="319" fill="#ededed" font-size="13.5">ответить на вопросы о клинике</text>
 
-    <!-- результат: смета -->
-    <rect x="280" y="440" width="640" height="122" rx="14" fill="#161616" stroke="#8b5cf6" stroke-width="1.3"/>
-    <circle cx="316" cy="476" r="15" fill="url(#grad)"/>
-    <g transform="translate(308,468)" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M9.94 14.5A2 2 0 0 0 8.5 13.06l-4.6-1.19a.4.4 0 0 1 0-.74l4.6-1.19A2 2 0 0 0 9.94 8.5l1.19-4.6a.4.4 0 0 1 .74 0l1.19 4.6A2 2 0 0 0 15.5 9.94l4.6 1.19a.4.4 0 0 1 0 .74l-4.6 1.19A2 2 0 0 0 13.06 14.5l-1.19 4.6a.4.4 0 0 1-.74 0z" transform="scale(0.67)"/>
-    </g>
-    <text x="342" y="472" fill="#8f8f8f" font-size="13">Примерная смета</text>
-    <text x="342" y="500" fill="#ededed" font-size="21" font-weight="700" font-family="ui-monospace, monospace">850 000 – 1 200 000 ₸</text>
-    <text x="342" y="530" fill="#a1a1a1" font-size="14">срок 3-4 недели, точная цена после замера</text>
-    <rect x="756" y="486" width="140" height="40" rx="11" fill="url(#grad)"/>
-    <text x="826" y="511" text-anchor="middle" fill="#ffffff" font-size="14" font-weight="600">Оставить заявку</text>
+    <!-- сообщение посетителя -->
+    <rect x="742" y="346" width="256" height="36" rx="12" fill="#2f2f2f"/>
+    <text x="978" y="369" text-anchor="end" fill="#ededed" font-size="13.5">Работаете в субботу?</text>
+
+    <!-- ответ ассистента -->
+    <rect x="656" y="398" width="332" height="72" rx="12" fill="#8b5cf6" fill-opacity="0.16"/>
+    <text x="674" y="422" fill="#ededed" font-size="13.5">Да, в субботу принимаем с 9:00</text>
+    <text x="674" y="441" fill="#ededed" font-size="13.5">до 15:00. Записать вас? На какое</text>
+    <text x="674" y="460" fill="#ededed" font-size="13.5">время удобно?</text>
+
+    <!-- поле ввода -->
+    <rect x="656" y="500" width="318" height="44" rx="12" fill="#0f0f0f" stroke="#2a2a2a"/>
+    <text x="676" y="527" fill="#8f8f8f" font-size="13.5">Спросите что угодно</text>
+    <circle cx="998" cy="522" r="15" fill="url(#grad)"/>
+    <g transform="translate(991,516)" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M0 6h11M6 1l5 5-5 5"/></g>
     </g>
   </g>
 </svg>
