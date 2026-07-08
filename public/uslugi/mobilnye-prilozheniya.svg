@@ -20,7 +20,7 @@
   <rect x="1" y="1" width="1198" height="638" rx="20" fill="url(#dots)"/>
   <ellipse cx="600" cy="320" rx="240" ry="200" fill="#8b5cf6" opacity="0.12" filter="url(#glow)"/>
 
-  <text x="600" y="56" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">MVP МОБИЛЬНОГО ПРИЛОЖЕНИЯ</text>
+  <text x="600" y="40" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">MVP МОБИЛЬНОГО ПРИЛОЖЕНИЯ</text>
 
   <!-- бейджи состава MVP: 4 разных факта -->
   <g filter="url(#dropSm)">
