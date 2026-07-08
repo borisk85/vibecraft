@@ -40,7 +40,7 @@ export function Hero() {
             custom={0.1}
             className="mt-6 max-w-3xl text-pretty text-lg text-muted md:text-xl"
           >
-            Собираю ботов, AI-агентов, AI-сайты, MVP веб- и мобильных
+            Собираю ботов, ИИ-агентов, AI-сайты, MVP веб- и мобильных
             приложений, автоматизации. Запускаю за недели, не месяцы — без
             бюджета большой студии.
           </motion.p>

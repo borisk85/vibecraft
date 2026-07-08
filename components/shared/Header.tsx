@@ -19,7 +19,7 @@ const navLinks = [
 
 const serviceLinks = [
   { href: "/uslugi/chat-boty", label: "Боты" },
-  { href: "/uslugi/ai-agenty", label: "AI-агенты" },
+  { href: "/uslugi/ai-agenty", label: "ИИ-агенты" },
   { href: "/uslugi/veb-prilozheniya", label: "MVP веб-приложений" },
   { href: "/uslugi/ai-sajty", label: "AI-сайты" },
   { href: "/uslugi/avtomatizacii", label: "Автоматизации" },
