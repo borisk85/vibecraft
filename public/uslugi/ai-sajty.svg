@@ -33,7 +33,7 @@
     <rect x="150" y="76" width="900" height="38" fill="#0f0f0f"/>
     <path d="M162 114 v-22 a8 8 0 0 1 8-8 h176 a8 8 0 0 1 8 8 v22 z" fill="#181818"/>
     <circle cx="180" cy="99" r="6" fill="url(#grad)"/>
-    <text x="196" y="103" fill="#ededed" font-size="12.5" font-weight="600">Nova</text>
+    <text x="196" y="103" fill="#ededed" font-size="12.5" font-weight="600">Ромашка</text>
     <g transform="translate(334,95)" stroke="#8f8f8f" stroke-width="1.3" stroke-linecap="round"><path d="M0 0l7 7M7 0l-7 7"/></g>
     <g transform="translate(372,93)" stroke="#6b6b6b" stroke-width="1.5" stroke-linecap="round"><path d="M6 0v12M0 6h12"/></g>
     <g stroke="#c9c9c9" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -51,16 +51,16 @@
     <g transform="translate(300,124)" stroke="#8f8f8f" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <rect x="0" y="5" width="9" height="6.5" rx="1.4"/><path d="M1.7 5V3.7a2.8 2.8 0 0 1 5.6 0V5"/>
     </g>
-    <text x="320" y="135" fill="#8f8f8f" font-size="12.5" font-family="ui-monospace, monospace">nova.kz</text>
+    <text x="320" y="135" fill="#8f8f8f" font-size="12.5" font-family="ui-monospace, monospace">example.com</text>
     <g transform="translate(902,125)" fill="none" stroke="#8f8f8f" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 0.5l1.6 3.5 3.9.4-2.9 2.6.8 3.8L6 8.9 2.6 10.8l.8-3.8L.5 4.4l3.9-.4z"/></g>
     <g transform="translate(1010,123)" fill="#8f8f8f"><circle cx="0" cy="0" r="1.5"/><circle cx="0" cy="5.5" r="1.5"/><circle cx="0" cy="11" r="1.5"/></g>
     <line x1="150" y1="148" x2="1050" y2="148" stroke="#242424"/>
 
     <!-- навигация сайта -->
-    <text x="210" y="192" fill="#ededed" font-size="18" font-weight="700">Nova</text>
-    <text x="560" y="191" fill="#8f8f8f" font-size="14">Возможности</text>
-    <text x="696" y="191" fill="#8f8f8f" font-size="14">Тарифы</text>
-    <text x="786" y="191" fill="#8f8f8f" font-size="14">Контакты</text>
+    <text x="210" y="192" fill="#ededed" font-size="18" font-weight="700">Ромашка</text>
+    <text x="726" y="191" fill="#8f8f8f" font-size="14">Возможности</text>
+    <text x="862" y="191" fill="#8f8f8f" font-size="14">Тарифы</text>
+    <text x="942" y="191" fill="#8f8f8f" font-size="14">Контакты</text>
     <line x1="150" y1="212" x2="1050" y2="212" stroke="#1c1c1c"/>
 
     <!-- герой: минимум элементов, крупные интервалы -->
@@ -87,19 +87,17 @@
     <text x="720" y="296" fill="#10b981" font-size="11.5">Онлайн</text>
     <g transform="translate(982,278)" stroke="#8f8f8f" stroke-width="1.5" stroke-linecap="round"><path d="M0 0l10 10M10 0l-10 10"/></g>
 
-    <!-- приветствие ассистента (нейтральный аватар — градиентный кружок) -->
-    <circle cx="710" cy="332" r="11" fill="url(#grad)"/>
-    <rect x="728" y="316" width="204" height="32" rx="13" fill="#111111"/>
-    <text x="744" y="337" fill="#ededed" font-size="13.5">Здравствуйте! Чем помочь?</text>
+    <!-- приветствие ассистента (без аватара) -->
+    <rect x="720" y="316" width="204" height="32" rx="13" fill="#111111"/>
+    <text x="736" y="337" fill="#ededed" font-size="13.5">Здравствуйте! Чем помочь?</text>
 
     <!-- сообщение посетителя -->
     <rect x="818" y="362" width="166" height="32" rx="13" fill="url(#grad)"/>
     <text x="968" y="383" text-anchor="end" fill="#ffffff" font-size="13.5">Работаете в субботу?</text>
 
     <!-- ответ ассистента -->
-    <circle cx="710" cy="424" r="11" fill="url(#grad)"/>
-    <rect x="728" y="408" width="172" height="32" rx="13" fill="#111111"/>
-    <text x="744" y="429" fill="#ededed" font-size="13.5">Да, с 9:00 до 18:00.</text>
+    <rect x="720" y="408" width="172" height="32" rx="13" fill="#111111"/>
+    <text x="736" y="429" fill="#ededed" font-size="13.5">Да, с 9:00 до 18:00.</text>
 
     <!-- поле ввода -->
     <line x1="700" y1="460" x2="1000" y2="460" stroke="#2a2a2a"/>
