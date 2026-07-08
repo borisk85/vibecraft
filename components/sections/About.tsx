@@ -13,7 +13,7 @@ export function About() {
           <div className="relative mx-auto order-2 aspect-square w-full max-w-[320px] overflow-hidden rounded-2xl border border-accent/30 bg-card lg:order-1">
             <Image
               src="/boris.jpg"
-              alt="Борис Комаров — ИИ-фаундер Vibecraft"
+              alt="Борис Комаров, ИИ-фаундер Vibecraft"
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 320px"
@@ -35,7 +35,7 @@ export function About() {
                 классической студии разработки с большой командой и
                 бюрократией. За 1-2 недели собираю то, что у студии может
                 занять месяцы. MVP веб- и мобильных приложений, боты,
-                ИИ-агенты и сайты, автоматизации — все до прода, максимально
+                ИИ-агенты и сайты, автоматизации: все до прода, максимально
                 быстро и качественно.
               </p>
             </div>

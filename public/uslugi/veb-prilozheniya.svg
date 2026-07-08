@@ -95,10 +95,10 @@
     <rect x="378" y="468" width="644" height="104" rx="14" fill="#1a1a1a" stroke="#2a2a2a"/>
     <text x="400" y="498" fill="#a1a1a1" font-size="13.5">Последние заявки</text>
     <circle cx="410" cy="524" r="4" fill="#10b981"/>
-    <text x="426" y="529" fill="#ededed" font-size="14">Айгерим — консультация</text>
+    <text x="426" y="529" fill="#ededed" font-size="14">Айгерим · консультация</text>
     <text x="1000" y="529" text-anchor="end" fill="#8f8f8f" font-size="13" font-family="ui-monospace, monospace">14:02</text>
     <circle cx="410" cy="552" r="4" fill="#f59e0b"/>
-    <text x="426" y="557" fill="#ededed" font-size="14">Даулет — заказ №482, ждет счет</text>
+    <text x="426" y="557" fill="#ededed" font-size="14">Даулет · заказ №482, ждет счет</text>
     <text x="1000" y="557" text-anchor="end" fill="#8f8f8f" font-size="13" font-family="ui-monospace, monospace">13:47</text>
     </g>
   </g>

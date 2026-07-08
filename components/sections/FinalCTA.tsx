@@ -28,9 +28,9 @@ const budgets = [
 ];
 
 const supportBudgets = [
-  "Почасовая поддержка — 25 000 ₸/час",
-  "Базовый — 5 часов в месяц, 90 000 ₸",
-  "Расширенный — 15 часов в месяц, 240 000 ₸",
+  "Почасовая поддержка: 25 000 ₸/час",
+  "Базовый: 5 часов в месяц, 90 000 ₸",
+  "Расширенный: 15 часов в месяц, 240 000 ₸",
 ];
 
 const supportType = "Поддержка существующего проекта";
@@ -81,7 +81,7 @@ export function FinalCTA() {
               Заявка
             </span>
             <h2 className="text-balance text-3xl font-semibold tracking-tight md:text-5xl">
-              Опишите задачу — отвечу за 1–2 часа
+              Опишите задачу, отвечу за 1–2 часа
             </h2>
             <p className="max-w-xl text-muted md:text-lg">
               Просмотрю ваш запрос и свяжусь с вами для уточнения деталей.
@@ -155,7 +155,7 @@ export function FinalCTA() {
             ) : null}
             {state === "error" ? (
               <p className="text-center text-sm text-error">
-                Не получилось отправить. Напишите напрямую в Telegram —{" "}
+                Не получилось отправить. Напишите напрямую в Telegram:{" "}
                 <Link
                   href={siteConfig.contacts.telegram}
                   className="underline"
@@ -167,7 +167,7 @@ export function FinalCTA() {
             ) : null}
 
             <p className="text-center text-sm text-muted">
-              Не уверены в бюджете? —{" "}
+              Не уверены в бюджете?{" "}
               <Link
                 href="/calculator"
                 className="text-accent-text hover:underline"

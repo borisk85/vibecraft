@@ -131,7 +131,7 @@ export function CalculatorClient() {
               <span className="text-gradient">за минуту</span>
             </h1>
             <p className="mt-4 text-muted md:text-lg">
-              Опишите задачу обычным текстом — наш ИИ-калькулятор выдаст вам
+              Опишите задачу обычным текстом, и наш ИИ-калькулятор выдаст вам
               ориентировочную стоимость.
             </p>
           </div>
@@ -181,7 +181,7 @@ export function CalculatorClient() {
               <div className="rounded-2xl border border-border bg-card p-6 md:p-8 print:border-0 print:bg-white print:p-0 print:text-black">
                 <div className="flex items-center justify-between">
                   <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent-text print:text-black">
-                    Смета — Vibecraft
+                    Смета Vibecraft
                   </span>
                 </div>
                 <pre className="mt-4 whitespace-pre-wrap break-words font-sans text-[15px] leading-relaxed text-foreground print:text-black">
@@ -209,7 +209,7 @@ export function CalculatorClient() {
                 </Link>
               </div>
               <p className="text-center text-sm text-muted print:hidden">
-                Точная стоимость и срок — после короткого обсуждения задачи.
+                Точная стоимость и срок уточняются после короткого обсуждения задачи.
               </p>
             </div>
           ) : null}

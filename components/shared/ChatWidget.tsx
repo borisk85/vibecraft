@@ -15,9 +15,9 @@ interface Message {
 const STORAGE_KEY = "vibecraft_chat";
 const PROACTIVE_KEY = "vibecraft_chat_proactive_shown";
 const GREETING =
-  "Здравствуйте! Я ИИ-консультант Vibecraft. Помогу разобраться с услугами, ценами, сроками — что вас интересует?";
+  "Здравствуйте! Я ИИ-консультант Vibecraft. Помогу разобраться с услугами, ценами и сроками. Что вас интересует?";
 const PROACTIVE_TEXT =
-  "Здравствуйте 👋 Если появятся вопросы по услугам или ценам — напишите мне.";
+  "Здравствуйте 👋 Если появятся вопросы по услугам или ценам, напишите мне.";
 const HISTORY_TTL_MS = 24 * 60 * 60 * 1000;
 
 const EMOJIS = [
@@ -263,7 +263,7 @@ export default function ChatWidget() {
       ...prev,
       {
         role: "assistant",
-        content: "Спасибо за обратную связь — передам это автору.",
+        content: "Спасибо за обратную связь, передам это автору.",
         isFeedback: true,
       },
     ]);
@@ -437,7 +437,7 @@ export default function ChatWidget() {
               <p className="text-sm font-semibold text-foreground">
                 {cfTicket ? `Обращение #${cfTicket} отправлено!` : "Сообщение отправлено!"}
               </p>
-              <p className="mt-1 text-xs text-muted">Копия ушла на вашу почту — ответим в течение 24 часов.</p>
+              <p className="mt-1 text-xs text-muted">Копия ушла на вашу почту, ответим в течение 24 часов.</p>
             </div>
             <button onClick={() => setView("chat")} className="text-xs text-accent-text hover:underline">
               ← Вернуться в чат
@@ -608,7 +608,7 @@ export default function ChatWidget() {
               </button>
             ) : (
               <p className="mt-2 text-center text-[10px] leading-snug text-subtle">
-                ИИ-консультант может ошибаться — важные моменты уточняйте лично у Бориса в{" "}
+                ИИ-консультант может ошибаться, важные моменты уточняйте лично у Бориса в{" "}
                 <a
                   href={siteConfig.contacts.telegram}
                   target="_blank"

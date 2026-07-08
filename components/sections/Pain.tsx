@@ -26,7 +26,7 @@ export function Pain() {
         <SectionHeading
           eyebrow="Проблема"
           title="Студия разработки или специалист"
-          description="Одна задача — разные сроки, цены и количество людей в работе над проектом."
+          description="Одна задача: разные сроки, цены и количество людей в работе над проектом."
         />
 
         <div className="mx-auto mt-16 grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
