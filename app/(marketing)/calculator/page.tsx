@@ -4,7 +4,7 @@ import { CalculatorClient } from "./CalculatorClient";
 export const metadata: Metadata = {
   title: "Калькулятор стоимости проекта",
   description:
-    "Опишите задачу обычным текстом — AI-калькулятор Vibecraft прикинет стоимость и срок проекта за минуту.",
+    "Опишите задачу обычным текстом — ИИ-калькулятор Vibecraft прикинет стоимость и срок проекта за минуту.",
   alternates: { canonical: "/calculator" },
   openGraph: {
     title: "Калькулятор стоимости проекта — Vibecraft",
