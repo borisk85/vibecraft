@@ -47,15 +47,15 @@
   <g>
     <rect x="100" y="110" width="230" height="96" rx="16" fill="#1a1a1a" stroke="#2a2a2a"/>
     <g transform="translate(128,146)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/>
+      <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><path d="M14 2v6h6"/><path d="M9 13h6"/><path d="M9 17h6"/>
     </g>
-    <text x="176" y="164" fill="#ededed" font-size="18" font-weight="600">Память диалога</text>
+    <text x="176" y="164" fill="#ededed" font-size="18" font-weight="600">Документы</text>
 
     <rect x="100" y="272" width="230" height="96" rx="16" fill="#1a1a1a" stroke="#2a2a2a"/>
     <g transform="translate(128,308)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
     </g>
-    <text x="176" y="326" fill="#ededed" font-size="18" font-weight="600">CRM клиентов</text>
+    <text x="176" y="326" fill="#ededed" font-size="18" font-weight="600">CRM</text>
 
     <rect x="100" y="434" width="230" height="96" rx="16" fill="#1a1a1a" stroke="#2a2a2a"/>
     <g transform="translate(128,470)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -76,7 +76,7 @@
     <g transform="translate(898,308)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
     </g>
-    <text x="946" y="326" fill="#ededed" font-size="18" font-weight="600">Поиск в сети</text>
+    <text x="946" y="326" fill="#ededed" font-size="18" font-weight="600">Веб-поиск</text>
 
     <rect x="870" y="434" width="230" height="96" rx="16" fill="#1a1a1a" stroke="#2a2a2a"/>
     <g transform="translate(898,470)" fill="none" stroke="#c084fc" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
