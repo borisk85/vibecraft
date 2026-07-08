@@ -24,13 +24,29 @@
     <rect x="150" y="76" width="900" height="520" rx="18" fill="#131313" stroke="#2a2a2a"/>
   </g>
   <g clip-path="url(#win)">
-    <!-- titlebar -->
-    <rect x="150" y="76" width="900" height="48" fill="#181818"/>
-    <circle cx="182" cy="100" r="6" fill="#333333"/><circle cx="204" cy="100" r="6" fill="#333333"/><circle cx="226" cy="100" r="6" fill="#333333"/>
-    <rect x="270" y="87" width="420" height="26" rx="13" fill="#111111" stroke="#242424"/>
-    <text x="288" y="105" fill="#8f8f8f" font-size="13" font-family="ui-monospace, monospace">app.vashbiznes.kz</text>
-    <line x1="150" y1="124" x2="1050" y2="124" stroke="#242424"/>
+    <!-- шапка браузера: строка вкладок + панель навигации -->
+    <rect x="150" y="76" width="900" height="72" fill="#181818"/>
+    <rect x="150" y="76" width="900" height="38" fill="#0f0f0f"/>
+    <circle cx="172" cy="95" r="5" fill="#ff5f57"/><circle cx="190" cy="95" r="5" fill="#febc2e"/><circle cx="208" cy="95" r="5" fill="#28c840"/>
+    <path d="M230 114 v-22 a8 8 0 0 1 8-8 h174 a8 8 0 0 1 8 8 v22 z" fill="#181818"/>
+    <circle cx="248" cy="99" r="6" fill="url(#grad)"/>
+    <text x="264" y="103" fill="#ededed" font-size="12.5" font-weight="600">Кабинет</text>
+    <g transform="translate(400,95)" stroke="#8f8f8f" stroke-width="1.3" stroke-linecap="round"><path d="M0 0l7 7M7 0l-7 7"/></g>
+    <g transform="translate(440,93)" stroke="#6b6b6b" stroke-width="1.5" stroke-linecap="round"><path d="M6 0v12M0 6h12"/></g>
+    <g fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M186 125l-6 6 6 6" stroke="#b0b0b0"/>
+      <path d="M208 125l6 6-6 6" stroke="#565656"/>
+      <g transform="translate(228,124)" stroke="#b0b0b0"><path d="M13 7a6 6 0 1 1-1.8-4.3"/><path d="M13 1v5h-5"/></g>
+    </g>
+    <rect x="262" y="119" width="690" height="24" rx="12" fill="#0d0d0d" stroke="#262626"/>
+    <g transform="translate(278,124)" stroke="#8f8f8f" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="0" y="5" width="10" height="7" rx="1.5"/><path d="M2 5V3.5a3 3 0 0 1 6 0V5"/>
+    </g>
+    <text x="298" y="135" fill="#8f8f8f" font-size="12.5" font-family="ui-monospace, monospace">app.vashbiznes.kz</text>
+    <g transform="translate(1004,124)" stroke="#8f8f8f" stroke-width="1.5" stroke-linecap="round"><path d="M0 0h14M0 5h14M0 10h14"/></g>
+    <line x1="150" y1="148" x2="1050" y2="148" stroke="#242424"/>
 
+    <g transform="translate(0,24)">
     <!-- сайдбар -->
     <rect x="150" y="124" width="200" height="472" fill="#161616"/>
     <text x="176" y="162" fill="#ededed" font-size="16" font-weight="700">Кабинет</text>
@@ -76,5 +92,6 @@
     <circle cx="410" cy="552" r="4" fill="#f59e0b"/>
     <text x="426" y="557" fill="#ededed" font-size="14">Даулет — заказ №482, ждет счет</text>
     <text x="1000" y="557" text-anchor="end" fill="#8f8f8f" font-size="13" font-family="ui-monospace, monospace">13:47</text>
+    </g>
   </g>
 </svg>
