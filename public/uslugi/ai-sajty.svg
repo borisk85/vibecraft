@@ -9,9 +9,12 @@
     <filter id="drop" x="-30%" y="-30%" width="160%" height="160%">
       <feDropShadow dx="0" dy="16" stdDeviation="28" flood-color="#000000" flood-opacity="0.5"/>
     </filter>
+    <filter id="fab" x="-80%" y="-80%" width="260%" height="260%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#8b5cf6" flood-opacity="0.45"/>
+    </filter>
     <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="80"/></filter>
     <clipPath id="win"><rect x="150" y="76" width="900" height="520" rx="18"/></clipPath>
-    <clipPath id="chat"><rect x="636" y="170" width="384" height="404" rx="16"/></clipPath>
+    <clipPath id="chat"><rect x="660" y="196" width="360" height="356" rx="16"/></clipPath>
   </defs>
 
   <rect x="1" y="1" width="1198" height="638" rx="20" fill="#0b0b0b" stroke="#1f1f1f"/>
@@ -20,12 +23,12 @@
 
   <text x="600" y="40" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">САЙТ С ИИ-ФУНКЦИЕЙ</text>
 
-  <!-- окно браузера: сайт клиента со встроенным ИИ-чат-консультантом -->
+  <!-- окно браузера: сайт клиента с чат-виджетом в углу -->
   <g filter="url(#drop)">
     <rect x="150" y="76" width="900" height="520" rx="18" fill="#131313" stroke="#2a2a2a"/>
   </g>
   <g clip-path="url(#win)">
-    <!-- шапка браузера: строка вкладок + панель навигации -->
+    <!-- шапка браузера -->
     <rect x="150" y="76" width="900" height="72" fill="#181818"/>
     <rect x="150" y="76" width="900" height="38" fill="#0f0f0f"/>
     <path d="M162 114 v-22 a8 8 0 0 1 8-8 h176 a8 8 0 0 1 8 8 v22 z" fill="#181818"/>
@@ -33,13 +36,11 @@
     <text x="196" y="103" fill="#ededed" font-size="12.5" font-weight="600">Ваш бизнес</text>
     <g transform="translate(334,95)" stroke="#8f8f8f" stroke-width="1.3" stroke-linecap="round"><path d="M0 0l7 7M7 0l-7 7"/></g>
     <g transform="translate(372,93)" stroke="#6b6b6b" stroke-width="1.5" stroke-linecap="round"><path d="M6 0v12M0 6h12"/></g>
-    <!-- кнопки окна Windows: свернуть, развернуть, закрыть -->
     <g stroke="#c9c9c9" stroke-width="1.3" fill="none" stroke-linecap="round" stroke-linejoin="round">
       <path d="M964 95h11"/>
       <rect x="996" y="90" width="10" height="10" rx="1"/>
       <path d="M1028 90l10 10M1038 90l-10 10"/>
     </g>
-    <!-- навигация: назад, вперёд, обновить, домой -->
     <g fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
       <g transform="translate(172,124)" stroke="#b0b0b0"><path d="M13 6H1"/><path d="M6 1 1 6l5 5"/></g>
       <g transform="translate(200,124)" stroke="#565656"><path d="M1 6h12"/><path d="M8 1l5 5-5 5"/></g>
@@ -55,57 +56,83 @@
     <g transform="translate(1010,123)" fill="#8f8f8f"><circle cx="0" cy="0" r="1.5"/><circle cx="0" cy="5.5" r="1.5"/><circle cx="0" cy="11" r="1.5"/></g>
     <line x1="150" y1="148" x2="1050" y2="148" stroke="#242424"/>
 
-    <!-- сайт клиента (фон) -->
-    <text x="190" y="200" fill="#ededed" font-size="17" font-weight="700">Ваш бизнес</text>
-    <text x="470" y="199" fill="#8f8f8f" font-size="14">Услуги</text>
-    <text x="548" y="199" fill="#8f8f8f" font-size="14">Цены</text>
-    <text x="612" y="199" fill="#8f8f8f" font-size="14">Контакты</text>
-    <text x="190" y="290" fill="#ededed" font-size="27" font-weight="700">Услуги и запись</text>
-    <text x="190" y="326" fill="#ededed" font-size="27" font-weight="700">онлайн</text>
-    <text x="190" y="366" fill="#a1a1a1" font-size="15">ИИ-консультант отвечает и оформляет заявки 24/7</text>
-    <rect x="190" y="394" width="200" height="46" rx="12" fill="url(#grad)"/>
-    <text x="290" y="423" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">Оставить заявку</text>
+    <!-- навигация сайта -->
+    <text x="190" y="194" fill="#ededed" font-size="17" font-weight="700">Ваш бизнес</text>
+    <text x="602" y="193" fill="#8f8f8f" font-size="14">Услуги</text>
+    <text x="690" y="193" fill="#8f8f8f" font-size="14">Цены</text>
+    <text x="752" y="193" fill="#8f8f8f" font-size="14">Кейсы</text>
+    <text x="828" y="193" fill="#8f8f8f" font-size="14">Контакты</text>
+    <line x1="150" y1="214" x2="1050" y2="214" stroke="#1e1e1e"/>
 
-    <!-- встроенный виджет ИИ-консультанта (по образцу ChatWidget.tsx) -->
-    <rect x="636" y="170" width="384" height="404" rx="16" fill="#1a1a1a" stroke="#2a2a2a"/>
-    <g clip-path="url(#chat)">
-      <rect x="636" y="170" width="384" height="56" fill="#111111"/>
-      <rect x="636" y="498" width="384" height="76" fill="#0b0b0b"/>
+    <!-- герой -->
+    <rect x="190" y="238" width="176" height="26" rx="13" fill="#1a1a1a" stroke="#2a2a2a"/>
+    <text x="206" y="255" fill="#c084fc" font-size="12" font-weight="600">★ 4.9</text>
+    <text x="246" y="255" fill="#a1a1a1" font-size="12">240 отзывов клиентов</text>
+    <text x="190" y="312" fill="#ededed" font-size="30" font-weight="700">Услуги и запись</text>
+    <text x="190" y="350" fill="#ededed" font-size="30" font-weight="700">онлайн за минуту</text>
+    <text x="190" y="390" fill="#a1a1a1" font-size="15">Отвечаем на вопросы и оформляем заявки круглосуточно</text>
+    <rect x="190" y="416" width="210" height="48" rx="12" fill="url(#grad)"/>
+    <text x="295" y="446" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">Оставить заявку</text>
+
+    <!-- карточки услуг -->
+    <rect x="190" y="492" width="228" height="86" rx="14" fill="#131313" stroke="#2a2a2a"/>
+    <rect x="212" y="514" width="30" height="30" rx="9" fill="#8b5cf6" fill-opacity="0.16"/>
+    <g transform="translate(220,522)" fill="none" stroke="#c084fc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="5.2"/><path d="M13 13l-3.2-3.2"/></g>
+    <text x="256" y="522" fill="#ededed" font-size="14.5" font-weight="600">Умный поиск</text>
+    <text x="256" y="544" fill="#8f8f8f" font-size="12.5">по вашему каталогу</text>
+    <rect x="434" y="492" width="228" height="86" rx="14" fill="#131313" stroke="#2a2a2a"/>
+    <rect x="456" y="514" width="30" height="30" rx="9" fill="#8b5cf6" fill-opacity="0.16"/>
+    <g transform="translate(464,521)" fill="none" stroke="#c084fc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="2" width="14" height="13" rx="2"/><path d="M1 6h14M5 0v4M11 0v4"/></g>
+    <text x="500" y="522" fill="#ededed" font-size="14.5" font-weight="600">Онлайн-запись</text>
+    <text x="500" y="544" fill="#8f8f8f" font-size="12.5">заявки без звонков</text>
+
+    <!-- чат-виджет в правом нижнем углу (по образцу ChatWidget.tsx) -->
+    <g filter="url(#drop)">
+      <rect x="660" y="196" width="360" height="356" rx="16" fill="#1a1a1a" stroke="#2a2a2a"/>
     </g>
-    <line x1="636" y1="226" x2="1020" y2="226" stroke="#2a2a2a"/>
-    <line x1="636" y1="498" x2="1020" y2="498" stroke="#2a2a2a"/>
+    <g clip-path="url(#chat)">
+      <rect x="660" y="196" width="360" height="54" fill="#111111"/>
+      <rect x="660" y="486" width="360" height="66" fill="#0b0b0b"/>
+    </g>
+    <line x1="660" y1="250" x2="1020" y2="250" stroke="#2a2a2a"/>
+    <line x1="660" y1="486" x2="1020" y2="486" stroke="#2a2a2a"/>
 
     <!-- шапка виджета -->
-    <text x="660" y="196" fill="#ededed" font-size="15" font-weight="600">ИИ-консультант</text>
-    <text x="660" y="214" fill="#10b981" font-size="12">Онлайн</text>
-    <g transform="translate(990,192)" stroke="#8f8f8f" stroke-width="1.5" stroke-linecap="round"><path d="M0 0l12 12M12 0l-12 12"/></g>
+    <text x="684" y="224" fill="#ededed" font-size="15" font-weight="600">ИИ-консультант</text>
+    <text x="684" y="242" fill="#10b981" font-size="12">Онлайн</text>
+    <g transform="translate(996,218)" stroke="#8f8f8f" stroke-width="1.5" stroke-linecap="round"><path d="M0 0l11 11M11 0l-11 11"/></g>
 
     <!-- приветствие ассистента -->
-    <circle cx="660" cy="262" r="14" fill="#111111"/>
-    <text x="660" y="267" text-anchor="middle" fill="#c084fc" font-size="13" font-weight="600">V</text>
-    <rect x="684" y="248" width="318" height="76" rx="14" fill="#111111"/>
-    <text x="700" y="272" fill="#ededed" font-size="13.5">Здравствуйте! Я ИИ-консультант.</text>
-    <text x="700" y="291" fill="#ededed" font-size="13.5">Помогу с услугами, ценами и записью.</text>
-    <text x="700" y="310" fill="#ededed" font-size="13.5">Что вас интересует?</text>
+    <circle cx="684" cy="284" r="14" fill="#111111"/>
+    <text x="684" y="289" text-anchor="middle" fill="#c084fc" font-size="13" font-weight="600">V</text>
+    <rect x="708" y="270" width="273" height="76" rx="14" fill="#111111"/>
+    <text x="724" y="294" fill="#ededed" font-size="13.5">Здравствуйте! Я ИИ-консультант.</text>
+    <text x="724" y="313" fill="#ededed" font-size="13.5">Помогу с услугами, ценами и записью.</text>
+    <text x="724" y="332" fill="#ededed" font-size="13.5">Что вас интересует?</text>
 
     <!-- сообщение посетителя -->
-    <rect x="800" y="340" width="202" height="36" rx="14" fill="url(#grad)"/>
-    <text x="986" y="363" text-anchor="end" fill="#ffffff" font-size="13.5">Работаете в субботу?</text>
+    <rect x="833" y="358" width="163" height="34" rx="14" fill="url(#grad)"/>
+    <text x="980" y="380" text-anchor="end" fill="#ffffff" font-size="13.5">Работаете в субботу?</text>
 
     <!-- ответ ассистента -->
-    <circle cx="660" cy="406" r="14" fill="#111111"/>
-    <text x="660" y="411" text-anchor="middle" fill="#c084fc" font-size="13" font-weight="600">V</text>
-    <rect x="684" y="392" width="318" height="76" rx="14" fill="#111111"/>
-    <text x="700" y="416" fill="#ededed" font-size="13.5">Да, в субботу с 9:00 до 18:00.</text>
-    <text x="700" y="435" fill="#ededed" font-size="13.5">Оформить заявку? Оставьте имя</text>
-    <text x="700" y="454" fill="#ededed" font-size="13.5">и телефон.</text>
+    <circle cx="684" cy="424" r="14" fill="#111111"/>
+    <text x="684" y="429" text-anchor="middle" fill="#c084fc" font-size="13" font-weight="600">V</text>
+    <rect x="708" y="410" width="214" height="58" rx="14" fill="#111111"/>
+    <text x="724" y="434" fill="#ededed" font-size="13.5">Да, в субботу с 9:00 до 18:00.</text>
+    <text x="724" y="453" fill="#ededed" font-size="13.5">Оформить заявку?</text>
 
     <!-- поле ввода -->
-    <rect x="656" y="508" width="344" height="36" rx="12" fill="#111111"/>
-    <text x="674" y="531" fill="#8f8f8f" font-size="13.5">Задайте вопрос...</text>
-    <text x="922" y="533" font-size="16">😊</text>
-    <rect x="958" y="512" width="28" height="28" rx="8" fill="#8b5cf6"/>
-    <g transform="translate(965,519)" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 0L0 5l6 2 1 6z"/></g>
-    <text x="828" y="562" text-anchor="middle" fill="#8f8f8f" font-size="9.5">ИИ-консультант может ошибаться, уточните детали у менеджера</text>
+    <rect x="680" y="496" width="316" height="34" rx="11" fill="#111111"/>
+    <text x="696" y="518" fill="#8f8f8f" font-size="13.5">Задайте вопрос...</text>
+    <text x="946" y="520" font-size="16">😊</text>
+    <rect x="966" y="500" width="26" height="26" rx="7" fill="#8b5cf6"/>
+    <g transform="translate(972,506)" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M13 0L0 5l5 2 2 5z"/></g>
+    <text x="840" y="546" text-anchor="middle" fill="#8f8f8f" font-size="9.5">ИИ-консультант может ошибаться, уточните детали у менеджера</text>
+
+    <!-- плавающая кнопка виджета (FAB) -->
+    <g filter="url(#fab)">
+      <circle cx="998" cy="576" r="22" fill="url(#grad)"/>
+    </g>
+    <g transform="translate(989,567)" stroke="#ffffff" stroke-width="2" stroke-linecap="round"><path d="M0 0l18 18M18 0l-18 18"/></g>
   </g>
 </svg>
