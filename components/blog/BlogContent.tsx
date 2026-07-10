@@ -83,7 +83,7 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
         </div>
         <p className="mb-2 text-base font-semibold text-foreground">Статьи скоро появятся</p>
         <p className="mx-auto max-w-sm text-sm text-muted">
-          Готовлю материалы о разработке Telegram-ботов, MVP и автоматизациях в Казахстане. Первая партия — в ближайшие недели.
+          Готовлю материалы: обзоры и сравнения решений, цены и рабочие сценарии для бизнеса в Казахстане. Первая партия — в ближайшие недели.
         </p>
       </div>
     )
