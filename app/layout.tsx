@@ -21,8 +21,8 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin", "cyrillic"],
   weight: ["400", "500"],
-  display: "swap",
-  preload: false,
+  display: "optional",
+  preload: true,
 });
 
 export const metadata: Metadata = {

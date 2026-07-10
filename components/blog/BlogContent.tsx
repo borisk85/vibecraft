@@ -2,6 +2,7 @@
 
 import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import Link from "next/link"
+import { Newspaper } from "lucide-react"
 import { type Post } from "@/lib/blog-posts"
 import PostCover from "@/components/blog/PostCover"
 
@@ -78,18 +79,12 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
     return (
       <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] p-12 text-center">
         <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10">
-          <span className="text-xl">✦</span>
+          <Newspaper className="h-6 w-6 text-accent-text" />
         </div>
         <p className="mb-2 text-base font-semibold text-foreground">Статьи скоро появятся</p>
-        <p className="mx-auto mb-7 max-w-sm text-sm text-muted">
+        <p className="mx-auto max-w-sm text-sm text-muted">
           Готовлю материалы о разработке Telegram-ботов, MVP и автоматизациях в Казахстане. Первая партия — в ближайшие недели.
         </p>
-        <Link
-          href="/#contact"
-          className="inline-flex items-center gap-2 rounded-xl bg-gradient-accent px-5 py-2.5 text-sm font-semibold text-white transition-shadow hover:shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)]"
-        >
-          Обсудить проект
-        </Link>
       </div>
     )
   }
