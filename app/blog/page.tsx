@@ -11,12 +11,12 @@ const visiblePosts = posts.filter((p) => !p.hidden)
 export const metadata: Metadata = {
   title: "Блог",
   description:
-    "Обзоры и цены на Telegram-боты, автоматизацию и приложения для бизнеса в Казахстане. Что выбрать, сколько стоит и какие сценарии реально работают.",
+    "Обзоры и цены на Telegram-боты, автоматизации и приложения для бизнеса в Казахстане. Что выбрать, сколько стоит и какие сценарии реально работают.",
   alternates: { canonical: "/blog" },
   openGraph: {
     title: "Блог Vibecraft",
     description:
-      "Обзоры и цены на Telegram-боты, автоматизацию и приложения для бизнеса в Казахстане.",
+      "Обзоры и цены на Telegram-боты, автоматизации и приложения для бизнеса в Казахстане.",
     url: "https://vibecraft.kz/blog",
     type: "website",
   },
@@ -33,7 +33,7 @@ export default function BlogIndexPage() {
               Блог
             </span>
             <h1 className="text-balance text-4xl font-semibold tracking-tight md:text-5xl">
-              Боты, автоматизация и приложения для бизнеса в Казахстане
+              Боты, автоматизации и приложения для бизнеса в Казахстане
             </h1>
             <p className="max-w-2xl text-pretty text-base text-muted md:text-lg">
               Обзоры и сравнения решений, реальные цены и рабочие сценарии

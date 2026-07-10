@@ -81,10 +81,7 @@ export default function BlogContent({ posts }: { posts: Post[] }) {
         <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10">
           <Newspaper className="h-6 w-6 text-accent-text" />
         </div>
-        <p className="mb-2 text-base font-semibold text-foreground">Статьи скоро появятся</p>
-        <p className="mx-auto max-w-sm text-sm text-muted">
-          Готовлю материалы: обзоры и сравнения решений, цены и рабочие сценарии для бизнеса в Казахстане. Первая партия — в ближайшие недели.
-        </p>
+        <p className="text-base font-semibold text-foreground">Статьи скоро появятся</p>
       </div>
     )
   }
