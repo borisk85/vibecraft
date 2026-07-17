@@ -1,41 +1,51 @@
-"""PreToolUse (Edit/Write) — ЗАПРЕТ визуал/стиль-правок блога без сверки с VELA.
+"""PreToolUse (Edit/Write) — ЗАПРЕТ отсебятины, когда рядом ДОСТУПЕН референс.
 
-Класс ошибки (18.07): Boris много раз повторил «референс на вела как рабочий флоу
-статей». Я делал визуал статьи (чипы на цены, цветная таблица, болд в теле) ИЗ ГОЛОВЫ,
-не посмотрев, как это сделано на velabot.io → месиво → потерян час. Срез по 5 статьям
-VELA: 5-6 КАРТИНОК на статью, 0 таблиц, 0 чипов, 0 выносок. Я изобретал то, чего в
-референсе нет вообще.
+Суть (словами Boris): референс доступен рядом, но ты выбираешь отсебятину и игноришь
+его — БЛОК. 18.07 я час делал статью из головы (свои чипы, таблицы, свой болд), хотя
+рядом лежал рабочий референс. Результат — месиво и потерянный час.
 
-Правило: правка визуала/разметки блога — ТОЛЬКО после того, как в недавнем ходу был
-реальный заход на velabot.io (browser_navigate ИЛИ curl velabot). Гейтим:
-- app/globals.css (там живут стили .blog-content),
-- components/blog/*.tsx,
-- lib/blog-posts.ts, если правка добавляет/меняет markup (<code>, таблица |---|, **,
-  бэктики, ##/###, <img>, <figure>).
-Правки самих хуков (.claude/) не гейтим.
+Что такое референс (это НЕ гадание, это конкретные рабочие источники):
+- Для статей/блога: маркет-бот vela-marketing-bot, файл workflows/blog_writer.py — он
+  УЖЕ пишет статьи VELA и Vibecraft по отлаженным правилам стиля, структуры и визуала;
+  и живой сайт velabot.io, где видно, как статьи выглядят.
+- Для цен/услуг/сроков: source of truth — components/sections/Services.tsx и Pricing.tsx.
+
+Правило: правка клиентского контента/UI (lib/blog-posts.ts, components/blog/*,
+app/blog/*, components/sections/*, app/**/page.tsx, .blog-content стили) — ТОЛЬКО если
+в этом ходу я реально открыл нужный референс (Read/curl/navigate). Референс доступен,
+но не открыт → значит отсебятина → блок. Правки самих хуков (.claude/) не гейтим.
 """
 import json
 import re
 import sys
 
-MARKUP_RE = re.compile(r"<code|<table|<figure|<img|\|\s*-{2,}|\*\*|`|^#{2,}\s|</", re.MULTILINE)
-VELA_RE = re.compile(r"velabot\.io|velabot", re.IGNORECASE)
+# Рабочие источники-референсы (открыть перед правкой контента).
+REF_RE = re.compile(
+    r"velabot|blog_writer|vela-marketing-bot|vela_marketing|knowledge_base_vibecraft|"
+    r"services\.tsx|pricing\.tsx",
+    re.IGNORECASE)
 
 
-def _blog_visual_target(fp, payload):
-    fpl = fp.lower()
+def _content_target(fp):
+    fpl = fp.lower().replace("\\", "/")
+    if fpl.endswith("blog-posts.ts"):
+        return True
     if "/components/blog/" in fpl and fpl.endswith(".tsx"):
         return True
-    if fpl.endswith("/globals.css") or fpl.endswith("globals.css"):
+    if "/app/blog/" in fpl:
         return True
-    if fpl.endswith("blog-posts.ts") and MARKUP_RE.search(payload):
+    if "/components/sections/" in fpl and fpl.endswith(".tsx"):
+        return True
+    if fpl.endswith("globals.css"):
+        return True
+    if re.search(r"/app/.+/page\.tsx$", fpl):
         return True
     return False
 
 
-def _vela_consulted(objs):
-    """True, если в недавнем ходу был заход на velabot (navigate/curl/fetch)."""
-    for o in objs[-90:]:
+def _reference_opened(objs):
+    """True, если в недавнем ходу я реально открыл референс (Read/navigate/curl)."""
+    for o in objs[-110:]:
         if not isinstance(o, dict) or o.get("type") != "assistant":
             continue
         content = (o.get("message", {}) or {}).get("content")
@@ -44,7 +54,7 @@ def _vela_consulted(objs):
         for b in content:
             if isinstance(b, dict) and b.get("type") == "tool_use":
                 blob = json.dumps(b.get("input", {}) or {}, ensure_ascii=False)
-                if VELA_RE.search(blob):
+                if REF_RE.search(blob):
                     return True
     return False
 
@@ -63,8 +73,7 @@ def decide():
     fp = str(ti.get("file_path", "")).replace("\\", "/")
     if "/.claude/" in fp.lower():
         return None
-    payload = str(ti.get("new_string", "")) + "\n" + str(ti.get("content", ""))
-    if not _blog_visual_target(fp, payload):
+    if not _content_target(fp):
         return None
 
     tp = data.get("transcript_path")
@@ -75,15 +84,16 @@ def decide():
                 objs = [json.loads(l) for l in f.read().splitlines() if l.strip()]
         except Exception:
             objs = []
-    if _vela_consulted(objs):
+    if _reference_opened(objs):
         return None
 
     return (
-        "БЛОК check_vela_before_blog_visual: правишь визуал/разметку блога, но в этом ходу "
-        "НЕ сверился с референсом VELA. Класс ошибки 18.07: делал чипы и цветную таблицу из "
-        "головы — месиво, потерян час. Срез VELA: 5-6 картинок на статью, 0 таблиц, 0 чипов, "
-        "0 выносок. СЕЙЧАС: сначала открой velabot.io/blog (browser_navigate или curl), "
-        "посмотри как реально сделан визуал в статьях, и правь ПО референсу, а не из головы."
+        "БЛОК check_reference_before_content: рядом ДОСТУПЕН референс, а ты правишь "
+        "контент/UI из головы, не открыв его — это отсебятина. 18.07 так потерян час "
+        "(чипы/таблицы/месиво). Референс, который надо открыть ПЕРЕД правкой: для статей — "
+        "маркет-бот vela-marketing-bot/workflows/blog_writer.py (он уже пишет статьи по "
+        "правилам) и velabot.io; для цен/услуг — Services.tsx / Pricing.tsx. СЕЙЧАС: "
+        "открой нужный референс (Read/curl/navigate), возьми оттуда как надо — и правь по нему."
     )
 
 
