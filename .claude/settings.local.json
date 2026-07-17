@@ -154,6 +154,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_build_before_push.py'",
             "statusMessage": "check_build_before_push: нет локального билда после правки исходника — не пушить/деплоить"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_micro_deploy.py'",
+            "statusMessage": "check_no_micro_deploy: не деплоить каждую мелкую правку — копить батч, один деплой"
           }
         ]
       },
@@ -226,6 +231,10 @@
           {
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_pause.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_suggest_stop.py'"
           },
           {
             "type": "command",
