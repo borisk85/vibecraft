@@ -18,7 +18,7 @@ const COVER_CONFIG: Record<string, { color: string; bg: string; icon: string }> 
       <path d="M9 13v2"/>
     </svg>`,
   },
-  "Автоматизация": {
+  "Автоматизации": {
     color: "#10B981",
     bg: "linear-gradient(135deg, rgba(16,185,129,0.14) 0%, rgba(5,150,105,0.06) 100%)",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">

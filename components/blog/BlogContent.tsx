@@ -9,7 +9,7 @@ import PostCover from "@/components/blog/PostCover"
 const CATEGORIES = [
   { label: "Все",           slug: "all" },
   { label: "Боты",          slug: "bots" },
-  { label: "Автоматизация", slug: "automation" },
+  { label: "Автоматизации", slug: "automation" },
   { label: "Приложения",    slug: "apps" },
 ]
 const PAGE_SIZE = 9

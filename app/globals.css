@@ -144,7 +144,10 @@ button[aria-haspopup="listbox"]:focus-visible {
   font-weight: 600;
 }
 .blog-content em {
-  color: var(--color-muted);
+  /* Курсив-примеры (`*«...»*`) выделяем цветом, чтобы не сливались с текстом
+     (как единообразно на VELA-блоге). Раньше был --color-muted = цвет тела. */
+  color: var(--color-accent-text);
+  font-style: italic;
 }
 .blog-content a {
   color: var(--color-accent-text);
