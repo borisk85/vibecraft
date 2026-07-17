@@ -134,6 +134,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_regressive_action.py'",
             "statusMessage": "check_no_regressive_action: не отключать/убирать фичу правкой ради обхода проблемы"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_vela_before_blog_visual.py'",
+            "statusMessage": "check_vela_before_blog_visual: визуал/разметку блога править только после сверки с VELA"
           }
         ]
       },
