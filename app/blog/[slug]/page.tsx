@@ -56,6 +56,31 @@ function slugifyHeading(text: string): string {
     .replace(/^-|-$/g, "");
 }
 
+// Достаем вопросы/ответы из секции ## FAQ (вопросы — H3) для FAQPage JSON-LD.
+function extractFaq(md: string): { q: string; a: string }[] {
+  const idx = md.search(/\n##\s+FAQ\b/);
+  if (idx === -1) return [];
+  const section = md.slice(idx);
+  const blocks = section.split(/\n###\s+/).slice(1);
+  const items: { q: string; a: string }[] = [];
+  for (const b of blocks) {
+    const nl = b.indexOf("\n");
+    if (nl === -1) continue;
+    const q = b.slice(0, nl).trim();
+    let a = b.slice(nl).trim();
+    const nextH2 = a.search(/\n##\s+/);
+    if (nextH2 !== -1) a = a.slice(0, nextH2).trim();
+    a = a
+      .replace(/\*\*([^*]+)\*\*/g, "$1")
+      .replace(/\*([^*]+)\*/g, "$1")
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (q && a) items.push({ q, a });
+  }
+  return items;
+}
+
 export default async function PostPage({
   params,
 }: {
@@ -116,9 +141,24 @@ export default async function PostPage({
     },
   };
 
+  const faq = extractFaq(cleanContent);
+  const faqSchema =
+    faq.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faq.map(({ q, a }) => ({
+            "@type": "Question",
+            name: q,
+            acceptedAnswer: { "@type": "Answer", text: a },
+          })),
+        }
+      : null;
+
   return (
     <>
       <JsonLd data={articleSchema} />
+      {faqSchema ? <JsonLd data={faqSchema} /> : null}
       <Header />
       <main className="flex-1 py-24 md:py-32">
         <Container>
