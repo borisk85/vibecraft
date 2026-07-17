@@ -81,6 +81,19 @@ def main():
         print(json.dumps({"decision": "block", "reason": reason}))
         sys.exit(0)
 
+    # «да» как опенер-филлер перед контентом. Чистый ответ «да»/«нет» на да/нет-вопрос
+    # разрешен; лепить «да» перед остальным ответом — запрещено (Boris бесит этот тик).
+    stripped = clean.rstrip(".!… \n")
+    if stripped.lower() not in ("да", "нет") and re.match(
+            r"^\s*да\b[\s,.!:—–-]+\S", clean, re.IGNORECASE):
+        reason = (
+            "НАРУШЕНИЕ check_no_filler: ответ открывается филлером «да» перед контентом. "
+            "Чистый «да»/«нет» на да/нет-вопрос — можно, но НЕ лепи «да» перед остальным "
+            "ответом. Начинай СРАЗУ с сути."
+        )
+        print(json.dumps({"decision": "block", "reason": reason}))
+        sys.exit(0)
+
     hit = None
     if OPEN_RE.match(clean):
         hit = OPEN_RE.match(clean).group(0).strip()

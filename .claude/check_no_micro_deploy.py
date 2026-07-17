@@ -1,45 +1,92 @@
-"""PreToolUse (Bash/PowerShell) — ЗАПРЕТ микро-деплоев (билд+деплой каждой мелкой правки).
+"""PreToolUse (Bash/PowerShell) — ЗАПРЕТ микро-билдов/деплоев (по одной-две правки).
 
-Класс ошибки (18.07): я гонял `vercel --prod` после КАЖДОЙ мелкой правки (убрал слово,
-подвинул пиксель, истончил линию), и Boris ждал 2-3 минуты на каждый деплой отдельно.
-CLAUDE.md прямо: «Накапливать 5-6 связанных правок = один логический батч, а не 5-6
-отдельных деплоев». Git push и так триггерит авто-деплой Vercel.
+Класс ошибки (18.07): я гонял `npm run build`/`vercel --prod` после КАЖДОЙ мелкой правки,
+и Boris ждал 2-3 минуты на каждую. Надо копить ВСЕ правки батча и билдить ОДИН раз.
 
-Правило: блок `vercel ... --prod`, если в недавнем ходу УЖЕ был `vercel --prod` (деплой
-только что шёл). Накопи все правки батча и деплой ОДИН раз в конце. Первый деплой батча
-проходит; повторные подряд — блок.
+Правило: блок `vercel --prod` / `npm run build`, ТОЛЬКО если с последнего билда/деплоя
+накопилось МЕНЬШЕ 3 правок исходника (значит это микро-деплой одной-двух правок). Если
+правок >=3 — это нормальный батч, билд пропускаем. Первый билд (деплоев ещё не было) —
+всегда можно. Правки .claude/ не считаем (они не деплоятся).
 """
 import json
 import re
 import sys
 
-# Матчим ТОЛЬКО реальный вызов команды (в начале или после &&/;/|/новой строки),
-# а не текст внутри строки/сообщения коммита (иначе хук блокирует сам себя).
-# Гейтим И `vercel --prod`, И `npm run build` — именно билд ест 2-3 минуты ожидания Boris.
+# Матчим реальный вызов команды (в начале или после &&/;/|/новой строки), а не текст
+# внутри строки/сообщения коммита. Гейтим и `vercel --prod`, и `npm run build`.
 PROD_RE = re.compile(
     r"(?:^|&&|\|\||;|\n)\s*"
     r"(?:(?:npx\s+)?vercel\b[^\n]*--prod|npm\s+run\s+build|next\s+build|"
     r"yarn\s+build|pnpm\s+build)",
     re.IGNORECASE)
-# сколько последних объектов транскрипта считаем «недавним ходом»
-WINDOW = 80
+SRC_EDIT_RE = re.compile(r"\.(tsx?|jsx?|css|mjs|cjs)$", re.IGNORECASE)
+MIN_BATCH_EDITS = 3
+# Маркеры РЕАЛЬНО прошедшего билда/деплоя в выводе. Если их нет — попытка была
+# заблокирована хуком или упала, за реальный билд её не считаем.
+BUILD_OK_RE = re.compile(
+    r"prerendered|\bSSG\b|Route \(app\)|Compiled|Deployment[^\n]*ready|First Load JS",
+    re.IGNORECASE)
 
 
-def _recent_prod_deploy(objs):
-    """True, если в последних WINDOW объектах уже был вызов vercel --prod."""
-    for o in objs[-WINDOW:]:
-        if not isinstance(o, dict) or o.get("type") != "assistant":
-            continue
-        content = (o.get("message", {}) or {}).get("content")
-        if not isinstance(content, list):
-            continue
-        for b in content:
-            if (isinstance(b, dict) and b.get("type") == "tool_use"
-                    and b.get("name") in ("Bash", "PowerShell")):
-                cmd = str((b.get("input", {}) or {}).get("command", ""))
-                if PROD_RE.search(cmd):
-                    return True
-    return False
+def _tool_uses(o):
+    if not isinstance(o, dict) or o.get("type") != "assistant":
+        return []
+    content = (o.get("message", {}) or {}).get("content")
+    if not isinstance(content, list):
+        return []
+    return [(b.get("name", ""), b.get("input", {}) or {})
+            for b in content if isinstance(b, dict) and b.get("type") == "tool_use"]
+
+
+def _is_build_cmd(name, inp):
+    return (name in ("Bash", "PowerShell")
+            and bool(PROD_RE.search(str(inp.get("command", "")))))
+
+
+def _tool_result_text(o):
+    if not isinstance(o, dict) or o.get("type") != "user":
+        return ""
+    content = (o.get("message", {}) or {}).get("content")
+    if not isinstance(content, list):
+        return ""
+    parts = []
+    for b in content:
+        if isinstance(b, dict) and b.get("type") == "tool_result":
+            c = b.get("content")
+            if isinstance(c, str):
+                parts.append(c)
+            elif isinstance(c, list):
+                for x in c:
+                    if isinstance(x, dict) and x.get("type") == "text":
+                        parts.append(x.get("text", ""))
+    return "\n".join(parts)
+
+
+def _decide_block(objs):
+    """Блок, если с последнего РЕАЛЬНОГО (не заблокированного) билда накоплено
+    < MIN_BATCH_EDITS правок исходника."""
+    last_deploy = -1
+    for i, o in enumerate(objs):
+        for name, inp in _tool_uses(o):
+            if _is_build_cmd(name, inp):
+                res = _tool_result_text(objs[i + 1]) if i + 1 < len(objs) else ""
+                # считаем только РЕАЛЬНО прошедший билд (по маркерам вывода);
+                # заблокированные/упавшие попытки пропускаем
+                if not BUILD_OK_RE.search(res):
+                    continue
+                last_deploy = i
+    if last_deploy == -1:
+        return False  # билдов/деплоев ещё не было — можно
+    edits = 0
+    for o in objs[last_deploy + 1:]:
+        for name, inp in _tool_uses(o):
+            if name in ("Edit", "Write", "MultiEdit"):
+                fp = str(inp.get("file_path", "")).replace("\\", "/").lower()
+                if "/.claude/" in fp:
+                    continue
+                if SRC_EDIT_RE.search(fp):
+                    edits += 1
+    return edits < MIN_BATCH_EDITS
 
 
 def decide():
@@ -64,15 +111,14 @@ def decide():
                 objs = [json.loads(l) for l in f.read().splitlines() if l.strip()]
         except Exception:
             objs = []
-    if not _recent_prod_deploy(objs):
-        return None  # первый деплой батча — можно
+    if not _decide_block(objs):
+        return None
 
     return (
-        "БЛОК check_no_micro_deploy: ты уже деплоил `vercel --prod` совсем недавно, а "
-        "теперь деплоишь снова после пары правок. Класс ошибки 18.07: билд+деплой КАЖДОЙ "
-        "мелкой правки = Boris ждёт 2-3 мин на каждую, время в трубу. СЕЙЧАС: НЕ деплой. "
-        "Накопи ВСЕ правки этого батча (правь файлы дальше), и когда батч готов — сделай "
-        "ОДИН npm run build + ОДИН git push (авто-деплой) в конце. Не по одной правке."
+        "БЛОК check_no_micro_deploy: с прошлого билда/деплоя ты сделал МЕНЬШЕ 3 правок "
+        "исходника — это микро-деплой одной-двух правок, Boris ждёт 2-3 мин впустую. "
+        "Накопи ВСЕ правки батча, и когда всё готово — сделай ОДИН билд + ОДИН пуш. "
+        "Не билди/деплой по одной правке."
     )
 
 
