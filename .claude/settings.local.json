@@ -149,6 +149,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_todo_no_drop.py'",
             "statusMessage": "check_todo_no_drop: не терять задачи из очереди"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_task_jump.py'",
+            "statusMessage": "check_no_task_jump: не прыгать с задачи на задачу"
           }
         ]
       },
@@ -286,6 +291,14 @@
           {
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_regressive_advice.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_enqueue_command.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_uncommitted_stop.py'"
           }
         ]
       }
