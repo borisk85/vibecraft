@@ -144,6 +144,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_unrequested_visual.py'",
             "statusMessage": "check_no_unrequested_visual: не добавлять цвет/стиль, которого Boris не просил"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_collateral_removal.py'",
+            "statusMessage": "check_no_collateral_removal: при удалении CSS не сносить заодно чужой фикс (nowrap)"
           }
         ]
       },
