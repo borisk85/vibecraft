@@ -28,6 +28,30 @@ BUILD_OK_RE = re.compile(
     re.IGNORECASE)
 
 
+_SVC = ("НАРУШЕНИЕ check", "БЛОК check", "Stop hook feedback", "system-reminder",
+        "hookSpecificOutput", "hook additional context")
+
+
+def _is_real_boris(o):
+    """Реальная реплика Boris (не tool_result, не служебка хука)."""
+    if not isinstance(o, dict) or o.get("type") != "user":
+        return False
+    content = (o.get("message", {}) or {}).get("content")
+    text = ""
+    if isinstance(content, str):
+        text = content
+    elif isinstance(content, list):
+        if content and all(isinstance(b, dict) and b.get("type") == "tool_result"
+                           for b in content):
+            return False
+        text = " ".join(b.get("text", "") for b in content
+                        if isinstance(b, dict) and b.get("type") == "text")
+    text = text.strip()
+    if not text or any(m in text for m in _SVC):
+        return False
+    return True
+
+
 def _tool_uses(o):
     if not isinstance(o, dict) or o.get("type") != "assistant":
         return []
@@ -77,6 +101,11 @@ def _decide_block(objs):
                 last_deploy = i
     if last_deploy == -1:
         return False  # билдов/деплоев ещё не было — можно
+    # Если после последнего билда Boris прислал НОВУЮ реплику — этот билд отвечает на
+    # новый запрос/претензию, а не само-итерация по одной правке. Разрешаем.
+    for o in objs[last_deploy + 1:]:
+        if _is_real_boris(o):
+            return False
     edits = 0
     for o in objs[last_deploy + 1:]:
         for name, inp in _tool_uses(o):

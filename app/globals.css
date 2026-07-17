@@ -231,3 +231,7 @@ button[aria-haspopup="listbox"]:focus-visible {
 .blog-content td strong {
   color: var(--color-foreground);
 }
+/* Колонка цены — на одной строке, чтобы знак валюты не переносился (просил Boris). */
+.blog-content tbody td:last-child {
+  white-space: nowrap;
+}
