@@ -144,11 +144,6 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_unrequested_visual.py'",
             "statusMessage": "check_no_unrequested_visual: не добавлять цвет/стиль, которого Boris не просил"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_color_collision.py'",
-            "statusMessage": "check_no_color_collision: не красить элемент в цвет, уже занятый другим (ссылками)"
           }
         ]
       },
