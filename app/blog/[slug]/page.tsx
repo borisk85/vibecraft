@@ -22,7 +22,9 @@ export async function generateMetadata({
   const post = posts.find((p) => p.slug === slug);
   if (!post || post.hidden) return { title: "Статья не найдена" };
   return {
-    title: `${post.title} — Блог Vibecraft`,
+    // Только заголовок статьи. Бренд «— Vibecraft» добавляет шаблон title в layout —
+    // если писать «Блог Vibecraft» здесь, бренд задваивается в <title>.
+    title: post.title,
     description: post.excerpt,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
