@@ -21,7 +21,10 @@ export default async function AdminLayout({
 
   if (!user) redirect("/login");
   const email = user.email?.toLowerCase() ?? "";
-  if (ADMIN_EMAILS.length > 0 && !ADMIN_EMAILS.includes(email)) {
+  // FAIL-CLOSED: пускаем ТОЛЬКО емейлы из allowlist. Если ADMIN_EMAILS пуст/не задан
+  // на проде — в админку не попадает НИКТО (раньше пустой список открывал доступ
+  // любому вошедшему по magic-link — дыра). Задать ADMIN_EMAILS в env Vercel.
+  if (!ADMIN_EMAILS.includes(email)) {
     redirect("/login?error=forbidden");
   }
 
