@@ -19,6 +19,7 @@ RUSSIAN_TEXT_FILES = re.compile(
     r"lib/calculator-system-prompt\.ts|"
     r"lib/calculator-pdf\.tsx|"
     r"lib/metadata\.ts|"
+    r"lib/blog-posts\.ts|"
     r"components/(?:sections|blog|shared)/[^/]+\.tsx|"
     r"app/.+\.(?:tsx|mdx)|"
     r"app/api/(?:calculator|lead|chat)/[^/]+\.ts|"
@@ -38,6 +39,7 @@ FORBIDDEN_WORDS = [
     (r"vibe\s+coding", "«vibe coding»"),
     (r"vibecoder", "«vibecoder»"),
     (r"\bкрипта\b", "«крипта» (использовать «криптовалюта»)"),
+    (r"коробк\w*", "«коробка / из коробки / коробочный» — жаргон, Boris вычищал руками; писать «готовое решение / готовый сервис»"),
 ]
 
 # Слово «алерт» только в русских текстовых файлах (в коде alert() допустим)

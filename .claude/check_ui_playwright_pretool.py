@@ -113,8 +113,11 @@ def decide():
         except Exception:
             objs = []
 
+    # Путь B гейтит только ВИЗУАЛЬНЫЕ файлы (.css/.tsx). Правка текста-контента
+    # (.ts, напр. blog-posts.ts) под визуальной жалобой — не визуальный фикс, не блок.
+    is_visual_file = fp.lower().endswith(".css") or fp.lower().endswith(".tsx")
     # Путь B: неразобранная визуальная жалоба + не смотрел страницу с тех пор.
-    if objs and _visual_complaint_unlooked(objs):
+    if is_visual_file and objs and _visual_complaint_unlooked(objs):
         return (
             "БЛОК check_ui_visual: последняя жалоба Boris — про то, что ВИДНО на странице "
             "(кнопка/дубль/ховер/кавер/иконка/цвет/линия/верстка), а ты правишь файл, НЕ "
