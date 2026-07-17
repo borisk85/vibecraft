@@ -16,4 +16,5 @@ export type Post = {
   hidden?: boolean
 }
 
-export const posts: Post[] = []
+export const posts: Post[] = [
+]
