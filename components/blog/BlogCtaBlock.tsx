@@ -18,7 +18,7 @@ export default function BlogCtaBlock() {
             href="/#contact"
             className="inline-flex h-11 items-center justify-center rounded-xl bg-gradient-accent px-5 text-sm font-semibold text-white shadow-[0_0_30px_-10px_rgb(139_92_246/0.5)] transition-shadow hover:shadow-[0_0_40px_-8px_rgb(139_92_246/0.65)]"
           >
-            Обсудить проект
+            Оставить заявку
           </Link>
           <Link
             href="/calculator"
