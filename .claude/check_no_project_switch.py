@@ -52,19 +52,42 @@ def _root(fp: str):
     return None
 
 
-def _last_user_text(messages) -> str:
-    txt = ""
+_SVC_MARKERS = (
+    "Stop hook feedback", "hook feedback", "НАРУШЕНИЕ check", "БЛОК check",
+    "system-reminder", "hook additional context", "Жесткие правила",
+    "task-notification", "<command-name", "persisted-output", "Caveat:",
+    "Stop hook blocking",
+)
+
+
+def _last_user_text(messages, n: int = 12) -> str:
+    """Текст ПОСЛЕДНИХ n РЕАЛЬНЫХ сообщений Boris (окно), не только самого последнего.
+    Разрешение на смену проекта Boris часто даёт репликой-двумя раньше («правь бота»,
+    «в этом маркетинг-боте»), а на следующей уже ругается без имени проекта. Одно
+    последнее сообщение это разрешение теряло и хук ложно блокировал (дыра 17.07).
+    Пропускаем tool_result И сообщения-фидбек хуков/служебные — иначе окно засоряется
+    ими и реальные реплики Boris (с сигналом-именем проекта) выпадают."""
+    texts = []
     for msg in messages:
         if msg.get("type") != "user":
             continue
         c = msg.get("message", {}).get("content", "")
+        is_tool = (
+            isinstance(c, list) and c
+            and all(isinstance(b, dict) and b.get("type") == "tool_result" for b in c)
+        )
+        if is_tool:
+            continue
         if isinstance(c, str):
-            txt = c
+            t = c
         elif isinstance(c, list):
-            parts = [b.get("text", "") for b in c if isinstance(b, dict) and b.get("type") == "text"]
-            if parts:
-                txt = " ".join(parts)
-    return txt.lower()
+            t = " ".join(b.get("text", "") for b in c if isinstance(b, dict) and b.get("type") == "text")
+        else:
+            t = ""
+        if not t.strip() or any(m in t for m in _SVC_MARKERS):
+            continue
+        texts.append(t)
+    return " ".join(texts[-n:]).lower()
 
 
 def _read_state():
