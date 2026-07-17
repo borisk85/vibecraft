@@ -4,13 +4,13 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation"
 import Link from "next/link"
 import { Newspaper } from "lucide-react"
 import { type Post } from "@/lib/blog-posts"
+import { BLOG_CATEGORIES } from "@/lib/blog-categories"
 import PostCover from "@/components/blog/PostCover"
 
+// Категории берем из единого источника lib/blog-categories.ts (не хардкодим имена).
 const CATEGORIES = [
-  { label: "Все",           slug: "all" },
-  { label: "Боты",          slug: "bots" },
-  { label: "Автоматизации", slug: "automation" },
-  { label: "Приложения",    slug: "apps" },
+  { label: "Все", slug: "all" },
+  ...BLOG_CATEGORIES.map((c) => ({ label: c.name, slug: c.slug })),
 ]
 const PAGE_SIZE = 9
 
