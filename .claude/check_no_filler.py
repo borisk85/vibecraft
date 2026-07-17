@@ -19,6 +19,9 @@ FILLER = (
 )
 OPEN_RE = re.compile(rf"^\s*(?:{FILLER})\b\s*[\s,.!:;—-]*", re.IGNORECASE | re.UNICODE)
 LINE_RE = re.compile(rf"^\s*(?:{FILLER})\s*[.!…]*\s*$", re.IGNORECASE | re.UNICODE)
+# Слова, запрещенные ВЕЗДЕ в ответе (не только в начале). Boris забанил «честно» в
+# любом контексте и формате — оно его бесит как вербальный тик.
+BANNED_ANYWHERE_RE = re.compile(r"честн\w*", re.IGNORECASE | re.UNICODE)
 
 
 def _is_tool_result(msg):
@@ -67,6 +70,15 @@ def main():
     # code-block снять
     clean = re.sub(r"```[\s\S]*?```", "", resp).strip()
     if not clean:
+        sys.exit(0)
+
+    any_hit = BANNED_ANYWHERE_RE.search(clean)
+    if any_hit:
+        reason = (
+            f"НАРУШЕНИЕ check_no_filler: слово «{any_hit.group(0)}» запрещено Boris ВЕЗДЕ, "
+            "в любом контексте и формате. Убери его из ответа полностью."
+        )
+        print(json.dumps({"decision": "block", "reason": reason}))
         sys.exit(0)
 
     hit = None
