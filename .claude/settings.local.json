@@ -129,6 +129,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_selfwritten_to_files.py'",
             "statusMessage": "check_no_selfwritten_to_files: без команды Boris в файлы-документы не писать отсебятину"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_regressive_action.py'",
+            "statusMessage": "check_no_regressive_action: не отключать/убирать фичу правкой ради обхода проблемы"
           }
         ]
       },
