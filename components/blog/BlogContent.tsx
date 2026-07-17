@@ -37,7 +37,6 @@ function PostCard({ post }: { post: Post }) {
     >
       <PostCover category={post.category} iconKey={post.iconKey} className="h-44 flex-shrink-0" />
       <div className="flex flex-1 flex-col gap-3 p-5">
-        <CategoryBadge label={post.category} color={post.categoryColor} />
         <h2 className="text-base font-bold leading-snug text-foreground transition-colors group-hover:text-white">
           {post.title}
         </h2>

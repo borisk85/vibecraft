@@ -129,15 +129,6 @@ export default async function PostPage({
             </Link>
 
             <div className="mb-8">
-              <span
-                className="mb-4 inline-block rounded-full px-2.5 py-0.5 text-xs font-semibold"
-                style={{
-                  background: `${post.categoryColor}18`,
-                  color: post.categoryColor,
-                }}
-              >
-                {post.category}
-              </span>
               <h1 className="mb-4 text-3xl font-semibold leading-snug tracking-tight text-foreground md:text-4xl">
                 {post.title}
               </h1>
