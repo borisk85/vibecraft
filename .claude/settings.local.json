@@ -144,6 +144,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_consult_reference.py'",
             "statusMessage": "check_consult_reference (Bash/PowerShell): позвали референс — прочитай источник, потом пиши файл"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_build_before_push.py'",
+            "statusMessage": "check_build_before_push: нет локального билда после правки исходника — не пушить/деплоить"
           }
         ]
       },
