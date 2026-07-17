@@ -213,9 +213,10 @@ button[aria-haspopup="listbox"]:focus-visible {
   line-height: 1.5;
 }
 .blog-content thead th {
-  background: rgb(255 255 255 / 0.03);
+  background: rgb(139 92 246 / 0.12);
   color: var(--color-foreground);
   font-weight: 600;
+  border-bottom: 2px solid var(--color-accent);
 }
 .blog-content th,
 .blog-content td {
@@ -224,6 +225,9 @@ button[aria-haspopup="listbox"]:focus-visible {
   border: 1px solid var(--color-border);
   vertical-align: top;
 }
+.blog-content tbody tr:nth-child(even) td {
+  background: rgb(255 255 255 / 0.02);
+}
 .blog-content td strong {
-  color: var(--color-foreground);
+  color: var(--color-accent-text);
 }

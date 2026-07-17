@@ -45,7 +45,7 @@ def _content_target(fp):
 
 def _reference_opened(objs):
     """True, если в недавнем ходу я реально открыл референс (Read/navigate/curl)."""
-    for o in objs[-110:]:
+    for o in objs[-400:]:
         if not isinstance(o, dict) or o.get("type") != "assistant":
             continue
         content = (o.get("message", {}) or {}).get("content")
