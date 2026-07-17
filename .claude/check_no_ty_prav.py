@@ -72,39 +72,22 @@ def _final_assistant_text(transcript_path: str) -> str:
 def _find_violation(text: str):
     if not text.strip():
         return None
-    # не проверять код-блоки и инлайн-код (там могу цитировать запрет)
+    # не проверять код-блоки и инлайн-код (там могу цитировать запрет легитимно)
     clean = re.sub(r"```[\s\S]*?```", "", text)
     clean = re.sub(r"`[^`]*`", "", clean)
     clean = "\n".join(l for l in clean.splitlines() if not l.lstrip().startswith(">"))
-    # Мета-контекст: обсуждение самого запрета/правила/хука, а не согласие.
-    meta_re = re.compile(
-        r"(запрет|запрещ|правил|фраз|хук|никогда\s+не|нельзя\s+говор|"
-        r"стоп.?лист|слов[оае]\b|блокир|ловит|срабат|детект|поймал|не\s+пиш)",
-        re.IGNORECASE | re.UNICODE,
-    )
+    # ЕДИНСТВЕННОЕ исключение: САМА запрещённая фраза заключена в «ёлочки» —
+    # это прямая цитата запрета («запрещено „ты прав“»), а не согласие.
+    # Широкий мета-фильтр по словам (хук/фраза/правило) и «есть любые ёлочки в
+    # предложении» УБРАНЫ — они глотали реальные «ты прав», когда рядом случайно
+    # было «хук»/«лажа» или цитата ДРУГОГО текста в «ёлочках» (дыра 17.07,
+    # проскочило «ты прав, «менять смысла нет» была лажа»).
+    quote_spans = [(mo.start(), mo.end()) for mo in re.finditer(r"«[^»]*»", clean)]
     for m in TY_PRAV_RE.finditer(clean):
-        s = clean.rfind(".", 0, m.start())
-        s = s + 1 if s != -1 else 0
-        e = clean.find(".", m.end())
-        e = e if e != -1 else len(clean)
-        sentence = clean[s:e]
-        # цитирование внутри «ёлочек» — объяснение запрета, пропускаем
-        if "«" in sentence and "»" in sentence:
-            continue
-        if meta_re.search(sentence):
-            continue
+        if any(qs <= m.start() and m.end() <= qe for qs, qe in quote_spans):
+            continue  # цитата запрета внутри самих «ёлочек» — не согласие
         return m
     return None
-
-
-    # Технические инструменты не трогаем в PreToolUse: если запрещённая фраза уже
-    # в отправленном тексте, блокировать рабочий tool-call бессмысленно (фраза уже
-    # ушла в чат), а повторные попытки плодят дубли «Update Todos»/статусов в UI.
-    # Финальную реплику всё равно поймает Stop-ветка ниже.
-SAFE_PRETOOL = {
-    "TodoWrite", "Read", "Grep", "Glob", "Bash", "Edit", "Write",
-    "MultiEdit", "NotebookEdit", "TodoRead",
-}
 
 
 def main():
@@ -114,9 +97,11 @@ def main():
         sys.exit(0)
     if payload.get("stop_hook_active"):
         sys.exit(0)
-    event = payload.get("hook_event_name")
-    if event == "PreToolUse" and payload.get("tool_name") in SAFE_PRETOOL:
-        sys.exit(0)
+    # PreToolUse БЕЗ белого списка инструментов: если в последней текстовой реплике
+    # уже есть «ты прав» — режем ЛЮБОЙ следующий инструмент (Edit/Bash/TodoWrite и
+    # т.д.), чтобы фраза ловилась на первой же границе, а не только в самом конце
+    # хода. Старый SAFE_PRETOOL глушил проверку почти для всех инструментов — из-за
+    # него PreToolUse-ветка не блокировала ничего (дыра 17.07).
     transcript_path = payload.get("transcript_path")
     if not transcript_path:
         sys.exit(0)

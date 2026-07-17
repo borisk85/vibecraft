@@ -282,6 +282,10 @@
           {
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_comment_on_data.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_regressive_advice.py'"
           }
         ]
       }
