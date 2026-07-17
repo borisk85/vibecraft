@@ -7,9 +7,10 @@ import { type Post } from "@/lib/blog-posts"
 import PostCover from "@/components/blog/PostCover"
 
 const CATEGORIES = [
-  { label: "Все",        slug: "all" },
-  { label: "Обзоры",     slug: "reviews" },
-  { label: "Сценарии",   slug: "scenarios" },
+  { label: "Все",           slug: "all" },
+  { label: "Боты",          slug: "bots" },
+  { label: "Автоматизация", slug: "automation" },
+  { label: "Приложения",    slug: "apps" },
 ]
 const PAGE_SIZE = 9
 

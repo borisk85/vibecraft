@@ -76,7 +76,10 @@ def _completed(todos):
 
 def decide():
     try:
-        data = json.loads(sys.stdin.read() or "{}")
+        # stdin ОБЯЗАТЕЛЬНО читать как utf-8: иначе на Windows кириллица в новых
+        # todos декодится в cp1252-мохибейк и не совпадает с utf-8 из транскрипта —
+        # хук ложно решает, что задачи разные, и блокирует любой TodoWrite (баг 17.07).
+        data = json.loads(sys.stdin.buffer.read().decode("utf-8", "ignore") or "{}")
     except Exception:
         return None
     if data.get("hook_event_name") != "PreToolUse" or data.get("tool_name") != "TodoWrite":
