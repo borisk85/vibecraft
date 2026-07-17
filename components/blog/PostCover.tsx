@@ -6,31 +6,49 @@ type Props = {
 }
 
 const COVER_CONFIG: Record<string, { color: string; bg: string; icon: string }> = {
-  "Обзоры": {
-    color: "#A78BFA",
-    bg: "linear-gradient(135deg, rgba(167,139,250,0.14) 0%, rgba(139,92,246,0.06) 100%)",
+  "Боты": {
+    color: "#8B5CF6",
+    bg: "linear-gradient(135deg, rgba(139,92,246,0.14) 0%, rgba(139,92,246,0.06) 100%)",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M8 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h3"/>
-      <path d="M16 3h3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-3"/>
-      <line x1="12" y1="3" x2="12" y2="21"/>
+      <path d="M12 8V4H8"/>
+      <rect width="16" height="12" x="4" y="8" rx="2"/>
+      <path d="M2 14h2"/>
+      <path d="M20 14h2"/>
+      <path d="M15 13v2"/>
+      <path d="M9 13v2"/>
     </svg>`,
   },
-  "Сценарии": {
+  "Автоматизация": {
     color: "#10B981",
     bg: "linear-gradient(135deg, rgba(16,185,129,0.14) 0%, rgba(5,150,105,0.06) 100%)",
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="4 7 4 4 20 4 20 7"/>
-      <line x1="9" y1="20" x2="15" y2="20"/>
-      <line x1="12" y1="4" x2="12" y2="20"/>
+      <rect width="8" height="8" x="3" y="3" rx="2"/>
+      <path d="M7 11v4a2 2 0 0 0 2 2h4"/>
+      <rect width="8" height="8" x="13" y="13" rx="2"/>
+    </svg>`,
+  },
+  "Приложения": {
+    color: "#EC4899",
+    bg: "linear-gradient(135deg, rgba(236,72,153,0.14) 0%, rgba(219,39,119,0.06) 100%)",
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <rect x="2" y="4" width="20" height="16" rx="2"/>
+      <path d="M2 8h20"/>
+      <path d="M6 6h.01"/>
+      <path d="M10 6h.01"/>
     </svg>`,
   },
 }
 
+// DEFAULT — нейтральный документ (НЕ звезда). Все категории замаплены выше,
+// поэтому DEFAULT показывается только если появится новая категория без иконки.
 const DEFAULT = {
-  color: "#A78BFA",
-  bg: "linear-gradient(135deg, rgba(167,139,250,0.14) 0%, rgba(139,92,246,0.06) 100%)",
+  color: "#8B5CF6",
+  bg: "linear-gradient(135deg, rgba(139,92,246,0.14) 0%, rgba(139,92,246,0.06) 100%)",
   icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="16" y1="13" x2="8" y2="13"/>
+    <line x1="16" y1="17" x2="8" y2="17"/>
   </svg>`,
 }
 

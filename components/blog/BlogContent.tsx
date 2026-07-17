@@ -33,12 +33,12 @@ function PostCard({ post }: { post: Post }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.06] bg-white/[0.02] transition-colors hover:border-accent/60"
+      className="group flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.03] transition-colors duration-200 hover:border-white/15"
     >
       <PostCover category={post.category} iconKey={post.iconKey} className="h-44 flex-shrink-0" />
       <div className="flex flex-1 flex-col gap-3 p-5">
         <CategoryBadge label={post.category} color={post.categoryColor} />
-        <h2 className="text-base font-bold leading-snug text-foreground transition-colors group-hover:text-accent">
+        <h2 className="text-base font-bold leading-snug text-foreground transition-colors group-hover:text-white">
           {post.title}
         </h2>
         <p className="line-clamp-3 text-sm leading-relaxed text-muted">{post.excerpt}</p>

@@ -7,6 +7,7 @@ import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { posts } from "@/lib/blog-posts";
+import PostCover from "@/components/blog/PostCover";
 import ShareButtons from "@/components/blog/ShareButtons";
 import BlogCtaBlock from "@/components/blog/BlogCtaBlock";
 
@@ -62,9 +63,12 @@ export default async function PostPage({
   const post = posts.find((p) => p.slug === slug);
   if (!post || post.hidden) notFound();
 
-  const html = post.content ? await marked.parse(post.content) : "";
+  // Маркеры [📸 СКРИН ...] не выводим как текст статьи (1:1 как на VELA-блоге):
+  // в источнике они остаются, визуал в статье дает кавер категории ниже.
+  const cleanContent = (post.content || "").replace(/\[📸[^\]]*\]/g, "");
+  const html = cleanContent ? await marked.parse(cleanContent) : "";
 
-  const headings = (post.content || "")
+  const headings = cleanContent
     .split("\n")
     .filter((line) => line.startsWith("## "))
     .map((line) => {
@@ -143,6 +147,13 @@ export default async function PostPage({
                 <span>{post.readTime} чтения</span>
               </div>
             </div>
+
+            <PostCover
+              category={post.category}
+              iconKey={post.iconKey}
+              large
+              className="mb-10 h-52 w-full rounded-2xl sm:h-64"
+            />
 
             {headings.length >= 3 && (
               <nav className="mb-10 rounded-xl border border-white/[0.06] bg-white/[0.02]">
