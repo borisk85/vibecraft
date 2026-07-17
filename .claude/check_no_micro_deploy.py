@@ -14,8 +14,13 @@ import re
 import sys
 
 # Матчим ТОЛЬКО реальный вызов команды (в начале или после &&/;/|/новой строки),
-# а не текст «vercel --prod» внутри строки/сообщения коммита (иначе хук блокирует сам себя).
-PROD_RE = re.compile(r"(?:^|&&|\|\||;|\n)\s*(?:npx\s+)?vercel\b[^\n]*--prod", re.IGNORECASE)
+# а не текст внутри строки/сообщения коммита (иначе хук блокирует сам себя).
+# Гейтим И `vercel --prod`, И `npm run build` — именно билд ест 2-3 минуты ожидания Boris.
+PROD_RE = re.compile(
+    r"(?:^|&&|\|\||;|\n)\s*"
+    r"(?:(?:npx\s+)?vercel\b[^\n]*--prod|npm\s+run\s+build|next\s+build|"
+    r"yarn\s+build|pnpm\s+build)",
+    re.IGNORECASE)
 # сколько последних объектов транскрипта считаем «недавним ходом»
 WINDOW = 80
 
