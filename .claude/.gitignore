@@ -1,0 +1,8 @@
+# Транзиентное состояние хуков — не версионируем
+__pycache__/
+*.pyc
+.answer_q_count
+.last_project_root
+.stop_block_count
+guess_flags.log
+*.lock

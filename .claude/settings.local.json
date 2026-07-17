@@ -7,6 +7,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/inject_rules.py'",
             "statusMessage": "Подмешиваю жесткие правила vibecraft"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/inject_reference_stop.py'",
+            "statusMessage": "Проверяю задачу на референс"
           }
         ]
       }
@@ -17,7 +22,164 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/validate_text.py'"
+            "command": "python 'C:/Claude Code/vibecraft/.claude/validate_text.py'",
+            "statusMessage": "validate_text: проверяю ё / запрещенные слова / сочиненные факты"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_project_switch.py'",
+            "statusMessage": "check_no_project_switch: не прыгать на другой проект без команды"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|TodoWrite|Read|Glob|Grep|Task|WebSearch|WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_ty_prav.py'",
+            "statusMessage": "check_no_ty_prav: запрещенная фраза согласия — режу сразу"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_deploy_destruction.py'",
+            "statusMessage": "check_no_deploy_destruction: деплой-очередь руками не трогать"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_bg_quick.py'",
+            "statusMessage": "check_no_bg_quick: быстрый grep/read — foreground, не в фон"
+          }
+        ]
+      },
+      {
+        "matcher": "WebSearch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_websearch_not_basic.py'",
+            "statusMessage": "check_websearch_not_basic: поиск только под внешние факты"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/ref_guard.py'",
+            "statusMessage": "ref_guard: проверяю что референс vibecraft открыт"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/no_action_on_question.py'",
+            "statusMessage": "no_action_on_question: правка продукта — только по команде, не на вопрос/критику"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_invented_copy.py'",
+            "statusMessage": "check_no_invented_copy: критическая копи — только из подтвержденного текста/источника"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_justify_not_delete.py'",
+            "statusMessage": "check_justify_not_delete: источник под вопросом — обоснуй, не удаляй молча"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_consult_reference.py'",
+            "statusMessage": "check_consult_reference: позвали референс — прочитай реальный источник, потом правь"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_verbatim_dictation.py'",
+            "statusMessage": "check_verbatim_dictation: Boris продиктовал текст — вставляй дословно, не склеивай"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_selfagree_pretool.py'",
+            "statusMessage": "check_no_selfagree_pretool: без «ты прав/согласен/виноват» в подводке перед инструментом"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_copy_facts_pretool.py'",
+            "statusMessage": "check_copy_facts: копи только с факт-чеком (код/Privacy/ресерч), без отсебятины"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_ui_playwright_pretool.py'",
+            "statusMessage": "check_ui_playwright: изменение верстки/сетки — проверить визуал через Playwright"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_selfwritten_to_files.py'",
+            "statusMessage": "check_no_selfwritten_to_files: без команды Boris в файлы-документы не писать отсебятину"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_consult_reference.py'",
+            "statusMessage": "check_consult_reference (Bash/PowerShell): позвали референс — прочитай источник, потом пиши файл"
+          }
+        ]
+      },
+      {
+        "matcher": "TodoWrite",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_todo_no_drop.py'",
+            "statusMessage": "check_todo_no_drop: не терять задачи из очереди"
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__playwright__.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_playwright_only_on_command.py'",
+            "statusMessage": "check_playwright_only_on_command: браузер/Playwright только по явной команде"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/ref_guard.py'"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_sweep_all_pages.py'",
+            "statusMessage": "check_sweep_all_pages: паттерн заменен — проверяю, не остался ли в других местах"
           }
         ]
       }
@@ -28,6 +190,98 @@
           {
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_text_changes.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_fix_question.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_ty_prav.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_false_done.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_pause.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_queue_on_new_task.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_stop_incomplete.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_ui_visual_verify.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_bossing_boris.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_offtopic_injection.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_empty_promise.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_filler.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_empty_status.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_english.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_unverified_denial.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_unvetted_fit.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_chat_duplicate.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_unverified_claim.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_hold_in_mind.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_late_infeasibility.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_econ_from_head.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_unverified_advice.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_answer_boris_q.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_comment_on_data.py'"
           }
         ]
       }
