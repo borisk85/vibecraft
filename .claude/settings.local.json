@@ -307,6 +307,10 @@
           {
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_work_proposal.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_lie_report_without_fix.py'"
           }
         ]
       }
