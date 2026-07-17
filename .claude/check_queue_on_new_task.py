@@ -30,8 +30,21 @@ TASK_RE = re.compile(
 
 
 def _get_last_user_text(messages) -> str:
-    """Текст последнего человеческого сообщения (не tool_result)."""
-    for msg in reversed(messages):
+    """Текст ВСЕХ человеческих сообщений mid-turn пачки (после последнего assistant-
+    текста), не только последнего. Boris шлет несколько команд подряд mid-turn — если
+    смотреть лишь последнее, ранние команды (реальные задачи вроде «убери дубль слова»)
+    теряются, и хук не ставит их в очередь (дыра 17.07). Собираем всю пачку."""
+    last_asst = -1
+    for i, msg in enumerate(messages):
+        if msg.get("type") == "assistant":
+            c = msg.get("message", {}).get("content", [])
+            if isinstance(c, list) and any(
+                isinstance(b, dict) and b.get("type") == "text" and b.get("text", "").strip()
+                for b in c
+            ):
+                last_asst = i
+    parts = []
+    for msg in messages[last_asst + 1:]:
         if msg.get("type") != "user":
             continue
         content = msg.get("message", {}).get("content", [])
@@ -39,16 +52,13 @@ def _get_last_user_text(messages) -> str:
             if content and all(
                 isinstance(b, dict) and b.get("type") == "tool_result" for b in content
             ):
-                continue  # это результат тула, не человек
-            parts = [
-                b.get("text", "")
-                for b in content
-                if isinstance(b, dict) and b.get("type") == "text"
-            ]
-            return " ".join(parts)
-        if isinstance(content, str):
-            return content
-    return ""
+                continue  # результат тула, не человек
+            for b in content:
+                if isinstance(b, dict) and b.get("type") == "text":
+                    parts.append(b.get("text", ""))
+        elif isinstance(content, str):
+            parts.append(content)
+    return " ".join(parts)
 
 
 def _last_human_index(messages) -> int:
