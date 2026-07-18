@@ -29,7 +29,8 @@ ALIASES = {
     "agent-builder-saas": [r"\bvela\b", r"velabot", r"вела\b", r"велабот", r"лендинг"],
     "vibecraft": [r"вайбкрафт", r"вибкрафт", r"вайб\b"],
     "tg-bot": [r"клодуша", r"личн\w+ бот"],
-    "vela-marketing-bot": [r"маркет"],
+    "vela-marketing-bot": [r"маркет", r"blog_writer", r"промпт\w*\s+бот",
+                           r"генерац\w*\s+бот", r"бот\w*\s+генер", r"стать\w+\s+бот"],
     "support-bot": [r"саппорт", r"support"],
 }
 # слова, которыми Boris явно велит сменить проект
