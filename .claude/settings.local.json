@@ -164,6 +164,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_collateral_removal.py'",
             "statusMessage": "check_no_collateral_removal: при удалении CSS не сносить заодно чужой фикс (nowrap)"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_table_house_format.py'",
+            "statusMessage": "check_table_house_format: таблица блога — первый столбец целиком жирный, без приписок"
           }
         ]
       },
