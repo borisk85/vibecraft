@@ -69,7 +69,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Telegram"
-              className="transition-colors hover:text-foreground"
+              className="text-[#2AABEE]/80 transition-colors hover:text-[#2AABEE]"
             >
               <Send className="h-5 w-5" />
             </Link>
@@ -78,7 +78,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="transition-colors hover:text-foreground"
+              className="text-[#0A66C2]/85 transition-colors hover:text-[#0A66C2]"
             >
               <LinkedinIcon className="h-5 w-5" />
             </Link>
@@ -87,7 +87,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Instagram"
-              className="transition-colors hover:text-foreground"
+              className="text-[#C13584]/80 transition-colors hover:text-[#C13584]"
             >
               <InstagramIcon className="h-5 w-5" />
             </Link>
@@ -96,7 +96,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
-              className="transition-colors hover:text-foreground"
+              className="text-[#1877F2]/80 transition-colors hover:text-[#1877F2]"
             >
               <FacebookIcon className="h-5 w-5" />
             </Link>
