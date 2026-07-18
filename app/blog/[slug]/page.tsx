@@ -219,7 +219,7 @@ export default async function PostPage({
                       <li key={h.id}>
                         <a
                           href={`#${h.id}`}
-                          className="flex items-baseline gap-2 text-sm text-muted transition-colors hover:text-accent"
+                          className="flex items-baseline gap-2 text-sm text-foreground transition-colors hover:text-accent"
                         >
                           <span className="min-w-[1.2rem] font-mono text-xs text-muted/70">
                             {i + 1}.
