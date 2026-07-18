@@ -64,26 +64,24 @@ def _recent_boris(msgs, n=4):
     return out
 
 
-def _key(s):
-    """Стабильный ключ задачи: без хвоста после тире/скобки, только буквы, первые ~28
-    символов. Иначе мелкая переформулировка content между вызовами (добавил «(front-
-    load…)») ломает сравнение — completed не матчится с прежним in_progress, и хук
-    ложно решает «прыжок» (баг 18.07)."""
-    s = (s or "").lower()
-    s = re.split(r"[—–(]|\s-\s", s)[0]
-    s = re.sub(r"[^\w\s]", " ", s, flags=re.UNICODE)
-    s = re.sub(r"\s+", " ", s).strip()
-    return s[:28]
+def _words(s):
+    """Значимые слова задачи (длина >=4). Сравниваем задачи по СМЫСЛУ, а не по точному
+    префиксу: переформулировка content между вызовами больше не ломает матчинг (баг
+    18.07 — старый ключ по первым 28 символам ложно видел «прыжок» и блокировал всю
+    очередь при малейшем переименовании задачи)."""
+    return {w for w in re.findall(r"[\w]{4,}", (s or "").lower(), re.UNICODE)}
 
 
-def _ip(todos):
-    return {_key(t.get("content", "")) for t in (todos or [])
-            if isinstance(t, dict) and t.get("status") == "in_progress"}
+def _overlap(pw, other):
+    """Доля слов pw, встретившихся в other."""
+    if not pw:
+        return 0.0
+    return len(pw & _words(other)) / len(pw)
 
 
-def _completed(todos):
-    return {_key(t.get("content", "")) for t in (todos or [])
-            if isinstance(t, dict) and t.get("status") == "completed"}
+def _contents(todos, status=None):
+    return [t.get("content", "") for t in (todos or [])
+            if isinstance(t, dict) and (status is None or t.get("status") == status)]
 
 
 def decide():
@@ -109,21 +107,25 @@ def decide():
     prev = _prev_todos(msgs)
     if prev is None:
         return None  # первый TodoWrite — не с чем сравнивать
-    prev_ip = _ip(prev)
+    prev_ip = _contents(prev, "in_progress")
     if not prev_ip:
         return None  # ничего не было в работе — не прыжок
-    new_ip = _ip(new_todos)
-    new_done = _completed(new_todos)
-    # задача была в работе и НЕ доведена до completed
-    abandoned = {t for t in prev_ip if t not in new_done}
-    # активной сделана ДРУГАЯ задача, которой не было в работе раньше
-    newly_started = {t for t in new_ip if t not in prev_ip}
+    all_new = _contents(new_todos)  # новые задачи ЛЮБОГО статуса
+    new_ip = _contents(new_todos, "in_progress")
+    # «Брошена» = прежняя in_progress задача ИСЧЕЗЛА из нового списка по смыслу (нет ни
+    # одной новой задачи с пересечением слов >= 0.5 в любом статусе). Переименованный
+    # completed по-прежнему матчится по словам — ложного «прыжка» больше нет.
+    abandoned = [pc for pc in prev_ip
+                 if max([_overlap(_words(pc), nc) for nc in all_new] or [0.0]) < 0.5]
+    # «Новая активная» = in_progress, которой по смыслу не было среди прежних in_progress
+    newly_started = [nc for nc in new_ip
+                     if max([_overlap(_words(nc), pc) for pc in prev_ip] or [0.0]) < 0.5]
     if not abandoned or not newly_started:
         return None
     if any(SWITCH_OK_RE.search(t) for t in _recent_boris(msgs)):
         return None  # Boris явно велел переключиться
-    ab = "; ".join(list(abandoned)[:2])
-    ns = "; ".join(list(newly_started)[:2])
+    ab = "; ".join(abandoned[:2])
+    ns = "; ".join(newly_started[:2])
     return (
         f"БЛОК check_no_task_jump: ты бросаешь недоделанную задачу «{ab}» и делаешь "
         f"активной другую «{ns}». Это ПРЫЖОК с задачи на задачу — CLAUDE.md запрещает "
