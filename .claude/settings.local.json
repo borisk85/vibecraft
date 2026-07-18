@@ -34,6 +34,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_project_switch.py'",
             "statusMessage": "check_no_project_switch: не прыгать на другой проект без команды"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_queue_before_switch.py'",
+            "statusMessage": "check_queue_before_switch: >=2 задач без очереди — сначала TodoWrite, потом правки"
           }
         ]
       },
@@ -44,6 +49,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_ty_prav.py'",
             "statusMessage": "check_no_ty_prav: запрещенная фраза согласия — режу сразу"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_time_estimate.py'",
+            "statusMessage": "check_no_time_estimate: без оценок длительности команд в чат"
           }
         ]
       },
@@ -194,6 +204,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_playwright_only_on_command.py'",
             "statusMessage": "check_playwright_only_on_command: браузер/Playwright только по явной команде"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_playwright_for_code.py'",
+            "statusMessage": "check_no_playwright_for_code: кодовая задача без визуала — без Playwright"
           }
         ]
       }
@@ -233,6 +248,10 @@
           {
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_ty_prav.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_time_estimate.py'"
           },
           {
             "type": "command",

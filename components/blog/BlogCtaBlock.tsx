@@ -22,7 +22,7 @@ export default function BlogCtaBlock() {
           </Link>
           <Link
             href="/calculator"
-            className="inline-flex h-11 items-center justify-center rounded-xl border border-white/10 px-5 text-sm font-medium text-muted transition-colors hover:border-white/20 hover:text-foreground"
+            className="inline-flex h-11 items-center justify-center rounded-xl border border-border bg-card/40 px-5 text-sm font-medium text-foreground transition-colors duration-150 hover:border-accent hover:bg-card"
           >
             Прикинуть в калькуляторе
           </Link>

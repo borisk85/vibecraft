@@ -64,13 +64,25 @@ def _recent_boris(msgs, n=4):
     return out
 
 
+def _key(s):
+    """Стабильный ключ задачи: без хвоста после тире/скобки, только буквы, первые ~28
+    символов. Иначе мелкая переформулировка content между вызовами (добавил «(front-
+    load…)») ломает сравнение — completed не матчится с прежним in_progress, и хук
+    ложно решает «прыжок» (баг 18.07)."""
+    s = (s or "").lower()
+    s = re.split(r"[—–(]|\s-\s", s)[0]
+    s = re.sub(r"[^\w\s]", " ", s, flags=re.UNICODE)
+    s = re.sub(r"\s+", " ", s).strip()
+    return s[:28]
+
+
 def _ip(todos):
-    return {t.get("content", "").strip() for t in (todos or [])
+    return {_key(t.get("content", "")) for t in (todos or [])
             if isinstance(t, dict) and t.get("status") == "in_progress"}
 
 
 def _completed(todos):
-    return {t.get("content", "").strip() for t in (todos or [])
+    return {_key(t.get("content", "")) for t in (todos or [])
             if isinstance(t, dict) and t.get("status") == "completed"}
 
 
