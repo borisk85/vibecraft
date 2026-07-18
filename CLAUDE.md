@@ -1,3 +1,5 @@
+@~/.claude/BASE_RULES.md
+
 # CLAUDE.md — Vibecraft (vibecraft.kz)
 
 ## Структура проекта
