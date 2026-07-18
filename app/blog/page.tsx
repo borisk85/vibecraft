@@ -33,7 +33,7 @@ export default function BlogIndexPage() {
               Блог
             </span>
             <h1 className="text-balance text-4xl font-semibold tracking-tight md:text-5xl">
-              Боты, автоматизации и приложения для бизнеса в Казахстане
+              Боты, ИИ-агенты, автоматизации и приложения для бизнеса в Казахстане
             </h1>
             <p className="max-w-2xl text-pretty text-base text-muted md:text-lg">
               Обзоры и сравнения решений, реальные цены и рабочие сценарии

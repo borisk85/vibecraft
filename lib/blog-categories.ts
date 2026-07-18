@@ -14,7 +14,7 @@ export type BlogCategory = {
 
 export const BLOG_CATEGORIES: BlogCategory[] = [
   {
-    name: "Боты",
+    name: "Боты и ИИ-агенты",
     slug: "bots",
     color: "#8B5CF6",
     coverBg: "linear-gradient(135deg, rgba(139,92,246,0.14) 0%, rgba(139,92,246,0.06) 100%)",
