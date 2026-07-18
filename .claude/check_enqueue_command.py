@@ -15,11 +15,26 @@ import re
 import sys
 from pathlib import Path
 
+# Только КОМАНДА занести (аккузатив «в очередь» / «поставь в очередь»), НЕ вопрос про
+# очередь («что в очереди?»). Баг 18.07: хук сработал на «в очереди» в ВОПРОСе Boris
+# «какой ключ в очереди?» и заставил открыть задачу на пустом месте.
 ENQUEUE_RE = re.compile(
-    r"(в\s+очеред\w*|поставь\s+в\s+очеред|добав\w*\s+в\s+очеред|запиши\s+в\s+очеред|"
-    r"в\s+б[эе]клог|в\s+backlog|в\s+тудушк\w*|в\s+todo\b|в\s+список\s+задач|"
-    r"в\s+план\s+задач|занеси\s+в\s+очеред)",
+    r"(поставь\s+в\s+очеред|добав\w*\s+в\s+очеред|запиши\s+в\s+очеред|занеси\s+в\s+очеред|"
+    r"в\s+очередь\b|в\s+б[эе]клог|в\s+backlog|в\s+тудушк\w*|в\s+todo\b|"
+    r"в\s+список\s+задач|в\s+план\s+задач)",
     re.IGNORECASE | re.UNICODE)
+
+IMPERATIVE_RE = re.compile(r"занеси|постав|добав|запиши|заведи|внеси",
+                           re.IGNORECASE | re.UNICODE)
+
+
+def _is_enqueue_cmd(text):
+    """Команда занести в очередь, а не вопрос про очередь."""
+    if not ENQUEUE_RE.search(text):
+        return False
+    if "?" in text and not IMPERATIVE_RE.search(text):
+        return False  # вопрос («что/какой в очереди?») — не команда
+    return True
 
 SERVICE_MARKERS = (
     "Жесткие правила", "persisted-output", "hook additional context",
@@ -81,8 +96,8 @@ def main():
         except Exception:
             pass
     boris = _recent_boris(msgs)
-    if not any(ENQUEUE_RE.search(t) for t in boris):
-        sys.exit(0)  # команды «в очередь» не было
+    if not any(_is_enqueue_cmd(t) for t in boris):
+        sys.exit(0)  # команды «в очередь» не было (или это вопрос про очередь)
     todos = _last_todos(msgs)
     open_items = [t for t in (todos or [])
                   if isinstance(t, dict) and t.get("status") in ("pending", "in_progress")]
