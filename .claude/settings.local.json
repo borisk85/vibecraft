@@ -54,6 +54,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_time_estimate.py'",
             "statusMessage": "check_no_time_estimate: без оценок длительности команд в чат"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_jargon.py'",
+            "statusMessage": "check_no_jargon: без мудреных слов в чате — простым языком"
           }
         ]
       },
@@ -252,6 +257,10 @@
           {
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_time_estimate.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_jargon.py'"
           },
           {
             "type": "command",
