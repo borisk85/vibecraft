@@ -81,15 +81,17 @@ export function Header() {
   return (
     <>
       <header className="sticky top-0 z-40 border-b border-border/60 bg-background/80 backdrop-blur-lg">
-        <Container as="div" className="flex h-16 items-center justify-between">
-          <a
-            href="/"
-            onClick={handleLogoClick}
-            className="flex items-center gap-2 rounded-md font-mono text-sm font-semibold tracking-tight outline-none focus:outline-none focus-visible:outline-none"
-          >
-            <LogoMono className="h-8 w-8" />
-            vibecraft
-          </a>
+        <Container as="div" className="flex h-16 items-center">
+          <div className="flex flex-1 items-center">
+            <a
+              href="/"
+              onClick={handleLogoClick}
+              className="flex items-center gap-2 rounded-md font-mono text-sm font-semibold tracking-tight outline-none focus:outline-none focus-visible:outline-none"
+            >
+              <LogoMono className="h-8 w-8" />
+              vibecraft
+            </a>
+          </div>
 
           <nav className="hidden items-center gap-8 lg:flex">
             <div className="group relative">
@@ -133,15 +135,17 @@ export function Header() {
             ))}
           </nav>
 
-          <button
-            type="button"
-            onClick={() => setIsOpen(true)}
-            aria-label="Открыть меню"
-            aria-expanded={isOpen}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card/40 text-foreground transition-colors duration-150 hover:border-accent lg:hidden"
-          >
-            <Menu className="h-5 w-5" />
-          </button>
+          <div className="flex flex-1 items-center justify-end">
+            <button
+              type="button"
+              onClick={() => setIsOpen(true)}
+              aria-label="Открыть меню"
+              aria-expanded={isOpen}
+              className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-border bg-card/40 text-foreground transition-colors duration-150 hover:border-accent lg:hidden"
+            >
+              <Menu className="h-5 w-5" />
+            </button>
+          </div>
         </Container>
       </header>
 

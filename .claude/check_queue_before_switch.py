@@ -20,7 +20,8 @@ import sys
 TASK_CMD_RE = re.compile(
     r"\b(сдела\w*|убер\w*|убра\w*|найд\w*|унифиц\w*|почини\w*|починил|запрет\w*|"
     r"замен\w*|удали\w*|поставь|добавь|исправь\w*|поменяй|перенеси|верни|внедри|"
-    r"поправь|переименуй)\b",
+    r"поправь|переименуй|поплыл\w*|съехал\w*|уехал\w*|сломал\w*|наеха\w*|плыв\w*|"
+    r"съезжа\w*)\b|не\s+работает|\bбаг\b|криво\b",
     re.IGNORECASE | re.UNICODE)
 
 _SVC = ("НАРУШЕНИЕ", "БЛОК check", "check_", "Stop hook feedback", "system-reminder",
@@ -93,7 +94,7 @@ def decide():
                 objs = [json.loads(l) for l in f.read().splitlines() if l.strip()]
         except Exception:
             objs = []
-    if _tasks_since_last_todo(objs) < 2:
+    if _tasks_since_last_todo(objs) < 1:
         return None
 
     return (
