@@ -51,7 +51,11 @@ export default function EditorClient({ prNumber, initialMarkdown }: Props) {
       if (!res.ok) {
         throw new Error(data.error || `HTTP ${res.status}`);
       }
-      setStatus("✅ Сохранено! Превью обновится через 1-2 минуты");
+      setStatus(
+        data.unchanged
+          ? "✅ Изменений нет — текст уже актуален, можно публиковать"
+          : "✅ Сохранено! Превью обновится через 1-2 минуты",
+      );
     } catch (e) {
       const msg = e instanceof Error ? e.message : "Неизвестная ошибка";
       setStatus(`❌ Ошибка: ${msg}`);
