@@ -12,6 +12,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/inject_reference_stop.py'",
             "statusMessage": "Проверяю задачу на референс"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/inject_open_tasks.py'",
+            "statusMessage": "Всплываю незакрытые задачи с прошлых сессий"
           }
         ]
       }
@@ -59,6 +64,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_jargon.py'",
             "statusMessage": "check_no_jargon: без мудреных слов в чате — простым языком"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_fabrication.py'",
+            "statusMessage": "check_no_fabrication: без отсебятины — не выдумывать действия/возможности"
           }
         ]
       },
@@ -244,6 +254,10 @@
         "hooks": [
           {
             "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/persist_open_tasks.py'"
+          },
+          {
+            "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_text_changes.py'"
           },
           {
@@ -261,6 +275,10 @@
           {
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_jargon.py'"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_fabrication.py'"
           },
           {
             "type": "command",
