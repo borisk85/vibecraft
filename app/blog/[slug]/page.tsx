@@ -167,7 +167,7 @@ export default async function PostPage({
       <JsonLd data={articleSchema} />
       {faqSchema ? <JsonLd data={faqSchema} /> : null}
       <Header />
-      <main className="flex-1 py-24 md:py-32">
+      <main className="flex-1 pt-24 md:pt-32 pb-10">
         <Container>
           <div className="mx-auto max-w-3xl">
             <Link
