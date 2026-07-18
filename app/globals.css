@@ -205,10 +205,15 @@ button[aria-haspopup="listbox"]:focus-visible {
   border-radius: 0.75rem;
   margin: 1.5rem 0;
 }
+.blog-content .table-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  margin: 1.75rem 0;
+}
 .blog-content table {
   width: 100%;
+  min-width: 30rem;
   border-collapse: collapse;
-  margin: 1.75rem 0;
   font-size: 0.925rem;
   line-height: 1.5;
 }

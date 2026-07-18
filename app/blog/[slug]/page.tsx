@@ -111,6 +111,13 @@ export default async function PostPage({
     );
   }
 
+  // Широкие таблицы — в горизонтально-скроллящийся контейнер: на мобильном скроллится
+  // таблица, а не вся страница (как на VELA compare). Работает для ЛЮБОЙ таблицы любой
+  // будущей статьи — обертка ставится всем <table> автоматически.
+  htmlWithIds = htmlWithIds
+    .replace(/<table>/g, '<div class="table-scroll"><table>')
+    .replace(/<\/table>/g, "</table></div>");
+
   const postUrl = `https://vibecraft.kz/blog/${post.slug}`;
   const articleSchema = {
     "@context": "https://schema.org",

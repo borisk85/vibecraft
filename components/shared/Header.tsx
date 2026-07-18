@@ -160,7 +160,7 @@ export function Header() {
             animate={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="fixed inset-0 z-50 flex flex-col bg-background lg:hidden"
+            className="fixed inset-0 z-[60] flex flex-col bg-background lg:hidden"
           >
             <Container
               as="div"
@@ -176,7 +176,7 @@ export function Header() {
               </button>
             </Container>
 
-            <nav className="flex flex-1 flex-col gap-2 overflow-y-auto px-6 pt-6">
+            <nav className="flex flex-1 flex-col gap-2 overflow-y-auto px-6 pb-10 pt-6">
               <a
                 href="/#services"
                 onClick={() => setIsOpen(false)}
@@ -211,7 +211,7 @@ export function Header() {
               <a
                 href="/#contact"
                 onClick={() => setIsOpen(false)}
-                className="mt-6 inline-flex h-12 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white"
+                className="mt-6 inline-flex h-12 shrink-0 items-center justify-center rounded-xl bg-gradient-accent px-6 text-base font-medium text-white"
               >
                 Обсудить проект
               </a>

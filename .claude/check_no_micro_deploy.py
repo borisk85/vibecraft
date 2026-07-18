@@ -101,6 +101,18 @@ def _decide_block(objs):
                 last_deploy = i
     if last_deploy == -1:
         return False  # билдов/деплоев ещё не было — можно
+    # Если после последнего билда НЕ было успешного git push — батч ещё не задеплоен
+    # (напр. пуш упал на husky-хуке), добить билд можно, это не новый микро-деплой.
+    pushed = False
+    for j in range(last_deploy + 1, len(objs)):
+        for name, inp in _tool_uses(objs[j]):
+            if (name in ("Bash", "PowerShell")
+                    and "git push" in str(inp.get("command", ""))):
+                res = _tool_result_text(objs[j + 1]) if j + 1 < len(objs) else ""
+                if "-> main" in res or "up-to-date" in res.lower():
+                    pushed = True
+    if not pushed:
+        return False
     # Если после последнего билда Boris прислал НОВУЮ реплику — этот билд отвечает на
     # новый запрос/претензию, а не само-итерация по одной правке. Разрешаем.
     for o in objs[last_deploy + 1:]:
