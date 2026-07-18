@@ -33,6 +33,23 @@ JUSTIFY_RE = re.compile(
     re.IGNORECASE | re.UNICODE)
 
 
+def _is_additive(ti):
+    """Правка чисто аддитивная — ни одна существующая строка не удалена (все
+    непустые строки old_string сохранены в new_string, между ними лишь вставки).
+    Отключить/выпилить фичу можно только удалив/заменив код, поэтому вставка новой
+    функции регрессом не является, даже если в её тексте (строке-литерале, промпте)
+    попалось слово «убрать/не вставлять». Дыра 18.07: заблокировало вставку функции
+    редактора из-за слова «УБРАТЬ» внутри промпта."""
+    old = str(ti.get("old_string", ""))
+    new = str(ti.get("new_string", ""))
+    if not old:
+        return False
+    old_lines = [ln.strip() for ln in old.splitlines() if len(ln.strip()) > 3]
+    if not old_lines:
+        return False
+    return all(ln in new for ln in old_lines)
+
+
 def _last_assistant_text(lines):
     for line in reversed(lines):
         try:
