@@ -40,6 +40,10 @@ SERVICE_MARKERS = (
     "Жесткие правила", "persisted-output", "hook additional context",
     "<local-command", "Caveat:", "<command-name>", "task-notification",
     "IMPORTANT: After completing",
+    # компакт-сводки сессии — НЕ команды Boris (содержат старый текст «в очередь»
+    # из прошлых тудушек и ложно срабатывали как enqueue, дыра 18.07)
+    "This session is being continued", "The summary below covers",
+    "Summary of the conversation",
 )
 
 
@@ -61,6 +65,8 @@ def _recent_boris(msgs, n=6):
         text = re.sub(r"<system-reminder>.*?</system-reminder>", " ", text, flags=re.S).strip()
         if not text or any(mk in text for mk in SERVICE_MARKERS):
             continue
+        if len(text) > 5000:
+            continue  # огромные пасты/сводки — не короткая команда «в очередь»
         out.append(text)
         if len(out) >= n:
             break
