@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.2" fill="#ffffff" fill-opacity="0.045"/>
+    </pattern>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="80"/>
+    </filter>
+    <filter id="drop" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="28" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- фон -->
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="#0b0b0b" stroke="#1f1f1f"/>
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="url(#dots)"/>
+  <ellipse cx="600" cy="330" rx="280" ry="200" fill="#8b5cf6" opacity="0.14" filter="url(#glow)"/>
+
+  <text x="600" y="40" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">ГОТОВАЯ ПЛАТФОРМА: КАЛЕНДАРЬ ОНЛАЙН-ЗАПИСИ</text>
+
+  <!-- окно календаря -->
+  <g filter="url(#drop)">
+    <rect x="240" y="76" width="720" height="520" rx="24" fill="#141414" stroke="#2a2a2a"/>
+  </g>
+
+  <!-- шапка -->
+  <text x="272" y="122" fill="#ededed" font-size="19" font-weight="600">Салон красоты — журнал записи</text>
+  <circle cx="278" cy="143" r="4" fill="#10b981"/>
+  <text x="290" y="148" fill="#a1a1a1" font-size="13.5">суббота · 3 мастера · 5 свободных окон</text>
+  <line x1="240" y1="166" x2="960" y2="166" stroke="#242424"/>
+
+  <!-- колонка 1: Айгуль -->
+  <circle cx="360" cy="210" r="20" fill="url(#grad)"/>
+  <text x="360" y="216" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">А</text>
+  <text x="360" y="256" text-anchor="middle" fill="#ededed" font-size="16" font-weight="600">Айгуль</text>
+  <text x="360" y="277" text-anchor="middle" fill="#a1a1a1" font-size="13">маникюр</text>
+
+  <rect x="300" y="296" width="120" height="38" rx="12" fill="#161616" stroke="#2a2a2a"/>
+  <text x="360" y="320" text-anchor="middle" fill="#6b6b6b" font-size="14.5">10:00</text>
+  <rect x="300" y="348" width="120" height="38" rx="12" fill="#191919" stroke="#8b5cf6"/>
+  <text x="360" y="372" text-anchor="middle" fill="#c084fc" font-size="14.5">12:30</text>
+  <rect x="300" y="400" width="120" height="38" rx="12" fill="#161616" stroke="#2a2a2a"/>
+  <text x="360" y="424" text-anchor="middle" fill="#6b6b6b" font-size="14.5">14:00</text>
+  <rect x="300" y="452" width="120" height="38" rx="12" fill="#191919" stroke="#8b5cf6"/>
+  <text x="360" y="476" text-anchor="middle" fill="#c084fc" font-size="14.5">16:30</text>
+
+  <!-- колонка 2: Дана -->
+  <circle cx="600" cy="210" r="20" fill="url(#grad)"/>
+  <text x="600" y="216" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">Д</text>
+  <text x="600" y="256" text-anchor="middle" fill="#ededed" font-size="16" font-weight="600">Дана</text>
+  <text x="600" y="277" text-anchor="middle" fill="#a1a1a1" font-size="13">педикюр</text>
+
+  <rect x="540" y="296" width="120" height="38" rx="12" fill="#191919" stroke="#8b5cf6"/>
+  <text x="600" y="320" text-anchor="middle" fill="#c084fc" font-size="14.5">10:00</text>
+  <rect x="540" y="348" width="120" height="38" rx="12" fill="#161616" stroke="#2a2a2a"/>
+  <text x="600" y="372" text-anchor="middle" fill="#6b6b6b" font-size="14.5">12:30</text>
+  <rect x="540" y="400" width="120" height="38" rx="12" fill="#191919" stroke="#8b5cf6"/>
+  <text x="600" y="424" text-anchor="middle" fill="#c084fc" font-size="14.5">15:00</text>
+  <rect x="540" y="452" width="120" height="38" rx="12" fill="#161616" stroke="#2a2a2a"/>
+  <text x="600" y="476" text-anchor="middle" fill="#6b6b6b" font-size="14.5">17:30</text>
+
+  <!-- колонка 3: Мадина -->
+  <circle cx="840" cy="210" r="20" fill="url(#grad)"/>
+  <text x="840" y="216" text-anchor="middle" fill="#ffffff" font-size="15" font-weight="600">М</text>
+  <text x="840" y="256" text-anchor="middle" fill="#ededed" font-size="16" font-weight="600">Мадина</text>
+  <text x="840" y="277" text-anchor="middle" fill="#a1a1a1" font-size="13">брови</text>
+
+  <rect x="780" y="296" width="120" height="38" rx="12" fill="#161616" stroke="#2a2a2a"/>
+  <text x="840" y="320" text-anchor="middle" fill="#6b6b6b" font-size="14.5">11:00</text>
+  <rect x="780" y="348" width="120" height="38" rx="12" fill="#161616" stroke="#2a2a2a"/>
+  <text x="840" y="372" text-anchor="middle" fill="#6b6b6b" font-size="14.5">13:00</text>
+  <rect x="780" y="400" width="120" height="38" rx="12" fill="#191919" stroke="#8b5cf6"/>
+  <text x="840" y="424" text-anchor="middle" fill="#c084fc" font-size="14.5">16:00</text>
+  <rect x="780" y="452" width="120" height="38" rx="12" fill="#161616" stroke="#2a2a2a"/>
+  <text x="840" y="476" text-anchor="middle" fill="#6b6b6b" font-size="14.5">18:00</text>
+
+  <!-- легенда -->
+  <line x1="240" y1="514" x2="960" y2="514" stroke="#242424"/>
+  <rect x="366" y="536" width="16" height="16" rx="5" fill="#191919" stroke="#8b5cf6"/>
+  <text x="392" y="549" fill="#a1a1a1" font-size="13.5">свободно</text>
+  <rect x="500" y="536" width="16" height="16" rx="5" fill="#161616" stroke="#2a2a2a"/>
+  <text x="526" y="549" fill="#a1a1a1" font-size="13.5">занято</text>
+  <circle cx="646" cy="544" r="4" fill="#10b981"/>
+  <text x="658" y="549" fill="#a1a1a1" font-size="13.5">запись идет даже ночью</text>
+</svg>

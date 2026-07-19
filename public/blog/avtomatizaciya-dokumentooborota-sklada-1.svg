@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.2" fill="#ffffff" fill-opacity="0.045"/>
+    </pattern>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="80"/>
+    </filter>
+    <filter id="drop" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="28" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- фон -->
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="#0b0b0b" stroke="#1f1f1f"/>
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="url(#dots)"/>
+  <ellipse cx="600" cy="330" rx="280" ry="200" fill="#8b5cf6" opacity="0.14" filter="url(#glow)"/>
+
+  <text x="600" y="40" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">СКЛАДСКОЙ УЧЕТ: ОСТАТКИ И ДОКУМЕНТЫ</text>
+
+  <!-- окно системы -->
+  <g filter="url(#drop)">
+    <rect x="240" y="76" width="720" height="520" rx="24" fill="#141414" stroke="#2a2a2a"/>
+  </g>
+
+  <!-- шапка -->
+  <text x="272" y="122" fill="#ededed" font-size="19" font-weight="600">Склад — остатки на сегодня</text>
+  <circle cx="278" cy="143" r="4" fill="#10b981"/>
+  <text x="290" y="148" fill="#a1a1a1" font-size="13.5">остатки пересчитываются при каждой отгрузке</text>
+  <line x1="240" y1="166" x2="960" y2="166" stroke="#242424"/>
+
+  <!-- заголовки таблицы -->
+  <text x="272" y="198" fill="#8f8f8f" font-size="12.5" letter-spacing="1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">ТОВАР</text>
+  <text x="640" y="198" fill="#8f8f8f" font-size="12.5" letter-spacing="1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">ОСТАТОК</text>
+  <text x="790" y="198" fill="#8f8f8f" font-size="12.5" letter-spacing="1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">СТАТУС</text>
+
+  <!-- строка 1 -->
+  <rect x="256" y="212" width="688" height="46" rx="10" fill="#191919"/>
+  <text x="272" y="241" fill="#ededed" font-size="16">Плитка керамическая, 60×60</text>
+  <text x="640" y="241" fill="#ededed" font-size="16" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">56 кор.</text>
+  <circle cx="798" cy="235" r="4" fill="#10b981"/>
+  <text x="810" y="241" fill="#a1a1a1" font-size="14">в норме</text>
+
+  <!-- строка 2 -->
+  <rect x="256" y="266" width="688" height="46" rx="10" fill="#161616"/>
+  <text x="272" y="295" fill="#ededed" font-size="16">Клей монтажный, 25 кг</text>
+  <text x="640" y="295" fill="#ededed" font-size="16" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">8 меш.</text>
+  <circle cx="798" cy="289" r="4" fill="#f59e0b"/>
+  <text x="810" y="295" fill="#f59e0b" font-size="14">ниже нормы</text>
+
+  <!-- строка 3 -->
+  <rect x="256" y="320" width="688" height="46" rx="10" fill="#191919"/>
+  <text x="272" y="349" fill="#ededed" font-size="16">Затирка белая, 2 кг</text>
+  <text x="640" y="349" fill="#ededed" font-size="16" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">124 шт.</text>
+  <circle cx="798" cy="343" r="4" fill="#10b981"/>
+  <text x="810" y="349" fill="#a1a1a1" font-size="14">в норме</text>
+
+  <!-- документы -->
+  <line x1="240" y1="392" x2="960" y2="392" stroke="#242424"/>
+  <text x="272" y="424" fill="#8f8f8f" font-size="12.5" letter-spacing="1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">ДОКУМЕНТЫ ЗА ДЕНЬ</text>
+
+  <!-- док 1 -->
+  <rect x="256" y="438" width="688" height="46" rx="10" fill="#191919"/>
+  <g transform="translate(270,449)" fill="none" stroke="#c084fc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" transform="scale(0.9)"/><path d="M14 2v6h6" transform="scale(0.9)"/>
+  </g>
+  <text x="302" y="467" fill="#ededed" font-size="16">Накладная на отгрузку — сформирована сама</text>
+  <circle cx="906" cy="461" r="4" fill="#10b981"/>
+
+  <!-- док 2 -->
+  <rect x="256" y="492" width="688" height="46" rx="10" fill="#161616"/>
+  <g transform="translate(270,503)" fill="none" stroke="#c084fc" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" transform="scale(0.9)"/><path d="M14 2v6h6" transform="scale(0.9)"/>
+  </g>
+  <text x="302" y="521" fill="#ededed" font-size="16">Счет и акт по вчерашней отгрузке — по шаблону</text>
+  <circle cx="906" cy="515" r="4" fill="#10b981"/>
+
+  <!-- итог -->
+  <text x="272" y="572" fill="#a1a1a1" font-size="14">инвентаризация — часы вместо дней, первичка не перепечатывается руками</text>
+</svg>

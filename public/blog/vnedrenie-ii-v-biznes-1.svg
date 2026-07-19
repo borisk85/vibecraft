@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 640" width="1200" height="640" font-family="Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, sans-serif">
+  <defs>
+    <linearGradient id="grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#ec4899"/>
+    </linearGradient>
+    <pattern id="dots" width="26" height="26" patternUnits="userSpaceOnUse">
+      <circle cx="1.5" cy="1.5" r="1.2" fill="#ffffff" fill-opacity="0.045"/>
+    </pattern>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="80"/>
+    </filter>
+    <filter id="drop" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="16" stdDeviation="28" flood-color="#000000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- фон -->
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="#0b0b0b" stroke="#1f1f1f"/>
+  <rect x="1" y="1" width="1198" height="638" rx="20" fill="url(#dots)"/>
+  <ellipse cx="600" cy="330" rx="280" ry="200" fill="#8b5cf6" opacity="0.14" filter="url(#glow)"/>
+
+  <text x="600" y="40" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="15" letter-spacing="3" fill="#c084fc" font-weight="600">ИНВЕНТАРИЗАЦИЯ ЗАДАЧ: ГДЕ ПРИМЕНИМ ИИ</text>
+
+  <!-- карточка списка -->
+  <g filter="url(#drop)">
+    <rect x="240" y="76" width="720" height="520" rx="24" fill="#141414" stroke="#2a2a2a"/>
+  </g>
+
+  <!-- шапка -->
+  <text x="272" y="122" fill="#ededed" font-size="19" font-weight="600">Неделя наблюдений — куда уходит время</text>
+  <text x="272" y="148" fill="#a1a1a1" font-size="13.5">пометки: что забирает рутина и где ее снимет ИИ</text>
+  <line x1="240" y1="166" x2="960" y2="166" stroke="#242424"/>
+
+  <!-- строка 1 -->
+  <circle cx="292" cy="205" r="12" fill="none" stroke="#10b981" stroke-width="1.8"/>
+  <path d="M287 205 l3.5 3.5 L297 201" fill="none" stroke="#10b981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="320" y="211" fill="#ededed" font-size="16.5">Одни и те же вопросы в WhatsApp</text>
+  <rect x="862" y="185" width="66" height="38" rx="12" fill="#191919" stroke="#3a3a3a"/>
+  <text x="895" y="209" text-anchor="middle" fill="#c084fc" font-size="14.5">ИИ</text>
+
+  <!-- строка 2 -->
+  <circle cx="292" cy="270" r="12" fill="none" stroke="#10b981" stroke-width="1.8"/>
+  <path d="M287 270 l3.5 3.5 L297 266" fill="none" stroke="#10b981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="320" y="276" fill="#ededed" font-size="16.5">Перенос заявок в таблицы руками</text>
+  <rect x="862" y="250" width="66" height="38" rx="12" fill="#191919" stroke="#3a3a3a"/>
+  <text x="895" y="274" text-anchor="middle" fill="#c084fc" font-size="14.5">ИИ</text>
+
+  <!-- строка 3 -->
+  <circle cx="292" cy="335" r="12" fill="none" stroke="#10b981" stroke-width="1.8"/>
+  <path d="M287 335 l3.5 3.5 L297 331" fill="none" stroke="#10b981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="320" y="341" fill="#ededed" font-size="16.5">Накладные и счета по вечерам</text>
+  <rect x="862" y="315" width="66" height="38" rx="12" fill="#191919" stroke="#3a3a3a"/>
+  <text x="895" y="339" text-anchor="middle" fill="#c084fc" font-size="14.5">ИИ</text>
+
+  <!-- строка 4 -->
+  <circle cx="292" cy="400" r="12" fill="none" stroke="#10b981" stroke-width="1.8"/>
+  <path d="M287 400 l3.5 3.5 L297 396" fill="none" stroke="#10b981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="320" y="406" fill="#ededed" font-size="16.5">Поиск по переписке: кто что заказывал</text>
+  <rect x="862" y="380" width="66" height="38" rx="12" fill="#191919" stroke="#3a3a3a"/>
+  <text x="895" y="404" text-anchor="middle" fill="#c084fc" font-size="14.5">ИИ</text>
+
+  <!-- строка 5 -->
+  <circle cx="292" cy="465" r="12" fill="none" stroke="#3a3a3a" stroke-width="1.8"/>
+  <line x1="287" y1="465" x2="297" y2="465" stroke="#3a3a3a" stroke-width="1.8" stroke-linecap="round"/>
+  <text x="320" y="471" fill="#8f8f8f" font-size="16.5">Переговоры с поставщиками</text>
+  <rect x="828" y="445" width="100" height="38" rx="12" fill="#161616" stroke="#2a2a2a"/>
+  <text x="878" y="469" text-anchor="middle" fill="#8f8f8f" font-size="14.5">человек</text>
+
+  <!-- итог -->
+  <line x1="240" y1="514" x2="960" y2="514" stroke="#242424"/>
+  <circle cx="292" cy="552" r="4" fill="#10b981"/>
+  <text x="308" y="557" fill="#a1a1a1" font-size="14.5">4 задачи из 5 — повторяющаяся рутина: с нее и стоит начинать</text>
+</svg>

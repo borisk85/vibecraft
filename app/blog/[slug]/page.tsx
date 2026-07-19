@@ -56,6 +56,40 @@ function slugifyHeading(text: string): string {
     .replace(/^-|-$/g, "");
 }
 
+// Акценты повторяющихся данных статьи: цены (mono, зеленый), сроки и даты (mono,
+// янтарный), названия сервисов (нейтральный чип). Идем по текстовым узлам HTML и
+// не трогаем ссылки, заголовки, код и шапку таблицы — у них свои стили.
+// Работает автоматически для любой будущей статьи.
+const PRICE_RE =
+  /((?:от |до )?\d{1,3}(?: \d{3})+ ₸|\$\d+(?:[–—-]\d+)?(?:\s?\/\s?мес)?)/g;
+const TIME_RE =
+  /((?:до |за |не дольше )\d{1,2}(?:[–-]\d{1,2})? ?(?:недел[ьия][а-я]*|час[ао][а-я]*)|до недели|\d{1,2}[–-]\d{1,2} (?:недел|час)[а-я]+|несколько (?:часов|дней)|\d{1,2} (?:января|февраля|марта|апреля|мая|июня|июля|августа|сентября|октября|ноября|декабря) \d{4}(?: года)?)/g;
+const BRAND_RE =
+  /(YCLIENTS|DIKIDI|Fresha|DINGG|Zoho Inventory|inFlow Inventory|Cin7 Core|Cin7|ChatGPT|Claude Code|Claude|Gemini|Copilot|WhatsApp|Telegram|Instagram|Kaspi Gold|Kaspi|n8n|Make)(?![a-zA-Z])/g;
+
+function accentuate(html: string): string {
+  const skipTags = new Set(["a", "h2", "h3", "code", "thead"]);
+  let skipDepth = 0;
+  return html
+    .split(/(<[^>]+>)/g)
+    .map((part) => {
+      if (part.startsWith("<")) {
+        const m = part.match(/^<(\/?)([a-zA-Z0-9]+)/);
+        if (m && skipTags.has(m[2].toLowerCase())) {
+          if (m[1] === "/") skipDepth = Math.max(0, skipDepth - 1);
+          else skipDepth += 1;
+        }
+        return part;
+      }
+      if (skipDepth > 0 || !part.trim()) return part;
+      return part
+        .replace(PRICE_RE, '<span class="stat stat-price">$1</span>')
+        .replace(TIME_RE, '<span class="stat stat-time">$1</span>')
+        .replace(BRAND_RE, '<span class="brand">$1</span>');
+    })
+    .join("");
+}
+
 // Достаем вопросы/ответы из секции ## FAQ (вопросы — H3) для FAQPage JSON-LD.
 function extractFaq(md: string): { q: string; a: string }[] {
   const idx = md.search(/\n##\s+FAQ\b/);
@@ -117,6 +151,8 @@ export default async function PostPage({
   htmlWithIds = htmlWithIds
     .replace(/<table>/g, '<div class="table-scroll"><table>')
     .replace(/<\/table>/g, "</table></div>");
+
+  htmlWithIds = accentuate(htmlWithIds);
 
   const postUrl = `https://vibecraft.kz/blog/${post.slug}`;
   const articleSchema = {
