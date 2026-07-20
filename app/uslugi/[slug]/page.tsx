@@ -156,10 +156,11 @@ export default async function ServicePage({
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`/uslugi/${page.slug}.svg`}
-                alt={page.h1}
+                alt={page.imageAlt}
                 width={1200}
                 height={640}
                 loading="lazy"
+                decoding="async"
                 className="h-auto w-full"
               />
             </div>

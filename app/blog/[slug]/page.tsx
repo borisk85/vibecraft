@@ -7,6 +7,7 @@ import { Header } from "@/components/shared/Header";
 import { Footer } from "@/components/shared/Footer";
 import { JsonLd } from "@/components/shared/JsonLd";
 import { posts } from "@/lib/blog-posts";
+import { BLOG_IMAGE_SIZES } from "@/lib/blog-images";
 import PostCover from "@/components/blog/PostCover";
 import ShareButtons from "@/components/blog/ShareButtons";
 import BlogCtaBlock from "@/components/blog/BlogCtaBlock";
@@ -150,6 +151,18 @@ export default async function PostPage({
     .replace(/<\/table>/g, "</table></div>");
 
   htmlWithIds = accentuate(htmlWithIds);
+
+  // Картинки статьи — реальные скриншоты. Проставляем размеры (чтобы страница не
+  // прыгала при загрузке), lazy и async. marked размеры не выдает, поэтому берем
+  // их из BLOG_IMAGE_SIZES.
+  htmlWithIds = htmlWithIds.replace(
+    /<img src="([^"]+)" alt="([^"]*)"\s*\/?>/g,
+    (m, src: string, alt: string) => {
+      const size = BLOG_IMAGE_SIZES[src];
+      const dim = size ? ` width="${size[0]}" height="${size[1]}"` : "";
+      return `<img src="${src}" alt="${alt}"${dim} loading="lazy" decoding="async" />`;
+    },
+  );
 
   const postUrl = `https://vibecraft.kz/blog/${post.slug}`;
   const articleSchema = {
