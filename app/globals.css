@@ -245,8 +245,9 @@ button[aria-haspopup="listbox"]:focus-visible {
   white-space: nowrap;
 }
 /* Акценты повторяющихся данных в статьях (расставляет page.tsx поверх HTML от marked):
-   цены — mono зеленым, сроки и даты — mono янтарным, названия сервисов — чип без смены
-   цвета текста. Не белый (сливается с заголовками) и не цвет ссылок — просил Boris. */
+   цены — mono зеленым, названия сервисов — чип без смены цвета текста.
+   Не белый (сливается с заголовками) и не цвет ссылок — просил Boris.
+   Сроки НЕ подсвечиваем: решение с цветом по срокам Boris отклонил. */
 .blog-content .stat {
   font-family: var(--font-mono);
   font-size: 0.9em;
@@ -255,9 +256,6 @@ button[aria-haspopup="listbox"]:focus-visible {
 }
 .blog-content .stat-price {
   color: var(--color-success);
-}
-.blog-content .stat-time {
-  color: var(--color-warning);
 }
 .blog-content .brand {
   background: rgb(255 255 255 / 0.05);
