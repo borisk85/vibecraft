@@ -50,6 +50,17 @@ export const BLOG_CATEGORIES: BlogCategory[] = [
       <path d="M10 6h.01"/>
     </svg>`,
   },
+  {
+    name: "Сайты",
+    slug: "sites",
+    color: "#F59E0B",
+    coverBg: "linear-gradient(135deg, rgba(245,158,11,0.14) 0%, rgba(217,119,6,0.06) 100%)",
+    coverIcon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <path d="M2 12h20"/>
+      <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+    </svg>`,
+  },
 ]
 
 export const BLOG_CATEGORY_BY_NAME: Record<string, BlogCategory> = Object.fromEntries(
