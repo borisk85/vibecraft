@@ -13,15 +13,15 @@ const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "cyrillic"],
   weight: ["400", "500", "600", "700"],
-  display: "optional",
+  display: "swap",
   preload: true,
 });
 
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "500"],
-  display: "optional",
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
   preload: true,
 });
 
