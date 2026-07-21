@@ -26,6 +26,32 @@ REF_RE = re.compile(
     re.IGNORECASE)
 
 
+def _is_article_body(ti):
+    """True, если я сочиняю ТЕЛО статьи сам (в любом файле, хоть в docs/драфте).
+
+    Статьи Vibecraft пишет vela-marketing-bot (workflows/blog_writer.py) -> PR ->
+    /admin/blog. Я их НЕ сочиняю: ни в lib/blog-posts.ts, ни драфтом в docs/, ни
+    в scratchpad. 21.07 я написал 1200-слов драфт «сколько стоит сайт» сам, хотя
+    в STATE.md прямо записано, кто пишет статьи.
+    """
+    body = str(ti.get("content") or ti.get("new_string") or "")
+    if len(body) < 1200:
+        return False
+    cyr = len(re.findall(r"[а-яА-Я]", body))
+    if cyr < 600:
+        return False
+    marks = 0
+    if len(re.findall(r"^##+ ", body, re.MULTILINE)) >= 3:
+        marks += 1
+    if re.search(r"^##+ *FAQ", body, re.MULTILINE | re.IGNORECASE):
+        marks += 1
+    if re.search(r"\bexcerpt\b|\bslug\b|главный ключ|кейворд", body, re.IGNORECASE):
+        marks += 1
+    if re.search(r"\[.+?\]\(/(blog|calculator|#contact)", body):
+        marks += 1
+    return marks >= 2
+
+
 def _content_target(fp):
     fpl = fp.lower().replace("\\", "/")
     if fpl.endswith("blog-posts.ts"):
@@ -73,6 +99,19 @@ def decide():
     fp = str(ti.get("file_path", "")).replace("\\", "/")
     if "/.claude/" in fp.lower():
         return None
+
+    if _is_article_body(ti):
+        return (
+            "БЛОК check_reference_before_content: ты СОЧИНЯЕШЬ ТЕЛО СТАТЬИ САМ. "
+            "Статьи блога Vibecraft пишет vela-marketing-bot (workflows/blog_writer.py) "
+            "-> PR -> /admin/blog, это записано в STATE.md. Ты статьи НЕ пишешь: ни в "
+            "lib/blog-posts.ts, ни драфтом в docs/, ни в scratchpad, ни «на утверждение». "
+            "И НЕ предлагай Boris «написать статью» или «показать структуру» — не твоя "
+            "работа. Твоя часть: ключи, темы, структура плана в docs/seo-blog-plan.md, "
+            "проверка и правка УЖЕ написанного текста. СЕЙЧАС: удали свой драфт и отдай "
+            "тему с ключами в vela-marketing-bot."
+        )
+
     if not _content_target(fp):
         return None
 
