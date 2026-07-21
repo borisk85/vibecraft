@@ -1,10 +1,8 @@
-"use client";
-
-import Link from "next/link";
-import { motion } from "framer-motion";
 import { Container } from "@/components/shared/Container";
-import { siteConfig } from "@/lib/metadata";
-import { heroFadeIn } from "@/lib/animations";
+
+/* Серверный компонент: на первом экране нет framer-motion, поэтому его бандл
+   не участвует в отрисовке LCP. Появление блоков — CSS-класс hero-fade-in
+   с теми же параметрами, что heroFadeIn в lib/animations. */
 
 const proof = [
   { value: "Solo", label: "без посредников и бюрократии" },
@@ -30,24 +28,18 @@ export function Hero() {
             <span className="text-gradient">От идеи до продакшна.</span>
           </h1>
 
-          <motion.p
-            variants={heroFadeIn}
-            initial="hidden"
-            animate="visible"
-            custom={0.1}
-            className="mt-6 max-w-3xl text-pretty text-lg text-muted md:text-xl"
+          <p
+            className="hero-fade-in mt-6 max-w-3xl text-pretty text-lg text-muted md:text-xl"
+            style={{ animationDelay: "0.1s" }}
           >
             Собираю ботов, ИИ-агентов, ИИ-сайты, MVP веб- и мобильных
             приложений, автоматизации. Запускаю за недели, не месяцы, без
             бюджета большой студии.
-          </motion.p>
+          </p>
 
-          <motion.div
-            variants={heroFadeIn}
-            initial="hidden"
-            animate="visible"
-            custom={0.25}
-            className="mt-10 flex flex-row items-center justify-center gap-3"
+          <div
+            className="hero-fade-in mt-10 flex flex-row items-center justify-center gap-3"
+            style={{ animationDelay: "0.25s" }}
           >
             <a
               href="#contact"
@@ -62,14 +54,11 @@ export function Hero() {
             >
               Смотреть работы
             </a>
-          </motion.div>
+          </div>
 
-          <motion.dl
-            variants={heroFadeIn}
-            initial="hidden"
-            animate="visible"
-            custom={0.45}
-            className="mt-10 flex flex-wrap items-center justify-center gap-y-3 text-sm text-muted"
+          <dl
+            className="hero-fade-in mt-10 flex flex-wrap items-center justify-center gap-y-3 text-sm text-muted"
+            style={{ animationDelay: "0.45s" }}
           >
             {proof.map((item, index) => (
               <div
@@ -84,7 +73,7 @@ export function Hero() {
                 <dd>{item.label}</dd>
               </div>
             ))}
-          </motion.dl>
+          </dl>
         </div>
       </Container>
     </section>
