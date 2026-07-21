@@ -9,10 +9,14 @@ import { Analytics as VercelAnalytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Script from "next/script";
 
+/* Без weight — next/font берет переменную версию шрифта: один файл на подмножество
+   вместо четырех под каждую жирность. Критический путь короче, шрифт успевает
+   к первой отрисовке, и LCP не уезжает из-за swap.
+   swap обязателен: с optional кириллическое подмножество не успевало и текст
+   рисовался запасным Arial (фикс от 21.07). */
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
   preload: true,
 });
@@ -20,7 +24,6 @@ const inter = Inter({
 const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains-mono",
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
   preload: true,
 });

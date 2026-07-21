@@ -3,8 +3,9 @@ import Script from "next/script";
 /*
   Аналитика: Яндекс.Метрика + GA4. Оба счетчика подключаются только если
   соответствующий NEXT_PUBLIC_*_ID задан — иначе ничего не рендерится.
-  Скрипты грузятся через next/script с strategy="afterInteractive",
-  чтобы не блокировать первый рендер и TTI.
+  Скрипты грузятся через next/script с strategy="lazyOnload" — после
+  полной загрузки страницы, чтобы счетчики не отъедали главный поток
+  на первом экране (PageSpeed: 67 КиБ неиспользуемого JS).
 */
 
 export function Analytics() {
@@ -17,7 +18,7 @@ export function Analytics() {
     <>
       {ymId ? (
         <>
-          <Script id="yandex-metrika" strategy="afterInteractive">
+          <Script id="yandex-metrika" strategy="lazyOnload">
             {`
               (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
               m[i].l=1*new Date();
@@ -48,9 +49,9 @@ export function Analytics() {
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           />
-          <Script id="ga4-init" strategy="afterInteractive">
+          <Script id="ga4-init" strategy="lazyOnload">
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
