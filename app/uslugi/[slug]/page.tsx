@@ -37,11 +37,14 @@ export async function generateMetadata({
       description: page.seoDescription,
       url: `https://vibecraft.kz/uslugi/${page.slug}`,
       type: "website",
+      // Без картинки ссылка в мессенджерах выглядит голой строкой
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Vibecraft" }],
     },
     twitter: {
       card: "summary_large_image",
       title: page.seoTitle,
       description: page.seoDescription,
+      images: ["/opengraph-image"],
     },
   };
 }
