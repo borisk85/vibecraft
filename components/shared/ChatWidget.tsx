@@ -375,7 +375,7 @@ export default function ChatWidget() {
                 onChange={(e) => setCfName(e.target.value)}
                 placeholder="Алексей"
                 maxLength={100}
-                className="rounded-xl bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle outline-none focus:ring-1 focus:ring-accent/50"
+                className="rounded-xl bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle focus:placeholder:text-transparent outline-none focus:ring-1 focus:ring-accent/50"
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -389,7 +389,7 @@ export default function ChatWidget() {
                 onChange={(e) => setCfEmail(e.target.value)}
                 placeholder="you@example.com"
                 maxLength={200}
-                className="rounded-xl bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle outline-none focus:ring-1 focus:ring-accent/50"
+                className="rounded-xl bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle focus:placeholder:text-transparent outline-none focus:ring-1 focus:ring-accent/50"
               />
             </div>
             <div className="flex flex-col gap-1">
@@ -403,7 +403,7 @@ export default function ChatWidget() {
                 placeholder="Опишите вашу задачу или вопрос..."
                 maxLength={2000}
                 rows={4}
-                className="resize-none rounded-xl bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle outline-none focus:ring-1 focus:ring-accent/50"
+                className="resize-none rounded-xl bg-surface px-3 py-2 text-sm text-foreground placeholder:text-subtle focus:placeholder:text-transparent outline-none focus:ring-1 focus:ring-accent/50"
               />
             </div>
             <button
@@ -573,7 +573,7 @@ export default function ChatWidget() {
                   placeholder="Задайте вопрос..."
                   maxLength={500}
                   rows={1}
-                  className="flex-1 resize-none bg-transparent text-foreground placeholder:text-subtle outline-none"
+                  className="flex-1 resize-none bg-transparent text-foreground placeholder:text-subtle focus:placeholder:text-transparent outline-none"
                   style={{
                     height: "24px",
                     maxHeight: "80px",

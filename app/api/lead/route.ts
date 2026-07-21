@@ -24,11 +24,11 @@ export async function POST(req: Request) {
     const contact = String(body.contact ?? "").slice(0, 200);
     const type = String(body.type ?? "").slice(0, 200);
     const budget = String(body.budget ?? "").slice(0, 200);
-    const message = String(body.message ?? "").slice(0, 2000);
+    const message = String(body.message ?? "").trim().slice(0, 2000);
 
-    if (!name || !contact) {
+    if (!name || !contact || !message) {
       return NextResponse.json(
-        { error: "Имя и контакт обязательны" },
+        { error: "Имя, контакт и описание задачи обязательны" },
         { status: 400 },
       );
     }

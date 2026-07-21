@@ -118,13 +118,15 @@ export function FinalCTA() {
             <div className="flex flex-col gap-2">
               <label htmlFor="field-message" className="text-sm text-muted">
                 Коротко о задаче
+                <span className="text-accent-text"> *</span>
               </label>
               <textarea
                 id="field-message"
                 name="message"
                 rows={4}
+                required
                 placeholder="Опишите задачу в нескольких предложениях"
-                className="resize-none rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-subtle transition-colors duration-150 focus:border-accent focus:outline-none focus-visible:outline-none"
+                className="resize-none rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-subtle focus:placeholder:text-transparent transition-colors duration-150 focus:border-accent focus:outline-none focus-visible:outline-none"
               />
             </div>
 
@@ -163,11 +165,9 @@ export function FinalCTA() {
 
             <p className="text-center text-sm text-muted">
               Не уверены в бюджете?{" "}
-              <Link
-                href="/calculator"
-                className="text-accent-text hover:underline"
-              >
-                Прикиньте стоимость в калькуляторе
+              <Link href="/calculator" className="hover:underline">
+                Прикиньте стоимость в{" "}
+                <span className="text-accent-text">калькуляторе</span>
               </Link>{" "}
               за минуту.
             </p>
@@ -202,7 +202,7 @@ function Field({
         name={name}
         required={required}
         placeholder={placeholder}
-        className="h-11 rounded-lg border border-border bg-background px-4 text-foreground placeholder:text-subtle transition-colors duration-150 focus:border-accent focus:outline-none focus-visible:outline-none"
+        className="h-11 rounded-lg border border-border bg-background px-4 text-foreground placeholder:text-subtle focus:placeholder:text-transparent transition-colors duration-150 focus:border-accent focus:outline-none focus-visible:outline-none"
       />
     </div>
   );

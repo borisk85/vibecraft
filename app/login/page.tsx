@@ -63,7 +63,7 @@ export default function LoginPage() {
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
               autoComplete="email"
-              className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-foreground placeholder:text-muted focus:border-accent focus:outline-none"
+              className="rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3 text-foreground placeholder:text-muted focus:border-accent focus:placeholder:text-transparent focus:outline-none"
               disabled={status.type === "sending"}
             />
             <button

@@ -147,7 +147,7 @@ export function CalculatorClient() {
               rows={5}
               maxLength={3000}
               disabled={loading}
-              className="w-full resize-none rounded-xl border border-border bg-card p-4 text-foreground placeholder:text-subtle outline-none transition-colors duration-150 focus:border-accent disabled:opacity-50"
+              className="w-full resize-none rounded-xl border border-border bg-card p-4 text-foreground placeholder:text-subtle focus:placeholder:text-transparent outline-none transition-colors duration-150 focus:border-accent disabled:opacity-50"
             />
             <div className="relative">
               <Mail className="pointer-events-none absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-subtle" />
@@ -158,7 +158,7 @@ export function CalculatorClient() {
                 placeholder="Email для копии сметы (необязательно)"
                 maxLength={200}
                 disabled={loading}
-                className="w-full rounded-xl border border-border bg-card pl-11 pr-4 py-3 text-foreground placeholder:text-subtle outline-none transition-colors duration-150 focus:border-accent disabled:opacity-50"
+                className="w-full rounded-xl border border-border bg-card pl-11 pr-4 py-3 text-foreground placeholder:text-subtle focus:placeholder:text-transparent outline-none transition-colors duration-150 focus:border-accent disabled:opacity-50"
               />
             </div>
             <button
