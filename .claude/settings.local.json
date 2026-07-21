@@ -17,6 +17,11 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/inject_open_tasks.py'",
             "statusMessage": "Всплываю незакрытые задачи с прошлых сессий"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/inject_attachments.py'",
+            "statusMessage": "Спасаю вложения из сообщений, присланных во время работы"
           }
         ]
       }

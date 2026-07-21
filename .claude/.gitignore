@@ -6,3 +6,5 @@ __pycache__/
 .stop_block_count
 guess_flags.log
 *.lock
+attachments/
+seen_attachments.json
