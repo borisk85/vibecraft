@@ -18,12 +18,9 @@ export function Hero() {
       id="hero"
       className="relative overflow-hidden pt-20 pb-24 md:pt-32 md:pb-32"
     >
-      <motion.div
+      <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-gradient-accent blur-[120px]"
-        initial={{ opacity: 0.25 }}
-        animate={{ opacity: [0.25, 0.35, 0.25] }}
-        transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
+        className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[520px] w-[820px] -translate-x-1/2 rounded-full bg-gradient-accent opacity-30 blur-[120px]"
       />
 
       <Container className="relative">

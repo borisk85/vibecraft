@@ -47,8 +47,20 @@ export function FinalCTA() {
     e.preventDefault();
     setState("sending");
 
-    const formData = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
+
+    // required не ловит строку из одних пробелов — проверяем сами
+    const messageField = form.elements.namedItem(
+      "message",
+    ) as HTMLTextAreaElement | null;
+    if (!String(data.message ?? "").trim()) {
+      messageField?.setCustomValidity("Опишите задачу хотя бы в двух словах");
+      messageField?.reportValidity();
+      setState("idle");
+      return;
+    }
 
     try {
       const res = await fetch("/api/lead", {
@@ -125,6 +137,7 @@ export function FinalCTA() {
                 name="message"
                 rows={4}
                 required
+                onInput={(e) => e.currentTarget.setCustomValidity("")}
                 placeholder="Опишите задачу в нескольких предложениях"
                 className="resize-none rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-subtle focus:placeholder:text-transparent transition-colors duration-150 focus:border-accent focus:outline-none focus-visible:outline-none"
               />
@@ -165,9 +178,12 @@ export function FinalCTA() {
 
             <p className="text-center text-sm text-muted">
               Не уверены в бюджете?{" "}
-              <Link href="/calculator" className="hover:underline">
-                Прикиньте стоимость в{" "}
-                <span className="text-accent-text">калькуляторе</span>
+              Прикиньте стоимость в{" "}
+              <Link
+                href="/calculator"
+                className="text-accent-text hover:underline"
+              >
+                калькуляторе
               </Link>{" "}
               за минуту.
             </p>
