@@ -69,11 +69,6 @@ export function FinalCTA() {
       id="contact"
       className="relative overflow-hidden py-24 md:py-28"
     >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-accent opacity-15 blur-[120px]"
-      />
-
       <Container>
         <div className="mx-auto max-w-3xl rounded-3xl border border-border bg-card/60 p-8 backdrop-blur md:p-12">
           <div className="flex flex-col items-center gap-4 text-center">
