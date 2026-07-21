@@ -12,4 +12,5 @@ export const BLOG_IMAGE_SIZES: Record<string, [number, number]> = {
   "/blog/n8n-ii-agent-workflow.webp": [985, 575],
   "/blog/zoho-inventory-ostatki.webp": [1200, 716],
   "/blog/zoho-inventory-dokumenty.webp": [1200, 775],
+  "/blog/esf-portal-kgd.webp": [1200, 556],
 };
