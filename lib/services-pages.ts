@@ -1,5 +1,5 @@
 // Данные SEO-страниц услуг /uslugi/[slug].
-// Каждая услуга сайта = отдельная страница под свой head-ключ (см. docs/seo-keywords-2026-07.md).
+// Каждая услуга сайта = отдельная страница под свой head-ключ (см. docs/seo-blog-plan.md).
 // Контент написан под SEO + GEO по docs/service-pages-guide.md: GEO-ответ первым, КЗ-якоря,
 // цена в тенге, FAQ, E-E-A-T. Голос «вы», без буквы е.
 import { services } from "@/components/sections/Services";

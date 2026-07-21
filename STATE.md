@@ -14,7 +14,7 @@
 
 ## ИДЕИ (не задачи — в работу только по команде Boris)
 - GEO (оптимизация под AI-поиск) и Speed Boost (Core Web Vitals) как услуги в Services.tsx + калькулятор. Цены не подтверждены. Источник: memory/project_state.md, блок «(старое)» от 2026-06-15.
-- SEO-статьи под ключи из docs/seo-keywords-2026-07.md (пишет vela-marketing-bot -> PR -> /admin/blog). Источник: тот же блок от 2026-06-15.
+- SEO-статьи под ключи из docs/seo-blog-plan.md (пишет vela-marketing-bot -> PR -> /admin/blog). Источник: тот же блок от 2026-06-15.
 
 ## СДЕЛАНО (с датой, новое сверху)
 - [ранее] Статичные SEO-страницы услуг на 6 направлений: lib/services-pages.ts + app/uslugi/[slug], коммит 0393eca
