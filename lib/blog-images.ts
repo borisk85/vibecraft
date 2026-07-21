@@ -8,6 +8,7 @@
 export const BLOG_IMAGE_SIZES: Record<string, [number, number]> = {
   "/blog/yclients-onlajn-zapis.webp": [1165, 655],
   "/blog/dikidi-marketplace-zapisi.webp": [980, 675],
+  "/blog/chatgpt-razbor-dogovora.webp": [1200, 653],
   "/blog/make-gotovye-svyazki.webp": [913, 775],
   "/blog/n8n-ii-agent-workflow.webp": [985, 575],
   "/blog/zoho-inventory-ostatki.webp": [1200, 716],
