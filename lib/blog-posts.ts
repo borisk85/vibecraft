@@ -3,6 +3,12 @@ export type Post = {
   category: string
   categoryColor: string
   title: string
+  /**
+   * Короткий заголовок для поисковой выдачи. Нужен, когда title длинный:
+   * шаблон добавляет к нему бренд, и строка перестает помещаться в выдачу.
+   * Проставляется генератором статей автоматически.
+   */
+  metaTitle?: string
   excerpt: string
   date: string
   readTime: string

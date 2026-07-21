@@ -25,7 +25,8 @@ export async function generateMetadata({
   return {
     // Только заголовок статьи. Бренд «— Vibecraft» добавляет шаблон title в layout —
     // если писать «Блог Vibecraft» здесь, бренд задваивается в <title>.
-    title: post.title,
+    // metaTitle используется, когда обычный заголовок слишком длинный для выдачи.
+    title: post.metaTitle ?? post.title,
     description: post.excerpt,
     alternates: { canonical: `/blog/${post.slug}` },
     openGraph: {
