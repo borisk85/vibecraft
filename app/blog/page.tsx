@@ -19,6 +19,7 @@ export const metadata: Metadata = {
       "Обзоры и цены на Telegram-боты, автоматизации и приложения для бизнеса в Казахстане.",
     url: "https://vibecraft.kz/blog",
     type: "website",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Vibecraft" }],
   },
 }
 
