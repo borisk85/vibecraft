@@ -6,6 +6,7 @@ import { Resend } from "resend";
 import { waitUntil } from "@vercel/functions";
 import { CALCULATOR_SYSTEM_PROMPT } from "@/lib/calculator-system-prompt";
 import { generateCalculatorPdfBuffer } from "@/lib/calculator-pdf";
+import { notifyFailure } from "@/lib/notify-failure";
 import { stripUpsells } from "@/lib/strip-upsells";
 import {
   parseSmeta,
@@ -415,6 +416,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ reply: clientReply });
   } catch (error) {
     console.error("Calculator API error:", error);
+    waitUntil(notifyFailure("калькулятор сметы", error));
     return NextResponse.json(
       {
         error:

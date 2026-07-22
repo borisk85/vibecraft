@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
 import { CHAT_SYSTEM_PROMPT } from "@/lib/chat-system-prompt";
+import { notifyFailure } from "@/lib/notify-failure";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -68,6 +69,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ reply: reply || "Не получилось сформулировать ответ. Напишите Борису в Telegram @borisk85." });
   } catch (error) {
     console.error("Chat API error:", error);
+    await notifyFailure("чат-виджет на сайте", error);
     return NextResponse.json(
       {
         error:

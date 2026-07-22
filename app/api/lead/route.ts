@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { notifyFailure } from "@/lib/notify-failure";
 
 /*
   Прием заявок с формы FinalCTA. Шлет сообщение в личный Telegram-чат
@@ -79,6 +80,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ ok: true });
   } catch (error) {
     console.error("[lead] Unexpected error", error);
+    await notifyFailure("форма заявки", error);
     return NextResponse.json(
       { error: "Внутренняя ошибка" },
       { status: 500 },
