@@ -55,3 +55,5 @@ next-env.d.ts
 .vercel
 .claude/open_tasks.json
 .claude/pending_violations.json
+.claude/.attach_rounds
+.claude/.todo_drop_rounds
