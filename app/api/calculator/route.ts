@@ -8,6 +8,13 @@ import { CALCULATOR_SYSTEM_PROMPT } from "@/lib/calculator-system-prompt";
 import { generateCalculatorPdfBuffer } from "@/lib/calculator-pdf";
 import { notifyFailure } from "@/lib/notify-failure";
 import { memoryRatelimit } from "@/lib/memory-ratelimit";
+import {
+  readState,
+  buildCookie,
+  checkCooldown,
+  nextState,
+  looksLikeGarbage,
+} from "@/lib/calc-guard";
 import { stripUpsells } from "@/lib/strip-upsells";
 import {
   parseSmeta,
@@ -26,7 +33,7 @@ const anthropic = new Anthropic({
 // Vercel при подключении Upstash через Marketplace создает env с префиксом
 // KV_* (KV_REST_API_URL, KV_REST_API_TOKEN). Для совместимости проверяем
 // оба варианта префикса. Если ничего не настроено — graceful degradation.
-const RATE_LIMIT = 5;
+const RATE_LIMIT = 3;
 const RATE_WINDOW_MS = 60 * 60 * 1000;
 
 function buildRatelimit(): Ratelimit | null {
@@ -327,6 +334,14 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    // Кулдаун по подписанной куке — главный слой против «понажимаю еще разок».
+    const now = Date.now();
+    const state = readState(req.headers.get("cookie"));
+    const cooldown = checkCooldown(state, now);
+    if (!cooldown.allowed) {
+      return NextResponse.json({ error: cooldown.message }, { status: 429 });
+    }
+
     const body = await req.json();
     const description =
       typeof body?.description === "string" ? body.description.trim() : "";
@@ -352,6 +367,16 @@ export async function POST(req: NextRequest) {
         { error: "Слишком длинное описание (максимум 3000 символов)" },
         { status: 400 },
       );
+    }
+
+    // Бесплатная проверка ПЕРЕД любым обращением к модели: клавиатурный набор,
+    // повтор одного слова, текст из цифр и символов. За такое платить не надо
+    // вообще — ни Sonnet, ни даже дешевым Haiku.
+    if (looksLikeGarbage(description)) {
+      return NextResponse.json({
+        reply:
+          "Опишите задачу словами: что нужно сделать, для какого бизнеса и какой результат ожидаете.",
+      });
     }
 
     // Дешевый Haiku-фильтр перед Sonnet — отсекает белиберду чтобы не жечь
@@ -416,7 +441,10 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    return NextResponse.json({ reply: clientReply });
+    return NextResponse.json(
+      { reply: clientReply },
+      { headers: { "Set-Cookie": buildCookie(nextState(state, now)) } },
+    );
   } catch (error) {
     console.error("Calculator API error:", error);
     waitUntil(notifyFailure("калькулятор сметы", error));
