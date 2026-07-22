@@ -258,21 +258,31 @@ async function notifyTelegram(
   const clientReply = stripUpsells(reply);
   const upsells = extractUpsells(reply);
 
+  const service = parseSmeta(clientReply).service || "не определена";
+
   const lines: (string | null)[] = [
-    "🧮 <b>Новый расчет в калькуляторе</b>",
+    email
+      ? "🧮 <b>Заявка с калькулятора — есть почта, можно писать первым</b>"
+      : "🧮 <b>Расчет в калькуляторе — контакта нет, клиент анонимный</b>",
     "",
-    email ? `📧 <code>${escapeHtml(email)}</code>` : null,
-    email ? "" : null,
-    "📝 <b>Описание клиента:</b>",
+    email
+      ? `📧 Почта клиента: <code>${escapeHtml(email)}</code> — смета ушла ему на этот адрес, там же кнопка написать в Telegram.`
+      : "Клиент посчитал стоимость, но почту не оставил. Ответить ему некуда: если задача заинтересовала, ждем, что он сам напишет в Telegram или через форму.",
+    "",
+    `🎯 Услуга по расчету: <b>${escapeHtml(service)}</b>`,
+    "",
+    "📝 <b>Что просил клиент — его словами:</b>",
     `<blockquote>${escapeHtml(description.slice(0, 1500))}</blockquote>`,
     "",
-    "📊 <b>Смета (что увидит клиент):</b>",
+    "📊 <b>Смета, которую он увидел на сайте:</b>",
     `<pre>${escapeHtml(clientReply.slice(0, 2000))}</pre>`,
     upsells ? "" : null,
     upsells
-      ? "💡 <b>Апсейлы (для тебя, в разговоре с клиентом):</b>"
+      ? "💡 <b>Что можно допродать — клиенту НЕ показано, только для разговора:</b>"
       : null,
     upsells ? `<pre>${escapeHtml(upsells.slice(0, 1000))}</pre>` : null,
+    "",
+    "ℹ️ Цифры выше посчитал ИИ по прайсу с сайта, это вилка «от и до», а не финальная цена. Точная сумма — после разбора задачи.",
   ];
 
   const text = lines
@@ -327,7 +337,7 @@ export async function POST(req: NextRequest) {
         );
         return NextResponse.json(
           {
-            error: `Лимит расчетов исчерпан (5 в час). Попробуйте через ${minutesLeft} мин или напишите в Telegram @borisk85.`,
+            error: `Лимит расчетов исчерпан (${RATE_LIMIT} в час). Попробуйте через ${minutesLeft} мин или напишите в Telegram @borisk85.`,
           },
           { status: 429 },
         );
