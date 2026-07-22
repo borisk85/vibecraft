@@ -54,3 +54,4 @@ next-env.d.ts
 
 .vercel
 .claude/open_tasks.json
+.claude/pending_violations.json

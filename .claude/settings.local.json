@@ -5,6 +5,10 @@
         "hooks": [
           {
             "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/inject_violations.py'"
+          },
+          {
+            "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/inject_rules.py'",
             "statusMessage": "Подмешиваю жесткие правила vibecraft"
           },
@@ -255,134 +259,15 @@
           {
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/persist_open_tasks.py'"
-          },
+          }
+        ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
           {
             "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_text_changes.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_fix_question.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_ty_prav.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_chat_lint.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_false_done.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_pause.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_suggest_stop.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_queue_on_new_task.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_stop_incomplete.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_ui_visual_verify.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_bossing_boris.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_offtopic_injection.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_empty_promise.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_filler.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_empty_status.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_english.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_unverified_denial.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_unvetted_fit.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_chat_duplicate.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_unverified_claim.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_hold_in_mind.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_late_infeasibility.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_econ_from_head.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_unverified_advice.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_answer_boris_q.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_comment_on_data.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_regressive_advice.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_enqueue_command.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_uncommitted_stop.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_offload_to_boris.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_work_proposal.py'"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_lie_report_without_fix.py'"
+            "command": "python 'C:/Claude Code/vibecraft/.claude/stop_soft.py'"
           }
         ]
       }
