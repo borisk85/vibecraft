@@ -1,5 +1,10 @@
 """PreToolUse hook на TodoWrite — блокирует ПОТЕРЮ задачи из очереди.
 
+ВНИМАНИЕ (22.07): проверено логированием — на TodoWrite этот хук НЕ вызывается
+вовсе, ни одной записи в лог не легло. Рабочая защита от потери задач живет
+в check_todo_dropped_stop.py (Stop-хук). Этот файл оставлен как есть на случай,
+если PreToolUse на TodoWrite заработает.
+
 Класс ошибки (повторяется, Boris в ярости): при обновлении TodoWrite я передаю
 список вручную и ЗАБЫВАЮ перенести pending/in_progress пункт — он молча исчезает.
 Boris не должен глазами следить за моей очередью.
@@ -42,14 +47,6 @@ def decide():
         data = json.loads(sys.stdin.buffer.read().decode("utf-8", "ignore") or "{}")
     except Exception:
         return None
-    if data.get("hook_event_name") != "PreToolUse":
-        return None
-    if data.get("tool_name") != "TodoWrite":
-        return None
-    new_todos = (data.get("tool_input", {}) or {}).get("todos")
-    if not isinstance(new_todos, list):
-        return None
-
     tp = data.get("transcript_path")
     if not tp:
         return None

@@ -39,6 +39,7 @@ MAX_KEEP = 6
 # HARD — требуют ПРОДОЛЖИТЬ РАБОТУ, а не переписать ответ. Блок здесь не даёт дубля.
 HARD = [
     "check_no_stop_incomplete.py",
+    "check_todo_dropped_stop.py",
     "check_no_uncommitted_stop.py",
 ]
 

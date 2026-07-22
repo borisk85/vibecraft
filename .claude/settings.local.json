@@ -68,6 +68,16 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_chat_lint.py'",
             "statusMessage": "check_chat_lint: мудреные слова / оценки времени / отсебятина"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_todo_no_drop.py'",
+            "statusMessage": "check_todo_no_drop: не терять задачи из очереди"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_task_jump.py'",
+            "statusMessage": "check_no_task_jump: не прыгать с задачи на задачу"
           }
         ]
       },
@@ -198,21 +208,6 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_micro_deploy.py'",
             "statusMessage": "check_no_micro_deploy: не деплоить каждую мелкую правку — копить батч, один деплой"
-          }
-        ]
-      },
-      {
-        "matcher": "TodoWrite",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_todo_no_drop.py'",
-            "statusMessage": "check_todo_no_drop: не терять задачи из очереди"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_task_jump.py'",
-            "statusMessage": "check_no_task_jump: не прыгать с задачи на задачу"
           }
         ]
       },
