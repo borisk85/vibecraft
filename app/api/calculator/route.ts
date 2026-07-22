@@ -288,13 +288,24 @@ export async function POST(req: NextRequest) {
   try {
     if (ratelimit) {
       const ip = getClientIp(req);
-      const result = await ratelimit.limit(ip);
-      console.log("[calculator] ratelimit check", {
-        ip,
-        success: result.success,
-        remaining: result.remaining,
-      });
-      if (!result.success) {
+      // Если Redis недоступен (инстанс удален, DNS не резолвится, сеть легла) —
+      // пропускаем клиента дальше, а не роняем весь расчет. Класс ошибки 22.07:
+      // хост Upstash перестал резолвиться, и калькулятор молча отдавал 500
+      // на КАЖДЫЙ запрос, хотя сам расчет был полностью рабочим.
+      let result: Awaited<ReturnType<typeof ratelimit.limit>> | null = null;
+      try {
+        result = await ratelimit.limit(ip);
+      } catch (e) {
+        console.error("[calculator] ratelimit unavailable, allowing through", e);
+      }
+      if (result) {
+        console.log("[calculator] ratelimit check", {
+          ip,
+          success: result.success,
+          remaining: result.remaining,
+        });
+      }
+      if (result && !result.success) {
         const minutesLeft = Math.max(
           1,
           Math.ceil((result.reset - Date.now()) / 60000),
