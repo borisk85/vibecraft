@@ -104,8 +104,11 @@ def main():
         payload = json.loads(raw)
     except Exception:
         sys.exit(0)
-    if payload.get("stop_hook_active"):
-        sys.exit(0)
+    # ДЫРА (Boris, 22.07): здесь стоял безусловный выход при stop_hook_active — и
+    # после ПЕРВОГО же блока защита отключалась до конца хода. Отсюда «опять встал
+    # с полной очередью»: первый стоп ловился, второй проходил насквозь. Теперь
+    # решают сами HARD-хуки: у check_no_stop_incomplete есть свой счетчик кругов.
+    repeat = bool(payload.get("stop_hook_active"))
 
     def _run(name):
         script = HERE / name
@@ -131,6 +134,11 @@ def main():
         if reason:
             print(json.dumps({"decision": "block", "reason": reason}))
             sys.exit(0)
+
+    if repeat:
+        # Повторный стоп: HARD уже отработали выше. Копить стилевые замечания
+        # второй раз подряд незачем — они те же самые.
+        sys.exit(0)
 
     found = []
     for name in CHECKS:
