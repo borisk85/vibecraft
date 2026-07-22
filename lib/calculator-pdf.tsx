@@ -394,9 +394,13 @@ export function CalculatorPdf({ description, smeta }: CalculatorPdfProps) {
           <Text style={styles.taskText}>{normalizedDescription}</Text>
         </View>
 
-        {/* Расчет — структурированный или fallback */}
+        {/* Расчет — структурированный или fallback.
+            Баг (23.07): здесь стояло `parsed ?`, где parsed — объект разбора,
+            то есть условие было истинным ВСЕГДА. Смета сложного проекта, которая
+            не легла в шаблон, давала PDF с пустыми полями вместо запасного
+            варианта с полным текстом. Проверять надо флаг разбора. */}
         <Text style={styles.sectionLabel}>Расчет</Text>
-        {parsed ? (
+        {parsed.parsed ? (
           <View style={styles.smetaCard}>
             <View style={styles.smetaRow}>
               <View style={styles.smetaCol}>
