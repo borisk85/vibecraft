@@ -11,6 +11,12 @@ Vercel», «проверь в дашборде Supabase», «своими рук
 resume проекта, DNS, деплой, секреты). Делаю САМ через CLI, потом отчитываюсь. Просить
 Boris руками — только если реально нет доступа (нет токена/CLI) И это указано.
 
+Расширение (22.07, Boris в ярости повторно): тот же класс лени в другой обертке —
+я САМ придумываю задачу, которую должен выполнить Boris («получить ID счетчика»,
+«прислать доступ»), и кладу ее в очередь TodoWrite. Он такого не просил, а очередь
+превращается в список поручений ему. Теперь проверяются оба места: текст ответа
+и пункты очереди.
+
 Логика: в финальном ответе есть маркер-сброс инфры на Boris И нет признака, что я
 сделал это сам (CLI-вызов в ответе). Fail-open при ошибке.
 """
@@ -38,6 +44,34 @@ DID_SELF_RE = re.compile(
     r"через\s+CLI|сам\s+(задал|поднял|проверил|сделал|настроил|добавил)|"
     r"\bgh\s+|npx\s+vercel|запустил\s+(vercel|supabase)|выполнил\s+(команд|vercel|supabase))",
     re.IGNORECASE | re.UNICODE)
+
+# Пункт очереди, который на самом деле поручение Boris, а не моя работа.
+TODO_OFFLOAD_RE = re.compile(
+    r"(жду\s+(id|ключ|доступ|токен|логин|от\s+boris)|"
+    r"получить\s+(id|ключ|доступ|токен|от\s+boris)|"
+    r"нужен\s+(id|ключ|доступ|токен|логин)\s+от\s+boris|"
+    r"попросить\s+boris|спросить\s+у\s+boris|"
+    r"boris\s+(должен|пришлет|даст|создаст|заведет))",
+    re.IGNORECASE | re.UNICODE)
+
+
+def _last_todos(msgs):
+    """Пункты последнего TodoWrite."""
+    todos = None
+    for m in msgs:
+        if m.get("type") != "assistant":
+            continue
+        c = (m.get("message", {}) or {}).get("content")
+        if not isinstance(c, list):
+            continue
+        for b in c:
+            if (isinstance(b, dict) and b.get("type") == "tool_use"
+                    and b.get("name") == "TodoWrite"):
+                t = (b.get("input", {}) or {}).get("todos")
+                if isinstance(t, list):
+                    todos = t
+    return todos or []
+
 
 META_RE = re.compile(
     r"(хук|check_no_offload|класс\w*\s+ошибк|блокир\w*|\bловит\b|сбрасыва\w*\s+на\s+boris\b\s+запрещ)",
@@ -89,6 +123,22 @@ def main():
     clean = re.sub(r"```[\s\S]*?```", "", resp)
     clean = re.sub(r"`[^`]*`", "", clean)
     clean = "\n".join(l for l in clean.splitlines() if not l.lstrip().startswith(">"))
+
+    for t in _last_todos(msgs):
+        if not isinstance(t, dict):
+            continue
+        if t.get("status") not in ("pending", "in_progress"):
+            continue
+        hit = TODO_OFFLOAD_RE.search(t.get("content") or "")
+        if hit:
+            print(json.dumps({"decision": "block", "reason": (
+                f"НАРУШЕНИЕ check_no_offload_to_boris: в очереди висит пункт "
+                f"«{(t.get('content') or '')[:60]}» — это поручение Boris, а не твоя "
+                "работа. Ты сам придумал задачу и повесил ее на него, он такого не "
+                "просил. Убери пункт из TodoWrite: недостающий факт просто назови в "
+                "ответе одной строкой. Задачей это станет, когда Boris скажет."
+            )}))
+            sys.exit(0)
 
     m = OFFLOAD_RE.search(clean)
     if not m:
