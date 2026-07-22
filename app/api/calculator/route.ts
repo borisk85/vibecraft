@@ -7,6 +7,7 @@ import { waitUntil } from "@vercel/functions";
 import { CALCULATOR_SYSTEM_PROMPT } from "@/lib/calculator-system-prompt";
 import { generateCalculatorPdfBuffer } from "@/lib/calculator-pdf";
 import { notifyFailure } from "@/lib/notify-failure";
+import { memoryRatelimit } from "@/lib/memory-ratelimit";
 import { stripUpsells } from "@/lib/strip-upsells";
 import {
   parseSmeta,
@@ -25,6 +26,9 @@ const anthropic = new Anthropic({
 // Vercel при подключении Upstash через Marketplace создает env с префиксом
 // KV_* (KV_REST_API_URL, KV_REST_API_TOKEN). Для совместимости проверяем
 // оба варианта префикса. Если ничего не настроено — graceful degradation.
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 60 * 60 * 1000;
+
 function buildRatelimit(): Ratelimit | null {
   const url =
     process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
@@ -287,26 +291,29 @@ async function notifyTelegram(
 
 export async function POST(req: NextRequest) {
   try {
-    if (ratelimit) {
+    {
       const ip = getClientIp(req);
       // Если Redis недоступен (инстанс удален, DNS не резолвится, сеть легла) —
       // пропускаем клиента дальше, а не роняем весь расчет. Класс ошибки 22.07:
       // хост Upstash перестал резолвиться, и калькулятор молча отдавал 500
       // на КАЖДЫЙ запрос, хотя сам расчет был полностью рабочим.
-      let result: Awaited<ReturnType<typeof ratelimit.limit>> | null = null;
-      try {
-        result = await ratelimit.limit(ip);
-      } catch (e) {
-        console.error("[calculator] ratelimit unavailable, allowing through", e);
+      let result: { success: boolean; remaining: number; reset: number };
+      if (ratelimit) {
+        try {
+          result = await ratelimit.limit(ip);
+        } catch (e) {
+          console.error("[calculator] Redis недоступен, считаем в памяти", e);
+          result = memoryRatelimit(ip, RATE_LIMIT, RATE_WINDOW_MS);
+        }
+      } else {
+        result = memoryRatelimit(ip, RATE_LIMIT, RATE_WINDOW_MS);
       }
-      if (result) {
-        console.log("[calculator] ratelimit check", {
-          ip,
-          success: result.success,
-          remaining: result.remaining,
-        });
-      }
-      if (result && !result.success) {
+      console.log("[calculator] ratelimit check", {
+        ip,
+        success: result.success,
+        remaining: result.remaining,
+      });
+      if (!result.success) {
         const minutesLeft = Math.max(
           1,
           Math.ceil((result.reset - Date.now()) / 60000),
@@ -318,10 +325,6 @@ export async function POST(req: NextRequest) {
           { status: 429 },
         );
       }
-    } else {
-      console.warn(
-        "[calculator] ratelimit DISABLED — KV/UPSTASH env vars missing",
-      );
     }
 
     const body = await req.json();
