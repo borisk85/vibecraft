@@ -14,6 +14,7 @@ export const BLOG_IMAGE_SIZES: Record<string, [number, number]> = {
   "/blog/zoho-inventory-ostatki.webp": [1200, 716],
   "/blog/zoho-inventory-dokumenty.webp": [1200, 775],
   "/blog/esf-portal-kgd.webp": [1200, 556],
+  "/blog/esf-vhod-ncalayer.webp": [1200, 516],
   "/blog/vibecraft-uslugi-ceny.webp": [1074, 412],
   "/blog/vibecraft-kalkulyator-stoimosti.webp": [880, 585],
 };
