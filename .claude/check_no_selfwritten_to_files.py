@@ -60,6 +60,11 @@ FINDING_RE = re.compile(
 )
 
 
+def basename_is_memory(target: str) -> bool:
+    """Файл памяти по имени: MEMORY.md в любой директории."""
+    return target.rsplit("/", 1)[-1] == "memory.md"
+
+
 def _is_tool_result_message(msg: dict) -> bool:
     content = msg.get("message", {}).get("content", [])
     if not isinstance(content, list) or not content:
@@ -133,6 +138,26 @@ def main():
     ti = data.get("tool_input", {}) or {}
     target = str(ti.get("file_path", "")).replace("\\", "/").lower()
     if not target:
+        sys.exit(0)
+    # ПАМЯТЬ ЗАПРЕЩЕНА ПОЛНОСТЬЮ. memory-директория лежит физически внутри
+    # .claude/projects/.../memory/ — из-за этого исключение "/.claude/" ниже её
+    # пропускало, и я своевольно писал туда правила/выводы. В этом проекте память
+    # не подключена и нигде не мониторится: правила живут в BASE_RULES/CLAUDE.md/
+    # STATE.md/хуках. Любая запись в /memory/ — блок, ДО исключения .claude.
+    if "/memory/" in target or target.endswith("/memory.md") or basename_is_memory(target):
+        print(json.dumps({
+            "hookSpecificOutput": {
+                "hookEventName": "PreToolUse",
+                "permissionDecision": "deny",
+                "permissionDecisionReason": (
+                    "БЛОК: запись в ПАМЯТЬ запрещена полностью и навсегда. Память в "
+                    "этом проекте не подключена и нигде не мониторится — это мёртвый "
+                    "канал. Правила и выводы фиксируются ТОЛЬКО в BASE_RULES.md, "
+                    "CLAUDE.md, STATE.md или хуках .claude/. Не пиши в memory-"
+                    "директорию и в MEMORY.md ничего и никогда."
+                ),
+            }
+        }))
         sys.exit(0)
     if "/.claude/" in target or "/node_modules/" in target:
         sys.exit(0)
