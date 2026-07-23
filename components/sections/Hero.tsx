@@ -49,10 +49,10 @@ export function Hero() {
             </a>
 
             <a
-              href="#cases"
+              href="/calculator"
               className="inline-flex h-12 items-center justify-center rounded-xl border border-border bg-card/40 px-4 text-sm sm:text-base font-medium text-foreground transition-colors duration-150 hover:border-accent hover:bg-card sm:px-6"
             >
-              Смотреть работы
+              Рассчитать бюджет
             </a>
           </div>
 
