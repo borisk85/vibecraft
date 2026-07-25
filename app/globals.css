@@ -227,7 +227,10 @@ button[aria-haspopup="listbox"]:focus-visible {
 }
 .blog-content img {
   border-radius: 0.75rem;
-  margin: 1.5rem 0;
+  /* по центру колонки: широкие скриншоты и так на всю ширину, узкие
+     (вертикальный виджет чата) без этого прижимались к левому краю */
+  display: block;
+  margin: 1.5rem auto;
 }
 .blog-content .table-scroll {
   overflow-x: auto;
