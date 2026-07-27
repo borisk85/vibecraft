@@ -14,7 +14,7 @@
           },
           {
             "type": "command",
-            "command": "python 'C:/Users/bkoma/.claude/hooks/inject_reference_stop.py'",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/inject_reference_stop.py'",
             "statusMessage": "Проверяю задачу на референс"
           },
           {
@@ -46,7 +46,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python 'C:/Users/bkoma/.claude/hooks/check_no_project_switch.py'",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_project_switch.py'",
             "statusMessage": "check_no_project_switch: не прыгать на другой проект без команды"
           }
         ]
@@ -56,12 +56,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python 'C:/Users/bkoma/.claude/hooks/check_no_deploy_destruction.py'",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_deploy_destruction.py'",
             "statusMessage": "check_no_deploy_destruction: деплой-очередь руками не трогать"
           },
           {
             "type": "command",
-            "command": "python 'C:/Users/bkoma/.claude/hooks/check_no_bg_quick.py'",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_bg_quick.py'",
             "statusMessage": "check_no_bg_quick: быстрый grep/read — foreground, не в фон"
           }
         ]
@@ -71,7 +71,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python 'C:/Users/bkoma/.claude/hooks/check_websearch_not_basic.py'",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_websearch_not_basic.py'",
             "statusMessage": "check_websearch_not_basic: поиск только под внешние факты"
           }
         ]
@@ -81,7 +81,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python 'C:/Users/bkoma/.claude/hooks/ref_guard.py'",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/ref_guard.py'",
             "statusMessage": "ref_guard: проверяю что референс vibecraft открыт"
           }
         ]
@@ -91,12 +91,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python 'C:/Users/bkoma/.claude/hooks/no_action_on_question.py'",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/no_action_on_question.py'",
             "statusMessage": "no_action_on_question: правка продукта — только по команде, не на вопрос/критику"
           },
           {
             "type": "command",
-            "command": "python 'C:/Users/bkoma/.claude/hooks/check_justify_not_delete.py'",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_justify_not_delete.py'",
             "statusMessage": "check_justify_not_delete: источник под вопросом — обоснуй, не удаляй молча"
           },
           {
@@ -173,7 +173,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python 'C:/Users/bkoma/.claude/hooks/ref_guard.py'"
+            "command": "python 'C:/Claude Code/vibecraft/.claude/ref_guard.py'"
           }
         ]
       },
@@ -182,7 +182,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python 'C:/Users/bkoma/.claude/hooks/check_sweep_all_pages.py'",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/check_sweep_all_pages.py'",
             "statusMessage": "check_sweep_all_pages: паттерн заменен — проверяю, не остался ли в других местах"
           }
         ]
