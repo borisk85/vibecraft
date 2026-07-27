@@ -6,6 +6,8 @@ tags: [geo, schema, structured-data, json-ld, entity-recognition, ai-discoverabi
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 ---
 
+> **Вызывается из `/site-optimize`.** Это шаг общего прогона сайта по SEO и ГЕО, а не отдельная команда: единый вход описан в скиле `site-optimize`, там же порядок шагов и базовый минимум, который ставится всегда.
+
 # GEO Schema & Structured Data
 
 ## Purpose

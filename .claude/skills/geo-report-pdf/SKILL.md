@@ -6,6 +6,8 @@ tags: [geo, pdf, report, client-deliverable, professional]
 allowed-tools: Read, Grep, Glob, Bash, Write
 ---
 
+> **Вызывается из `/site-optimize`.** Это шаг общего прогона сайта по SEO и ГЕО, а не отдельная команда: единый вход описан в скиле `site-optimize`, там же порядок шагов и базовый минимум, который ставится всегда.
+
 # GEO PDF Report Generator (pandoc pipeline)
 
 ## Prerequisites

@@ -38,44 +38,28 @@ MAX_KEEP = 6
 
 # HARD — требуют ПРОДОЛЖИТЬ РАБОТУ, а не переписать ответ. Блок здесь не даёт дубля.
 HARD = [
-    "check_attachments_stop.py",
-    "check_no_stop_incomplete.py",
-    "check_todo_dropped_stop.py",
-    "check_no_uncommitted_stop.py",
+    ("file", "check_attachments_stop.py"),
+    ("group", "stop_hard"),
+    ("group", "queue"),
 ]
 
-# SOFT — требуют переписать уже показанный ответ. Только копим и отдаём в след. ход.
 CHECKS = [
-    "check_text_changes.py",
-    "check_no_lie_report_without_fix.py",
-    "check_no_false_done.py",
-    "check_no_unverified_claim.py",
-    "check_no_unverified_denial.py",
-    "check_unverified_advice.py",
-    "check_no_econ_from_head.py",
-    "check_answer_boris_q.py",
-    "check_no_fix_question.py",
-    "check_no_ty_prav.py",
-    "check_chat_lint.py",
-    "check_no_filler.py",
-    "check_no_english.py",
-    "check_no_chat_duplicate.py",
-    "check_no_pause.py",
-    "check_no_suggest_stop.py",
-    "check_queue_on_new_task.py",
-    "check_enqueue_command.py",
-    "check_ui_visual_verify.py",
-    "check_no_bossing_boris.py",
-    "check_no_offtopic_injection.py",
-    "check_no_empty_promise.py",
-    "check_no_empty_status.py",
-    "check_no_unvetted_fit.py",
-    "check_no_hold_in_mind.py",
-    "check_no_late_infeasibility.py",
-    "check_no_comment_on_data.py",
-    "check_no_regressive_advice.py",
-    "check_no_offload_to_boris.py",
-    "check_no_work_proposal.py",
+    ("group", "stop_soft"),
+    ("group", "verified"),
+    ("group", "style"),
+    ("group", "visual"),
+    ("file", "check_text_changes.py"),
+    ("file", "check_no_lie_report_without_fix.py"),
+    ("file", "check_answer_boris_q.py"),
+    ("file", "check_no_fix_question.py"),
+    ("file", "check_no_bossing_boris.py"),
+    ("file", "check_no_offtopic_injection.py"),
+    ("file", "check_no_hold_in_mind.py"),
+    ("file", "check_no_late_infeasibility.py"),
+    ("file", "check_no_comment_on_data.py"),
+    ("file", "check_no_regressive_advice.py"),
+    ("file", "check_no_offload_to_boris.py"),
+    ("file", "check_no_work_proposal.py"),
 ]
 
 
@@ -112,13 +96,20 @@ def main():
     # решают сами HARD-хуки: у check_no_stop_incomplete есть свой счетчик кругов.
     repeat = bool(payload.get("stop_hook_active"))
 
-    def _run(name):
-        script = HERE / name
-        if not script.exists():
-            return None
+    def _run(entry):
+        kind, name = entry
+        if kind == "group":
+            cmd = [sys.executable, str(HERE / "hook_group.py"), name]
+        else:
+            script = HERE / name
+            if not script.exists():
+                script = HERE / "detectors" / name
+            if not script.exists():
+                return None
+            cmd = [sys.executable, str(script)]
         try:
             proc = subprocess.run(
-                [sys.executable, str(script)],
+                cmd,
                 input=raw,
                 capture_output=True,
                 text=True,

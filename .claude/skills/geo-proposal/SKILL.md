@@ -11,6 +11,8 @@ tags: [geo, business, proposal, sales, pricing, client]
 allowed-tools: Read, Write, Bash, Glob, WebFetch
 ---
 
+> **Вызывается из `/site-optimize`.** Это шаг общего прогона сайта по SEO и ГЕО, а не отдельная команда: единый вход описан в скиле `site-optimize`, там же порядок шагов и базовый минимум, который ставится всегда.
+
 # GEO Proposal Generator
 
 ## Purpose

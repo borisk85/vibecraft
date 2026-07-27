@@ -10,6 +10,8 @@ allowed-tools:
   - Write
 ---
 
+> **Вызывается из `/site-optimize`.** Это шаг общего прогона сайта по SEO и ГЕО, а не отдельная команда: единый вход описан в скиле `site-optimize`, там же порядок шагов и базовый минимум, который ставится всегда.
+
 # AI Citability Scoring Skill
 
 ## Core Insight

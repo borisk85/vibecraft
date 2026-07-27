@@ -6,6 +6,8 @@ tags: [geo, ai-search, platform-optimization, chatgpt, perplexity, gemini, aio]
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 ---
 
+> **Вызывается из `/site-optimize`.** Это шаг общего прогона сайта по SEO и ГЕО, а не отдельная команда: единый вход описан в скиле `site-optimize`, там же порядок шагов и базовый минимум, который ставится всегда.
+
 # GEO Platform Optimizer
 
 ## Core Insight

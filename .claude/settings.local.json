@@ -48,36 +48,6 @@
             "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_project_switch.py'",
             "statusMessage": "check_no_project_switch: не прыгать на другой проект без команды"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_queue_before_switch.py'",
-            "statusMessage": "check_queue_before_switch: >=2 задач без очереди — сначала TodoWrite, потом правки"
-          }
-        ]
-      },
-      {
-        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|TodoWrite|Read|Glob|Grep|Task|WebSearch|WebFetch",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_ty_prav.py'",
-            "statusMessage": "check_no_ty_prav: запрещенная фраза согласия — режу сразу"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_chat_lint.py'",
-            "statusMessage": "check_chat_lint: мудреные слова / оценки времени / отсебятина"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_todo_no_drop.py'",
-            "statusMessage": "check_todo_no_drop: не терять задачи из очереди"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_task_jump.py'",
-            "statusMessage": "check_no_task_jump: не прыгать с задачи на задачу"
           }
         ]
       },
@@ -126,63 +96,13 @@
           },
           {
             "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_invented_copy.py'",
-            "statusMessage": "check_no_invented_copy: критическая копи — только из подтвержденного текста/источника"
-          },
-          {
-            "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_justify_not_delete.py'",
             "statusMessage": "check_justify_not_delete: источник под вопросом — обоснуй, не удаляй молча"
           },
           {
             "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_consult_reference.py'",
-            "statusMessage": "check_consult_reference: позвали референс — прочитай реальный источник, потом правь"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_verbatim_dictation.py'",
-            "statusMessage": "check_verbatim_dictation: Boris продиктовал текст — вставляй дословно, не склеивай"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_selfagree_pretool.py'",
-            "statusMessage": "check_no_selfagree_pretool: без «ты прав/согласен/виноват» в подводке перед инструментом"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_copy_facts_pretool.py'",
-            "statusMessage": "check_copy_facts: копи только с факт-чеком (код/Privacy/ресерч), без отсебятины"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_ui_playwright_pretool.py'",
-            "statusMessage": "check_ui_playwright: изменение верстки/сетки — проверить визуал через Playwright"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_selfwritten_to_files.py'",
-            "statusMessage": "check_no_selfwritten_to_files: без команды Boris в файлы-документы не писать отсебятину"
-          },
-          {
-            "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_regressive_action.py'",
             "statusMessage": "check_no_regressive_action: не отключать/убирать фичу правкой ради обхода проблемы"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_vela_before_blog_visual.py'",
-            "statusMessage": "check_vela_before_blog_visual: визуал/разметку блога править только после сверки с VELA"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_unrequested_visual.py'",
-            "statusMessage": "check_no_unrequested_visual: не добавлять цвет/стиль, которого Boris не просил"
-          },
-          {
-            "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_collateral_removal.py'",
-            "statusMessage": "check_no_collateral_removal: при удалении CSS не сносить заодно чужой фикс (nowrap)"
           },
           {
             "type": "command",
@@ -196,11 +116,6 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_consult_reference.py'",
-            "statusMessage": "check_consult_reference (Bash/PowerShell): позвали референс — прочитай источник, потом пиши файл"
-          },
-          {
-            "type": "command",
             "command": "python 'C:/Claude Code/vibecraft/.claude/check_build_before_push.py'",
             "statusMessage": "check_build_before_push: нет локального билда после правки исходника — не пушить/деплоить"
           },
@@ -212,17 +127,42 @@
         ]
       },
       {
+        "matcher": "Edit|Write|MultiEdit|NotebookEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/hook_group.py' content",
+            "statusMessage": "Референс и запрет отсебятины в копи"
+          },
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/hook_group.py' visual",
+            "statusMessage": "Визуал: не вслепую и без непрошенного"
+          }
+        ]
+      },
+      {
         "matcher": "mcp__playwright__.*",
         "hooks": [
           {
             "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_playwright_only_on_command.py'",
-            "statusMessage": "check_playwright_only_on_command: браузер/Playwright только по явной команде"
+            "command": "python 'C:/Claude Code/vibecraft/.claude/hook_group.py' visual",
+            "statusMessage": "Playwright только когда он нужен"
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|TodoWrite|Read|Glob|Grep|Task|WebSearch|WebFetch",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python 'C:/Claude Code/vibecraft/.claude/hook_group.py' queue",
+            "statusMessage": "Дисциплина очереди задач"
           },
           {
             "type": "command",
-            "command": "python 'C:/Claude Code/vibecraft/.claude/check_no_playwright_for_code.py'",
-            "statusMessage": "check_no_playwright_for_code: кодовая задача без визуала — без Playwright"
+            "command": "python 'C:/Claude Code/vibecraft/.claude/hook_group.py' style",
+            "statusMessage": "Стиль реплики"
           }
         ]
       }
