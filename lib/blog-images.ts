@@ -20,6 +20,6 @@ export const BLOG_IMAGE_SIZES: Record<string, [number, number]> = {
   "/blog/vibecraft-uslugi-ceny.webp": [1074, 412],
   "/blog/vibecraft-kalkulyator-stoimosti.webp": [880, 585],
   "/blog/vibecraft-ii-chat-konsultant.webp": [380, 643],
-  "/blog/vibecraft-chat-konsultant-ip.webp": [380, 711],
+  "/blog/vibecraft-chat-konsultant-ip.webp": [722, 1172],
   "/blog/kabinet-nalogoplatelshchika-vhod.webp": [1200, 878],
 };
