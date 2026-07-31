@@ -33,6 +33,25 @@ SERVICE_MARKERS = (
 )
 
 
+# Сторож про КОПИ: тексты, которые видит юзер. Рабочие записи и код сверять с
+# копи-референсом не с чем, а требование «консистентно» из давней реплики висело
+# до конца сессии и блокировало любую правку подряд (31.07.2026)
+EXEMPT_NAMES = ("state.md", "state_archive.md", "backlog.md", "readme.md",
+                "claude.md", "base_rules.md", "agents.md", "memory.md")
+EXEMPT_DIRS = ("/docs/", "/memory/", "/tests/", "/scripts/")
+EXEMPT_EXT = (".py", ".sh", ".yml", ".yaml", ".toml", ".cfg", ".ini",
+              ".lock", ".log", ".sql", ".env")
+
+
+def _is_exempt(target: str) -> bool:
+    name = target.rsplit("/", 1)[-1]
+    if name in EXEMPT_NAMES:
+        return True
+    if any(d in target for d in EXEMPT_DIRS):
+        return True
+    return target.endswith(EXEMPT_EXT)
+
+
 def _user_text(o):
     if o.get("type") != "user" or o.get("isMeta"):
         return None
@@ -172,6 +191,8 @@ def decide():
         return None
     if "/.claude/" in target or target.endswith(".claude"):
         return None  # правки самих хуков/конфига не гейтим
+    if _is_exempt(target):
+        return None  # рабочие записи и код: сверять с копи-референсом нечего
     tp = data.get("transcript_path")
     if not tp:
         return None

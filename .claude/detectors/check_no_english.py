@@ -69,6 +69,55 @@ def _clean(resp: str) -> str:
     return text
 
 
+def _last_user_text(msgs) -> str:
+    """Последняя реплика человека (не результат инструмента)."""
+    for m in reversed(msgs):
+        if m.get("type") == "user" and not _is_tool_result(m):
+            c = m.get("message", {}).get("content", "")
+            if isinstance(c, str):
+                return c
+            if isinstance(c, list):
+                return " ".join(
+                    b.get("text", "") for b in c
+                    if isinstance(b, dict) and b.get("type") == "text"
+                )
+    return ""
+
+
+# Boris сам регулярно заказывает англоязычную копию: описание модуля на двух языках,
+# EN-версия статьи, письмо, ключи для западного рынка. Блокировать такой ответ значит
+# запрещать заказанную работу, поэтому при явной просьбе английского сторож молчит
+_EN_REQUEST_RE = re.compile(
+    r"(?i)(на\s+англ|англ[оий]|английск|по-английски|english|\bEN\b|en-верси|eng\b)"
+)
+
+# Строки-маркеры, после которых идет цитата англоязычной копии внутри русского ответа
+_EN_QUOTE_MARK_RE = re.compile(r"(?im)^\s*(?:\*\*)?(?:EN|English|Eng|На английском)[:\s*]")
+
+
+def _strip_en_quotes(resp: str) -> str:
+    """Убирает блоки англоязычной копии, помеченные строкой EN/English/На английском.
+
+    Такой блок это цитата продуктового текста на утверждение, а не проза ответа.
+    Блок заканчивается пустой строкой либо следующей строкой с кириллицей."""
+    out = []
+    skipping = False
+    for line in resp.splitlines():
+        if _EN_QUOTE_MARK_RE.match(line):
+            skipping = True
+            continue
+        if skipping:
+            if not line.strip():
+                skipping = False
+                continue
+            if re.search(r"[а-яА-ЯёЁ]{4,}", line):
+                skipping = False
+            else:
+                continue
+        out.append(line)
+    return "\n".join(out)
+
+
 def _english_word_count(resp: str) -> int:
     words = re.findall(r"(?<![A-Za-z])[A-Za-z]{3,}(?![A-Za-z])", _clean(resp))
     return sum(1 for w in words if w.lower() not in ALLOW)
@@ -110,6 +159,13 @@ def main():
         except Exception:
             pass
     resp = _last_response(msgs)
+    if not resp.strip():
+        sys.exit(0)
+    # Английский заказан прямо в реплике Boris (EN-копия, EN-ключи, EN-версия текста)
+    if _EN_REQUEST_RE.search(_last_user_text(msgs)):
+        sys.exit(0)
+    # Цитаты англоязычной копии под маркером EN не считаем прозой ответа
+    resp = _strip_en_quotes(resp)
     if not resp.strip():
         sys.exit(0)
     # блок ТОЛЬКО на реальной английской ПРОЗЕ: длинная цепочка англ-слов подряд
