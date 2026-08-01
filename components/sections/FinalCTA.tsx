@@ -37,7 +37,6 @@ const supportType = "Поддержка существующего проект�
 
 const sources = [
   "Google или поиск",
-  "Telegram",
   "LinkedIn",
   "Instagram",
   "Facebook",
