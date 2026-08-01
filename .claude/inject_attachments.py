@@ -76,7 +76,7 @@ def collect(transcript):
 def main():
     try:
         # Claude Code отдает payload на stdin; BOM от Windows-пайпа ломает json.loads
-        payload = json.loads(sys.stdin.read().lstrip("﻿").strip() or "{}")
+        payload = json.loads(sys.stdin.buffer.read().decode("utf-8", "ignore").lstrip("﻿").strip() or "{}")
         transcript = Path(payload.get("transcript_path", ""))
         if not transcript.is_file():
             sys.exit(0)

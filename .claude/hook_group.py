@@ -15,6 +15,7 @@
 Fail-open: сбой детектора, таймаут, отсутствие файла — пропускаем молча.
 """
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -106,7 +107,12 @@ def _verdict(proc):
 def main():
     group = sys.argv[1] if len(sys.argv) > 1 else ""
     names = GROUPS.get(group)
-    raw = sys.stdin.read()
+    # stdin ТОЛЬКО через buffer с явным utf-8: текстовый sys.stdin на Windows берет
+    # кодировку системы (cp1251) и превращает кириллицу в мохибейк «ÐŸÐµÑ€Ð²Ð¸Ñ‡Ð½Ñ‹Ð¹».
+    # Дальше этот испорченный текст уходил детекторам, они сравнивали его с чистым
+    # utf-8 из транскрипта, не находили совпадений и блокировали любой TodoWrite
+    # с кириллицей (баг 01.08.2026: очередь пришлось вести дублем на латинице).
+    raw = sys.stdin.buffer.read().decode("utf-8", "ignore")
     if not names:
         sys.exit(0)
     try:
@@ -124,6 +130,9 @@ def main():
         if not script.exists():
             continue
         try:
+            # PYTHONUTF8/PYTHONIOENCODING — чтобы детектор читал наш utf-8, а не
+            # переоткрывал stdin в кодировке системы и снова получал мохибейк.
+            env = dict(os.environ, PYTHONUTF8="1", PYTHONIOENCODING="utf-8")
             proc = subprocess.run(
                 [sys.executable, str(script)],
                 input=raw,
@@ -132,6 +141,7 @@ def main():
                 encoding="utf-8",
                 errors="ignore",
                 timeout=TIMEOUT,
+                env=env,
             )
         except Exception:
             continue

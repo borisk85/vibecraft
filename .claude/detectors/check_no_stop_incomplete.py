@@ -50,7 +50,7 @@ def _last_todos(messages):
 
 def main():
     try:
-        payload = json.load(sys.stdin)
+        payload = json.loads(sys.stdin.buffer.read().decode("utf-8", "ignore") or "{}")
     except Exception:
         sys.exit(0)
     # ДЫРА (поймана Boris 08.07): после блока другим Stop-хуком повторный стоп

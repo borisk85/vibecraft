@@ -59,7 +59,7 @@ def get_new_text(tool_name, tool_input):
 
 def main():
     try:
-        payload = json.load(sys.stdin)
+        payload = json.loads(sys.stdin.buffer.read().decode("utf-8", "ignore") or "{}")
     except Exception:
         sys.exit(0)
 

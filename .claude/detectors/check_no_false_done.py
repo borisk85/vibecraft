@@ -47,7 +47,7 @@ def last_assistant_text(tp):
 
 def main():
     try:
-        data = json.loads(sys.stdin.read() or "{}")
+        data = json.loads(sys.stdin.buffer.read().decode("utf-8", "ignore") or "{}")
     except Exception:
         sys.exit(0)
 

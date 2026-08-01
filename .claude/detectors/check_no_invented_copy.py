@@ -73,7 +73,7 @@ def _overlaps(new_text, boris_msgs):
 
 def decide():
     try:
-        data = json.loads(sys.stdin.read() or "{}")
+        data = json.loads(sys.stdin.buffer.read().decode("utf-8", "ignore") or "{}")
     except Exception:
         return None
     if data.get("hook_event_name") != "PreToolUse":

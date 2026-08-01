@@ -85,7 +85,7 @@ def _reason(proc):
 
 
 def main():
-    raw = sys.stdin.read()
+    raw = sys.stdin.buffer.read().decode("utf-8", "ignore")
     try:
         payload = json.loads(raw)
     except Exception:

@@ -100,7 +100,7 @@ def _reduces_to_empty(resp: str) -> bool:
 
 def main():
     try:
-        payload = json.load(sys.stdin)
+        payload = json.loads(sys.stdin.buffer.read().decode("utf-8", "ignore") or "{}")
     except Exception:
         sys.exit(0)
     if payload.get("stop_hook_active"):

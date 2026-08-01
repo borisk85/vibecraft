@@ -50,7 +50,7 @@ def _bad_rows(text):
 
 def main():
     try:
-        data = json.load(sys.stdin)
+        data = json.loads(sys.stdin.buffer.read().decode("utf-8", "ignore") or "{}")
     except Exception:
         sys.exit(0)
     if data.get("tool_name") not in ("Edit", "Write", "MultiEdit"):

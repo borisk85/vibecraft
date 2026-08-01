@@ -62,7 +62,7 @@ def _read_repo_file(msgs, start):
 
 def main():
     try:
-        pl = json.load(sys.stdin)
+        pl = json.loads(sys.stdin.buffer.read().decode("utf-8", "ignore") or "{}")
     except Exception:
         sys.exit(0)
     if pl.get("stop_hook_active"):

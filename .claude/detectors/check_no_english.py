@@ -144,7 +144,7 @@ def _max_english_run(resp: str) -> int:
 
 def main():
     try:
-        payload = json.load(sys.stdin)
+        payload = json.loads(sys.stdin.buffer.read().decode("utf-8", "ignore") or "{}")
     except Exception:
         sys.exit(0)
     if payload.get("stop_hook_active"):
