@@ -35,7 +35,13 @@ const supportBudgets = [
 
 const supportType = "Поддержка существующего проекта";
 
-const sources = ["Google или поиск", "Рекомендация", "Другое"];
+const sources = [
+  "Google или поиск",
+  "LinkedIn",
+  "Instagram",
+  "Рекомендация",
+  "Другое",
+];
 
 export function FinalCTA() {
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">(
