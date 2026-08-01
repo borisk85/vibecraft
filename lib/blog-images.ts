@@ -22,4 +22,6 @@ export const BLOG_IMAGE_SIZES: Record<string, [number, number]> = {
   "/blog/vibecraft-ii-chat-konsultant.webp": [380, 643],
   "/blog/vibecraft-chat-konsultant-ip.webp": [440, 714],
   "/blog/kabinet-nalogoplatelshchika-vhod.webp": [1200, 805],
+  "/blog/kaspi-guide-api-instrukciya.webp": [744, 454],
+  "/blog/favor-it-modul-1c-kaspi.webp": [1200, 740],
 };
