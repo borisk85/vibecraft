@@ -36,11 +36,12 @@ const supportBudgets = [
 const supportType = "Поддержка существующего проекта";
 
 const sources = [
-  "Google или другой поиск",
-  "ИИ-ассистент (ChatGPT, Claude и т.д.)",
+  "Google или поиск",
   "Telegram",
+  "LinkedIn",
+  "Instagram",
+  "Facebook",
   "Рекомендация",
-  "Соцсети",
   "Другое",
 ];
 
