@@ -57,3 +57,4 @@ next-env.d.ts
 .claude/pending_violations.json
 .claude/.attach_rounds
 .claude/.todo_drop_rounds
+.claude/.stop_guard_count
