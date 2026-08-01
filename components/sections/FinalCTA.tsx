@@ -276,9 +276,11 @@ function SelectField({
 
   return (
     <div className="flex flex-col gap-2">
-      <label htmlFor={id} className="text-sm text-muted">
+      {/* htmlFor тут не ставим: клик по метке браузер переводил бы на кнопку
+          и список открывался при клике мимо поля. Связь через aria-labelledby */}
+      <span id={`${id}-label`} className="text-sm text-muted">
         {label}
-      </label>
+      </span>
       <div ref={containerRef} className="relative">
         <button
           id={id}
@@ -286,6 +288,7 @@ function SelectField({
           onClick={() => setOpen((o) => !o)}
           aria-haspopup="listbox"
           aria-expanded={open}
+          aria-labelledby={`${id}-label`}
           className="flex h-11 w-full items-center justify-between rounded-lg border border-border bg-background px-4 text-left text-foreground transition-colors duration-150 focus:border-accent focus:outline-none focus-visible:outline-none"
         >
           <span className={cn(value ? "text-foreground" : "text-subtle")}>
