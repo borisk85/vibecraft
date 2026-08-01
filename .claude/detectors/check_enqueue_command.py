@@ -85,6 +85,47 @@ def _last_todos(msgs):
     return None
 
 
+def _last_enqueue_index(msgs):
+    """Индекс последнего сообщения Boris с командой «в очередь» (или -1)."""
+    for i in range(len(msgs) - 1, -1, -1):
+        m = msgs[i]
+        if m.get("type") != "user" or m.get("isMeta") or _is_tool_result(m):
+            continue
+        c = m.get("message", {}).get("content", "")
+        text = c if isinstance(c, str) else " ".join(
+            b.get("text", "") for b in c
+            if isinstance(b, dict) and b.get("type") == "text")
+        text = re.sub(r"<system-reminder>.*?</system-reminder>", " ", text, flags=re.S).strip()
+        if not text or any(mk in text for mk in SERVICE_MARKERS) or len(text) > 5000:
+            continue
+        if _is_enqueue_cmd(text):
+            return i
+    return -1
+
+
+def _enqueued_after(msgs, start):
+    """Был ли ПОСЛЕ индекса start вызов TodoWrite с открытым пунктом.
+
+    Дыра 01.08.2026: хук держал окно из шести сообщений и требовал открытую
+    задачу бесконечно — даже когда всё, что Boris велел занести, уже сделано.
+    Чтобы не встать, агент выдумывал задачи от себя, что прямо запрещено
+    правилом «в очередь попадает только сказанное Boris». Команда «в очередь»
+    считается выполненной один раз: занёс, отработал, закрыл.
+    """
+    for m in msgs[start + 1:]:
+        if m.get("type") != "assistant":
+            continue
+        for b in m.get("message", {}).get("content", []):
+            if (isinstance(b, dict) and b.get("type") == "tool_use"
+                    and b.get("name") == "TodoWrite"):
+                todos = (b.get("input", {}) or {}).get("todos", []) or []
+                if any(isinstance(t, dict)
+                       and t.get("status") in ("pending", "in_progress")
+                       for t in todos):
+                    return True
+    return False
+
+
 def main():
     try:
         payload = json.load(sys.stdin)
@@ -104,6 +145,9 @@ def main():
     boris = _recent_boris(msgs)
     if not any(_is_enqueue_cmd(t) for t in boris):
         sys.exit(0)  # команды «в очередь» не было (или это вопрос про очередь)
+    idx = _last_enqueue_index(msgs)
+    if idx >= 0 and _enqueued_after(msgs, idx):
+        sys.exit(0)  # задача по команде уже была занесена и отработана
     todos = _last_todos(msgs)
     open_items = [t for t in (todos or [])
                   if isinstance(t, dict) and t.get("status") in ("pending", "in_progress")]
