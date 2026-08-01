@@ -35,6 +35,15 @@ const supportBudgets = [
 
 const supportType = "Поддержка существующего проекта";
 
+const sources = [
+  "Google или другой поиск",
+  "ИИ-ассистент (ChatGPT, Claude и т.д.)",
+  "Telegram",
+  "Рекомендация",
+  "Соцсети",
+  "Другое",
+];
+
 export function FinalCTA() {
   const [state, setState] = useState<"idle" | "sending" | "sent" | "error">(
     "idle",
@@ -126,6 +135,7 @@ export function FinalCTA() {
               name="budget"
               options={budgetOptions}
             />
+            <SelectField label="Как вы о нас узнали" name="source" options={sources} />
 
             <div className="flex flex-col gap-2">
               <label htmlFor="field-message" className="text-sm text-muted">

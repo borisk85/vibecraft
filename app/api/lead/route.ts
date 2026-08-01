@@ -25,6 +25,7 @@ export async function POST(req: Request) {
     const contact = String(body.contact ?? "").slice(0, 200);
     const type = String(body.type ?? "").slice(0, 200);
     const budget = String(body.budget ?? "").slice(0, 200);
+    const source = String(body.source ?? "").slice(0, 200);
     const message = String(body.message ?? "").trim().slice(0, 2000);
 
     if (!name || !contact || !message) {
@@ -52,6 +53,7 @@ export async function POST(req: Request) {
       `<b>Контакт:</b> ${escapeHtml(contact)}`,
       type ? `<b>Тип:</b> ${escapeHtml(type)}` : null,
       budget ? `<b>Бюджет:</b> ${escapeHtml(budget)}` : null,
+      source ? `<b>Узнали от:</b> ${escapeHtml(source)}` : null,
       message ? `\n<b>Задача:</b>\n${escapeHtml(message)}` : null,
     ];
 
