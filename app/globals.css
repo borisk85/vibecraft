@@ -281,8 +281,12 @@ button[aria-haspopup="listbox"]:focus-visible {
   font-weight: 500;
   white-space: nowrap;
 }
+/* Цена в тексте статьи отличается от абзаца ТОЛЬКО цветом: шрифт и кегль общие.
+   Раньше сюда добавлялись моноширинный шрифт и кегль 0.9em, и каждая сумма
+   выбивалась из строки — абзац с несколькими ценами читался как гирлянда. (06.08) */
 .blog-content .stat-price {
   color: var(--color-success);
+  white-space: nowrap;
 }
 .blog-content .brand {
   background: rgb(255 255 255 / 0.05);

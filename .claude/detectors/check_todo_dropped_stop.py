@@ -16,7 +16,16 @@ import sys
 from pathlib import Path
 
 STATE = Path(__file__).with_name(".todo_drop_rounds")
-MAX_ROUNDS = 3
+# Один блок на ход. Раньше стояло 3, и хук на переформулированной задаче срабатывал
+# трижды подряд: каждый раз шел новый TodoWrite, а вместе с ним очередь печаталась
+# в чат. Boris видел ровно этот дубль. (06.08)
+MAX_ROUNDS = 1
+# Порог «задача на месте в текущем списке». Был 0.45 — этого хватало, чтобы тот же
+# пункт, пересказанный другими словами («Билд и пуш» → «Перепроверить на проде»),
+# посчитался выкинутым. Реально выкинутая задача не совпадает с текущим списком
+# почти ничем, поэтому 0.3 ловит ее так же, а ложных срабатываний не дает. (06.08)
+PRESENT_THRESHOLD = 0.3
+CLOSED_THRESHOLD = 0.45
 
 
 def _rounds() -> int:
@@ -109,9 +118,9 @@ def main():
 
     dropped = []
     for text, sig in open_items.items():
-        if any(_jaccard(sig, c) >= 0.55 for c in closed):
+        if any(_jaccard(sig, c) >= CLOSED_THRESHOLD for c in closed):
             continue  # задача была честно закрыта
-        if any(_jaccard(sig, l) >= 0.45 for l in last_sigs):
+        if any(_jaccard(sig, l) >= PRESENT_THRESHOLD for l in last_sigs):
             continue  # задача на месте в текущем списке
         dropped.append(text[:70])
 

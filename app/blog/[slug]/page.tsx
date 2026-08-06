@@ -63,57 +63,32 @@ function slugifyHeading(text: string): string {
 // код и шапку таблицы — у них свои стили. Сроки не подсвечиваем — Boris отклонил.
 // Работает автоматически для любой будущей статьи.
 //
-// Гирлянда лечится двумя правилами (06.08):
-// 1. Диапазон подсвечивается ЦЕЛИКОМ («500 000–2 000 000 ₸» одним куском). Раньше
-//    зеленела только вторая половина суммы, первая оставалась обычной, и внутри
-//    одной ячейки выходил разнобой.
-// 2. Правило «все или ничего» на блок: в абзаце или ячейке больше двух сумм —
-//    не подсвечивается ни одна. Акцент имеет смысл на одной-двух цифрах; там, где
-//    идет перечень цен, зеленый моно превращает текст в елку, а красить половину
-//    сумм в блоке значит оставить читателя без понимания, почему одна цифра
-//    выделена, а соседняя нет.
+// Правило простое и без исключений: подсвечивается КАЖДАЯ сумма в тексте статьи,
+// и подсвечивается целиком. Диапазон «500 000–2 000 000 ₸» идет одним куском —
+// раньше знак ₸ стоял только в конце, поэтому первая половина оставалась белой,
+// вторая зеленела, и в одной ячейке выходил разнобой.
+//
+// Елку давало не количество сумм, а стиль: цена отличалась от текста сразу тремя
+// параметрами (цвет, моноширинный шрифт, кегль 0.9em). Восемь таких вставок в
+// абзаце рвали строку. Теперь у цены отличается только цвет, шрифт и размер общие
+// с абзацем, поэтому подсвечены все суммы и текст читается ровно. (06.08)
 const PRICE_RE =
   /((?:от |до )?\d{1,3}(?: \d{3})+(?:\s?[–—-]\s?\d{1,3}(?: \d{3})+)? ₸|\$\d+(?:[–—-]\d+)?(?:\s?\/\s?мес)?)/g;
-const PRICE_PER_BLOCK = 2;
+// Список ведется вручную, и это его слабое место: компания, которой здесь нет, стоит
+// в статье голым текстом рядом с чипом соседней. Именно так вышло с Rexlama, Astrix,
+// WebTop и A-LUX. Правило простое: имя любой сторонней компании или сервиса, которое
+// появилось в новой статье, дописывается сюда в тот же день, иначе статья уходит на
+// прод с разнобоем. Длинные варианты идут раньше коротких («Google Drive» до «Google»,
+// «Cin7 Core» до «Cin7»), иначе сработает короткий и обрежет имя. (06.08)
 const BRAND_RE =
-  /(YCLIENTS|DIKIDI|Fresha|DINGG|Zoho Inventory|inFlow Inventory|Cin7 Core|Cin7|ChatGPT|Claude Code|Claude|Gemini|Copilot|WhatsApp|Telegram|Instagram|Kaspi Gold|Kaspi|n8n|Make)(?![a-zA-Z])/g;
+  /(YCLIENTS|DIKIDI|Fresha|DINGG|Zoho Inventory|Zoho|inFlow Inventory|Cin7 Core|Cin7|ChatGPT|Claude Code|Claude|Google Drive|Google|Gemini|Copilot|WhatsApp|Telegram|Instagram|Kaspi Gold|Kaspi|n8n|Make|Rexlama|Astrix|WebTop|A-LUX|FAVOR-IT|ARIDA|OptimalCourse|Webkassa|NCALayer|Tilda|Wix|Shopify|Amazon|Anthropic|Microsoft|Gmail|Excel|PowerPoint)(?![a-zA-Z])/g;
 
 function accentuate(html: string): string {
   const skipTags = new Set(["a", "h2", "h3", "code", "thead"]);
-  const blockTags = new Set(["p", "li", "td", "th"]);
-  const parts = html.split(/(<[^>]+>)/g);
-
-  // Первый проход: считаем суммы в каждом блоке, чтобы решить, красить его или нет.
-  const blockOfPart: number[] = [];
-  const pricesPerBlock: number[] = [];
   let skipDepth = 0;
-  let block = -1;
-  parts.forEach((part, i) => {
-    if (part.startsWith("<")) {
-      const m = part.match(/^<(\/?)([a-zA-Z0-9]+)/);
-      if (m && skipTags.has(m[2].toLowerCase())) {
-        if (m[1] === "/") skipDepth = Math.max(0, skipDepth - 1);
-        else skipDepth += 1;
-      }
-      if (m && blockTags.has(m[2].toLowerCase()) && m[1] !== "/") {
-        block = pricesPerBlock.length;
-        pricesPerBlock.push(0);
-      }
-      blockOfPart[i] = -1;
-      return;
-    }
-    if (skipDepth > 0 || !part.trim() || block < 0) {
-      blockOfPart[i] = -1;
-      return;
-    }
-    blockOfPart[i] = block;
-    pricesPerBlock[block] += (part.match(PRICE_RE) || []).length;
-  });
-
-  // Второй проход: подсвечиваем только в блоках, где сумм не больше лимита.
-  skipDepth = 0;
-  return parts
-    .map((part, i) => {
+  return html
+    .split(/(<[^>]+>)/g)
+    .map((part) => {
       if (part.startsWith("<")) {
         const m = part.match(/^<(\/?)([a-zA-Z0-9]+)/);
         if (m && skipTags.has(m[2].toLowerCase())) {
@@ -123,12 +98,9 @@ function accentuate(html: string): string {
         return part;
       }
       if (skipDepth > 0 || !part.trim()) return part;
-      const b = blockOfPart[i];
-      const paint = b >= 0 && pricesPerBlock[b] <= PRICE_PER_BLOCK;
-      const withPrices = paint
-        ? part.replace(PRICE_RE, '<span class="stat stat-price">$1</span>')
-        : part;
-      return withPrices.replace(BRAND_RE, '<span class="brand">$1</span>');
+      return part
+        .replace(PRICE_RE, '<span class="stat-price">$1</span>')
+        .replace(BRAND_RE, '<span class="brand">$1</span>');
     })
     .join("");
 }
