@@ -62,14 +62,24 @@ function slugifyHeading(text: string): string {
 // (нейтральный чип). Идем по текстовым узлам HTML и не трогаем ссылки, заголовки,
 // код и шапку таблицы — у них свои стили. Сроки не подсвечиваем — Boris отклонил.
 // Работает автоматически для любой будущей статьи.
+//
+// Гирлянда лечится двумя ограничениями (06.08):
+// 1. Диапазон подсвечивается ЦЕЛИКОМ («500 000–2 000 000 ₸» одним куском). Раньше
+//    зеленела только вторая половина суммы, первая оставалась обычной, и внутри
+//    одной ячейки выходил разнобой.
+// 2. Не больше двух подсвеченных сумм на абзац или ячейку. Где цен много подряд,
+//    зеленый моно перестает быть акцентом и превращает текст в елку.
 const PRICE_RE =
-  /((?:от |до )?\d{1,3}(?: \d{3})+ ₸|\$\d+(?:[–—-]\d+)?(?:\s?\/\s?мес)?)/g;
+  /((?:от |до )?\d{1,3}(?: \d{3})+(?:\s?[–—-]\s?\d{1,3}(?: \d{3})+)? ₸|\$\d+(?:[–—-]\d+)?(?:\s?\/\s?мес)?)/g;
+const PRICE_PER_BLOCK = 2;
 const BRAND_RE =
   /(YCLIENTS|DIKIDI|Fresha|DINGG|Zoho Inventory|inFlow Inventory|Cin7 Core|Cin7|ChatGPT|Claude Code|Claude|Gemini|Copilot|WhatsApp|Telegram|Instagram|Kaspi Gold|Kaspi|n8n|Make)(?![a-zA-Z])/g;
 
 function accentuate(html: string): string {
   const skipTags = new Set(["a", "h2", "h3", "code", "thead"]);
+  const blockTags = new Set(["p", "li", "td", "th"]);
   let skipDepth = 0;
+  let pricesInBlock = 0;
   return html
     .split(/(<[^>]+>)/g)
     .map((part) => {
@@ -79,11 +89,18 @@ function accentuate(html: string): string {
           if (m[1] === "/") skipDepth = Math.max(0, skipDepth - 1);
           else skipDepth += 1;
         }
+        // Счетчик цен живет в пределах одного абзаца или ячейки таблицы.
+        if (m && blockTags.has(m[2].toLowerCase()) && m[1] !== "/") pricesInBlock = 0;
         return part;
       }
       if (skipDepth > 0 || !part.trim()) return part;
       return part
-        .replace(PRICE_RE, '<span class="stat stat-price">$1</span>')
+        .replace(PRICE_RE, (match: string) => {
+          pricesInBlock += 1;
+          return pricesInBlock > PRICE_PER_BLOCK
+            ? match
+            : `<span class="stat stat-price">${match}</span>`;
+        })
         .replace(BRAND_RE, '<span class="brand">$1</span>');
     })
     .join("");
