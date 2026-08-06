@@ -24,4 +24,7 @@ export const BLOG_IMAGE_SIZES: Record<string, [number, number]> = {
   "/blog/kabinet-nalogoplatelshchika-vhod.webp": [1200, 805],
   "/blog/kaspi-guide-api-instrukciya.webp": [744, 454],
   "/blog/favor-it-modul-1c-kaspi.webp": [1200, 740],
+  "/blog/vibecraft-sajt-chto-vhodit.webp": [1100, 662],
+  "/blog/seo-raboty-po-mesyacam.webp": [1100, 878],
+  "/blog/seo-tarify-almaty.webp": [1000, 441],
 };
