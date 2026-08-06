@@ -63,12 +63,15 @@ function slugifyHeading(text: string): string {
 // код и шапку таблицы — у них свои стили. Сроки не подсвечиваем — Boris отклонил.
 // Работает автоматически для любой будущей статьи.
 //
-// Гирлянда лечится двумя ограничениями (06.08):
+// Гирлянда лечится двумя правилами (06.08):
 // 1. Диапазон подсвечивается ЦЕЛИКОМ («500 000–2 000 000 ₸» одним куском). Раньше
 //    зеленела только вторая половина суммы, первая оставалась обычной, и внутри
 //    одной ячейки выходил разнобой.
-// 2. Не больше двух подсвеченных сумм на абзац или ячейку. Где цен много подряд,
-//    зеленый моно перестает быть акцентом и превращает текст в елку.
+// 2. Правило «все или ничего» на блок: в абзаце или ячейке больше двух сумм —
+//    не подсвечивается ни одна. Акцент имеет смысл на одной-двух цифрах; там, где
+//    идет перечень цен, зеленый моно превращает текст в елку, а красить половину
+//    сумм в блоке значит оставить читателя без понимания, почему одна цифра
+//    выделена, а соседняя нет.
 const PRICE_RE =
   /((?:от |до )?\d{1,3}(?: \d{3})+(?:\s?[–—-]\s?\d{1,3}(?: \d{3})+)? ₸|\$\d+(?:[–—-]\d+)?(?:\s?\/\s?мес)?)/g;
 const PRICE_PER_BLOCK = 2;
@@ -78,30 +81,54 @@ const BRAND_RE =
 function accentuate(html: string): string {
   const skipTags = new Set(["a", "h2", "h3", "code", "thead"]);
   const blockTags = new Set(["p", "li", "td", "th"]);
+  const parts = html.split(/(<[^>]+>)/g);
+
+  // Первый проход: считаем суммы в каждом блоке, чтобы решить, красить его или нет.
+  const blockOfPart: number[] = [];
+  const pricesPerBlock: number[] = [];
   let skipDepth = 0;
-  let pricesInBlock = 0;
-  return html
-    .split(/(<[^>]+>)/g)
-    .map((part) => {
+  let block = -1;
+  parts.forEach((part, i) => {
+    if (part.startsWith("<")) {
+      const m = part.match(/^<(\/?)([a-zA-Z0-9]+)/);
+      if (m && skipTags.has(m[2].toLowerCase())) {
+        if (m[1] === "/") skipDepth = Math.max(0, skipDepth - 1);
+        else skipDepth += 1;
+      }
+      if (m && blockTags.has(m[2].toLowerCase()) && m[1] !== "/") {
+        block = pricesPerBlock.length;
+        pricesPerBlock.push(0);
+      }
+      blockOfPart[i] = -1;
+      return;
+    }
+    if (skipDepth > 0 || !part.trim() || block < 0) {
+      blockOfPart[i] = -1;
+      return;
+    }
+    blockOfPart[i] = block;
+    pricesPerBlock[block] += (part.match(PRICE_RE) || []).length;
+  });
+
+  // Второй проход: подсвечиваем только в блоках, где сумм не больше лимита.
+  skipDepth = 0;
+  return parts
+    .map((part, i) => {
       if (part.startsWith("<")) {
         const m = part.match(/^<(\/?)([a-zA-Z0-9]+)/);
         if (m && skipTags.has(m[2].toLowerCase())) {
           if (m[1] === "/") skipDepth = Math.max(0, skipDepth - 1);
           else skipDepth += 1;
         }
-        // Счетчик цен живет в пределах одного абзаца или ячейки таблицы.
-        if (m && blockTags.has(m[2].toLowerCase()) && m[1] !== "/") pricesInBlock = 0;
         return part;
       }
       if (skipDepth > 0 || !part.trim()) return part;
-      return part
-        .replace(PRICE_RE, (match: string) => {
-          pricesInBlock += 1;
-          return pricesInBlock > PRICE_PER_BLOCK
-            ? match
-            : `<span class="stat stat-price">${match}</span>`;
-        })
-        .replace(BRAND_RE, '<span class="brand">$1</span>');
+      const b = blockOfPart[i];
+      const paint = b >= 0 && pricesPerBlock[b] <= PRICE_PER_BLOCK;
+      const withPrices = paint
+        ? part.replace(PRICE_RE, '<span class="stat stat-price">$1</span>')
+        : part;
+      return withPrices.replace(BRAND_RE, '<span class="brand">$1</span>');
     })
     .join("");
 }
