@@ -6,6 +6,9 @@
  * При добавлении нового скриншота — дописать сюда его ширину и высоту.
  */
 export const BLOG_IMAGE_SIZES: Record<string, [number, number]> = {
+  "/blog/kabinet-nalogoplatelshchika-otchetnost.webp": [1200, 567],
+  "/blog/nuc-poluchenie-klyucha-ecp.webp": [1200, 240],
+  "/blog/vibecraft-uslugi-avtomatizacii.webp": [1200, 450],
   "/blog/yclients-onlajn-zapis.webp": [1165, 655],
   "/blog/dikidi-marketplace-zapisi.webp": [980, 675],
   "/blog/chatgpt-razbor-dogovora.webp": [1200, 653],
