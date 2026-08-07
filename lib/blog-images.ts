@@ -10,6 +10,7 @@ export const BLOG_IMAGE_SIZES: Record<string, [number, number]> = {
   "/blog/1cbit-obmen-sostav-uslugi.webp": [1100, 454],
   "/blog/make-gotovye-shablony-svyazok.webp": [1100, 462],
   "/blog/vibecraft-razdely-uslug.webp": [1150, 491],
+  "/blog/rexlama-ceny-tipy-sajtov.webp": [1150, 617],
   "/blog/nuc-poluchenie-klyucha-ecp.webp": [1200, 240],
   "/blog/vibecraft-uslugi-avtomatizacii.webp": [1200, 450],
   "/blog/yclients-onlajn-zapis.webp": [1165, 655],
