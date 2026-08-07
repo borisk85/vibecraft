@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { Container } from "@/components/shared/Container";
+import { SectionHeading } from "@/components/shared/SectionHeading";
 import { MotionSection } from "@/components/shared/MotionSection";
 import { siteConfig } from "@/lib/metadata";
 import { cn } from "@/lib/utils";
@@ -90,22 +91,14 @@ export function FinalCTA() {
       className="relative overflow-hidden py-24 md:py-28"
     >
       <Container>
-        <div className="mx-auto max-w-3xl rounded-3xl border border-border bg-card/60 p-8 backdrop-blur md:p-12">
-          <div className="flex flex-col items-center gap-4 text-center">
-            <span className="font-mono text-xs uppercase tracking-[0.2em] text-accent-text">
-              Заявка
-            </span>
-            <h2 className="text-balance text-3xl font-semibold tracking-tight md:text-5xl">
-              Опишите задачу, отвечу за 1–2 часа
-            </h2>
-            <p className="max-w-xl text-muted md:text-lg">
-              Просмотрю ваш запрос и свяжусь с вами для уточнения деталей.
-              Предложу план, сроки и финальную стоимость для вашей задачи.
-              Без долгих согласований и бюрократии.
-            </p>
-          </div>
+        <SectionHeading
+          eyebrow="Заявка"
+          title="Опишите задачу, отвечу за 1–2 часа"
+          description="Просмотрю ваш запрос и свяжусь с вами для уточнения деталей."
+        />
 
-          <form onSubmit={handleSubmit} className="mt-10 flex flex-col gap-5">
+        <div className="mx-auto mt-16 max-w-3xl rounded-3xl border border-border bg-card/60 p-8 backdrop-blur md:p-12">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               <Field
                 label="Имя"
