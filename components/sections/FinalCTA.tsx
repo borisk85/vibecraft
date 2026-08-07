@@ -49,27 +49,50 @@ export function FinalCTA() {
     "idle",
   );
   const [type, setType] = useState("");
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const isSupport = type === supportType;
   const budgetOptions = isSupport ? supportBudgets : budgets;
 
+  // Свои подсказки вместо браузерных: стандартный пузырь приходит на языке
+  // браузера («Please fill out this field»), выглядит чужеродно на темной теме
+  // и исчезает по клику. Поэтому форма с noValidate, а незаполненное поле
+  // подсвечивается рамкой и подписью под ним.
+  const requiredFields: Record<string, string> = {
+    name: "Напишите, как к вам обращаться",
+    contact: "Оставьте Telegram или email, иначе не смогу ответить",
+    message: "Опишите задачу хотя бы в двух словах",
+  };
+
+  const clearError = (field: string) =>
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setState("sending");
 
     const form = e.currentTarget;
     const formData = new FormData(form);
     const data = Object.fromEntries(formData.entries());
 
-    // required не ловит строку из одних пробелов — проверяем сами
-    const messageField = form.elements.namedItem(
-      "message",
-    ) as HTMLTextAreaElement | null;
-    if (!String(data.message ?? "").trim()) {
-      messageField?.setCustomValidity("Опишите задачу хотя бы в двух словах");
-      messageField?.reportValidity();
-      setState("idle");
+    const found: Record<string, string> = {};
+    for (const [field, text] of Object.entries(requiredFields)) {
+      if (!String(data[field] ?? "").trim()) found[field] = text;
+    }
+    if (Object.keys(found).length) {
+      setErrors(found);
+      const first = form.elements.namedItem(
+        Object.keys(found)[0],
+      ) as HTMLElement | null;
+      first?.focus();
       return;
     }
+
+    setErrors({});
+    setState("sending");
 
     try {
       const res = await fetch("/api/lead", {
@@ -98,19 +121,23 @@ export function FinalCTA() {
         />
 
         <div className="mx-auto mt-16 max-w-3xl rounded-3xl border border-border bg-card/60 p-8 backdrop-blur md:p-12">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+          <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
               <Field
                 label="Имя"
                 name="name"
                 placeholder="Как к вам обращаться"
                 required
+                error={errors.name}
+                onInput={() => clearError("name")}
               />
               <Field
                 label="Telegram или email"
                 name="contact"
                 placeholder="@username или mail@example.kz"
                 required
+                error={errors.contact}
+                onInput={() => clearError("contact")}
               />
             </div>
 
@@ -138,11 +165,18 @@ export function FinalCTA() {
                 id="field-message"
                 name="message"
                 rows={4}
-                required
-                onInput={(e) => e.currentTarget.setCustomValidity("")}
+                onInput={() => clearError("message")}
                 placeholder="Опишите задачу в нескольких предложениях"
-                className="resize-none rounded-lg border border-border bg-background px-4 py-3 text-foreground placeholder:text-subtle focus:placeholder:text-transparent transition-colors duration-150 focus:border-accent focus:outline-none focus-visible:outline-none"
+                className={cn(
+                  "resize-none rounded-lg border bg-background px-4 py-3 text-foreground placeholder:text-subtle focus:placeholder:text-transparent transition-colors duration-150 focus:outline-none focus-visible:outline-none",
+                  errors.message
+                    ? "border-error focus:border-error"
+                    : "border-border focus:border-accent",
+                )}
               />
+              {errors.message ? (
+                <p className="text-sm text-error">{errors.message}</p>
+              ) : null}
             </div>
 
             <motion.button
@@ -201,11 +235,15 @@ function Field({
   name,
   placeholder,
   required,
+  error,
+  onInput,
 }: {
   label: string;
   name: string;
   placeholder?: string;
   required?: boolean;
+  error?: string;
+  onInput?: () => void;
 }) {
   const id = `field-${name}`;
   return (
@@ -218,10 +256,14 @@ function Field({
         id={id}
         type="text"
         name={name}
-        required={required}
         placeholder={placeholder}
-        className="h-11 rounded-lg border border-border bg-background px-4 text-foreground placeholder:text-subtle focus:placeholder:text-transparent transition-colors duration-150 focus:border-accent focus:outline-none focus-visible:outline-none"
+        onInput={onInput}
+        className={cn(
+          "h-11 rounded-lg border bg-background px-4 text-foreground placeholder:text-subtle focus:placeholder:text-transparent transition-colors duration-150 focus:outline-none focus-visible:outline-none",
+          error ? "border-error focus:border-error" : "border-border focus:border-accent",
+        )}
       />
+      {error ? <p className="text-sm text-error">{error}</p> : null}
     </div>
   );
 }
