@@ -242,7 +242,7 @@ async function sendLetter(draft: Draft) {
 export async function POST(req: Request) {
   const secret = process.env.TELEGRAM_WEBHOOK_SECRET;
   if (secret && req.headers.get("x-telegram-bot-api-secret-token") !== secret) {
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, stage: "bad-secret" });
   }
 
   const ownerChatId = process.env.TELEGRAM_CHAT_ID ?? "";
@@ -302,11 +302,11 @@ export async function POST(req: Request) {
     }
 
     const message = update?.message;
-    if (!message?.text) return NextResponse.json({ ok: true });
+    if (!message?.text) return NextResponse.json({ ok: true, stage: "no-text" });
 
     chatId = message.chat?.id ?? ownerChatId;
     if (String(chatId) !== String(ownerChatId)) {
-      return NextResponse.json({ ok: true });
+      return NextResponse.json({ ok: true, stage: "foreign-chat" });
     }
 
     const hint = String(message.text).trim();
@@ -316,7 +316,7 @@ export async function POST(req: Request) {
         chatId,
         "Сделай reply на сообщение с заявкой и напиши, что ответить клиенту.",
       );
-      return NextResponse.json({ ok: true });
+      return NextResponse.json({ ok: true, stage: "no-reply" });
     }
 
     // Reply приходит либо на заявку, либо на уже готовый черновик: во втором
@@ -332,12 +332,12 @@ export async function POST(req: Request) {
         chatId,
         "В заявке нет email — письмом не ответить. Пиши клиенту в Telegram.",
       );
-      return NextResponse.json({ ok: true });
+      return NextResponse.json({ ok: true, stage: "no-email" });
     }
 
     if (!process.env.ANTHROPIC_API_KEY || !process.env.RESEND_API_KEY) {
       await sendMessage(chatId, "Не задан ANTHROPIC_API_KEY или RESEND_API_KEY.");
-      return NextResponse.json({ ok: true });
+      return NextResponse.json({ ok: true, stage: "no-keys" });
     }
 
     if (!redis) {
@@ -345,7 +345,7 @@ export async function POST(req: Request) {
         chatId,
         "Не настроено хранилище черновиков (KV_REST_API_URL), кнопка отправки работать не будет.",
       );
-      return NextResponse.json({ ok: true });
+      return NextResponse.json({ ok: true, stage: "no-redis" });
     }
 
     const built = await buildDraft(original, hint, previous ?? undefined);
