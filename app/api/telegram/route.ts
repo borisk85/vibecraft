@@ -144,7 +144,9 @@ function keyboard() {
 }
 
 function extractTelegramHandle(text: string): string {
-  const match = text.match(/@([A-Za-z0-9_]{4,32})/);
+  // @username ищем только там, где перед ним нет символов адреса почты,
+  // иначе из bkomarov85@gmail.com выдиралось «@gmail».
+  const match = text.match(/(?:^|[\s(:,])@([A-Za-z0-9_]{5,32})\b/);
   return match ? match[1] : "";
 }
 
