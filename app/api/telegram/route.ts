@@ -423,7 +423,7 @@ export async function POST(req: Request) {
     await sendMessage(
       chatId,
       draftMessage(draft),
-      keyboard(ready),
+      keyboard(),
       repliedTo.message_id,
     );
 
