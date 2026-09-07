@@ -15,6 +15,7 @@ import { siteConfig } from "@/lib/metadata";
 const LOGO_URL = `${siteConfig.url}/icon`;
 
 const SOCIALS = [
+  { label: "vibecraft.kz", href: siteConfig.url },
   { label: "Telegram", href: siteConfig.contacts.telegram },
   { label: "LinkedIn", href: siteConfig.contacts.linkedin },
   { label: "Instagram", href: siteConfig.contacts.instagram },
@@ -95,17 +96,13 @@ export function renderEmail({
             <tr><td style="border-top:1px solid #e5e5e5;padding-top:20px;">
               <div style="font-size:15px;font-weight:700;color:#0a0a0a;">Борис Комаров</div>
               <div style="font-size:13px;color:#5a5a5a;margin-top:2px;">Основатель Vibecraft</div>
-              <div style="font-size:13px;color:#5a5a5a;margin-top:8px;">
-                <a href="${siteConfig.url}" style="color:#8B5CF6;text-decoration:none;">vibecraft.kz</a>
-              </div>
             </td></tr>
           </table>
 
           <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
             <tr><td style="border-top:1px solid #e5e5e5;padding-top:16px;font-size:11px;color:#5a5a5a;line-height:1.6;">
               <div style="margin-bottom:6px;">${socialLinks}</div>
-              <div>Вы получили это письмо, потому что оставили заявку или написали на сайте vibecraft.kz.</div>
-              <div style="margin-top:4px;">Отписаться от писем: <a href="mailto:${siteConfig.contacts.email}?subject=%D0%9E%D1%82%D0%BF%D0%B8%D1%81%D0%B0%D1%82%D1%8C%D1%81%D1%8F" style="color:#5a5a5a;text-decoration:underline;">напишите нам одно слово</a>.</div>
+              <div>Это ответ на вашу заявку с сайта vibecraft.kz.</div>
             </td></tr>
           </table>
 

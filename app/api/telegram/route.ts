@@ -145,7 +145,13 @@ function keyboard(handle: string) {
     });
   }
   return {
-    inline_keyboard: [row, [{ text: "Пока не слать", callback_data: "hold" }]],
+    inline_keyboard: [
+      row,
+      [
+        { text: "Редактировать", callback_data: "edit" },
+        { text: "Пока не слать", callback_data: "hold" },
+      ],
+    ],
   };
 }
 
@@ -237,10 +243,6 @@ async function sendLetter(draft: Draft) {
       preheader: draft.body.slice(0, 120),
     }),
     text: renderEmailText(draft.title, draft.body),
-    headers: {
-      "List-Unsubscribe": "<mailto:hello@vibecraft.kz?subject=unsubscribe>",
-      "List-Unsubscribe-Post": "List-Unsubscribe=One-Click",
-    },
   });
   if (sent.error) throw new Error(sent.error.message);
   return sent.data?.id ?? "";
@@ -275,6 +277,14 @@ export async function POST(req: Request) {
         message_id: callback.message.message_id,
         reply_markup: { inline_keyboard: [] },
       });
+
+      if (action === "edit") {
+        await sendMessage(
+          chatId,
+          "Сделай reply на черновик и напиши, что поменять. Пришлю новый вариант с кнопками.",
+        );
+        return NextResponse.json({ ok: true, stage: "edit" });
+      }
 
       if (action === "hold") {
         await sendMessage(chatId, "Письмо не отправлено. Черновик остался в чате, reply на него внесет правки.");
