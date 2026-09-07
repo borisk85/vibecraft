@@ -144,13 +144,16 @@ function extractTelegramHandle(text: string): string {
 }
 
 /** Черновик читается обратно из текста сообщения: внешнее хранилище не нужно. */
-function parseDraftMessage(text: string): { to: string; handle: string; subject: string; body: string } | null {
+function parseDraftMessage(text: string): { to: string; handle: string; subject: string; body: string; original: string } | null {
   const to = text.match(/Кому:\s*(\S+)/);
   const subject = text.match(/Тема:\s*(.+)/);
   if (!to || !subject) return null;
   const lines = text.split("\n");
   const start = lines.findIndex((l) => l.startsWith("Тема:")) + 1;
   const end = lines.findIndex((l) => l.startsWith("Правки:"));
+  const leadAt = lines.findIndex((l) => l.startsWith("Заявка:"));
+  const original =
+    leadAt === -1 ? "" : lines.slice(leadAt).join("\n").replace("Заявка:", "").trim();
   const body = lines
     .slice(start, end === -1 ? undefined : end)
     .join("\n")
@@ -162,6 +165,7 @@ function parseDraftMessage(text: string): { to: string; handle: string; subject:
     handle: handle ? handle[1].trim() : "",
     subject: subject[1].trim(),
     body,
+    original,
   };
 }
 
@@ -175,6 +179,8 @@ function draftMessage(draft: Draft): string {
     escapeHtml(draft.body),
     "",
     "<i>Правки: reply на это сообщение с тем, что изменить.</i>",
+    "",
+    `<blockquote expandable>Заявка: ${escapeHtml(draft.original)}</blockquote>`,
   ].join("\n");
 }
 
@@ -287,7 +293,7 @@ export async function POST(req: Request) {
           subject: parsed.subject,
           title: parsed.subject,
           body: parsed.body,
-          original: "",
+          original: parsed.original,
         });
         const lines = [
           `Письмо отправлено на ${escapeHtml(parsed.to)} с hello@vibecraft.kz`,
@@ -328,8 +334,8 @@ export async function POST(req: Request) {
     // своя ссылка на заявку, поэтому исходный текст всегда доступен без базы.
     const isDraft = repliedTo.text.startsWith("Черновик письма");
     const previousDraft = isDraft ? parseDraftMessage(repliedTo.text) : null;
-    const original = isDraft
-      ? String(repliedTo.reply_to_message?.text ?? "").trim()
+    const original = previousDraft
+      ? previousDraft.original
       : String(repliedTo.text).trim();
 
     const to = previousDraft ? previousDraft.to : extractEmail(original);
