@@ -16,6 +16,7 @@ import {
   looksLikeGarbage,
 } from "@/lib/calc-guard";
 import { stripUpsells } from "@/lib/strip-upsells";
+import { renderEmail } from "@/lib/email-layout";
 import {
   parseSmeta,
   isSupportService,
@@ -126,20 +127,8 @@ async function sendEmailToClient(
     smetaHtml = `<pre style="font-family:-apple-system,Segoe UI,Roboto,sans-serif;font-size:13px;line-height:1.6;white-space:pre-wrap;margin:0 0 24px 0;color:#0a0a0a;">${escapeHtml(clientSmeta)}</pre>`;
   }
 
-  const html = `<!DOCTYPE html>
-<html lang="ru"><head><meta charset="utf-8"></head>
-<body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,Segoe UI,Roboto,sans-serif;color:#0a0a0a;">
-  <div style="max-width:600px;margin:0 auto;background:#ffffff;padding:32px 32px 40px 32px;">
-    <div style="display:flex;align-items:center;gap:10px;border-bottom:1px solid #e5e5e5;padding-bottom:16px;margin-bottom:24px;">
-      <img src="https://vibecraft.kz/icon" alt="Vibecraft" width="32" height="32" style="display:block;border-radius:6px;" />
-      <div>
-        <div style="font-size:20px;font-weight:700;letter-spacing:-0.4px;color:#0a0a0a;line-height:1;">vibecraft</div>
-        <div style="font-size:11px;color:#5a5a5a;margin-top:4px;">ИИ-разработка и автоматизации · Казахстан</div>
-      </div>
-    </div>
-
-    <h1 style="font-size:22px;font-weight:700;margin:0 0 8px 0;letter-spacing:-0.4px;">Ваша смета по проекту</h1>
-    <p style="font-size:13px;color:#5a5a5a;margin:0 0 24px 0;">Спасибо, что воспользовались калькулятором на сайте Vibecraft. Ниже — ориентировочный расчет стоимости вашей задачи.</p>
+  const bodyHtml = `
+    <p style="font-size:13px;color:#5a5a5a;margin:0 0 24px 0;">Спасибо, что воспользовались калькулятором на сайте Vibecraft. Ниже ориентировочный расчет стоимости вашей задачи.</p>
 
     <div style="font-size:9px;font-weight:700;color:#8B5CF6;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Описание задачи</div>
     <div style="background:#fafafa;border-left:3px solid #8B5CF6;padding:12px 14px;margin-bottom:24px;font-size:13px;line-height:1.5;">${escapeHtml(description)}</div>
@@ -147,16 +136,15 @@ async function sendEmailToClient(
     <div style="font-size:9px;font-weight:700;color:#8B5CF6;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Расчет</div>
     ${smetaHtml}
 
-    <div style="background:#f5f0ff;padding:14px;border-radius:6px;font-size:13px;line-height:1.5;margin-bottom:24px;">
-      <strong>Готовы обсудить?</strong> Напишите мне в Telegram <a href="https://t.me/borisk85" style="color:#8B5CF6;text-decoration:none;font-weight:700;">@borisk85</a> — отвечу в течение 1-2 часов в рабочее время.
-    </div>
+    <div style="background:#f5f0ff;padding:14px;border-radius:6px;font-size:13px;line-height:1.5;">
+      <strong>Готовы обсудить?</strong> Напишите в Telegram <a href="https://t.me/borisk85" style="color:#8B5CF6;text-decoration:none;font-weight:700;">@borisk85</a> — отвечу в течение 1-2 часов в рабочее время.
+    </div>`;
 
-    <div style="border-top:1px solid #e5e5e5;padding-top:16px;font-size:11px;color:#5a5a5a;">
-      <div style="margin-bottom:8px;"><strong style="color:#0a0a0a;">Vibecraft</strong> — ИИ-разработка и автоматизации · Казахстан</div>
-      <div>Telegram: <a href="https://t.me/borisk85" style="color:#8B5CF6;text-decoration:none;">@borisk85</a> · Email: hello@vibecraft.kz · Сайт: <a href="https://vibecraft.kz" style="color:#8B5CF6;text-decoration:none;">vibecraft.kz</a></div>
-    </div>
-  </div>
-</body></html>`;
+  const html = renderEmail({
+    title: "Ваша смета по проекту",
+    bodyHtml,
+    preheader: description.slice(0, 120),
+  });
 
   let pdfBase64: string | null = null;
   try {

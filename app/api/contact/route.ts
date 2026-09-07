@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { Redis } from "@upstash/redis";
 import { Resend } from "resend";
+import { renderEmail } from "@/lib/email-layout";
 
 function escapeHtml(v: string) {
   return v.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -71,30 +72,17 @@ export async function POST(req: Request) {
         const subject = ticket
           ? `Ваше обращение получено — Vibecraft (#${ticket})`
           : "Ваше обращение получено — Vibecraft";
-        const html = `<div style="background:#ffffff;padding:40px 16px;font-family:'Inter',Arial,sans-serif">
-<table width="100%" cellpadding="0" cellspacing="0" border="0"><tr><td align="center">
-<table width="560" cellpadding="0" cellspacing="0" border="0" style="max-width:560px;width:100%;text-align:left">
-  <tr><td style="padding-bottom:12px">
-    <h1 style="margin:0;font-size:22px;font-weight:700;color:#111827;line-height:1.3">Ваше обращение получено</h1>
-  </td></tr>
-  <tr><td style="padding-bottom:20px">
-    <p style="margin:0;font-size:15px;color:#374151;line-height:1.65">Мы уже смотрим — обычно отвечаем в течение нескольких часов.</p>
-  </td></tr>
-  ${ticket ? `<tr><td style="padding-bottom:24px"><p style="margin:0;font-size:14px;color:#374151">Номер обращения: <strong style="color:#111827">#${ticket}</strong></p></td></tr>` : ""}
-  <tr><td style="padding-bottom:24px"><div style="height:1px;background:#E5E7EB"></div></td></tr>
-  <tr><td style="padding-bottom:6px">
-    <p style="margin:0;font-size:13px;font-weight:700;color:#111827">Ваше сообщение:</p>
-  </td></tr>
-  <tr><td style="padding-bottom:28px">
-    <p style="margin:0;font-size:14px;color:#6B7280;line-height:1.65;white-space:pre-wrap">${escapeHtml(message)}</p>
-  </td></tr>
-  <tr><td style="padding-bottom:20px"><div style="height:1px;background:#E5E7EB"></div></td></tr>
-  <tr><td>
-    <p style="margin:0;font-size:12px;color:#9CA3AF;line-height:1.65">Это письмо отправлено автоматически в ответ на ваше обращение с сайта vibecraft.kz.<br>Вопросы — <a href="mailto:hello@vibecraft.kz" style="color:#6B7280;text-decoration:none">hello@vibecraft.kz</a></p>
-  </td></tr>
-</table>
-</td></tr></table>
-</div>`;
+        const bodyHtml = `
+  <p style="margin:0 0 20px 0;font-size:15px;color:#374151;line-height:1.65">Мы уже смотрим, обычно отвечаем в течение нескольких часов.</p>
+  ${ticket ? `<p style="margin:0 0 24px 0;font-size:14px;color:#374151">Номер обращения: <strong style="color:#111827">#${ticket}</strong></p>` : ""}
+  <div style="font-size:9px;font-weight:700;color:#8B5CF6;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:6px;">Ваше сообщение</div>
+  <div style="background:#fafafa;border-left:3px solid #8B5CF6;padding:12px 14px;font-size:13px;line-height:1.5;white-space:pre-wrap;">${escapeHtml(message)}</div>`;
+
+        const html = renderEmail({
+          title: "Ваше обращение получено",
+          bodyHtml,
+          preheader: message.slice(0, 120),
+        });
         await resend.emails.send({
           from: "Vibecraft <noreply@vibecraft.kz>",
           to: email,
