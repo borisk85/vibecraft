@@ -247,9 +247,11 @@ export async function POST(req: Request) {
 
   const ownerChatId = process.env.TELEGRAM_CHAT_ID ?? "";
   let chatId: number | string = ownerChatId;
+  let step = "start";
 
   try {
     const update = await req.json();
+    step = "redis-init";
     const redis = getRedis();
 
     // Нажатие кнопки под черновиком.
@@ -321,6 +323,7 @@ export async function POST(req: Request) {
 
     // Reply приходит либо на заявку, либо на уже готовый черновик: во втором
     // случае берем ту же заявку и правим прошлый текст.
+    step = "redis-get";
     const previous = redis
       ? await redis.get<Draft>(`draft:${repliedTo.message_id}`)
       : null;
@@ -348,6 +351,7 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true, stage: "no-redis" });
     }
 
+    step = "claude";
     const built = await buildDraft(original, hint, previous ?? undefined);
     const draft: Draft = {
       to,
@@ -357,6 +361,7 @@ export async function POST(req: Request) {
       ...built,
     };
 
+    step = "telegram-send";
     const sentDraft = await sendMessage(
       chatId,
       draftMessage(draft),
@@ -389,6 +394,6 @@ export async function POST(req: Request) {
         `Не получилось собрать или отправить письмо: ${escapeHtml(reason)}`,
       );
     }
-    return NextResponse.json({ ok: true, error: reason });
+    return NextResponse.json({ ok: true, step, error: reason });
   }
 }
