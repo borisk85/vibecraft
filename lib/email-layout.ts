@@ -15,11 +15,10 @@ import { siteConfig } from "@/lib/metadata";
 const LOGO_URL = `${siteConfig.url}/icon`;
 
 const SOCIALS = [
-  { label: "Сайт", href: siteConfig.url },
-  { label: "Telegram", href: siteConfig.contacts.telegram },
-  { label: "LinkedIn", href: siteConfig.contacts.linkedin },
-  { label: "Instagram", href: siteConfig.contacts.instagram },
-  { label: "Facebook", href: siteConfig.contacts.facebook },
+  { name: "telegram", label: "Telegram", href: siteConfig.contacts.telegram },
+  { name: "linkedin", label: "LinkedIn", href: siteConfig.contacts.linkedin },
+  { name: "instagram", label: "Instagram", href: siteConfig.contacts.instagram },
+  { name: "facebook", label: "Facebook", href: siteConfig.contacts.facebook },
 ];
 
 export function escapeHtml(value: string): string {
@@ -60,10 +59,10 @@ export function renderEmail({
   bodyHtml: string;
   preheader?: string;
 }): string {
-  const socialLinks = SOCIALS.map(
+  const socialIcons = SOCIALS.map(
     (s) =>
-      `<a href="${s.href}" style="color:#5a5a5a;text-decoration:none;">${s.label}</a>`,
-  ).join(' <span style="color:#c4c4c4;">·</span> ');
+      `<td style="padding-right:14px;"><a href="${s.href}"><img src="${siteConfig.url}/email-icon/${s.name}" alt="${s.label}" width="20" height="20" style="display:block;border:0;" /></a></td>`,
+  ).join("");
 
   return `<!DOCTYPE html>
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
@@ -101,8 +100,8 @@ export function renderEmail({
 
           <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
             <tr><td style="border-top:1px solid #e5e5e5;padding-top:16px;font-size:11px;color:#5a5a5a;line-height:1.6;">
-              <div style="margin-bottom:6px;">Vibecraft в сети: ${socialLinks}</div>
-              <div>Это ответ на вашу заявку с сайта vibecraft.kz.</div>
+              <table cellpadding="0" cellspacing="0" border="0" style="margin-bottom:10px;"><tr>${socialIcons}</tr></table>
+              <div>Это ответ на вашу заявку с сайта <a href="${siteConfig.url}" style="color:#5a5a5a;">vibecraft.kz</a>.</div>
             </td></tr>
           </table>
 
