@@ -101,7 +101,7 @@ export function renderEmail({
 
           <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;">
             <tr><td style="border-top:1px solid #e5e5e5;padding-top:16px;font-size:11px;color:#5a5a5a;line-height:1.6;">
-              <div style="margin-bottom:6px;">${socialLinks}</div>
+              <div style="margin-bottom:6px;">Vibecraft в сети: ${socialLinks}</div>
               <div>Это ответ на вашу заявку с сайта vibecraft.kz.</div>
             </td></tr>
           </table>

@@ -132,24 +132,12 @@ function sendMessage(
   });
 }
 
-function keyboard(handle: string) {
-  const row: Record<string, string>[] = [
-    { text: "Отправить на почту", callback_data: "send" },
-  ];
-  // Бот не может писать первым незнакомому человеку: Telegram это запрещает.
-  // Поэтому для указанного в заявке @username даем ссылку на чат.
-  if (handle) {
-    row.push({
-      text: "Написать в Telegram",
-      url: `https://t.me/${handle.replace("@", "")}`,
-    });
-  }
+function keyboard() {
   return {
     inline_keyboard: [
-      row,
       [
+        { text: "Отправить", callback_data: "send" },
         { text: "Редактировать", callback_data: "edit" },
-        { text: "Пока не слать", callback_data: "hold" },
       ],
     ],
   };
@@ -161,7 +149,7 @@ function extractTelegramHandle(text: string): string {
 }
 
 /** Черновик читается обратно из текста сообщения: внешнее хранилище не нужно. */
-function parseDraftMessage(text: string): { to: string; subject: string; body: string } | null {
+function parseDraftMessage(text: string): { to: string; handle: string; subject: string; body: string } | null {
   const to = text.match(/Кому:\s*(\S+)/);
   const subject = text.match(/Тема:\s*(.+)/);
   if (!to || !subject) return null;
@@ -173,13 +161,20 @@ function parseDraftMessage(text: string): { to: string; subject: string; body: s
     .join("\n")
     .trim();
   if (!body) return null;
-  return { to: to[1].trim(), subject: subject[1].trim(), body };
+  const handle = text.match(/Telegram:\s*@(\S+)/);
+  return {
+    to: to[1].trim(),
+    handle: handle ? handle[1].trim() : "",
+    subject: subject[1].trim(),
+    body,
+  };
 }
 
 function draftMessage(draft: Draft): string {
   return [
     `<b>Черновик письма${draft.name ? ` ${draft.name}` : ""}</b>`,
     `<b>Кому:</b> ${escapeHtml(draft.to)}`,
+    draft.handle ? `<b>Telegram:</b> @${escapeHtml(draft.handle)}` : "",
     `<b>Тема:</b> ${escapeHtml(draft.subject)}`,
     "",
     escapeHtml(draft.body),
@@ -307,10 +302,18 @@ export async function POST(req: Request) {
           body: parsed.body,
           original: "",
         });
-        await sendMessage(
-          chatId,
-          `Письмо отправлено на ${escapeHtml(parsed.to)} с hello@vibecraft.kz${id ? `\nID письма: <code>${id}</code>` : ""}`,
-        );
+        const lines = [
+          `Письмо отправлено на ${escapeHtml(parsed.to)} с hello@vibecraft.kz`,
+        ];
+        if (id) lines.push(`ID письма: <code>${id}</code>`);
+        // Написать первым в Telegram бот не может, это запрет самого Telegram,
+        // поэтому для указанного в заявке @username даем ссылку на чат.
+        if (parsed.handle) {
+          lines.push(
+            `Клиент оставил Telegram: <a href="https://t.me/${parsed.handle}">@${parsed.handle}</a> — текст письма выше можно продублировать ему туда.`,
+          );
+        }
+        await sendMessage(chatId, lines.join("\n"));
       }
 
       return NextResponse.json({ ok: true, stage: "sent" });
@@ -364,7 +367,7 @@ export async function POST(req: Request) {
         ? {
             to,
             name: "",
-            handle: "",
+            handle: previousDraft.handle,
             subject: previousDraft.subject,
             title: previousDraft.subject,
             body: previousDraft.body,
@@ -376,7 +379,7 @@ export async function POST(req: Request) {
     const draft: Draft = {
       to,
       name: extractName(original),
-      handle: extractTelegramHandle(original),
+      handle: previousDraft ? previousDraft.handle : extractTelegramHandle(original),
       original,
       ...built,
     };
@@ -385,7 +388,7 @@ export async function POST(req: Request) {
     await sendMessage(
       chatId,
       draftMessage(draft),
-      keyboard(draft.handle),
+      keyboard(),
       isDraft ? repliedTo.reply_to_message?.message_id : repliedTo.message_id,
     );
 
