@@ -133,14 +133,7 @@ function sendMessage(
 }
 
 function keyboard() {
-  return {
-    inline_keyboard: [
-      [
-        { text: "Отправить", callback_data: "send" },
-        { text: "Редактировать", callback_data: "edit" },
-      ],
-    ],
-  };
+  return { inline_keyboard: [[{ text: "Отправить", callback_data: "send" }]] };
 }
 
 function extractTelegramHandle(text: string): string {
@@ -274,14 +267,6 @@ export async function POST(req: Request) {
         message_id: callback.message.message_id,
         reply_markup: { inline_keyboard: [] },
       });
-
-      if (action === "edit") {
-        await sendMessage(
-          chatId,
-          "Сделай reply на черновик и напиши, что поменять. Пришлю новый вариант с кнопками.",
-        );
-        return NextResponse.json({ ok: true, stage: "edit" });
-      }
 
       if (action === "hold") {
         await sendMessage(chatId, "Письмо не отправлено. Черновик остался в чате, reply на него внесет правки.");
