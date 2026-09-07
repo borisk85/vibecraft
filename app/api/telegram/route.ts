@@ -1,6 +1,5 @@
 import { NextResponse } from "next/server";
 import Anthropic from "@anthropic-ai/sdk";
-import { Redis } from "@upstash/redis";
 import { Resend } from "resend";
 import {
   renderEmail,
@@ -26,14 +25,12 @@ import { notifyFailure } from "@/lib/notify-failure";
     TELEGRAM_CHAT_ID        — личный чат, из других чатов запросы игнорируются
     TELEGRAM_WEBHOOK_SECRET — секрет из setWebhook, приходит заголовком
     ANTHROPIC_API_KEY, RESEND_API_KEY
-    KV_REST_API_URL / KV_REST_API_TOKEN — хранение черновика до нажатия кнопки
 */
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 const MODEL = "claude-sonnet-4-6";
-const DRAFT_TTL_SECONDS = 60 * 60 * 24 * 3;
 
 // Коды букв, запрещенных в текстах проекта: строчная и заглавная с точками.
 const YO_LOWER = String.fromCharCode(1105);
@@ -108,14 +105,6 @@ function extractName(text: string): string {
   return match ? match[1].trim() : "";
 }
 
-function getRedis(): Redis | null {
-  const url = process.env.KV_REST_API_URL ?? process.env.UPSTASH_REDIS_REST_URL;
-  const token =
-    process.env.KV_REST_API_TOKEN ?? process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return null;
-  return new Redis({ url, token });
-}
-
 async function telegram(method: string, payload: Record<string, unknown>) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
   if (!token) return null;
@@ -131,6 +120,7 @@ function sendMessage(
   chatId: number | string,
   text: string,
   replyMarkup?: unknown,
+  replyTo?: number,
 ) {
   return telegram("sendMessage", {
     chat_id: chatId,
@@ -138,12 +128,13 @@ function sendMessage(
     parse_mode: "HTML",
     disable_web_page_preview: true,
     reply_markup: replyMarkup,
+    reply_to_message_id: replyTo,
   });
 }
 
-function keyboard(key: string, handle: string) {
+function keyboard(handle: string) {
   const row: Record<string, string>[] = [
-    { text: "Отправить на почту", callback_data: `send:${key}` },
+    { text: "Отправить на почту", callback_data: "send" },
   ];
   // Бот не может писать первым незнакомому человеку: Telegram это запрещает.
   // Поэтому для указанного в заявке @username даем ссылку на чат.
@@ -154,13 +145,29 @@ function keyboard(key: string, handle: string) {
     });
   }
   return {
-    inline_keyboard: [row, [{ text: "Пока не слать", callback_data: `hold:${key}` }]],
+    inline_keyboard: [row, [{ text: "Пока не слать", callback_data: "hold" }]],
   };
 }
 
 function extractTelegramHandle(text: string): string {
   const match = text.match(/@([A-Za-z0-9_]{4,32})/);
   return match ? match[1] : "";
+}
+
+/** Черновик читается обратно из текста сообщения: внешнее хранилище не нужно. */
+function parseDraftMessage(text: string): { to: string; subject: string; body: string } | null {
+  const to = text.match(/Кому:\s*(\S+)/);
+  const subject = text.match(/Тема:\s*(.+)/);
+  if (!to || !subject) return null;
+  const lines = text.split("\n");
+  const start = lines.findIndex((l) => l.startsWith("Тема:")) + 1;
+  const end = lines.findIndex((l) => l.startsWith("Правки:"));
+  const body = lines
+    .slice(start, end === -1 ? undefined : end)
+    .join("\n")
+    .trim();
+  if (!body) return null;
+  return { to: to[1].trim(), subject: subject[1].trim(), body };
 }
 
 function draftMessage(draft: Draft): string {
@@ -251,56 +258,52 @@ export async function POST(req: Request) {
 
   try {
     const update = await req.json();
-    step = "redis-init";
-    const redis = getRedis();
 
     // Нажатие кнопки под черновиком.
     const callback = update?.callback_query;
     if (callback) {
       chatId = callback.message?.chat?.id ?? ownerChatId;
-      const [action, key] = String(callback.data ?? "").split(":");
+      const action = String(callback.data ?? "");
       await telegram("answerCallbackQuery", { callback_query_id: callback.id });
 
       if (String(chatId) !== String(ownerChatId)) {
-        return NextResponse.json({ ok: true });
+        return NextResponse.json({ ok: true, stage: "foreign-chat" });
       }
 
+      await telegram("editMessageReplyMarkup", {
+        chat_id: chatId,
+        message_id: callback.message.message_id,
+        reply_markup: { inline_keyboard: [] },
+      });
+
       if (action === "hold") {
-        await telegram("editMessageReplyMarkup", {
-          chat_id: chatId,
-          message_id: callback.message.message_id,
-          reply_markup: { inline_keyboard: [] },
-        });
-        await sendMessage(
-          chatId,
-          "Письмо не отправлено. Черновик живет три дня, reply на него вернет кнопку.",
-        );
-        return NextResponse.json({ ok: true });
+        await sendMessage(chatId, "Письмо не отправлено. Черновик остался в чате, reply на него внесет правки.");
+        return NextResponse.json({ ok: true, stage: "hold" });
       }
 
       if (action === "send") {
-        const draft = redis ? await redis.get<Draft>(`draft:${key}`) : null;
-        if (!draft) {
-          await sendMessage(
-            chatId,
-            "Черновик не найден, он хранится три дня. Сделай reply на заявку заново.",
-          );
-          return NextResponse.json({ ok: true });
+        const parsed = parseDraftMessage(String(callback.message?.text ?? ""));
+        if (!parsed) {
+          await sendMessage(chatId, "Не разобрал черновик. Сделай reply на заявку заново.");
+          return NextResponse.json({ ok: true, stage: "parse-failed" });
         }
-
-        const id = await sendLetter(draft);
-        await telegram("editMessageReplyMarkup", {
-          chat_id: chatId,
-          message_id: callback.message.message_id,
-          reply_markup: { inline_keyboard: [] },
+        step = "resend";
+        const id = await sendLetter({
+          to: parsed.to,
+          name: "",
+          handle: "",
+          subject: parsed.subject,
+          title: parsed.subject,
+          body: parsed.body,
+          original: "",
         });
         await sendMessage(
           chatId,
-          `Письмо отправлено на ${escapeHtml(draft.to)} с hello@vibecraft.kz${id ? `\nID письма: <code>${id}</code>` : ""}`,
+          `Письмо отправлено на ${escapeHtml(parsed.to)} с hello@vibecraft.kz${id ? `\nID письма: <code>${id}</code>` : ""}`,
         );
       }
 
-      return NextResponse.json({ ok: true });
+      return NextResponse.json({ ok: true, stage: "sent" });
     }
 
     const message = update?.message;
@@ -321,15 +324,15 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true, stage: "no-reply" });
     }
 
-    // Reply приходит либо на заявку, либо на уже готовый черновик: во втором
-    // случае берем ту же заявку и правим прошлый текст.
-    step = "redis-get";
-    const previous = redis
-      ? await redis.get<Draft>(`draft:${repliedTo.message_id}`)
-      : null;
-    const original = previous ? previous.original : String(repliedTo.text).trim();
+    // Reply приходит либо на заявку, либо на черновик. У черновика в чате есть
+    // своя ссылка на заявку, поэтому исходный текст всегда доступен без базы.
+    const isDraft = repliedTo.text.startsWith("Черновик письма");
+    const previousDraft = isDraft ? parseDraftMessage(repliedTo.text) : null;
+    const original = isDraft
+      ? String(repliedTo.reply_to_message?.text ?? "").trim()
+      : String(repliedTo.text).trim();
 
-    const to = previous ? previous.to : extractEmail(original);
+    const to = previousDraft ? previousDraft.to : extractEmail(original);
     if (!to) {
       await sendMessage(
         chatId,
@@ -343,43 +346,38 @@ export async function POST(req: Request) {
       return NextResponse.json({ ok: true, stage: "no-keys" });
     }
 
-    if (!redis) {
-      await sendMessage(
-        chatId,
-        "Не настроено хранилище черновиков (KV_REST_API_URL), кнопка отправки работать не будет.",
-      );
-      return NextResponse.json({ ok: true, stage: "no-redis" });
-    }
-
     step = "claude";
-    const built = await buildDraft(original, hint, previous ?? undefined);
+    const built = await buildDraft(
+      original,
+      hint,
+      previousDraft
+        ? {
+            to,
+            name: "",
+            handle: "",
+            subject: previousDraft.subject,
+            title: previousDraft.subject,
+            body: previousDraft.body,
+            original,
+          }
+        : undefined,
+    );
+
     const draft: Draft = {
       to,
-      name: previous ? previous.name : extractName(original),
-      handle: previous ? previous.handle : extractTelegramHandle(original),
+      name: extractName(original),
+      handle: extractTelegramHandle(original),
       original,
       ...built,
     };
 
     step = "telegram-send";
-    const sentDraft = await sendMessage(
+    await sendMessage(
       chatId,
       draftMessage(draft),
-      keyboard("pending", draft.handle),
+      keyboard(draft.handle),
+      isDraft ? repliedTo.reply_to_message?.message_id : repliedTo.message_id,
     );
-
-    const draftMessageId = sentDraft?.result?.message_id;
-    if (draftMessageId) {
-      await redis.set(`draft:${draftMessageId}`, draft, {
-        ex: DRAFT_TTL_SECONDS,
-      });
-      // Ключ черновика это id сообщения, он известен только после отправки.
-      await telegram("editMessageReplyMarkup", {
-        chat_id: chatId,
-        message_id: draftMessageId,
-        reply_markup: keyboard(String(draftMessageId), draft.handle),
-      });
-    }
 
     return NextResponse.json({ ok: true, stage: "draft-sent" });
   } catch (error) {
