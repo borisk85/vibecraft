@@ -132,8 +132,18 @@ function sendMessage(
   });
 }
 
-function keyboard() {
-  return { inline_keyboard: [[{ text: "Отправить", callback_data: "send" }]] };
+function keyboard(final = false) {
+  if (final) {
+    return { inline_keyboard: [[{ text: "\u2705 Отправить", callback_data: "send" }]] };
+  }
+  return {
+    inline_keyboard: [
+      [
+        { text: "\u2705 Отправить", callback_data: "send" },
+        { text: "\u270F\uFE0F Редактировать", callback_data: "edit" },
+      ],
+    ],
+  };
 }
 
 function extractTelegramHandle(text: string): string {
@@ -274,6 +284,31 @@ export async function POST(req: Request) {
         reply_markup: { inline_keyboard: [] },
       });
 
+      if (action === "edit") {
+        const parsed = parseDraftMessage(String(callback.message?.text ?? ""));
+        if (!parsed) {
+          await sendMessage(chatId, "Черновик потерян. Сделай reply на заявку заново.");
+          return NextResponse.json({ ok: true, stage: "edit-lost" });
+        }
+        await sendMessage(
+          chatId,
+          "\u270F\uFE0F Ниже текущий текст. Скопируй его, поправь и пришли одним сообщением: он заменит черновик.",
+        );
+        await sendMessage(
+          chatId,
+          `<pre>${escapeHtml(draftMessage({
+            to: parsed.to,
+            name: "",
+            handle: parsed.handle,
+            subject: parsed.subject,
+            title: parsed.subject,
+            body: parsed.body,
+            original: parsed.original,
+          }))}</pre>`,
+        );
+        return NextResponse.json({ ok: true, stage: "edit" });
+      }
+
       if (action === "hold") {
         await sendMessage(chatId, "Письмо не отправлено. Черновик остался в чате, reply на него внесет правки.");
         return NextResponse.json({ ok: true, stage: "hold" });
@@ -353,7 +388,14 @@ export async function POST(req: Request) {
     }
 
     step = "claude";
-    const built = await buildDraft(
+    const ready = hint.includes("\n") || hint.length > 160;
+    const built = ready
+      ? {
+          subject: previousDraft ? previousDraft.subject : `Ответ на вашу заявку`,
+          title: previousDraft ? previousDraft.subject : `Ответ на вашу заявку`,
+          body: stripYo(hint),
+        }
+      : await buildDraft(
       original,
       hint,
       previousDraft
@@ -367,7 +409,7 @@ export async function POST(req: Request) {
             original,
           }
         : undefined,
-    );
+      );
 
     const draft: Draft = {
       to,
@@ -381,8 +423,8 @@ export async function POST(req: Request) {
     await sendMessage(
       chatId,
       draftMessage(draft),
-      keyboard(),
-      isDraft ? repliedTo.reply_to_message?.message_id : repliedTo.message_id,
+      keyboard(ready),
+      repliedTo.message_id,
     );
 
     return NextResponse.json({ ok: true, stage: "draft-sent" });
