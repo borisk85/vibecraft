@@ -376,16 +376,19 @@ export async function POST(req: Request) {
       });
     }
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, stage: "draft-sent" });
   } catch (error) {
     console.error("[telegram]", error);
+    // Ответ видит только Telegram и запросы с секретом, поэтому текст ошибки
+    // здесь безопасен и экономит час разбора логов при поломке.
+    const reason = error instanceof Error ? error.message : String(error);
     await notifyFailure("ответ клиенту из Telegram", error);
     if (chatId) {
       await sendMessage(
         chatId,
-        "Не получилось собрать или отправить письмо. Подробности в логах Vercel.",
+        `Не получилось собрать или отправить письмо: ${escapeHtml(reason)}`,
       );
     }
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true, error: reason });
   }
 }
