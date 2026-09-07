@@ -63,6 +63,29 @@ export function FinalCTA() {
     message: "Опишите задачу хотя бы в двух словах",
   };
 
+  // Метки кампании и адрес, откуда пришел человек, видны только на входе:
+  // до формы он доходит уже с чистым адресом. Запоминаем один раз за визит.
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem("vc_visit")) return;
+      const q = new URLSearchParams(window.location.search);
+      const tags = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"]
+        .map((k) => (q.get(k) ? k + "=" + q.get(k) : null))
+        .filter(Boolean)
+        .join(" ");
+      sessionStorage.setItem(
+        "vc_visit",
+        JSON.stringify({
+          tags,
+          from: document.referrer || "",
+          entry: window.location.pathname + window.location.search,
+        }),
+      );
+    } catch {
+      // приватный режим браузера: заявка уйдет без данных о визите
+    }
+  }, []);
+
   const clearError = (field: string) =>
     setErrors((prev) => {
       if (!prev[field]) return prev;
@@ -95,10 +118,24 @@ export function FinalCTA() {
     setState("sending");
 
     try {
+      let visit: Record<string, string> = {};
+      try {
+        visit = JSON.parse(sessionStorage.getItem("vc_visit") || "{}");
+      } catch {
+        visit = {};
+      }
+      const payload = {
+        ...data,
+        utm: visit.tags || "",
+        referrer: visit.from || "",
+        entry: visit.entry || "",
+        page: window.location.pathname,
+      };
+
       const res = await fetch("/api/lead", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
       if (!res.ok) throw new Error("Request failed");
       setState("sent");

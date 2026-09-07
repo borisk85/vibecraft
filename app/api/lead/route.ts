@@ -27,6 +27,10 @@ export async function POST(req: Request) {
     const budget = String(body.budget ?? "").slice(0, 200);
     const source = String(body.source ?? "").slice(0, 200);
     const message = String(body.message ?? "").trim().slice(0, 2000);
+    const utm = String(body.utm ?? "").slice(0, 300);
+    const referrer = String(body.referrer ?? "").slice(0, 300);
+    const entry = String(body.entry ?? "").slice(0, 300);
+    const page = String(body.page ?? "").slice(0, 200);
 
     if (!name || !contact || !message) {
       return NextResponse.json(
@@ -54,6 +58,10 @@ export async function POST(req: Request) {
       type ? `<b>Тип:</b> ${escapeHtml(type)}` : null,
       budget ? `<b>Бюджет:</b> ${escapeHtml(budget)}` : null,
       source ? `<b>Узнали от:</b> ${escapeHtml(source)}` : null,
+      utm ? `<b>Кампания:</b> ${escapeHtml(utm)}` : null,
+      referrer ? `<b>Пришел с:</b> ${escapeHtml(referrer)}` : null,
+      entry ? `<b>Вошел на:</b> ${escapeHtml(entry)}` : null,
+      page ? `<b>Отправил со страницы:</b> ${escapeHtml(page)}` : null,
       message ? `\n<b>Задача:</b>\n${escapeHtml(message)}` : null,
     ];
 
