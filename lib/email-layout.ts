@@ -15,7 +15,7 @@ import { siteConfig } from "@/lib/metadata";
 const LOGO_URL = `${siteConfig.url}/icon`;
 
 const SOCIALS = [
-  { label: "vibecraft.kz", href: siteConfig.url },
+  { label: "Сайт", href: siteConfig.url },
   { label: "Telegram", href: siteConfig.contacts.telegram },
   { label: "LinkedIn", href: siteConfig.contacts.linkedin },
   { label: "Instagram", href: siteConfig.contacts.instagram },
