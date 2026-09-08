@@ -27,7 +27,11 @@ const WATCHED: Record<string, string> = {
   "email.bounced": "Письмо не доставлено",
   "email.complained": "Клиент пометил письмо как спам",
   "email.delivery_delayed": "Письмо задерживается у почтового сервера",
+  "email.opened": "Письмо открыто клиентом",
 };
+
+// Открытое письмо в спаме не лежит, поэтому по нему нужен другой хвост.
+const GOOD = "email.opened";
 
 function escapeHtml(value: string): string {
   return value
@@ -91,7 +95,9 @@ export async function POST(req: Request) {
     event.data?.subject ? `Тема: ${escapeHtml(event.data.subject)}` : "",
     event.data?.email_id ? `ID письма: <code>${event.data.email_id}</code>` : "",
     "",
-    "Клиент ответа не увидел. Напиши ему в Telegram или с другой почты.",
+    event.type === GOOD
+      ? "Письмо дошло во входящие и прочитано."
+      : "Клиент ответа не увидел. Напиши ему в Telegram или с другой почты.",
   ]
     .filter(Boolean)
     .join("\n");
