@@ -45,7 +45,7 @@ export async function GET(
       width: 72,
       height: 72,
     },
-    createElement("path", { d: icon.path, fill: icon.color }),
+    createElement("path", { d: icon.path, fill: "#8a8a8a" }),
   );
 
   const wrapper = createElement(
@@ -57,7 +57,7 @@ export async function GET(
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#ffffff",
+        background: "transparent",
       },
     },
     svg,

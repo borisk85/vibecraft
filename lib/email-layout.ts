@@ -75,15 +75,15 @@ export function renderEmail({
 
           <table width="100%" cellpadding="0" cellspacing="0" border="0" style="border-bottom:1px solid #e5e5e5;padding-bottom:16px;margin-bottom:24px;">
             <tr>
-              <td width="52" valign="middle" style="padding-bottom:16px;">
+              <td width="68" valign="middle" style="padding-bottom:16px;">
                 <table cellpadding="0" cellspacing="0" border="0"><tr>
-                  <td width="40" height="40" align="center" valign="middle" style="background:#0A0A0A;border-radius:8px;">
-                    <img src="${LOGO_URL}" alt="Vibecraft" width="28" height="28" style="display:block;" />
+                  <td width="56" height="56" align="center" valign="middle" style="background:#0A0A0A;border-radius:12px;">
+                    <img src="${LOGO_URL}" alt="Vibecraft" width="40" height="40" style="display:block;" />
                   </td>
                 </tr></table>
               </td>
               <td valign="middle" style="padding-bottom:16px;">
-                <div style="font-size:20px;font-weight:700;letter-spacing:-0.4px;color:#0a0a0a;line-height:1;">vibecraft</div>
+                <div style="font-size:26px;font-weight:700;letter-spacing:-0.6px;color:#0a0a0a;line-height:1;">vibecraft</div>
                 <div style="font-size:11px;color:#5a5a5a;margin-top:4px;">ИИ-разработка и автоматизации · Казахстан</div>
               </td>
             </tr>
