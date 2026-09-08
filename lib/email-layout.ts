@@ -83,8 +83,8 @@ export function renderEmail({
                 </tr></table>
               </td>
               <td valign="middle" style="padding-bottom:16px;">
-                <div style="font-size:26px;font-weight:700;letter-spacing:-0.6px;color:#0a0a0a;line-height:1;">vibecraft</div>
-                <div style="font-size:11px;color:#5a5a5a;margin-top:4px;">ИИ-разработка и автоматизации · Казахстан</div>
+                <div style="font-size:18px;font-weight:700;letter-spacing:-0.4px;color:#0a0a0a;line-height:1;">vibecraft</div>
+                <div style="font-size:10px;color:#5a5a5a;margin-top:3px;">ИИ-разработка и автоматизации · Казахстан</div>
               </td>
             </tr>
           </table>
