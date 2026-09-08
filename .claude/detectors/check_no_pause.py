@@ -43,6 +43,28 @@ PAUSE_RE = re.compile(
 )
 
 
+# Назвал проблему словами и не тронул ни одного файла за ход. Класс факапа
+# 08.09.2026: «шероховатость в другом: граница дропдауна режет по 1.5 млн» —
+# и на этом все, Boris получил диагноз вместо починки и требовал ее пинком.
+# Слов-ожидания в таком ответе нет, поэтому PAUSE_RE его не видит.
+PROBLEM_RE = re.compile(
+    r"("
+    r"шероховатост|нестыковк|расхожден|рассинхрон|нелогичн|"
+    r"проблема\s+(?:в\s+том|в\s+другом|тут|здесь)|"
+    r"(?:слабое|узкое)\s+мест|"
+    r"стоит\s+(?:поправ|подвин|перенест|переимен|заменить)|"
+    r"можно\s+(?:улучш|поправ|подвин|переделать)|"
+    r"(?:минус|риск|беда|косяк)\s+в\s+том|"
+    r"выглядит\s+(?:странн|криво)|не\s+совпада[ею]т"
+    r")",
+    re.IGNORECASE | re.UNICODE,
+)
+
+# Инструменты, которыми проблема чинится. Read и Grep сюда не входят: чтение
+# это еще не работа.
+FIXING_TOOLS = {"Edit", "Write", "NotebookEdit", "Bash", "PowerShell"}
+
+
 def _get_text(content) -> str:
     if isinstance(content, str):
         return content
@@ -60,6 +82,43 @@ def _is_tool_result_message(msg: dict) -> bool:
     if not isinstance(content, list) or not content:
         return False
     return all(b.get("type") == "tool_result" for b in content)
+
+
+def used_fixing_tool(transcript_path: str) -> bool:
+    """True, если после последней реплики Boris я реально что-то правил."""
+    p = Path(transcript_path)
+    if not p.exists():
+        return True
+    messages = []
+    for line in p.read_text(encoding="utf-8", errors="ignore").splitlines():
+        try:
+            messages.append(json.loads(line))
+        except Exception:
+            continue
+    last_human_idx = -1
+    for i, msg in enumerate(messages):
+        if msg.get("type") == "user" and not _is_tool_result_message(msg):
+            last_human_idx = i
+    for msg in messages[last_human_idx + 1:]:
+        if msg.get("type") != "assistant":
+            continue
+        content = msg.get("message", {}).get("content", [])
+        if not isinstance(content, list):
+            continue
+        for block in content:
+            if not isinstance(block, dict) or block.get("type") != "tool_use":
+                continue
+            name = block.get("name", "")
+            if name not in FIXING_TOOLS:
+                continue
+            # Bash читает так же часто, как чинит. Правкой считаем только то,
+            # что меняет репозиторий.
+            if name in ("Bash", "PowerShell"):
+                cmd = str(block.get("input", {}).get("command", ""))
+                if not re.search(r"git\s+(?:commit|push|checkout|revert)|>>|>\s|vercel\s+env", cmd):
+                    continue
+            return True
+    return False
 
 
 def load_response(transcript_path: str) -> str:
@@ -133,6 +192,19 @@ def main():
             "либо ВЫПОЛНИ следующий шаг прямо сейчас (Edit/Bash) и отчитайся о "
             "сделанном, либо, если реально нужен выбор Boris, дай его как факт "
             "без фразы-ожидания в конце."
+        )
+        print(json.dumps({"decision": "block", "reason": reason}))
+        sys.exit(0)
+    m = PROBLEM_RE.search(response)
+    if m and not used_fixing_tool(transcript_path):
+        reason = (
+            "НАРУШЕНИЕ check_no_pause: ты НАЗВАЛ проблему словами "
+            f"('{m.group(0)}'), но за весь ход не сделал ни одной правки — "
+            "ни Edit, ни Write, ни коммита. Диагноз без починки Boris не "
+            "заказывал: он за это ругается пинком и требует делать. СЕЙЧАС "
+            "почини то, что назвал, и запушь. Если правка меняет суть "
+            "продукта (цена, состав услуги, снос раздела) — все равно сделай "
+            "свой вариант, отчитайся что сделал и чем это заменяется."
         )
         print(json.dumps({"decision": "block", "reason": reason}))
         sys.exit(0)
