@@ -29,16 +29,22 @@ SERVICE_MARKERS = (
 )
 
 
-def _recent_boris(lines, n=5):
+def _recent_boris(lines, n=10):
     out = []
     for line in reversed(lines):
         try:
             o = json.loads(line)
         except Exception:
             continue
-        if o.get("type") != "user" or o.get("isMeta"):
+        # Сообщения, отправленные посреди хода, пишутся как attachment/queued_command,
+        # а не как user: без этого сторож их не видел и блокировал прямую команду.
+        att = o.get("attachment") or {}
+        if o.get("type") == "attachment" and att.get("type") == "queued_command":
+            c = att.get("prompt")
+        elif o.get("type") != "user" or o.get("isMeta"):
             continue
-        c = (o.get("message", {}) or {}).get("content")
+        else:
+            c = (o.get("message", {}) or {}).get("content")
         text = ""
         if isinstance(c, str):
             text = c
